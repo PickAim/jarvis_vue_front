@@ -1,5 +1,5 @@
 <template>
-  <div> КАРТА СКЛАДОВ </div>
+  <div class="font-bold text-3xl text-blue-900"> КАРТА СКЛАДОВ </div>
 </template>
 
 <script>

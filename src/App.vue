@@ -1,6 +1,6 @@
 <template>
-  <JHeader/>
-  <RouterView/>
+  <JHeader class="bg-red-200 z-10"/>
+  <RouterView />
   <JFooter/>
 </template>
 

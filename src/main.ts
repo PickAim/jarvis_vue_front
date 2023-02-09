@@ -6,6 +6,8 @@ import JIntro from '@/pages/JIntro.vue'
 import JWorkspace from '@/pages/JWorkspace.vue'
 import JUnitEconCalc from '@/pages/JUnitEconCalc.vue'
 import JStorageMap from '@/pages/JStorageMap.vue'
+import './assets/tailwind.css'
+import {AppTransferContainer} from "@/AppTransferContainer";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -34,4 +36,7 @@ const router = createRouter({
     }]
 });
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App);
+app.config.globalProperties.appTransferContainer = new AppTransferContainer(33,2);
+app.use(router);
+app.mount('#app');
