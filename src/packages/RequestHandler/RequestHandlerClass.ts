@@ -14,48 +14,61 @@ export default class RequestHandlerClass implements IRequestHandler{
         this.storageHandler = new StorageHandlerClass()
         this.tokenHandler = new TokenHandler(this.storageHandler)
         this.axiosInst = axios.create({
-            baseURL: 'http://localhost:8090',
-            headers: {}
+            baseURL: 'http://localhost:8090/',
+            headers: {
+                Accept: "*/*"
+            },
+            withCredentials: true
         })
     }
 
-    async makeRequest(request: RequestData): Promise<ResponseData> {
+    async makeRequest<K>(request: RequestData):
+        Promise<ResponseData<K>> {
+        const {url, body = {}, method = "GET", responseType = "json"} = request;
+
         const config: AxiosRequestConfig = {
-            responseType: request.responseType
+            responseType: responseType
         }
-        const requestBody = {...this.tokenHandler.getTokens(), ...request.body}
+        const requestBody = {...this.tokenHandler.getTokens(), ...body}
+
+        console.log(requestBody);
 
         let req;
-        if (request.method == "GET") {
+        if (method == "GET") {
             config.params = requestBody;
-            req = this.axiosInst.get(request.url, config)
+            req = this.axiosInst.get<K>(url, config)
         }
-        if (request.method == "POST") {
-            req = this.axiosInst.post(request.url, requestBody, config)
+        if (method == "POST") {
+            req = this.axiosInst.post<K>(url, requestBody, config)
         }
-
         if (!req)
-            return new ResponseData(ResultCodes.FAIL);
-
+            return {code: ResultCodes.CONFIGURATION_ERROR}
         try {
             const result = await req;
-            // TODO: unwrap result (result code + result body (token + result))
-            return new ResponseData(ResultCodes.OK, result);
+            return {code: ResultCodes.OK, result: result.data};
         }
         catch(err){
             if(err instanceof AxiosError) {
-                // TODO: test connection and configuration error
                 if (err.response) {
-                    // TODO: check is data an object
-                    // TODO: add update token
-                    return new ResponseData(err.response.status, (err.response.data as object));
-                } else if (err.request) {
-                    return new ResponseData(ResultCodes.CONNECTION_ERROR, {error: err.request});
+                    console.log(err.response)
+                    if ((err.response.data instanceof Object) && (err.response.data.jarvis_exception !== undefined)) {
+                        // check token expired and update
+                        if (err.response.data.jarvis_exception === ResultCodes.EXPIRED_TOKEN){
+                            const updRes = await this.updateToken();
+                            if(updRes.code !== ResultCodes.OK)
+                                return {code: updRes.code, error: updRes.error};
+                            return await this.makeRequest<K>(request)
+                        }
+                        return {code: err.response.data.jarvis_exception, error: err.response.data};
+                    }
+                    return {code: ResultCodes.FAIL, error: {description: err.response.statusText}};
+                }else if (err.request) {
+                    return {code: ResultCodes.CONNECTION_ERROR, error: {description: err.request}};
                 } else {
-                    return new ResponseData(ResultCodes.CONFIGURATION_ERROR, {error: err.message});
+                    return {code: ResultCodes.CONFIGURATION_ERROR, error: {description: err.message}};
                 }
             }
-            return new ResponseData(ResultCodes.FAIL);
+            return {code: ResultCodes.FAIL, error: {description: "Unknown error"}};
         }
     }
 
@@ -67,8 +80,13 @@ export default class RequestHandlerClass implements IRequestHandler{
         return this.storageHandler;
     }
 
-    updateToken(): void {
-        // TODO: write update token request
-        console.log()
+    async updateToken(): Promise<ResponseData<object>> {
+        const request: RequestData = {url: "/update/update_all_tokens"};
+        const response = await this.makeRequest<TokenData>(request);
+        if(response.code == ResultCodes.OK && response.result !== undefined){
+            const tokens = response.result;
+            this.setTokens(tokens);
+        }
+        return response;
     }
 }

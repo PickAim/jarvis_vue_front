@@ -12,9 +12,9 @@ export default class TokenHandler{
 
     setTokens(tokens: TokenData): ResultCodes{
         if(!navigator.cookieEnabled){
-            this.authStorage.setAccessToken(tokens.accessToken);
-            this.authStorage.setUpdateToken(tokens.updateToken);
-            this.authStorage.setImprint(tokens.imprintToken);
+            this.authStorage.setAccessToken(tokens.access_token);
+            this.authStorage.setUpdateToken(tokens.update_token);
+            this.authStorage.setImprint(tokens.imprint_token);
         }
         return ResultCodes.OK
     }

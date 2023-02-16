@@ -9,10 +9,11 @@ export default class AuthStorage extends AbstractStorage implements IAuthStorage
     }
 
     getTokenData(): TokenData {
-        return new TokenData(
-            this.storageHandler.getValue('accessToken'),
-            this.storageHandler.getValue('updateToken'),
-            this.storageHandler.getValue('imprintToken'));
+        return {
+            access_token: this.storageHandler.getValue('accessToken'),
+            update_token: this.storageHandler.getValue('updateToken'),
+            imprint_token: this.storageHandler.getValue('imprintToken')
+        }
     }
 
     setAccessToken(token: string): ResultCodes {

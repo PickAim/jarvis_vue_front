@@ -12,7 +12,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-    let isAuthorized = true;
+    let isAuthorized = false;
     if (isAuthorized) {
       router.replace({
         name: "workspace",
