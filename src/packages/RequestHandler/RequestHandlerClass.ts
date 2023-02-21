@@ -30,6 +30,7 @@ export default class RequestHandlerClass implements IRequestHandler{
             responseType: responseType
         }
         const requestBody = {...this.tokenHandler.getTokens(), ...body}
+        // TODO: don't send update token!
 
         console.log(requestBody);
 
