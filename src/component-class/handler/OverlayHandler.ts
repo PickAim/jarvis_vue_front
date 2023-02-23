@@ -1,5 +1,7 @@
+import {OverlayName} from "@/packages/Objects";
+
 export class OverlayHandler{
-    setOverlayName(name: string){
+    setOverlayName(name: OverlayName){
         //TODO
     }
 
@@ -8,6 +10,10 @@ export class OverlayHandler{
     }
 
     openOverlay(){
+        //TODO
+    }
+
+    closeOverlay(){
         //TODO
     }
 

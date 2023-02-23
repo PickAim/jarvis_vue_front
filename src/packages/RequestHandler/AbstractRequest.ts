@@ -1,11 +1,12 @@
 import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
 import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import RequestHandlerClass from "@/packages/RequestHandler/RequestHandlerClass";
 
 export default abstract class AbstractRequest{
     requestHandler: IRequestHandler;
 
-    protected constructor(requestHandler: IRequestHandler) {
-        this.requestHandler = requestHandler;
+    protected constructor() {
+        this.requestHandler = new RequestHandlerClass();
     }
 
     getStorageHandler(): IStorageHandler{

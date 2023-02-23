@@ -1,10 +1,10 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
-import {LoginData, RegData, ResponseData, ResultCodes, TokenData} from "@/packages/Entities";
+import {LoginData, RegData, ResponseData, TokenData} from "@/packages/Objects";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default class AccountRequestClass extends AbstractRequest{
-    constructor(requestHandler: IRequestHandler) {
-        super(requestHandler);
+    constructor() {
+        super();
     }
 
     async loginPassword(loginData: LoginData): Promise<ResponseData<object>>{
@@ -15,7 +15,7 @@ export default class AccountRequestClass extends AbstractRequest{
         });
         console.log("LOGIN-PASSWORD-REQUEST");
         console.log(response);
-        if(response.code == ResultCodes.OK && response.result !== undefined){
+        if(response.code == ResultCode.OK && response.result !== undefined){
             const tokens = response.result;
             this.requestHandler.setTokens(tokens);
         }

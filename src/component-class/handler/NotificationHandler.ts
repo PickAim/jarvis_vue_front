@@ -1,5 +1,7 @@
+import {Notification} from "@/packages/Objects";
+
 export class NotificationHandler{
-    createNotification(header: string, body: string, type: "error" | "log" | "notification"){
+    createNotification(note: Notification){
         //TODO
     }
 

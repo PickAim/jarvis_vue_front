@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import JAuthTestComponent from "./JAuthTestComponent";
+import JAuthTestComponent from "./AuthTest";
 
 export default {
   name: "JTest",

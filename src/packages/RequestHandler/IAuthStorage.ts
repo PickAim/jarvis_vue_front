@@ -1,8 +1,9 @@
-import {ResultCodes, TokenData} from "@/packages/Entities";
+import {TokenData} from "@/packages/Objects";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default interface IAuthStorage{
-    setAccessToken(token: string): ResultCodes,
-    setUpdateToken(token: string): ResultCodes,
-    setImprint(key: string | undefined): ResultCodes,
+    setAccessToken(token: string): ResultCode,
+    setUpdateToken(token: string): ResultCode,
+    setImprint(key: string | undefined): ResultCode,
     getTokenData(): TokenData,
 }

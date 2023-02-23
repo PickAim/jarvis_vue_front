@@ -1,7 +1,8 @@
-import {TokenData, ResultCodes} from "@/packages/Entities";
+import {TokenData} from "@/packages/Objects";
 import IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
 import AuthStorage from "@/packages/StorageHandler/AuthStorage";
 import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default class TokenHandler{
     authStorage: IAuthStorage
@@ -10,13 +11,13 @@ export default class TokenHandler{
         this.authStorage = new AuthStorage(storageHandler);
     }
 
-    setTokens(tokens: TokenData): ResultCodes{
+    setTokens(tokens: TokenData): ResultCode{
         if(!navigator.cookieEnabled){
             this.authStorage.setAccessToken(tokens.access_token);
             this.authStorage.setUpdateToken(tokens.update_token);
             this.authStorage.setImprint(tokens.imprint_token);
         }
-        return ResultCodes.OK
+        return ResultCode.OK
     }
     getTokens(): TokenData | undefined{
         if(navigator.cookieEnabled)

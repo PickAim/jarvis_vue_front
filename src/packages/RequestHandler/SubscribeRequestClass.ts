@@ -1,10 +1,10 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
-import {ResponseData, ResultCodes, SubscribeData} from "@/packages/Entities";
+import {ResponseData, SubscribeData} from "@/packages/Objects";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default class SubscribeRequestClass extends AbstractRequest{
-    constructor(requestHandler: IRequestHandler) {
-        super(requestHandler);
+    constructor() {
+        super();
     }
 
     async getCurrentSubscribe(): Promise<ResponseData<SubscribeData>>{
@@ -35,10 +35,10 @@ export default class SubscribeRequestClass extends AbstractRequest{
         // make some things with subscribe and get key
         /*const request = new RequestData("", "POST", subscribeData);
         let response = await this.requestHandler.makeRequest(request);
-        if (response.code == ResultCodes.OK){
+        if (response.code == ResultCode.OK){
             const obj = Object.assign(new SubscribeData(), response.result);
             response = new ResponseData(response.code, obj);
         }*/
-        return {code: ResultCodes.OK, result: {grant_type: 1, pay_api_key: "123123"}};
+        return {code: ResultCode.OK, result: {grant_type: 1, pay_api_key: "123123"}};
     }
 }

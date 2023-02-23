@@ -1,7 +1,8 @@
 import AbstractStorage from "@/packages/StorageHandler/AbstractStorage";
 import IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
 import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
-import {ResultCodes, TokenData} from "@/packages/Entities";
+import {TokenData} from "@/packages/Objects";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default class AuthStorage extends AbstractStorage implements IAuthStorage{
     constructor(storageHandler: IStorageHandler) {
@@ -16,17 +17,17 @@ export default class AuthStorage extends AbstractStorage implements IAuthStorage
         }
     }
 
-    setAccessToken(token: string): ResultCodes {
+    setAccessToken(token: string): ResultCode {
         return this.storageHandler.setValue('accessToken', token);
     }
 
-    setImprint(token: string | undefined): ResultCodes {
+    setImprint(token: string | undefined): ResultCode {
         if(token === undefined)
-            return ResultCodes.OK;
+            return ResultCode.OK;
         return this.storageHandler.setValue('imprintToken', token);
     }
 
-    setUpdateToken(token: string): ResultCodes {
+    setUpdateToken(token: string): ResultCode {
         return this.storageHandler.setValue('updateToken', token);
     }
 }

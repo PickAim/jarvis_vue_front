@@ -1,10 +1,9 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
-import {ResponseData, SellerAPIKeysData} from "@/packages/Entities";
+import {ResponseData, SellerAPIKeysData} from "@/packages/Objects";
 
 export default class SellerRequestClass extends AbstractRequest{
-    constructor(requestHandler: IRequestHandler) {
-        super(requestHandler);
+    constructor() {
+        super();
     }
 
     async getSellerAPIKeys(): Promise<ResponseData<SellerAPIKeysData>>{

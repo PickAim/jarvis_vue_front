@@ -1,5 +1,5 @@
 import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
-import {ResultCodes} from "@/packages/Entities";
+import {ResultCode} from "@/packages/ResultCode";
 
 export default class StorageHandlerClass implements IStorageHandler{
 
@@ -9,7 +9,7 @@ export default class StorageHandlerClass implements IStorageHandler{
         return "";
     }
 
-    setValue(key: string, value: string): ResultCodes {
-        return ResultCodes.OK;
+    setValue(key: string, value: string): ResultCode {
+        return ResultCode.OK;
     }
 }

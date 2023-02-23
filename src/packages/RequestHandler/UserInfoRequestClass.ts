@@ -1,10 +1,9 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
-import {ResponseData, UserData} from "@/packages/Entities";
+import {ResponseData, UserData} from "@/packages/Objects";
 
 export default class UserInfoRequestClass extends AbstractRequest{
-    constructor(requestHandler: IRequestHandler) {
-        super(requestHandler);
+    constructor() {
+        super();
     }
 
     async getUserInfo(): Promise<ResponseData<UserData>>{

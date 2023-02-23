@@ -1,10 +1,9 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import IRequestHandler from "@/packages/RequestHandler/IRequestHandler";
-import {ResponseData} from "@/packages/Entities";
+import {ResponseData} from "@/packages/Objects";
 
 export default class SubscribeRequestClass extends AbstractRequest{
-    constructor(requestHandler: IRequestHandler) {
-        super(requestHandler);
+    constructor() {
+        super();
     }
     // TODO: add statistic requests
     async getStat(): Promise<ResponseData<object>>{

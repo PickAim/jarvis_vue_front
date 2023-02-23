@@ -1,17 +1,12 @@
 <template>
-
-  <RouterView />
+  <NotificationList/>
+  <OverlayContainer/>
+  <RouterView/>
 </template>
 
-<script>
-import {RouterView} from "vue-router"
-
-export default {
-  name: "JMain",
-  components: {
-    RouterView
-  }
-}
+<script setup lang="ts">
+import OverlayContainer from "@/component/OverlayContainer.vue"
+import NotificationList from "@/component/NotificationList.vue"
 </script>
 
 <style scoped>
