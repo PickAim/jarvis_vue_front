@@ -1,4 +1,4 @@
-import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import type IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
 
 export default abstract class AbstractStorage{
     storageHandler: IStorageHandler;

@@ -1,7 +1,7 @@
 import AbstractStorage from "@/packages/StorageHandler/AbstractStorage";
-import IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
-import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
-import {TokenData} from "@/packages/Objects";
+import type IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
+import type IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import type {TokenData} from "@/packages/Objects";
 import {ResultCode} from "@/packages/ResultCode";
 
 export default class AuthStorage extends AbstractStorage implements IAuthStorage{

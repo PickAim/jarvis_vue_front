@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import DecoratedOverlay from "./templates/DecoratedOverlay";
+import DecoratedOverlay from "./OverlayTemplateDecorated";
 export default {
   components: {DecoratedOverlay}
 }

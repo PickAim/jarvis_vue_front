@@ -1,5 +1,5 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import {LoginData, RegData, ResponseData, TokenData} from "@/packages/Objects";
+import type {LoginData, RegData, ResponseData, TokenData} from "@/packages/Objects";
 import {ResultCode} from "@/packages/ResultCode";
 
 export default class AccountRequestClass extends AbstractRequest{

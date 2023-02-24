@@ -1,7 +1,5 @@
 <template>
   <div class="ml-10">
-    <TextboxControl input-type="text" placeholder="Textetxtetx" label="Логин" error-text="qwe" v-model="textValue"/>
-    {{textValue}}
     <div v-if="!isCookieEnabled()">Куки недоступны! Всё в локале</div>
     <div v-else>Куки доступны</div>
     <div>Ответ: {{requestResult}}</div>
@@ -19,10 +17,9 @@
 
 <script setup lang="ts">
 import AccountRequestClass from "@/packages/RequestHandler/AccountRequestClass";
-import {ResponseData} from "@/packages/Objects";
+import type {ResponseData} from "@/packages/Objects";
 import {ref} from "vue";
 import {ResultCode} from "@/packages/ResultCode";
-import TextboxControl from "@/component/controls/TextboxControl.vue"
 
 const password = "qwe123@#$QWE"
 const passwordWrong = "qwe123"
@@ -30,7 +27,6 @@ const passwordWrong = "qwe123"
 const accountHandler = new AccountRequestClass();
 let requestResult = ref("0");
 let isLoading = ref(false);
-const textValue = ref("");
 
 async function loginPassword(){
     requestResult.value = "";

@@ -1,6 +1,6 @@
-import {OverlayName} from "@/packages/Objects";
+import type {OverlayName} from "@/packages/Objects";
 
-export class OverlayHandler{
+export class HandlerOverlay {
     setOverlayName(name: OverlayName){
         //TODO
     }

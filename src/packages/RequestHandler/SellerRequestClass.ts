@@ -1,5 +1,5 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import {ResponseData, SellerAPIKeysData} from "@/packages/Objects";
+import type {ResponseData, SellerAPIKeysData} from "@/packages/Objects";
 
 export default class SellerRequestClass extends AbstractRequest{
     constructor() {

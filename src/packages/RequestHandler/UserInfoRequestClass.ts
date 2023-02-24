@@ -1,5 +1,5 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import {ResponseData, UserData} from "@/packages/Objects";
+import type {ResponseData, UserData} from "@/packages/Objects";
 
 export default class UserInfoRequestClass extends AbstractRequest{
     constructor() {

@@ -6,9 +6,9 @@
 </template>
 
 <script setup lang="ts">
-  import LoginOverlay from "@/component/overlay/LoginOverlay.vue"
-  import RegOverlay from "@/component/overlay/RegOverlay.vue"
-  import ControlPanelOverlay from "@/component/overlay/ControlPanelOverlay.vue"
+  import OverlayBodyLogin from "@/component/OverlayBodyLogin.vue"
+  import OverlayBodyRegistration from "@/component/OverlayBodyRegistration.vue"
+  import OverlayBodyControlPanel from "@/component/OverlayBodyControlPanel.vue"
 
   let overlayName = ""
   overlayName = "LoginOverlay"

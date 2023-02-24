@@ -1,5 +1,5 @@
-import {ResponseType} from "axios";
-import {ResultCode} from "@/packages/ResultCode";
+import type {ResponseType} from "axios";
+import type {ResultCode} from "@/packages/ResultCode";
 
 export abstract class AbstractData{}
 

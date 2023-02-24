@@ -1,4 +1,4 @@
-import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import type IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
 import {ResultCode} from "@/packages/ResultCode";
 
 export default class StorageHandlerClass implements IStorageHandler{

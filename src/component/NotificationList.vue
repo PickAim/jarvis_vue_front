@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import {Notification} from "@/packages/Objects";
-import NotificationBlock from "@/component/NotificationBlock.vue"
+import type {Notification} from "@/packages/Objects";
+import type NotificationBlock from "@/component/NotificationListItem.vue"
 
 let notifications: Notification[] = [];
 notifications.push({

@@ -1,4 +1,4 @@
-export class OverlayWorker{
+export class WorkerOverlay {
     closeOverlay() {
         //TODO
     }

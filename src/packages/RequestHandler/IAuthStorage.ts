@@ -1,5 +1,5 @@
-import {TokenData} from "@/packages/Objects";
-import {ResultCode} from "@/packages/ResultCode";
+import type {TokenData} from "@/packages/Objects";
+import type {ResultCode} from "@/packages/ResultCode";
 
 export default interface IAuthStorage{
     setAccessToken(token: string): ResultCode,

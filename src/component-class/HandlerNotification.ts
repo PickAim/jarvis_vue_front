@@ -1,6 +1,6 @@
-import {Notification} from "@/packages/Objects";
+import type {Notification} from "@/packages/Objects";
 
-export class NotificationHandler{
+export class HandlerNotification {
     createNotification(note: Notification){
         //TODO
     }

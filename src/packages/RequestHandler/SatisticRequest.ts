@@ -1,5 +1,5 @@
 import AbstractRequest from "@/packages/RequestHandler/AbstractRequest";
-import {ResponseData} from "@/packages/Objects";
+import type {ResponseData} from "@/packages/Objects";
 
 export default class SubscribeRequestClass extends AbstractRequest{
     constructor() {

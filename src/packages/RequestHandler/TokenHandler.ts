@@ -1,7 +1,7 @@
-import {TokenData} from "@/packages/Objects";
-import IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
+import type {TokenData} from "@/packages/Objects";
+import type IAuthStorage from "@/packages/RequestHandler/IAuthStorage";
 import AuthStorage from "@/packages/StorageHandler/AuthStorage";
-import IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
+import type IStorageHandler from "@/packages/RequestHandler/IStorageHandler";
 import {ResultCode} from "@/packages/ResultCode";
 
 export default class TokenHandler{

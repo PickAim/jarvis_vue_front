@@ -1,9 +1,9 @@
 <template>
-  <TestAuth />
+  <div></div>
 </template>
 
 <script setup lang="ts">
-import TestAuth from "./TestAuth.vue";
+
 </script>
 
 <style scoped>
