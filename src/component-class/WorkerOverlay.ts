@@ -1,6 +1,14 @@
+import {useOverlayStateStore} from "@/stores/overlayStore";
+
 export class WorkerOverlay {
+    overlayState;
+
+    constructor() {
+        this.overlayState = useOverlayStateStore();
+    }
+
     closeOverlay() {
-        //TODO
+        this.overlayState.closeOverlay();
     }
 
     changeOverlay(name: string) {
@@ -8,10 +16,10 @@ export class WorkerOverlay {
     }
 
     startLoading() {
-        //TODO
+        this.overlayState.startLoading();
     }
 
     stopLoading() {
-        //TODO
+        this.overlayState.stopLoading();
     }
 }

@@ -1,17 +1,19 @@
-import {HandlerOverlay} from "@/component-class/HandlerOverlay";
+import {useOverlayStateStore} from "@/stores/overlayStore";
 
 export class WorkerViewStart {
-    overlayHandler: HandlerOverlay;
+    overlayState;
 
     constructor() {
-        this.overlayHandler = new HandlerOverlay();
+        this.overlayState = useOverlayStateStore();
     }
 
     openLoginOverlay(){
-        //TODO
+        this.overlayState.setOverlayName('login');
+        this.overlayState.openOverlay();
     }
 
-    openRegOverlay(){
-        //TODO
+    openRegistrationOverlay(){
+        this.overlayState.setOverlayName('registration');
+        this.overlayState.openOverlay();
     }
 }

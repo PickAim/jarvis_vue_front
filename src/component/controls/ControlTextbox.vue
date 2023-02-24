@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="textbox-wrapper">
     <span :class="{active: error}" class="error-text">{{errorText}}</span>
     <div class="input-block">
       <input
@@ -27,7 +27,7 @@ defineEmits(['update:modelValue'])
 
 <style scoped lang="scss">
 
-.wrapper{
+.textbox-wrapper{
   height: fit-content;
   display: block;
   margin: 0;
@@ -70,13 +70,13 @@ defineEmits(['update:modelValue'])
       width: 100%;
       bottom: 0;
       border-width: 3px;
-      border-color: #fbf;
+      border-color: #555;
       outline: none;
       box-sizing: border-box;
       transition: border-width 0.1s linear, border-color 0.1s linear;
 
       &:focus{
-        border-color: #f4f;
+        border-color: #111;
       }
       &:focus+.placeholder, &:not(:placeholder-shown)+.placeholder{
         font-size: 13px;

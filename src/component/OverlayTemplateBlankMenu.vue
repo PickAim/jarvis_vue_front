@@ -1,7 +1,7 @@
 <template>
   <OverlayHeader><slot name="headerText"/></OverlayHeader>
   <slot name="menu"/>
-  <slot name="body"/>
+  <slot/>
   <!--  TODO: make decoration-->
 </template>
 

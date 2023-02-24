@@ -1,13 +1,23 @@
 <template>
-  <OverlayHeader><slot name="headerText"/></OverlayHeader>
-  <slot name="body"/>
+  <div class="decorate-wrapper">
+    <OverlayTemplate :header-text="headerText">
+        <slot/>
+    </OverlayTemplate>
+  </div>
 <!--  TODO: make decoration-->
 </template>
 
 <script setup lang="ts">
-import OverlayHeader from "./OverlayHeader.vue"
+import OverlayTemplate from "./OverlayTemplate.vue"
+import {defineProps} from "vue";
+
+defineProps<{
+  headerText: string
+}>()
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.decorate-wrapper{
+  background-color: white;
+}
 </style>

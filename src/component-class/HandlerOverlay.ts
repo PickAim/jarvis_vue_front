@@ -1,27 +1,35 @@
 import type {OverlayName} from "@/packages/Objects";
+import {useOverlayStateStore} from "@/stores/overlayStore";
+import type {Store} from "pinia";
 
 export class HandlerOverlay {
+    overlayStore;
+
+    constructor() {
+        this.overlayStore = useOverlayStateStore();
+    }
+
     setOverlayName(name: OverlayName){
-        //TODO
+        this.overlayStore.setOverlayName(name);
     }
 
     setEffect(effect: string, options: object){
-        //TODO
+
     }
 
     openOverlay(){
-        //TODO
+        this.overlayStore.openOverlay();
     }
 
     closeOverlay(){
-        //TODO
+        this.overlayStore.closeOverlay();
     }
 
     isOpen(){
-        //TODO
+        return this.overlayStore.isOpen
     }
 
     isLoading(){
-        //TODO
+        return this.overlayStore.isLoading
     }
 }

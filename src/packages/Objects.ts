@@ -84,12 +84,4 @@ export interface SubscribeData extends AbstractData{
     pay_api_key?: string;
 }
 
-export interface Notification{
-    id: number;
-    header: string;
-    body: string;
-    type: "error" | "notification" | "warning";
-    duration?: number
-}
-
 export type OverlayName = "LoginOverlay" | "RegOverlay" | "ControlPanelOverlay";
