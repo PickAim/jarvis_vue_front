@@ -15,11 +15,12 @@ export interface Notification extends NotificationInput{
 export const useNotificationsStore = defineStore('notifications', {
     state: () => ({
         notificationsList: [] as Notification[],
-        defaultDuration: 3000,
+        timerList: {} as {[id: number]: number},
+        defaultDuration: 2000,
         id: 0
     }),
     getters: {
-        notifications: (state): Notification[] => state.notificationsList,
+        notifications: (state): Notification[] => state.notificationsList
     },
     actions: {
         addNotification(note: NotificationInput){
@@ -28,23 +29,40 @@ export const useNotificationsStore = defineStore('notifications', {
             if(notification.duration === undefined) notification.duration = this.defaultDuration;
             notification.isShow = false;
             this.notificationsList.push(notification);
+            this.startNotificationTimer(notification.id);
         },
-        hideAllNotifications(){
-            this.notificationsList.forEach(note => {note.isShow = false})
+        getNotification(id: number){
+            for(const note of this.notificationsList){
+                if(note.id === id){
+                    return note;
+                }
+            }
+            return undefined;
         },
         showNotification(id: number){
-            for(const note of this.notificationsList){
-                if(note.id === id){
-                    note.isShow = true;
-                }
-            }
+            const note = this.getNotification(id);
+            if(note !== undefined) note.isShow = true;
         },
         hideNotification(id: number){
-            for(const note of this.notificationsList){
-                if(note.id === id){
-                    note.isShow = false;
-                }
-            }
+            const note = this.getNotification(id);
+            if(note) this.hideNotificationByInst(note);
+        },
+        hideNotificationByInst(note: Notification){
+            note.isShow = false;
+            this.stopNotificationTimer(note.id);
+        },
+        hideAllNotifications(){
+            this.notificationsList.forEach(note => {this.hideNotificationByInst(note)})
+        },
+        startNotificationTimer(id: number){
+            const note = this.getNotification(id);
+            if(note === undefined || this.timerList[id] !== undefined) return;
+            this.timerList[id] = setTimeout(() => this.hideNotification(id), note.duration)
+        },
+        stopNotificationTimer(id: number){
+            if(this.timerList[id] === undefined) return;
+            clearTimeout(this.timerList[id]);
+            delete this.timerList[id]
         }
     }
 })

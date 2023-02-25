@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-wrapper p-10">
+  <div class="menu-wrapper ml-10">
     <RouterLink to="/test/auth">Тест авторизации</RouterLink>
     <RouterLink to="/test/overlay">Тест оверлеев</RouterLink>
     <RouterLink to="/test/control">Тест элементов управления</RouterLink>
@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import TestAuth from "./TestAuth.vue";
 </script>
 
 <style scoped lang="scss">
@@ -17,7 +16,7 @@ import TestAuth from "./TestAuth.vue";
   align-items: center;
   justify-content: center;
   width: 200px;
-  height: 100px;
+  height: 70px;
   margin-block: 10px;
   border: 2px solid black;
   text-align: center;

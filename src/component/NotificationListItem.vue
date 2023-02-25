@@ -1,11 +1,16 @@
 <template>
-  <div class="notification-list-item-wrapper" :class="{active: note.isShow}">
-    <div class="type-icon"/>
+  <div class="notification-list-item-wrapper"
+       :class="{active: note.isShow}"
+       @mouseenter="stopNotificationTimer(note.id)"
+       @mouseleave="startNotificationTimer(note.id)">
+    <div class="type-icon"
+         :style="{backgroundColor: typeToColor[note.type]}"/>
     <div class="vertical-separator"/>
     <main>
       <div class="header-wrapper">
         <div class="header-text">{{note.header}}</div>
-        <button class="hide-button" @click="hideNotification(note.id)"></button>
+        <button class="hide-button"
+                @click="hideNotification(note.id)"/>
       </div>
       <div class="horizontal-separator"/>
       <div class="body-text">{{note.body}}</div>
@@ -14,12 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, onMounted} from "vue";
+import {defineProps} from "vue";
 import type {Notification} from "@/stores/notificationsStore";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 
 const notificationStore = useNotificationsStore();
-const {showNotification, hideNotification} = notificationStore;
+const {showNotification, hideNotification, startNotificationTimer, stopNotificationTimer} = notificationStore;
+
 const props = defineProps<{
   note: Notification
 }>()
@@ -28,6 +34,12 @@ console.log(props.note.isShow)
 setTimeout(() => {
   showNotification(props.note.id);
 }, 1);
+
+const typeToColor = {
+  'error': '#F21',
+  'warning': '#FB0',
+  'notify': '#09F'
+}
 </script>
 
 <style scoped lang="scss">
@@ -64,9 +76,8 @@ setTimeout(() => {
   }
 
   .type-icon{
-    width: 50px;
+    width: 20px;
     height: 100%;
-    background-color: greenyellow;
   }
   main{
     margin-left: 20px;

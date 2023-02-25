@@ -20,18 +20,42 @@
     type: 'notify'
     })">
       Добавить предупреждение</ControlButton>
+    <ControlButton @click="addNotification({
+    header: randomString,
+    body: '',
+    type: 'notify'
+    })">
+      Добавить нечто</ControlButton>
     <ControlButton @click="hideAllNotifications()">Очистить</ControlButton>
+    <ControlTextbox class="duration-input"
+                    input-type="number"
+                    placeholder="Длительность"
+                    v-model="defaultDuration"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import ControlButton from "@/component/controls/ControlButton.vue"
+import ControlTextbox from "@/component/controls/ControlTextbox.vue"
 import {useNotificationsStore} from "@/stores/notificationsStore";
+import {ref} from "vue";
+import {storeToRefs} from "pinia";
 
 const notificationsStore = useNotificationsStore()
 const {addNotification, hideAllNotifications} = notificationsStore;
+const {defaultDuration} = storeToRefs(notificationsStore);
+const randomString = ref("qwe")
+
+setInterval(() => {
+  let buffer = new Uint8Array(16);
+  buffer = crypto.getRandomValues(buffer)
+  randomString.value = String.fromCharCode.apply(String, buffer as unknown as number[]);
+}, 100)
 
 </script>
 
 <style scoped lang="scss">
+.duration-input{
+  width: 300px;
+}
 </style>
