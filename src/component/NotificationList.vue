@@ -27,6 +27,7 @@ const notifications = storeToRefs(notificationsStore).notifications;
   text-align: center;
   width: 600px;
   height: 100%;
+  overflow-y: hidden;
   display: block;
 }
 </style>

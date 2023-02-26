@@ -1,17 +1,13 @@
 <template>
   <div class="overlay-container-wrapper" :class="{active: isOpen}">
     <div class="background-wrapper" @click="backgroundClick">
-      <OverlayWindowLogin v-if="overlayName === 'login'"/>
-      <OverlayWindowRegistration v-else-if="overlayName === 'registration'"/>
-      <OverlayWindowControlPanel v-else-if="overlayName === 'controlPanel'"/>
+      <component :is="overlays[overlayName]"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import OverlayWindowLogin from "@/component/OverlayWindowLogin.vue"
-  import OverlayWindowRegistration from "@/component/OverlayWindowRegistration.vue"
-  import OverlayWindowControlPanel from "@/component/OverlayWindowControlPanel.vue"
+  import * as overlays from "@/component/overlays"
   import {useOverlayStateStore} from "@/stores/overlayStore";
   import {storeToRefs} from "pinia";
 

@@ -10,13 +10,15 @@
         v-model="textValue"
         :error="inputError"
     />
-    {{textValue}}
+    <div>{{textValue}}</div>
+    <TestC/>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
 import ControlTextbox from "@/component/controls/ControlTextbox.vue"
+import TestC from "@/component/test/TestC.vue";
 const textValue = ref("");
 const inputError = ref(true);
 

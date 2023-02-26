@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
 
+class A{
+
+};
+
 export interface NotificationInput{
     header: string;
     body: string;
@@ -17,7 +21,8 @@ export const useNotificationsStore = defineStore('notifications', {
         notificationsList: [] as Notification[],
         timerList: {} as {[id: number]: number},
         defaultDuration: 2000,
-        id: 0
+        id: 0,
+        c: new A()
     }),
     getters: {
         notifications: (state): Notification[] => state.notificationsList

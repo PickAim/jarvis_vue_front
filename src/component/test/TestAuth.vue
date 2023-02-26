@@ -8,7 +8,6 @@
     <button @click="registration()">Регистрация</button>
     <button @click="registrationWrong()">Регистрация (Неправильный пароль)</button>
     <button @click="logout()">Выйти</button>
-    <button @click="openOverlay()">Открыть оверлей</button>
   </div>
   <div class="overlay flex items-center justify-center" :class="{active: isLoading}">
     <div class="w-4/12 h-2/3 bg-gray-400 rounded-xl"></div>

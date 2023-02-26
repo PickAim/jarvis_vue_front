@@ -13,14 +13,18 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits} from "vue";
+import {defineProps, defineEmits, withDefaults} from "vue";
 
-defineProps<{
-  inputType: string,
+withDefaults(defineProps<{
+  inputType?: string,
   placeholder: string,
-  errorText: string,
-  modelValue: string,
-  error: boolean}>()
+  errorText?: string,
+  modelValue?: string,
+  error?: boolean}>(), {
+  inputType: "text",
+  errorText: "",
+  error: false
+})
 defineEmits(['update:modelValue'])
 
 </script>
