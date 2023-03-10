@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "run-p type-check build-only",
-    "lint": "vue-cli-service lint",
+    "build": "vite build",
     "dev": "vite --port=8300"
   },
   "dependencies": {

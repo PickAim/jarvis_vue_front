@@ -8,6 +8,9 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   base: "./",
   plugins: [vue()],
+  build: {
+    outDir: "./public"
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

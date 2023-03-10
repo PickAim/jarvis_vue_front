@@ -7,7 +7,7 @@ export class WorkerViewStart {
         this.overlayState = useOverlayStateStore();
     }
 
-    openLoginOverlay(){
+    public openLoginOverlay(){
         this.overlayState.setOverlayName('login');
         this.overlayState.openOverlay();
     }
