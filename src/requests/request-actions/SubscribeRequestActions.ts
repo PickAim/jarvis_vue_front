@@ -1,9 +1,9 @@
-import AbstractRequest from "@/packages/request/AbstractRequest";
+import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
 import type {ResponseData, SubscribeData} from "@/Objects";
 import {ResultCode} from "@/ResultCode";
-import type IAuthStore from "@/packages/store-interfaces/IAuthStore";
+import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
-export default class SubscribeRequestClass extends AbstractRequest{
+export default class SubscribeRequestActions extends AbstractRequestActions{
     constructor(authStore: IAuthStore) {
         super(authStore);
     }

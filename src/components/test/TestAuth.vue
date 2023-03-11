@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import AccountRequestClass from "@/packages/request/AccountRequestClass";
+import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
 import type {ResponseData} from "@/Objects";
 import {ref} from "vue";
 import {ResultCode} from "@/ResultCode";
@@ -27,7 +27,7 @@ import {useAuthStore} from "@/stores/authStore";
 const password = "qwe123@#$QWE"
 const passwordWrong = "qwe123"
 
-const accountHandler = new AccountRequestClass(useAuthStore());
+const accountHandler = new AccountRequestActions(useAuthStore());
 let requestResult = ref("0");
 let isLoading = ref(false);
 

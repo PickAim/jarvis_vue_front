@@ -5,5 +5,6 @@ export default interface IAuthStore {
     setAccessToken(token: string): ResultCode,
     setUpdateToken(token: string): ResultCode,
     setImprint(key: string | undefined): ResultCode,
-    getTokenData(): TokenData,
+    setTokens(token: TokenData): void,
+    getTokens(): TokenData,
 }

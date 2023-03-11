@@ -1,10 +1,10 @@
-import AbstractRequest from "@/packages/request/AbstractRequest";
+import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
 import type {LoginData, RegData, ResponseData, TokenData} from "@/Objects";
 import {ResultCode} from "@/ResultCode";
-import type IAuthStore from "@/packages/store-interfaces/IAuthStore";
+import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
-export default class AccountRequestClass extends AbstractRequest{
-    constructor(authStore: IAuthStore) {
+export default class AccountRequestActions extends AbstractRequestActions{
+    constructor(private authStore: IAuthStore) {
         super(authStore);
     }
 
@@ -18,7 +18,7 @@ export default class AccountRequestClass extends AbstractRequest{
         console.log(response);
         if(response.code == ResultCode.OK && response.result !== undefined){
             const tokens = response.result;
-            this.requestHandler.setTokens(tokens);
+            this.authStore.setTokens(tokens);
         }
         return response;
     }
@@ -47,14 +47,14 @@ export default class AccountRequestClass extends AbstractRequest{
     }
 
     async deleteAccount(): Promise<ResponseData<object>>{
-        this.requestHandler.setTokens({access_token: "", update_token: ""});
+        this.authStore.setTokens({access_token: "", update_token: ""});
         return await this.requestHandler.makeRequest({
             url: "",
         });
     }
 
     async logout(): Promise<ResponseData<object>>{
-        this.requestHandler.setTokens({access_token: "", update_token: ""});
+        this.authStore.setTokens({access_token: "", update_token: ""});
         return await this.requestHandler.makeRequest({
             url: "/access/log_out/",
         });

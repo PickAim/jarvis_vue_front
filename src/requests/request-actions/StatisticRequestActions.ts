@@ -1,8 +1,8 @@
-import AbstractRequest from "@/packages/request/AbstractRequest";
+import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
 import type {ResponseData} from "@/Objects";
-import type IAuthStore from "@/packages/store-interfaces/IAuthStore";
+import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
-export default class StatisticRequest extends AbstractRequest{
+export default class StatisticRequestActions extends AbstractRequestActions{
     constructor(authStore: IAuthStore) {
         super(authStore);
     }

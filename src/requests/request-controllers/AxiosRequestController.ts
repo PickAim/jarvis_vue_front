@@ -1,17 +1,14 @@
-import type IRequestHandler from "@/packages/request/IRequestHandler";
+import type IRequestController from "@/requests/request-actions/interfaces/IRequestController";
 import type {RequestData, ResponseData, TokenData} from "@/Objects";
-import TokenHandler from "@/packages/request/TokenHandler";
 import axios, {AxiosError} from "axios";
 import type {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {ResultCode} from "@/ResultCode";
-import type IAuthStore from "@/packages/store-interfaces/IAuthStore";
+import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
-export default class RequestHandlerClass implements IRequestHandler{
-    tokenHandler: TokenHandler
+export default class AxiosRequestController implements IRequestController{
     axiosInst: AxiosInstance
 
-    constructor(authStore: IAuthStore) {
-        this.tokenHandler = new TokenHandler(authStore)
+    constructor(private authStore: IAuthStore) {
         this.axiosInst = axios.create({
             baseURL: 'http://localhost:8090/',
             headers: {
@@ -28,7 +25,7 @@ export default class RequestHandlerClass implements IRequestHandler{
         const config: AxiosRequestConfig = {
             responseType: responseType
         }
-        const requestBody = {...this.tokenHandler.getTokens(), ...body}
+        const requestBody = {...this.authStore.getTokens(), ...body}
         // TODO: don't send update token!
 
         console.log(requestBody);
@@ -43,37 +40,33 @@ export default class RequestHandlerClass implements IRequestHandler{
         }
         if (!req)
             return {code: ResultCode.CONFIGURATION_ERROR}
+
         try {
             const result = await req;
             return {code: ResultCode.OK, result: result.data};
         }
         catch(err){
-            if(err instanceof AxiosError) {
-                if (err.response) {
-                    console.log(err.response)
-                    if ((err.response.data instanceof Object) && (err.response.data.jarvis_exception !== undefined)) {
-                        // check token expired and update
-                        if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN){
-                            const updRes = await this.updateToken();
-                            if(updRes.code !== ResultCode.OK)
-                                return {code: updRes.code, error: updRes.error};
-                            return await this.makeRequest<K>(request)
-                        }
-                        return {code: err.response.data.jarvis_exception, error: err.response.data};
-                    }
-                    return {code: ResultCode.FAIL, error: {description: err.response.statusText}};
-                }else if (err.request) {
+            if(!(err instanceof AxiosError))
+                return {code: ResultCode.FAIL, error: {description: "Unknown error"}};
+            if (!err.response)
+                if(err.request)
                     return {code: ResultCode.CONNECTION_ERROR, error: {description: err.request}};
-                } else {
+                else
                     return {code: ResultCode.CONFIGURATION_ERROR, error: {description: err.message}};
-                }
-            }
-            return {code: ResultCode.FAIL, error: {description: "Unknown error"}};
-        }
-    }
+            if (!(err.response.data instanceof Object) || !(err.response.data.jarvis_exception !== undefined))
+                return {code: ResultCode.FAIL, error: {description: err.response.statusText}};
 
-    setTokens(tokens: TokenData): ResultCode {
-        return this.tokenHandler.setTokens(tokens);
+            console.log(err.response)
+
+            // check token expired and update
+            if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN){
+                const updRes = await this.updateToken();
+                if(updRes.code !== ResultCode.OK)
+                    return {code: updRes.code, error: updRes.error};
+                return await this.makeRequest<K>(request)
+            }
+            return {code: err.response.data.jarvis_exception, error: err.response.data};
+        }
     }
 
     async updateToken(): Promise<ResponseData<object>> {
@@ -81,7 +74,7 @@ export default class RequestHandlerClass implements IRequestHandler{
         const response = await this.makeRequest<TokenData>(request);
         if(response.code == ResultCode.OK && response.result !== undefined){
             const tokens = response.result;
-            this.setTokens(tokens);
+            this.authStore.setTokens(tokens);
         }
         return response;
     }
