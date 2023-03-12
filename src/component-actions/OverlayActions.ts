@@ -1,6 +1,6 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
 
-export class WorkerOverlay {
+export class OverlayActions {
     overlayState;
 
     constructor() {

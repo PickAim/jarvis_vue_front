@@ -1,6 +1,6 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
 
-export class WorkerViewStart {
+export class ViewStartActions {
     overlayState;
 
     constructor() {

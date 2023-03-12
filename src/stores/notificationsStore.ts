@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export interface NotificationInput{
     header: string;
     body: string;
-    type: "error" | "notify" | "warning";
+    type: "error" | "notify" | "warning" | "success";
     duration?: number;
 }
 

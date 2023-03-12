@@ -32,7 +32,8 @@ const props = defineProps<{
 const typeToColor = {
   'error': '#F21',
   'warning': '#FB0',
-  'notify': '#09F'
+  'notify': '#09F',
+  'success': '#8F3'
 }
 
 function mouseEnterFunc(){
@@ -45,24 +46,12 @@ function mouseLeaveFunc(){
 </script>
 
 <style scoped lang="scss">
-.vertical-separator{
-  height: 100%;
-  width: 1px;
-  background-color: black;
-}
-
-.horizontal-separator{
-  height: 1px;
-  width: 100%;
-  background-color: black;
-}
-
 .notification-list-item-wrapper{
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: calc(80px + max(0px, 300px - 50vw));
   background-color: white;
-  height: 80px;
   border: 1px solid black;
   overflow-y: hidden;
   margin-block: 5px;
@@ -92,5 +81,17 @@ function mouseLeaveFunc(){
       }
     }
   }
+}
+
+.vertical-separator{
+  height: 100%;
+  width: 1px;
+  background-color: black;
+}
+
+.horizontal-separator{
+  height: 1px;
+  width: 100%;
+  background-color: black;
 }
 </style>

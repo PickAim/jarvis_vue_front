@@ -14,7 +14,7 @@
       </div>
       <ControlButton
           class="submit"
-          @click="worker.login()">Подтвердить</ControlButton>
+          @click="actions.login({login: loginInput, password: passwordInput})">Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>
@@ -24,11 +24,12 @@ import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecor
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {ref} from "vue";
-import {WorkerOverlayWindowLogin} from "@/component-class/WorkerOverlayWindowLogin";
+import {OverlayLoginActions} from "@/component-actions/OverlayLoginActions";
+import {useAuthStore} from "@/stores/authStore";
 
 const loginInput = ref("")
 const passwordInput = ref("")
-const worker = new WorkerOverlayWindowLogin()
+const actions = new OverlayLoginActions(useAuthStore())
 
 console.log("LOGIN WINDOW")
 

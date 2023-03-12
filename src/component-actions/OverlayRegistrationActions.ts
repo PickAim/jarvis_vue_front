@@ -1,7 +1,7 @@
-import {WorkerOverlay} from "@/component-class/WorkerOverlay";
+import {OverlayActions} from "@/component-actions/OverlayActions";
 import type {RegData} from "@/Objects";
 
-export class WorkerOverlayWindowRegistration extends WorkerOverlay{
+export class OverlayRegistrationActions extends OverlayActions{
     constructor() {
         super();
     }

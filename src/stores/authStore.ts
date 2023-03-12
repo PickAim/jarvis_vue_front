@@ -16,6 +16,11 @@ export const useAuthStore = defineStore<"authStore",{},{}, IAuthStore>("authStor
         },
         setUpdateToken(token: string): ResultCode {
             return {} as ResultCode;
+        },
+        setTokens(token: TokenData) {
+            this.setAccessToken(token.access_token);
+            this.setImprint(token.imprint_token);
+            this.setUpdateToken(token.update_token);
         }
     }
 });

@@ -15,7 +15,7 @@ defineEmits(['click'])
 
 <style scoped lang="scss">
 .button-wrapper{
-  width: 300px;
+  width: 200px;
   height: 70px;
 }
 
@@ -23,8 +23,9 @@ button{
   display: block;
   width: 100%;
   height: 100%;
-  margin-block: 10px;
   border: 2px solid black;
+  background-color: white;
+
   &:hover{
     border-width: 3px;
   }

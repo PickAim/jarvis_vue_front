@@ -31,6 +31,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 100;
+  position: fixed;
 
   .background-wrapper{
     width: 100%;
