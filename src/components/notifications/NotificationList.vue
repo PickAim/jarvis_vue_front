@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import NotificationListItem from "@/components/NotificationListItem.vue";
+import NotificationListItem from "@/components/notifications/NotificationListItem.vue";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {storeToRefs} from "pinia";
 

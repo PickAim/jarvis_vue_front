@@ -5,6 +5,7 @@ import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import {ResultCode} from "@/ResultCode";
 import type {Store} from "pinia";
 import {useNotificationsStore} from "@/stores/notificationsStore";
+import {ResultDescription} from "@/ResultDescription";
 
 export class OverlayLoginActions extends OverlayActions{
     accountRequestActions: AccountRequestActions;
@@ -22,46 +23,14 @@ export class OverlayLoginActions extends OverlayActions{
         try {
             const response = await this.accountRequestActions.loginPassword(data);
             console.log(response);
-            switch(response.code){
-                case ResultCode.OK:
-                    this.notificationsStore.addNotification({
-                        header: "Успех",
-                        body: "Вход совершён",
-                        type: "success",
-                    });
-                    break;
-                case ResultCode.CONNECTION_ERROR:
-                    this.notificationsStore.addNotification({
-                        header: "Ошибка сети",
-                        body: "Не получилось получить ответ от сервера. Возможно, есть проблема с подключением к сети",
-                        type: "error",
-                    });
-                    break;
-                case ResultCode.INCORRECT_LOGIN_OR_PASSWORD:
-                    this.notificationsStore.addNotification({
-                        header: "Неверный логин или пароль",
-                        body: "Попробуйте ввести данные ещё раз",
-                        type: "error",
-                    });
-                    break;
-                case ResultCode.FAIL:
-                case ResultCode.CONFIGURATION_ERROR:
-                    this.showSimpleErrorMessage();
-                    break;
-            }
+            if(response.code === ResultCode.OK)
+                this.notificationsStore.addSuccessNotification(["Успех", "Вход совершён"]);
+            else
+                this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }
         catch(e){
-            this.showSimpleErrorMessage();
-            console.error(e);
+            this.notificationsStore.addErrorNotification(ResultDescription[ResultCode.FAIL]);
         }
         this.stopLoading();
-    }
-
-    showSimpleErrorMessage(){
-        this.notificationsStore.addNotification({
-            header: "Ошибка",
-            body: "Ошибка запроса к серверу",
-            type: "error",
-        });
     }
 }

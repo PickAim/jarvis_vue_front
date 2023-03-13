@@ -66,7 +66,7 @@ function openOverlay(){
 }
 
 function setResult(response: ResponseData<object>){
-  let res;
+  let res: string;
   switch(response.code){
     case ResultCode.OK:
       res = "ОК";
@@ -78,7 +78,7 @@ function setResult(response: ResponseData<object>){
       res = "Ошибка конфигурации";
       break;
     default:
-      res = response.code;
+      res = response.code.toString();
   }
   requestResult.value = res;
 }

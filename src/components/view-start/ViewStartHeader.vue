@@ -3,6 +3,8 @@
     <div class="logo"/>
     <div class="buttons-wrapper">
       <ControlButton class="login-button"
+                     @click="router.push('workspace')">На работу</ControlButton>
+      <ControlButton class="login-button"
                      @click="actions.openLoginOverlay()">Вход</ControlButton>
       <ControlButton class="reg-button"
                      @click="actions.openRegistrationOverlay()">Регистрация</ControlButton>
@@ -13,8 +15,10 @@
 <script setup lang="ts">
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {ViewStartActions} from "@/component-actions/ViewStartActions";
+import {useRouter} from "vue-router";
 
 const actions = new ViewStartActions();
+const router = useRouter();
 </script>
 
 <style scoped lang="scss">

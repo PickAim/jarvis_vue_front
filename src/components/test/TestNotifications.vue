@@ -4,22 +4,17 @@
     header: 'Ошибка',
     body: 'Какое-то уведомление об ошибке',
     type: 'error'
-    })">
-      Добавить ошибку
-    </ControlButton>
+    })">Добавить ошибку</ControlButton>
     <ControlButton @click="addNotification({
     header: 'Предупреждение',
     body: 'Какое-то уведомление с предупреждением',
     type: 'warning'
-    })">
-      Добавить уведомление
-    </ControlButton>
+    })">Добавить уведомление</ControlButton>
     <ControlButton @click="addNotification({
     header: 'Уведомление',
     body: 'Какое-то уведомление',
     type: 'notify'
-    })">
-      Добавить предупреждение</ControlButton>
+    })">Добавить предупреждение</ControlButton>
     <ControlButton @click="addNotification({
     header: randomString,
     body: '',

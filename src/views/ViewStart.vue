@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import ViewStartHeader from "@/components/start-view/ViewStartHeader.vue";
-import ViewStartFooter from "@/components/start-view/ViewStartFooter.vue";
-import ViewStartMain from "@/components/start-view/ViewStartMain.vue";
+import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
+import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
+import ViewStartMain from "@/components/view-start/ViewStartMain.vue";
 import {useRouter} from "vue-router";
 
 const router = useRouter();

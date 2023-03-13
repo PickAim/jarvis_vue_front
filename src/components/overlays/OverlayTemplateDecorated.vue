@@ -1,5 +1,5 @@
 <template>
-  <div class="decorate-wrapper">
+  <div class="overlay-decorate-wrapper">
     <OverlayTemplate :header-text="headerText">
       <slot/>
     </OverlayTemplate>
@@ -17,7 +17,7 @@ defineProps<{
 </script>
 
 <style scoped lang="scss">
-.decorate-wrapper{
+.overlay-decorate-wrapper{
   background-color: white;
 }
 </style>

@@ -20,8 +20,8 @@ $headerHeight: 50px;
 header{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   height: $headerHeight;
-  position: relative;
 
   .header-text{
     font-size: 30px;
@@ -33,9 +33,6 @@ header{
   }
 
   .close-button{
-    position: absolute;
-    right: 0;
-    top: 0;
     height: $headerHeight;
     width: $headerHeight;
     background-color: #444;

@@ -41,14 +41,13 @@ console.log("LOGIN WINDOW")
 }
 
 main{
-  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 
   header{
     font-size: 40px;
-    margin-top: 30px;
   }
 
   .input-block{
@@ -57,8 +56,9 @@ main{
 
   .submit{
     font-size: 22px;
-    margin-top: 20px;
-    width: 200px;
+    margin-top: 30px;
+    height: 50px;
+    width: 250px;
   }
 }
 </style>

@@ -11,18 +11,18 @@ export const testRoutes: RouteRecordRaw[] = [
         component: TestMenu,
         children: [
             {
-                path: '/test/auth',
+                path: 'auth',
                 component: TestAuth
             },
             {
-                path: '/test/control',
+                path: 'control',
                 component: TestControl
             },
             {
-                path: '/test/overlay',
+                path: 'overlay',
                 component: TestOverlay
             },{
-                path: '/test/notifications',
+                path: 'notifications',
                 component: TestNotifications
             },
         ]

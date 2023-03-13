@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-  import * as overlays from "@/components/overlays"
+  import * as overlays from "@/components/overlays/index"
   import {useOverlayStateStore} from "@/stores/overlayStore";
   import {storeToRefs} from "pinia";
 

@@ -27,13 +27,18 @@ console.log("TEMPLATE")
 <style scoped lang="scss">
 .template-wrapper{
   position: relative;
+  max-height: 90vh;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
 
   .header{
     width: 100%;
   }
 
   .main-wrapper{
-
+    overflow-y: auto;
+    height: 100%;
   }
 }
 </style>
