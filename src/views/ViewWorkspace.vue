@@ -20,16 +20,19 @@ import ViewWorkspaceLeftPanel from "@/components/view-workspace/ViewWorkspaceLef
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
   .middle-wrapper{
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
+    flex: 1 0 0;
     align-items: stretch;
-    overflow-y: hidden;
+    overflow: hidden;
 
     .section-wrapper{
-      flex-grow: 1;
+      flex: 1 0;
+      width: 100px;
     }
   }
 }

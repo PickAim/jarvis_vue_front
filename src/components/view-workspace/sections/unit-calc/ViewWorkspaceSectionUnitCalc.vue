@@ -1,58 +1,12 @@
 <template>
-  <pre class="wrapper">
-    cbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fe
-cbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fecbcvbbvbvbvb
-    sef
-    fes
-    fse
-    fe
-  </pre>
+  <ViewWorkspaceSectionContainer>
+    <template v-slot:header>Расчёт UNIT-экономики</template>
+  </ViewWorkspaceSectionContainer>
 </template>
 
 <script setup lang="ts">
-
+import ViewWorkspaceSectionContainer from "@/components/view-workspace/sections/ViewWorkspaceSectionContainer.vue";
 </script>
 
 <style scoped lang="scss">
-pre{
-  background-color: #AAA;
-  overflow-y: auto;
-  height: 100%;
-}
 </style>
