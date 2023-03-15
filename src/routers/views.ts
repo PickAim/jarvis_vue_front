@@ -1,11 +1,11 @@
 import type {RouteRecordRaw} from "vue-router";
 import ViewStart from "../views/ViewStart.vue";
 import ViewWorkspace from "../views/ViewWorkspace.vue";
-import ViewWorkspaceSectionMain from "@/components/view-workspace/sections/main/ViewWorkspaceSectionMain.vue";
+import ViewWorkspaceSectionMain from "@/components/view-workspace/ViewWorkspaceSectionMain.vue";
 import ViewWorkspaceSectionUnitCalc
-    from "@/components/view-workspace/sections/unit-calc/ViewWorkspaceSectionUnitCalc.vue";
+    from "@/components/view-workspace/ViewWorkspaceSectionUnitCalc.vue";
 import ViewWorkspaceSectionStatistic
-    from "@/components/view-workspace/sections/statistic/ViewWorkspaceSectionStatistic.vue";
+    from "@/components/view-workspace/ViewWorkspaceSectionStatistic.vue";
 
 export const viewRoutes: RouteRecordRaw[] = [
     {

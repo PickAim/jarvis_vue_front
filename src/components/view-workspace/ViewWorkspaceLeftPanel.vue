@@ -69,6 +69,7 @@ $button-width: 65px;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
+  z-index: 100;
 
   .buttons-panel{
     display: flex;

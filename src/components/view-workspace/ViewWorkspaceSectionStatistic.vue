@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import ViewWorkspaceSectionContainer from "@/components/view-workspace/sections/ViewWorkspaceSectionContainer.vue";
+import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
 import ViewWorkspaceSectionMainWidget
-  from "@/components/view-workspace/sections/main/ViewWorkspaceSectionMainWidget.vue";
+  from "@/components/view-workspace/widgets/WidgetContainer.vue";
 </script>
 
 <style scoped lang="scss">

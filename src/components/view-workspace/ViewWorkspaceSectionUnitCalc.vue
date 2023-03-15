@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import ViewWorkspaceSectionContainer from "@/components/view-workspace/sections/ViewWorkspaceSectionContainer.vue";
+import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
 </script>
 
 <style scoped lang="scss">
