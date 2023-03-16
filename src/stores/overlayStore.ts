@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type {OverlayName} from "@/Objects";
 
 export const useOverlayStateStore = defineStore('overlayState', {
     state: () => ({
@@ -11,7 +12,7 @@ export const useOverlayStateStore = defineStore('overlayState', {
     getters: {
     },
     actions: {
-        setOverlayName(name: string) {
+        setOverlayName(name: OverlayName) {
             this.overlayName = name;
         },
         openOverlay(){

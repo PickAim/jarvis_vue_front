@@ -6,7 +6,7 @@
        @mouseleave="(e) => emit('mouseLeave', e)">
   </div>
   <div class="widget"
-       :class="{translated: targetIndex !== -1, move: isMoving, otherMove: isOtherMoving}"
+       :class="{translated: options.targetIndex !== -1, move: isMoving, otherMove: isOtherMoving}"
        :style="gridStyle"
        @mousedown="movingStart"
        @dragstart="()=>{return false;}">
@@ -15,7 +15,7 @@
       <div class="close-button"/>
     </header>
     <main>
-      <BarChart/>
+      <BarChart :font-size="widgetSize*4"/>
     </main>
     <footer>
     </footer>
@@ -25,11 +25,12 @@
 <script setup lang="ts">
 import {defineProps, defineEmits, computed, ref} from "vue";
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
+import type {WidgetOptions} from "@/Objects";
 
 const props = defineProps<{
   gridWidth: number,
-  index: number,
-  targetIndex: number,
+  options: WidgetOptions,
+  widgetSize: number
   isOtherMoving: boolean
 }>();
 
@@ -46,11 +47,11 @@ const topPosition = ref(0);
 const leftPosition = ref(0);
 const id = Math.floor(Math.random() * 1000);
 
-const gridColumn = computed(() => Math.floor((props.index) % props.gridWidth) + 1);
-const gridRow = computed(() => Math.floor((props.index) / props.gridWidth) + 1);
+const gridColumn = computed(() => Math.floor((props.options.index) % props.gridWidth) + 1);
+const gridRow = computed(() => Math.floor((props.options.index) / props.gridWidth) + 1);
 
-const columnDelta = computed(() => Math.floor(props.targetIndex % props.gridWidth) + 1 - gridColumn.value);
-const rowDelta = computed(() => Math.floor(props.targetIndex / props.gridWidth) + 1 - gridRow.value);
+const columnDelta = computed(() => Math.floor(props.options.targetIndex % props.gridWidth) + 1 - gridColumn.value);
+const rowDelta = computed(() => Math.floor(props.options.targetIndex / props.gridWidth) + 1 - gridRow.value);
 const gridStyle = computed(() => { return {
   gridColumn: gridColumn.value,
   gridRow: gridRow.value,

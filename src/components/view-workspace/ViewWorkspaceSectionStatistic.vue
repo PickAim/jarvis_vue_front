@@ -2,15 +2,6 @@
   <ViewWorkspaceSectionContainer>
     <template v-slot:header>Статистика</template>
     <div>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
-      <ViewWorkspaceSectionMainWidget/>
     </div>
   </ViewWorkspaceSectionContainer>
 </template>

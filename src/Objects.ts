@@ -84,4 +84,11 @@ export interface SubscribeData extends AbstractData{
     pay_api_key?: string;
 }
 
-export type OverlayName = "LoginOverlay" | "RegOverlay" | "ControlPanelOverlay";
+export type WidgetName = "unitCalcNiche" | "unitCalcResult";
+export type OverlayName = "login" | "registration" | "controlPanel" | Partial<WidgetName>;
+
+export type WidgetOptions = {
+    index: number,
+    targetIndex: number,
+    widgetName: WidgetName
+}

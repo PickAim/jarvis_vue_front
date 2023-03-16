@@ -20,13 +20,13 @@
   height: 100%;
   width: auto;
   background-color: #222;
-  padding: 10px 30px;
 
   h1{
     color: white;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 10px;
+    padding: 10px 30px;
   }
   main{
     flex: 1 0;

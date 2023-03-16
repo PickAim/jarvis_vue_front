@@ -10,17 +10,53 @@
 
 <script setup lang="ts">
 import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import {withDefaults, defineProps, ref, reactive, computed, ComputedRef} from 'vue';
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ChartOptions,
+  ChartData
+} from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-const chartData = {
-  labels: ['January', 'February', 'March'],
-  datasets: [{data: [40, 20, 12], backgroundColor: '#f87979'}],
-}
-const chartOptions = {
-  responsive: true,
-}
+const props = defineProps<{
+  fontSize: number
+}>()
+const fontSize = ref(5);
+setInterval(()=>fontSize.value+=10, 500);
+const chartData = computed<ChartData>(() => {
+  return {
+    labels: ['January', 'February', 'March'],
+    datasets: [{data: [40, 20, 12], backgroundColor: '#f87979'}],
+  }
+})
+
+const chartOptions = computed<ChartOptions>(() => {
+  return {
+    maintainAspectRatio: false,
+    responsive: true,
+    aspectRatio: 2,
+    plugins: {
+      legend: {
+        display: false,
+        position: 'top',
+      },
+      title: {
+        font: {
+          size: props.fontSize
+        },
+        display: false,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  }
+})
 
 </script>
 
