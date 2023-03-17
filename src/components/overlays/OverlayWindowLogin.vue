@@ -30,8 +30,7 @@ const loginInput = ref("")
 const passwordInput = ref("")
 const actions = new OverlayLoginActions();
 
-console.log("LOGIN WINDOW")
-
+console.log("LOGIN WINDOW");
 </script>
 
 <style scoped lang="scss">

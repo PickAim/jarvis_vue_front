@@ -12,7 +12,7 @@
       <div class="widget-panel"
            :class="{scrollable: isCtrl}"
            @mousedown="onPanelMouseDown"
-           @mousemove="(e) => {onPanelMouseMove(e); onWidgetMoveEdgeScroll(e);}"
+           @mousemove="(e) => {onPanelMouseMove(e)}"
            @mouseup="onPanelMouseUp"
            @mouseleave="onPanelMouseLeave"
            ref="container">
@@ -39,6 +39,7 @@ import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import type {WidgetOptions} from "@/Objects";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
+import * as _ from "lodash";
 
 const container = ref<HTMLElement | null>(null);
 const widgetList = ref<WidgetOptions[]>([]);
@@ -77,6 +78,10 @@ window.addEventListener('keyup', (e) => {
   if (!e.ctrlKey)
     isCtrl.value = false;
 });
+
+window.addEventListener('mousemove', (e) => {
+  if(container.value) onWidgetMoveEdgeScroll(e, container.value);
+})
 
 function onPanelMouseDown(e: MouseEvent){
   if(!e.ctrlKey || !container.value) return;
@@ -131,44 +136,50 @@ function onWidgetMoveStop(idx: number){
   mouseOverWidgetIndex = -1;
 }
 
-function onWidgetMoveEdgeScroll(e: MouseEvent){
+const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) => {
   if(!isWidgetMoving.value) return;
-  const panel = e.currentTarget as HTMLElement;
   const panelSize = panel.getBoundingClientRect();
   const panelPos = [panel.offsetLeft, panel.offsetTop];
   const mousePos = [e.pageX, e.pageY];
   const step = 10;
-  const delay = 7;
-  const offset = 200;
+  const delay = 2;
+  const offset = 150;
+  const moveSpeedScale = [
+    Math.min(1, (panelPos[0] + offset - mousePos[0]) / offset),
+    Math.min(1, (panelPos[1] + offset - mousePos[1]) / offset),
+    Math.min(1, (mousePos[0] - (panelPos[0] + panelSize.width - offset)) / offset),
+    Math.min(1, (mousePos[1] - (panelPos[1] + panelSize.height - offset)) / offset),
+  ]
 
   if(mousePos[0] < (panelPos[0] + offset)){
-    if(scrollTimerHandlersArray[0] === -1)
-      scrollTimerHandlersArray[0] = setInterval(() => {
-        panel.scrollLeft -= step;
-      }, delay);
+    clearScrollInterval(0)
+    scrollTimerHandlersArray[0] = setInterval(() => {
+      panel.scrollLeft -= step * moveSpeedScale[0];
+    }, delay);
   } else clearScrollInterval(0)
 
   if (mousePos[1] < (panelPos[1] + offset)){
-    if(scrollTimerHandlersArray[1] === -1)
-      scrollTimerHandlersArray[1] = setInterval(() => {
-        panel.scrollTop -= step;
-      }, delay);
+    clearScrollInterval(1)
+    scrollTimerHandlersArray[1] = setInterval(() => {
+      panel.scrollTop -= step * moveSpeedScale[1];
+    }, delay);
   } else clearScrollInterval(1)
 
   if (mousePos[0] > (panelPos[0] + panelSize.width - offset)){
-    if(scrollTimerHandlersArray[2] === -1)
-      scrollTimerHandlersArray[2] = setInterval(() => {
-        panel.scrollLeft += step;
-      }, delay);
+    clearScrollInterval(2)
+    scrollTimerHandlersArray[2] = setInterval(() => {
+      panel.scrollLeft += step * moveSpeedScale[2];
+    }, delay);
   } else clearScrollInterval(2)
 
   if (mousePos[1] > (panelPos[1] + panelSize.height - offset)){
-    if(scrollTimerHandlersArray[3] === -1)
-      scrollTimerHandlersArray[3] = setInterval(() => {
-        panel.scrollTop += step;
-      }, delay);
+    console.log("ASD");
+    clearScrollInterval(3)
+    scrollTimerHandlersArray[3] = setInterval(() => {
+      panel.scrollTop += step * moveSpeedScale[3];
+    }, delay);
   } else clearScrollInterval(3)
-}
+}, 100);
 
 function clearScrollInterval(id: number){
   clearInterval(scrollTimerHandlersArray[id]);
@@ -182,7 +193,7 @@ function clearScrollInterval(id: number){
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   --widget-width: v-bind(widgetWidth);
   --widget-height: v-bind(widgetHeight);
   --grid-gap: 20px;
