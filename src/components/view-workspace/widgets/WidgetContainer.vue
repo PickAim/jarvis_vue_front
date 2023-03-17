@@ -15,7 +15,7 @@
       <div class="close-button"/>
     </header>
     <main>
-      <BarChart :font-size="widgetSize*4"/>
+      <BarChart class="bar-chart" :font-size="widgetSize*4"/>
     </main>
     <footer>
     </footer>
@@ -45,7 +45,6 @@ const isMoving = ref(false);
 const startOffset = ref([0, 0])
 const topPosition = ref(0);
 const leftPosition = ref(0);
-const id = Math.floor(Math.random() * 1000);
 
 const gridColumn = computed(() => Math.floor((props.options.index) % props.gridWidth) + 1);
 const gridRow = computed(() => Math.floor((props.options.index) / props.gridWidth) + 1);
@@ -106,11 +105,12 @@ $grid-gap: var(--grid-gap);
     border-color: white;
   }
 }
+
 .widget{
   background-color: black;
   display: flex;
   width: $width;
-  height: $height;
+  max-height: $height;
   border-radius: 20px;
   overflow: hidden;
   flex-direction: column;
@@ -125,18 +125,22 @@ $grid-gap: var(--grid-gap);
             calc(v-bind(columnDelta) * calc(100% + $grid-gap)),
             calc(v-bind(rowDelta) * calc(100% + $grid-gap)));
   }
+
   &.move{
     position: absolute;
     opacity: 0.8;
     box-shadow: 10px 10px 20px 5px black;
     pointer-events: none;
-    z-index: 100;
+    z-index: 5;
   }
+
   &.otherMove{
     transition: box-shadow 0.1s, opacity 0.1s, transform 0.2s;
   }
+
   header{
     height: 40px;
+    flex: 0 0 auto;
     background-color: #111;
     display: flex;
     flex-direction: row;
@@ -152,13 +156,21 @@ $grid-gap: var(--grid-gap);
       cursor: move
     }
   }
-  main{
+
+  main {
     color: white;
     flex: 1 0;
+    overflow: hidden;
     background-color: #000;
+
+    .bar-chart {
+      height: 100%;
+    }
   }
+
   footer{
     height: 40px;
+    flex: 0 0 auto;
     background-color: #111;
   }
 }

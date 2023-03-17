@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { Bar } from 'vue-chartjs'
-import {withDefaults, defineProps, ref, reactive, computed, ComputedRef} from 'vue';
+import {defineProps, ref, computed} from 'vue';
 import {
   Chart as ChartJS,
   Title,
@@ -33,7 +33,7 @@ setInterval(()=>fontSize.value+=10, 500);
 const chartData = computed<ChartData>(() => {
   return {
     labels: ['January', 'February', 'March'],
-    datasets: [{data: [40, 20, 12], backgroundColor: '#f87979'}],
+    datasets: [{data: [Math.random()*10, Math.random()*10, Math.random()*10], backgroundColor: '#f87979'}],
   }
 })
 

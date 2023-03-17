@@ -1,7 +1,7 @@
 <template>
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
-      <header>Логин</header>
+      <header>Настройка виджетов</header>
       <div class="input-block">
         <ControlTextbox
             placeholder="Логин"
@@ -14,7 +14,7 @@
       </div>
       <ControlButton
           class="submit"
-          @click="actions.login({login: 'loginInput', password: passwordInput})">Подтвердить</ControlButton>
+          @click="actions.login({login: loginInput, password: passwordInput})">Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>
@@ -28,7 +28,7 @@ import {OverlayLoginActions} from "@/component-actions/OverlayLoginActions";
 
 const loginInput = ref("")
 const passwordInput = ref("")
-const actions = new OverlayLoginActions();
+const actions = new OverlayLoginActions()
 
 console.log("LOGIN WINDOW")
 

@@ -1,9 +1,11 @@
 import type {OverlayName} from "@/Objects";
 
-export const overlays: {[name in OverlayName]: any} = {
-    login: import('./OverlayWindowLogin.vue'),
-    registration: import('./OverlayWindowRegistration.vue'),
-    controlPanel: import('./OverlayWindowControlPanel.vue'),
-    unitCalcNiche: import('./OverlayWindowLogin.vue'),
-    unitCalcResult: import('./OverlayWindowLogin.vue'),
+export const overlays: {[name in OverlayName]: string} = {
+    login: './OverlayWindowLogin.vue',
+    registration: './OverlayWindowRegistration.vue',
+    controlPanel: './OverlayWindowControlPanel.vue',
+    unitCalcNiche: './OverlayWindowLogin.vue',
+    unitCalcResult: './OverlayWindowLogin.vue',
+    widgetAdd: './OverlayWindowWidgetAdd.vue',
+    widgetSettings: './OverlayWindowWidgetSettings.vue',
 }

@@ -1,33 +1,48 @@
 import { defineStore } from 'pinia'
 import type {OverlayName} from "@/Objects";
+import {ref} from "vue";
 
-export const useOverlayStateStore = defineStore('overlayState', {
-    state: () => ({
-        overlayName: "login",
-        isOpen: false,
-        isLoading: false,
-        effect: "",
-        effectOptions: {}
-    }),
-    getters: {
-    },
-    actions: {
-        setOverlayName(name: OverlayName) {
-            this.overlayName = name;
-        },
-        openOverlay(){
-            this.isOpen = true;
-        },
-        closeOverlay(){
-            if(!this.isLoading)
-                this.isOpen = false;
-        },
-        startLoading(){
-            if(this.isOpen)
-                this.isLoading = true;
-        },
-        stopLoading(){
-            this.isLoading = false;
-        }
+export const useOverlayStateStore = defineStore('overlayState', () => {
+    const overlayName = ref("login");
+    const isOpen = ref(false);
+    const isLoading = ref(false);
+    const effect = ref("");
+    const effectOptions = ref({});
+
+    function setOverlayName(name: OverlayName) {
+        overlayName.value = name;
     }
+
+    function openOverlay() {
+        isOpen.value = true;
+    }
+
+    function closeOverlay() {
+        if (!isLoading.value)
+            isOpen.value = false;
+    }
+
+    function startLoading() {
+        if (isOpen.value)
+            isLoading.value = true;
+    }
+
+    function stopLoading() {
+        isLoading.value = false;
+    }
+
+    // function waitForResult<R>(): Promise<R | undefined>{
+    //     return new Promise((resolve) => {
+    //         let watchHandler: WatchStopHandle;
+    //         watchHandler = watch(result, ()=>{
+    //             console.log(watchHandler)
+    //             watchHandler()
+    //             isOpen.value;
+    //             resolve(result.value)
+    //         })
+    //     })
+    // }
+
+    return {overlayName, isOpen, isLoading, effect, effectOptions, setOverlayName, openOverlay, closeOverlay,
+        startLoading, stopLoading}
 })

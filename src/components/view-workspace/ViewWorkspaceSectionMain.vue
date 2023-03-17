@@ -3,7 +3,7 @@
     <template v-slot:header>Главная страница</template>
     <div class="main-section-wrapper">
       <div class="size-select">
-        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSize=i">{{i}}</ControlButton>
+        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{i}}</ControlButton>
       </div>
       <div class="widget-panel-buttons">
         <ControlButtonRound class="widget-panel-settings-button"/>
@@ -20,7 +20,7 @@
                          :key="idx"
                          :options="w"
                          :grid-width="gridWidth"
-                         :widget-size="widgetSize"
+                         :widget-size="widgetSizeMode"
                          :is-other-moving="isWidgetMoving"
                          @mouse-enter="onWidgetMouseEnter(idx)"
                          @mouse-leave="onWidgetMouseLeave(idx)"
@@ -57,16 +57,14 @@ let movingWidgetIndex = -1;
 let mouseOverWidgetIndex = -1;
 
 const gridWidth = ref(5);
-const widgetSize = ref(4);
+const widgetSizeMode = ref(1);
 const isCtrl = ref(false);
 let isWidgetMoving = ref(false);
 
-const widgetWidthVariants = [100,200,300,400];
-const widgetWidth = computed(() => widgetWidthVariants[widgetSize.value - 1] + 'px')
-
-// const widgetHeightVariants = [100,200,300,400];
-const widgetHeightVariants = [300,300,300,300];
-const widgetHeight = computed(() => widgetHeightVariants[widgetSize.value - 1] + 'px')
+const widgetSize = [250,200];
+const widgetSizeScale = computed(() => (1 + (widgetSizeMode.value - 1) * 0.3));
+const widgetWidth = computed(() => (widgetSize[0] * widgetSizeScale.value + 'px'))
+const widgetHeight = computed(() => (widgetSize[1] * widgetSizeScale.value + 'px'))
 
 const scrollTimerHandlersArray = [-1,-1,-1,-1];
 
@@ -223,9 +221,10 @@ function clearScrollInterval(id: number){
     right: 20px;
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: flex-end;
     width: fit-content;
     height: fit-content;
+    z-index: 10;
 
     .widget-panel-settings-button{
       flex: 0 0 auto;

@@ -1,18 +1,18 @@
 import {OverlayActions} from "@/component-actions/OverlayActions";
 import type {RegData} from "@/Objects";
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import {ResultCode} from "@/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {ResultDescription} from "@/ResultDescription";
+import {useAuthStore} from "@/stores/authStore";
 
 export class OverlayRegistrationActions extends OverlayActions{
     accountRequestActions: AccountRequestActions;
     notificationsStore;
 
-    constructor(authStore: IAuthStore) {
+    constructor() {
         super();
-        this.accountRequestActions = new AccountRequestActions(authStore);
+        this.accountRequestActions = new AccountRequestActions(useAuthStore());
         this.notificationsStore = useNotificationsStore();
     }
 

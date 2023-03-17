@@ -34,14 +34,13 @@ import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecor
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {ref} from "vue";
-import {useAuthStore} from "@/stores/authStore";
 import {OverlayRegistrationActions} from "@/component-actions/OverlayRegistrationActions";
 
 const emailInput = ref("")
 const phoneInput = ref("")
 const passwordInput = ref("")
 const passwordRepeatInput = ref("")
-const actions = new OverlayRegistrationActions(useAuthStore())
+const actions = new OverlayRegistrationActions()
 
 console.log("LOGIN WINDOW")
 
