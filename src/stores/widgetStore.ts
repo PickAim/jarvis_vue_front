@@ -3,22 +3,22 @@ import type {Widget, WidgetName, WidgetOptions} from "@/Objects";
 
 export const useWidgetStore = defineStore('widgets', {
     state: () => ({
-        widgetList: [] as Widget[],
+        widgetList: [] as Widget<WidgetName>[],
         saveWidgetPosition: false
     }),
     getters: {
     },
     actions: {
-        addWidget<N extends WidgetName, O extends WidgetOptions[N]>(widgetName: N, options?: O){
-            const widget: Widget = {
+        addWidget<N extends WidgetName>(widgetName: N, options: WidgetOptions[N]){
+            const widget: Widget<N> = {
                 widgetName: widgetName,
-                options: options,
+                settings: options,
                 gridIndex: this.widgetList.length,
                 targetIndex: -1,
             };
             this.widgetList.push(widget);
         },
-        getWidget(ind: number): Widget{
+        getWidget(ind: number): Widget<WidgetName>{
             return this.widgetList[ind];
         },
         swapPosition(ind: number){
@@ -36,7 +36,7 @@ export const useWidgetStore = defineStore('widgets', {
             this.widgetList.splice(ind, 1);
         },
         editWidget(ind: number, options: WidgetOptions[WidgetName]){
-            this.getWidget(ind).options = options;
+            this.getWidget(ind).settings = options;
         }
     }
 })

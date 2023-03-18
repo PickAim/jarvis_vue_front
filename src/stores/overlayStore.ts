@@ -3,7 +3,7 @@ import type {OverlayName} from "@/Objects";
 import {ref} from "vue";
 
 export const useOverlayStateStore = defineStore('overlayState', () => {
-    const overlayName = ref("login");
+    const overlayName = ref<OverlayName>("login");
     const isOpen = ref(false);
     const isLoading = ref(false);
     const overlayOptions = ref<any>({});

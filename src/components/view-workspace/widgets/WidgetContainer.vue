@@ -13,25 +13,27 @@
     <header>
       <div class="move-button">M</div>
       <div class="right-buttons-wrapper">
-        <ControlButtonRound class="edit-button">E</ControlButtonRound>
-        <ControlButtonRound class="close-button">C</ControlButtonRound>
+        <ControlButtonRound class="edit-button" @click="emit('edit')">E</ControlButtonRound>
+        <ControlButtonRound class="close-button" @click="emit('close')">C</ControlButtonRound>
       </div>
     </header>
     <main>
-      <component :is="loadedWidgets[options.widgetName]"></component>
+      <component :is="widgets[options.widgetName]"
+                 :options="options"
+                 :widgetSize="WidgetSize"/>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits, computed, ref, defineAsyncComponent} from "vue";
+import {defineProps, defineEmits, computed, ref} from "vue";
 import type {Widget, WidgetName} from "@/Objects";
-import {widgets} from "@/components/view-workspace/widgets/index";
+import * as widgets from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 
 const props = defineProps<{
   gridWidth: number,
-  options: Widget,
+  options: Widget<WidgetName>,
   widgetSize: number
   isOtherMoving: boolean
 }>();
@@ -41,13 +43,15 @@ const emit = defineEmits<{
   (e: 'moveStop'): void,
   (e: 'mouseEnter', ev: MouseEvent): void,
   (e: 'mouseLeave', ev: MouseEvent): void,
+  (e: 'edit'): void,
+  (e: 'close'): void
 }>();
 
-const loadedWidgets = Object.keys(widgets).reduce((obj, name)=>{
-  return Object.assign(obj, {
-    [name]: defineAsyncComponent(() => import(widgets[name as WidgetName]))
-  })
-}, {})
+// const loadedWidgets = Object.keys(widgets).reduce((obj, name)=>{
+//   return Object.assign(obj, {
+//     [name]: defineAsyncComponent(() => import(widgets[name as WidgetName]))
+//   })
+// }, {})
 
 const isMoving = ref(false);
 const startOffset = ref([0, 0])
@@ -129,6 +133,7 @@ $grid-gap: var(--grid-gap);
   overflow: hidden;
   flex-direction: column;
   align-items: stretch;
+  justify-content: flex-start;
   box-shadow: 0 0;
   opacity: 1;
   transition: box-shadow 0.1s, opacity 0.1s;
@@ -193,6 +198,7 @@ $grid-gap: var(--grid-gap);
     flex: 1 0;
     overflow: hidden;
     background-color: #000;
+    display: flex;
   }
 }
 </style>

@@ -3,18 +3,16 @@
     <main>
       <header>Логин</header>
       <div class="input-block">
-        <ControlTextbox
-            placeholder="Логин"
-            input-type="text"
-            v-model="loginInput"/>
-        <ControlTextbox
-            placeholder="Пароль"
-            input-type="password"
-            v-model="passwordInput"/>
+        <ControlTextbox placeholder="Логин"
+                        input-type="text"
+                        v-model="loginInput"/>
+        <ControlTextbox placeholder="Пароль"
+                        input-type="password"
+                        v-model="passwordInput"/>
       </div>
-      <ControlButton
-          class="submit"
-          @click="actions.login({login: 'loginInput', password: passwordInput})">Подтвердить</ControlButton>
+      <ControlButton class="submit"
+                     @click="actions.login({login: 'loginInput', password: passwordInput})"
+      >Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>

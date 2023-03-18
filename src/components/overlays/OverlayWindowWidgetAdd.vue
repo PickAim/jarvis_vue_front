@@ -3,34 +3,18 @@
     <main>
       <header>Добавление виджета</header>
       <div class="input-block">
-        <ControlTextbox
-            placeholder="Логин"
-            input-type="text"
-            v-model="loginInput"/>
-        <ControlTextbox
-            placeholder="Пароль"
-            input-type="password"
-            v-model="passwordInput"/>
       </div>
-      <ControlButton
-          class="submit"
-          @click="actions.login({login: loginInput, password: passwordInput})">Подтвердить</ControlButton>
+      <ControlButton class="submit" @click="actions.addWidget()">Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>
 
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {ref} from "vue";
-import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";
+import {OverlayWidgetAddActions} from "@/component-actions/overlays-actions/OverlayWidgetAddActions";
 
-const loginInput = ref("")
-const passwordInput = ref("")
-const actions = new OverlayLoginActions()
-
-console.log("LOGIN WINDOW")
+const actions = new OverlayWidgetAddActions();
 
 </script>
 
@@ -46,7 +30,7 @@ main{
   margin-bottom: 50px;
 
   header{
-    font-size: 40px;
+    font-size: 30px;
   }
 
   .input-block{

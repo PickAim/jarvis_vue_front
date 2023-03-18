@@ -1,26 +1,25 @@
 <template>
   <div class="overlay-container-wrapper" :class="{active: isOpen}">
     <div class="background-wrapper" @click="backgroundClick">
-      <component :is="loadedOverlays[overlayName]" :options="overlayState.overlayOptions"/>
+      <component :is="overlays[overlayName]"
+                 :options="overlayState.overlayOptions"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {overlays} from "@/components/overlays/index"
+import * as overlays from "@/components/overlays/index"
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import {storeToRefs} from "pinia";
-import {defineAsyncComponent} from "vue";
-import type {OverlayName} from "@/Objects";
 
 const overlayState = useOverlayStateStore();
 const {overlayName, isOpen} = storeToRefs(overlayState)
 
-const loadedOverlays = Object.keys(overlays).reduce((obj, name)=>{
-  return Object.assign(obj, {
-    [name]: defineAsyncComponent(() => import(overlays[name as OverlayName]))
-  })
-}, {})
+// const loadedOverlays = Object.keys(overlays).reduce((obj, name)=>{
+//   return Object.assign(obj, {
+//     [name]: defineAsyncComponent(() => import(overlays[name as OverlayName]))
+//   })
+// }, {})
 
 function backgroundClick(e: Event){
   if(e.target === e.currentTarget) overlayState.closeOverlay();

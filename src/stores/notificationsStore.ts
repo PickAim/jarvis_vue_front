@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import {ResultCode} from "@/ResultCode";
-import {ResultDescription} from "@/ResultDescription";
 
 type NotificationType = "error" | "notify" | "warning" | "success";
 
@@ -76,7 +74,7 @@ export const useNotificationsStore = defineStore('notifications', {
         startNotificationTimer(id: number){
             const note = this.getNotification(id);
             if(note === undefined || this.timerList[id] !== undefined) return;
-            this.timerList[id] = setTimeout(() => {
+            this.timerList[id] = window.setTimeout(() => {
                 this.stopNotificationTimer(id);
                 this.hideNotification(id);
             }, note.duration);

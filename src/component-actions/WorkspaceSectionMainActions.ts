@@ -7,13 +7,13 @@ export class WorkspaceSectionMainActions{
         this.overlayState = useOverlayStateStore();
     }
 
-    openAddWidgetOverlay(){
-        this.overlayState.setOverlayName('login');
+    openWidgetAddOverlay(){
+        this.overlayState.setOverlayName('widgetAdd');
         this.overlayState.openOverlay();
     }
 
     openWidgetPanelSettingsOverlay(){
-        this.overlayState.setOverlayName('registration');
+        this.overlayState.setOverlayName('widgetSettings');
         this.overlayState.openOverlay();
     }
 }

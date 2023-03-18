@@ -6,8 +6,10 @@
         <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{i}}</ControlButton>
       </div>
       <div class="widget-panel-buttons">
-        <ControlButtonRound class="widget-panel-settings-button">EDIT</ControlButtonRound>
-        <ControlButtonRound class="add-widget-button">ADD</ControlButtonRound>
+        <ControlButtonRound class="widget-panel-settings-button"
+                            @click="actions.openWidgetPanelSettingsOverlay()">SET</ControlButtonRound>
+        <ControlButtonRound class="widget-add-button"
+                            @click="actions.openWidgetAddOverlay()">ADD</ControlButtonRound>
       </div>
       <div class="widget-panel"
            :class="{scrollable: isCtrl}"
@@ -25,28 +27,33 @@
                          @mouse-enter="onWidgetMouseEnter(ind)"
                          @mouse-leave="onWidgetMouseLeave(ind)"
                          @move-start="onWidgetMoveStart(ind)"
-                         @move-stop="onWidgetMoveStop(ind)"/>
+                         @move-stop="onWidgetMoveStop(ind)"
+                         @close="widgetStore.deleteWidget(ind)"/>
       </div>
     </div>
   </ViewWorkspaceSectionContainer>
 </template>
 
 <script setup lang="ts">
-import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
 import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
+import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
-import {useWidgetStore} from "@/stores/widgetStore";
 import {storeToRefs} from "pinia";
+import {useWidgetStore} from "@/stores/widgetStore";
+import {WorkspaceSectionMainActions} from "@/component-actions/WorkspaceSectionMainActions";
 
+const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
 const {widgetList} = storeToRefs(widgetStore);
 
-for(let i = 0; i < 8; i++) widgetStore.addWidget("unitCalcNiche");
+for(let i = 0; i < 8; i++) widgetStore.addWidget("unitCalcNiche", {
+  nicheName: Math.random().toString().substring(2,4)
+});
 
 let startPos = [0,0];
 let isPanelScrolling = false;
@@ -55,7 +62,7 @@ let movingWidgetIndex = -1;
 const gridWidth = ref(5);
 const widgetSizeMode = ref(1);
 const isCtrl = ref(false);
-let isWidgetMoving = ref(false);
+const isWidgetMoving = ref(false);
 
 const widgetSize = [250,200];
 const widgetSizeScale = computed(() => (1 + (widgetSizeMode.value - 1) * 0.3));
@@ -143,21 +150,21 @@ const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) =>
 
   if(mousePos[0] < (panelPos[0] + offset)){
     clearScrollInterval(0)
-    scrollTimerHandlersArray[0] = setInterval(() => {
+    scrollTimerHandlersArray[0] = window.setInterval(() => {
       panel.scrollLeft -= step * moveSpeedScale[0];
     }, delay);
   } else clearScrollInterval(0)
 
   if (mousePos[1] < (panelPos[1] + offset)){
     clearScrollInterval(1)
-    scrollTimerHandlersArray[1] = setInterval(() => {
+    scrollTimerHandlersArray[1] = window.setInterval(() => {
       panel.scrollTop -= step * moveSpeedScale[1];
     }, delay);
   } else clearScrollInterval(1)
 
   if (mousePos[0] > (panelPos[0] + panelSize.width - offset)){
     clearScrollInterval(2)
-    scrollTimerHandlersArray[2] = setInterval(() => {
+    scrollTimerHandlersArray[2] = window.setInterval(() => {
       panel.scrollLeft += step * moveSpeedScale[2];
     }, delay);
   } else clearScrollInterval(2)
@@ -165,7 +172,7 @@ const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) =>
   if (mousePos[1] > (panelPos[1] + panelSize.height - offset)){
     console.log("ASD");
     clearScrollInterval(3)
-    scrollTimerHandlersArray[3] = setInterval(() => {
+    scrollTimerHandlersArray[3] = window.setInterval(() => {
       panel.scrollTop += step * moveSpeedScale[3];
     }, delay);
   } else clearScrollInterval(3)
@@ -233,7 +240,7 @@ function clearScrollInterval(id: number){
       height: 80px;
     }
 
-    .add-widget-button{
+    .widget-add-button{
       flex: 0 0 auto;
       width: 120px;
       height: 120px;
