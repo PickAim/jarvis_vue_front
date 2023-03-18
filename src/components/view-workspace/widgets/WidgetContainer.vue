@@ -1,5 +1,5 @@
 <template>
-  <div class="widget-wrapper"
+  <div class="widget-place"
        :class="{move: isMoving, otherMove: isOtherMoving}"
        :style="gridStyle"
        @mouseover="(e) => emit('mouseEnter', e)"
@@ -11,25 +11,27 @@
        @mousedown="movingStart"
        @dragstart="()=>{return false;}">
     <header>
-      <div class="move-button"/>
-      <div class="close-button"/>
+      <div class="move-button">M</div>
+      <div class="right-buttons-wrapper">
+        <ControlButtonRound class="edit-button">E</ControlButtonRound>
+        <ControlButtonRound class="close-button">C</ControlButtonRound>
+      </div>
     </header>
     <main>
-      <BarChart class="bar-chart" :font-size="widgetSize*4"/>
+      <component :is="loadedWidgets[options.widgetName]"></component>
     </main>
-    <footer>
-    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits, computed, ref} from "vue";
-import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
-import type {WidgetOptions} from "@/Objects";
+import {defineProps, defineEmits, computed, ref, defineAsyncComponent} from "vue";
+import type {Widget, WidgetName} from "@/Objects";
+import {widgets} from "@/components/view-workspace/widgets/index";
+import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 
 const props = defineProps<{
   gridWidth: number,
-  options: WidgetOptions,
+  options: Widget,
   widgetSize: number
   isOtherMoving: boolean
 }>();
@@ -41,13 +43,19 @@ const emit = defineEmits<{
   (e: 'mouseLeave', ev: MouseEvent): void,
 }>();
 
+const loadedWidgets = Object.keys(widgets).reduce((obj, name)=>{
+  return Object.assign(obj, {
+    [name]: defineAsyncComponent(() => import(widgets[name as WidgetName]))
+  })
+}, {})
+
 const isMoving = ref(false);
 const startOffset = ref([0, 0])
 const topPosition = ref(0);
 const leftPosition = ref(0);
 
-const gridColumn = computed(() => Math.floor((props.options.index) % props.gridWidth) + 1);
-const gridRow = computed(() => Math.floor((props.options.index) / props.gridWidth) + 1);
+const gridColumn = computed(() => Math.floor((props.options.gridIndex) % props.gridWidth) + 1);
+const gridRow = computed(() => Math.floor((props.options.gridIndex) / props.gridWidth) + 1);
 
 const columnDelta = computed(() => Math.floor(props.options.targetIndex % props.gridWidth) + 1 - gridColumn.value);
 const rowDelta = computed(() => Math.floor(props.options.targetIndex / props.gridWidth) + 1 - gridRow.value);
@@ -59,12 +67,17 @@ const gridStyle = computed(() => { return {
 }})
 
 function movingStart(e: MouseEvent){
-  const el = (e.target as HTMLElement);
-  if(el.className === "move-button") {
+  const target = e.target as HTMLElement;
+  console.log(target.parentElement)
+  const widget = e.currentTarget as HTMLElement;
+  const panel = widget.parentElement;
+
+  if(target.className === "move-button" && widget && panel) {
+    console.log(panel.scrollTop)
     emit('moveStart');
     document.addEventListener('mouseup', movingStop);
     isMoving.value = true;
-    startOffset.value = [e.offsetX + 15, e.offsetY + 10];
+    startOffset.value = [e.pageX - widget.offsetLeft + panel.scrollLeft, e.pageY - widget.offsetTop + panel.scrollTop];
     mouseMove(e);
   }
 }
@@ -76,6 +89,7 @@ function movingStop(){
 }
 
 function mouseMove(e: MouseEvent){
+  if(!isMoving.value) return;
   topPosition.value = e.pageY - startOffset.value[1];
   leftPosition.value = e.pageX - startOffset.value[0];
 }
@@ -90,7 +104,7 @@ $width: var(--widget-width);
 $height: var(--widget-height);
 $grid-gap: var(--grid-gap);
 
-.widget-wrapper {
+.widget-place {
   width: $width;
   height: $height;
   border-radius: 20px;
@@ -149,11 +163,28 @@ $grid-gap: var(--grid-gap);
 
     .move-button{
       flex: 0 0 auto;
+      margin-left: 20px;
       width: 20px;
-      height: 20px;
-      margin-left: 15px;
+      height: 30px;
       background-color: #444444;
-      cursor: move
+      cursor: move;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .right-buttons-wrapper{
+      display: flex;
+      flex-direction: row;
+      margin-right: 10px;
+
+      *{
+        flex: 0 0 auto;
+        margin-left: 8px;
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 
@@ -162,16 +193,6 @@ $grid-gap: var(--grid-gap);
     flex: 1 0;
     overflow: hidden;
     background-color: #000;
-
-    .bar-chart {
-      height: 100%;
-    }
-  }
-
-  footer{
-    height: 40px;
-    flex: 0 0 auto;
-    background-color: #111;
   }
 }
 </style>

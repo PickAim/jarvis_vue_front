@@ -31,6 +31,7 @@ button{
   background-color: black;
   border-radius: 999px;
   border: 2px solid white;
+  color: white;
 
   &.enabled {
     &:hover {

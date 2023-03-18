@@ -1,5 +1,5 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import {OverlayLoginActions} from "@/component-actions/OverlayLoginActions";
+import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";
 
 export class ViewStartActions {
     overlayState;

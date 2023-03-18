@@ -1,4 +1,4 @@
-import {OverlayActions} from "@/component-actions/OverlayActions";
+import {OverlayActions} from "@/component-actions/overlays-actions/OverlayActions";
 import type {RegData} from "@/Objects";
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
 import {ResultCode} from "@/ResultCode";

@@ -85,10 +85,25 @@ export interface SubscribeData extends AbstractData{
 }
 
 export type WidgetName = "unitCalcNiche" | "unitCalcResult";
-export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | Partial<WidgetName>;
+
+export type Widget = {
+    gridIndex: number,
+    targetIndex: number,
+    widgetName: WidgetName,
+    options?: WidgetOptions[WidgetName]
+}
+
+export type unitCalcNicheWidgetOptions = {
+    nicheName: string
+}
+
+export type unitCalcResultWidgetOptions = {
+    saveResultID: number
+}
 
 export type WidgetOptions = {
-    index: number,
-    targetIndex: number,
-    widgetName: WidgetName
+    unitCalcNiche: unitCalcNicheWidgetOptions,
+    unitCalcResult: unitCalcResultWidgetOptions
 }
+
+export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | WidgetName;

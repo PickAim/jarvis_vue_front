@@ -6,6 +6,7 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
     const overlayName = ref("login");
     const isOpen = ref(false);
     const isLoading = ref(false);
+    const overlayOptions = ref<any>({});
     const effect = ref("");
     const effectOptions = ref({});
 
@@ -13,8 +14,9 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
         overlayName.value = name;
     }
 
-    function openOverlay() {
+    function openOverlay<O>(options?: O) {
         isOpen.value = true;
+        overlayOptions.value = options;
     }
 
     function closeOverlay() {
@@ -44,5 +46,5 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
     // }
 
     return {overlayName, isOpen, isLoading, effect, effectOptions, setOverlayName, openOverlay, closeOverlay,
-        startLoading, stopLoading}
+        startLoading, stopLoading, overlayOptions}
 })

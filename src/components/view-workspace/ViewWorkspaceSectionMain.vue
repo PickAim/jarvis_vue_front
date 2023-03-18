@@ -6,8 +6,8 @@
         <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{i}}</ControlButton>
       </div>
       <div class="widget-panel-buttons">
-        <ControlButtonRound class="widget-panel-settings-button"/>
-        <ControlButtonRound class="add-widget-button"/>
+        <ControlButtonRound class="widget-panel-settings-button">EDIT</ControlButtonRound>
+        <ControlButtonRound class="add-widget-button">ADD</ControlButtonRound>
       </div>
       <div class="widget-panel"
            :class="{scrollable: isCtrl}"
@@ -16,16 +16,16 @@
            @mouseup="onPanelMouseUp"
            @mouseleave="onPanelMouseLeave"
            ref="container">
-        <WidgetContainer v-for="(w, idx) in widgetList"
-                         :key="idx"
+        <WidgetContainer v-for="(w, ind) in widgetList"
+                         :key="ind"
                          :options="w"
                          :grid-width="gridWidth"
                          :widget-size="widgetSizeMode"
                          :is-other-moving="isWidgetMoving"
-                         @mouse-enter="onWidgetMouseEnter(idx)"
-                         @mouse-leave="onWidgetMouseLeave(idx)"
-                         @move-start="onWidgetMoveStart(idx)"
-                         @move-stop="onWidgetMoveStop(idx)"/>
+                         @mouse-enter="onWidgetMouseEnter(ind)"
+                         @mouse-leave="onWidgetMouseLeave(ind)"
+                         @move-start="onWidgetMoveStart(ind)"
+                         @move-stop="onWidgetMoveStop(ind)"/>
       </div>
     </div>
   </ViewWorkspaceSectionContainer>
@@ -37,25 +37,20 @@ import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import type {WidgetOptions} from "@/Objects";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
+import {useWidgetStore} from "@/stores/widgetStore";
+import {storeToRefs} from "pinia";
 
 const container = ref<HTMLElement | null>(null);
-const widgetList = ref<WidgetOptions[]>([]);
+const widgetStore = useWidgetStore();
+const {widgetList} = storeToRefs(widgetStore);
 
-for(let i = 0; i < 12; i++){
-  widgetList.value.push({
-    index: i,
-    targetIndex: -1,
-    widgetName: "unitCalcResult"
-  });
-}
+for(let i = 0; i < 8; i++) widgetStore.addWidget("unitCalcNiche");
 
 let startPos = [0,0];
 let isPanelScrolling = false;
 let movingWidgetIndex = -1;
-let mouseOverWidgetIndex = -1;
 
 const gridWidth = ref(5);
 const widgetSizeMode = ref(1);
@@ -113,13 +108,11 @@ function onPanelMouseMove(e: MouseEvent){
 
 function onWidgetMouseEnter(idx: number){
   if(!isWidgetMoving.value || (idx === movingWidgetIndex)) return;
-  widgetList.value[idx].targetIndex = widgetList.value[movingWidgetIndex].index;
-  mouseOverWidgetIndex = idx;
+  widgetStore.getWidget(idx).targetIndex = widgetStore.getWidget(movingWidgetIndex).gridIndex;
 }
 
 function onWidgetMouseLeave(idx: number) {
-  widgetList.value[idx].targetIndex = -1;
-  mouseOverWidgetIndex = -1;
+  widgetStore.getWidget(idx).targetIndex = -1;
 }
 
 function onWidgetMoveStart(idx: number){
@@ -127,13 +120,10 @@ function onWidgetMoveStart(idx: number){
   movingWidgetIndex = idx;
 }
 
-function onWidgetMoveStop(idx: number){
+function onWidgetMoveStop(ind: number){
   isWidgetMoving.value = false;
   scrollTimerHandlersArray.forEach((t, ind) => clearScrollInterval(ind));
-  if(mouseOverWidgetIndex === -1 || (mouseOverWidgetIndex === movingWidgetIndex)) return;
-  widgetList.value[idx].index = [widgetList.value[mouseOverWidgetIndex].index,
-    widgetList.value[mouseOverWidgetIndex].index = widgetList.value[idx].index][0];
-  mouseOverWidgetIndex = -1;
+  widgetStore.swapPosition(ind);
 }
 
 const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) => {
