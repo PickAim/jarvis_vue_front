@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
-import type {OverlayName} from "@/Objects";
+import type {OverlayName, OverlayOptions} from "@/Objects";
 import {ref} from "vue";
 
 export const useOverlayStateStore = defineStore('overlayState', () => {
     const overlayName = ref<OverlayName>("login");
     const isOpen = ref(false);
     const isLoading = ref(false);
-    const overlayOptions = ref<any>({});
+    const overlayOptions = ref<OverlayOptions[OverlayName]>();
     const effect = ref("");
     const effectOptions = ref({});
 
@@ -14,9 +14,10 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
         overlayName.value = name;
     }
 
-    function openOverlay<O>(options?: O) {
-        isOpen.value = true;
+    function openOverlay<N extends OverlayName, O extends OverlayOptions[N]>(name: N, options?: O) {
+        setOverlayName(name);
         overlayOptions.value = options;
+        isOpen.value = true;
     }
 
     function closeOverlay() {

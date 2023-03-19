@@ -13,12 +13,10 @@ export class ViewStartActions {
     }
 
     openLoginOverlay(){
-        this.overlayState.setOverlayName('login');
-        this.overlayState.openOverlay();
+        this.overlayState.openOverlay('login');
     }
 
     openRegistrationOverlay(){
-        this.overlayState.setOverlayName('registration');
-        this.overlayState.openOverlay();
+        this.overlayState.openOverlay('registration');
     }
 }

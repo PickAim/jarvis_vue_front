@@ -28,7 +28,8 @@
                          @mouse-leave="onWidgetMouseLeave(ind)"
                          @move-start="onWidgetMoveStart(ind)"
                          @move-stop="onWidgetMoveStop(ind)"
-                         @close="widgetStore.deleteWidget(ind)"/>
+                         @close="widgetStore.deleteWidget(ind)"
+                         @edit="onEditClick(w, ind)"/>
       </div>
     </div>
   </ViewWorkspaceSectionContainer>
@@ -45,11 +46,12 @@ import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {WorkspaceSectionMainActions} from "@/component-actions/WorkspaceSectionMainActions";
+import type {Widget} from "@/Objects";
 
 const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
-const {widgetList} = storeToRefs(widgetStore);
+const {widgetList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
 for(let i = 0; i < 8; i++) widgetStore.addWidget("unitCalcNiche", {
   nicheName: Math.random().toString().substring(2,4)
@@ -59,8 +61,6 @@ let startPos = [0,0];
 let isPanelScrolling = false;
 let movingWidgetIndex = -1;
 
-const gridWidth = ref(5);
-const widgetSizeMode = ref(1);
 const isCtrl = ref(false);
 const isWidgetMoving = ref(false);
 
@@ -84,6 +84,10 @@ window.addEventListener('keyup', (e) => {
 window.addEventListener('mousemove', (e) => {
   if(container.value) onWidgetMoveEdgeScroll(e, container.value);
 })
+
+function onEditClick(w: Widget, ind: number){
+  actions.openWidgetSettingsOverlay(w.widgetName, {index: ind})
+}
 
 function onPanelMouseDown(e: MouseEvent){
   if(!e.ctrlKey || !container.value) return;

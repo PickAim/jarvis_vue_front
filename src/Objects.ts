@@ -107,3 +107,11 @@ export interface WidgetOptions{
 }
 
 export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | WidgetName;
+
+export type WidgetSettingsOverlayOptions = {
+    index: number
+}
+
+export type OverlayOptions =
+    {[ind in WidgetName]: WidgetSettingsOverlayOptions} &
+    {[ind in Exclude<OverlayName, WidgetName>]: undefined};

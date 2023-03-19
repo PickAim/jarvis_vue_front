@@ -3,8 +3,10 @@ import type {Widget, WidgetName, WidgetOptions} from "@/Objects";
 
 export const useWidgetStore = defineStore('widgets', {
     state: () => ({
-        widgetList: [] as Widget<WidgetName>[],
-        saveWidgetPosition: false
+        widgetList: [] as Widget[],
+        saveWidgetPosition: false,
+        gridWidth: 4,
+        widgetSizeMode: 2
     }),
     getters: {
     },
