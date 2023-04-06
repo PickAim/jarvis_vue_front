@@ -1,7 +1,7 @@
 <template>
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
-      <header>Настройка виджета выбора ниш {{nicheName}}</header>
+      <header>Настройка виджета цен ниши {{nicheName}}</header>
       <div class="input-block">
       </div>
       <ControlButton class="submit">Подтвердить</ControlButton>
@@ -14,7 +14,7 @@ import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecor
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {OverlayWidgetSettingsActions} from "@/component-actions/overlays-actions/OverlayWidgetSettingsActions";
 import {useWidgetStore} from "@/stores/widgetStore";
-import {Widget, WidgetOptions} from "@/Objects";
+import {Widget, WidgetOptions} from "@/types/Objects";
 import {storeToRefs} from "pinia";
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import {computed} from "vue";

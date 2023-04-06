@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
-import type {ResponseData} from "@/Objects";
+import type {ResponseData} from "@/types/Objects";
 import {ref} from "vue";
-import {ResultCode} from "@/ResultCode";
+import {ResultCode} from "@/types/ResultCode";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {useAuthStore} from "@/stores/authStore";
 

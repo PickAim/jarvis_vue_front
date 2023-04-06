@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
 import {defineProps} from "vue";
-import {Widget} from "@/Objects";
+import {Widget} from "@/types/Objects";
 
 defineProps<{
   options: Widget<"unitCalcNiche">,

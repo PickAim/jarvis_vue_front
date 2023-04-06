@@ -1,5 +1,5 @@
 import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
-import type {ResponseData} from "@/Objects";
+import type {ResponseData} from "@/types/Objects";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
 export default class StatisticRequestActions extends AbstractRequestActions{

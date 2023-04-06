@@ -1,6 +1,6 @@
 import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
-import type {ResponseData, SubscribeData} from "@/Objects";
-import {ResultCode} from "@/ResultCode";
+import type {ResponseData, SubscribeData} from "@/types/Objects";
+import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
 export default class SubscribeRequestActions extends AbstractRequestActions{

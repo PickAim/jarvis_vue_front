@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type {Widget, WidgetName, WidgetOptions} from "@/Objects";
+import type {Widget, WidgetName, WidgetOptions} from "@/types/Objects";
 
 export const useWidgetStore = defineStore('widgets', {
     state: () => ({

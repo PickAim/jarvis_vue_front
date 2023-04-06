@@ -1,5 +1,5 @@
 import type {ResponseType} from "axios";
-import type {ResultCode} from "@/ResultCode";
+import type {ResultCode} from "@/types/ResultCode";
 
 export abstract class AbstractData{}
 
@@ -45,7 +45,7 @@ export interface ActiveSessionData extends AbstractData{
     readonly login_date: number;
 }
 
-export interface UNITCalcRequestData extends AbstractData{
+export interface UNITCalcRequestData extends AbstractData {
     readonly buy: number;
     readonly pack: number;
     readonly niche: string;

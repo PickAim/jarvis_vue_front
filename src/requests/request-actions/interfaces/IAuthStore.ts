@@ -1,5 +1,5 @@
-import type {TokenData} from "@/Objects";
-import type {ResultCode} from "@/ResultCode";
+import type {TokenData} from "@/types/Objects";
+import type {ResultCode} from "@/types/ResultCode";
 
 export default interface IAuthStore {
     setAccessToken(token: string): ResultCode,

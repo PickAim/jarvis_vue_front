@@ -46,7 +46,7 @@ import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {WorkspaceSectionMainActions} from "@/component-actions/WorkspaceSectionMainActions";
-import type {Widget} from "@/Objects";
+import type {Widget} from "@/types/Objects";
 
 const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);

@@ -1,9 +1,9 @@
 import {OverlayActions} from "@/component-actions/overlays-actions/OverlayActions";
-import type {LoginData} from "@/Objects";
+import type {LoginData} from "@/types/Objects";
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
-import {ResultCode} from "@/ResultCode";
+import {ResultCode} from "@/types/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
-import {ResultDescription} from "@/ResultDescription";
+import {ResultDescription} from "@/types/ResultDescription";
 import {useAuthStore} from "@/stores/authStore";
 
 export class OverlayLoginActions extends OverlayActions{

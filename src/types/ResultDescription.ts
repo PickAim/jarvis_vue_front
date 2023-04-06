@@ -1,4 +1,4 @@
-import {ResultCode} from "@/ResultCode";
+import {ResultCode} from "@/types/ResultCode";
 
 export const ResultDescription: {[code in ResultCode]: [string, string]} = {
     [ResultCode.OK]: ["Успех",""],

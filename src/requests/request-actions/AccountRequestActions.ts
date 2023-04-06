@@ -1,6 +1,6 @@
 import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
-import type {LoginData, RegData, ResponseData, TokenData} from "@/Objects";
-import {ResultCode} from "@/ResultCode";
+import type {LoginData, RegData, ResponseData, TokenData} from "@/types/Objects";
+import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 
 export default class AccountRequestActions extends AbstractRequestActions{
