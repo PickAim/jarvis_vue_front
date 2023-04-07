@@ -3,8 +3,9 @@ import AbstractRequestActions from "@/requests/request-actions/AbstractRequestAc
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import type {ResponseData} from "@/types/Objects";
 import {Configs} from "@/Configs";
+import {useUnitEconRequestStore} from "@/stores/CalcRequestStores";
 
-export default class SavableRequestActions <Q, R extends object> extends AbstractRequestActions{
+export default class SavableRequestActions <Q, R> extends AbstractRequestActions{
     constructor(private baseRequestURL: string, authStore: IAuthStore) {
         super(authStore);
     }
@@ -17,23 +18,23 @@ export default class SavableRequestActions <Q, R extends object> extends Abstrac
         return res;
     }
 
-    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<R>> {
+    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>>> {
         // TODO check
-        const res = await this.requestHandler.makeRequest<R>({
+        const res = await this.requestHandler.makeRequest<CalcRequestData<Q, R>>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save'
         });
         return res;
     }
 
-    async deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<R>> {
+    async deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<void>> {
         // TODO check
-        const res = await this.requestHandler.makeRequest<R>({
+        const res = await this.requestHandler.makeRequest<void>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete'
         });
         return res;
     }
 
-    async getAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
+    async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
        // TODO check
         const res = await this.requestHandler.makeRequest<CalcRequestData<Q, R>[]>({
             url: this.baseRequestURL + '/get-all'

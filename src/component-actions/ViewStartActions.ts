@@ -3,13 +3,9 @@ import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayL
 
 export class ViewStartActions {
     overlayState;
-    overlayLoginActions: OverlayLoginActions;
-    overlayRegistrationActions: OverlayLoginActions;
 
     constructor() {
         this.overlayState = useOverlayStateStore();
-        this.overlayLoginActions = new OverlayLoginActions();
-        this.overlayRegistrationActions = new OverlayLoginActions();
     }
 
     openLoginOverlay(){
