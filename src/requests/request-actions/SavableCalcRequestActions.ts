@@ -3,9 +3,8 @@ import AbstractRequestActions from "@/requests/request-actions/AbstractRequestAc
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import type {ResponseData} from "@/types/Objects";
 import {Configs} from "@/Configs";
-import {useUnitEconRequestStore} from "@/stores/CalcRequestStores";
 
-export default class SavableRequestActions <Q, R> extends AbstractRequestActions{
+export default class SavableCalcRequestActions<Q, R> extends AbstractRequestActions{
     constructor(private baseRequestURL: string, authStore: IAuthStore) {
         super(authStore);
     }

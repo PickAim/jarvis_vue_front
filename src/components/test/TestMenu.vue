@@ -14,6 +14,9 @@
       <RouterLink to="/test/notifications" custom v-slot="{ navigate }">
         <ControlButton @click="navigate(); isSelected=true;" role="link"> Тест уведомлений </ControlButton>
       </RouterLink>
+      <RouterLink to="/test/unit-econ" custom v-slot="{ navigate }">
+        <ControlButton @click="navigate(); isSelected=true;" role="link"> Тест расчёта UNIT экономики </ControlButton>
+      </RouterLink>
     </nav>
     <main v-show="isSelected">
       <ControlButton @click="isSelected=false">Назад</ControlButton>

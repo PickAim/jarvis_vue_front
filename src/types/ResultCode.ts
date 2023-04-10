@@ -21,4 +21,7 @@ export enum ResultCode {
     // token exceptions
     INCORRECT_TOKEN = 5001,
     EXPIRED_TOKEN = 5002,
+
+    // input error
+    INCORRECT_INPUT = 1101,
 }

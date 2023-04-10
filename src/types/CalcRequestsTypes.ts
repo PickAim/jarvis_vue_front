@@ -18,26 +18,26 @@ export interface CalcRequestInfoData {
 }
 
 export interface UnitEconRequestData extends AbstractData {
-    readonly buy: number;
-    readonly pack: number;
-    readonly niche: string;
-    readonly transit_count?: number;
-    readonly transit_price?: number;
-    readonly market_place_transit_price?: number;
-    readonly warehouse_name?: string;
+    buy: number; // Need
+    pack: number; // Need
+    niche: string; // Need
+    transit_count?: number;
+    transit_price?: number;
+    market_place_transit_price?: number;
+    warehouse_name?: string;
 }
 
 export interface UnitEconResultData extends AbstractData{
-    readonly product_cost?: [number, number];  // Закупочная себестоимость
-    readonly pack_cost?: [number, number];  // Упаковка
-    readonly marketplace_commission?: [number, number]; // Комиссия маркетплейса
-    readonly logistic_price?: [number, number]; // Логистика
-    readonly storage_price?: [number, number]; // Хранение
-    readonly margin?: [number, number]; // Маржа в копейках
-    readonly transit_price?: [number, number]; // Чистая прибыль с транзита
-    readonly roi?: [number, number]; // ROI
-    readonly transit_margin?: [number, number]; // Маржа с транзита (%)
-    readonly recommended_price: number; // Рекомендованная стоимость
+    product_cost?: [number, number];  // Закупочная себестоимость
+    pack_cost?: [number, number];  // Упаковка
+    marketplace_commission?: [number, number]; // Комиссия маркетплейса
+    logistic_price?: [number, number]; // Логистика
+    storage_price?: [number, number]; // Хранение
+    margin?: [number, number]; // Маржа в копейках
+    transit_price?: [number, number]; // Чистая прибыль с транзита
+    roi?: [number, number]; // ROI
+    transit_margin?: [number, number]; // Маржа с транзита (%)
+    recommended_price: number; // Рекомендованная стоимость
 }
 
 export interface NicheRequestData {

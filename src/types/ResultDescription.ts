@@ -23,4 +23,7 @@ export const ResultDescription: {[code in ResultCode]: [string, string]} = {
     // token exceptions
     [ResultCode.INCORRECT_TOKEN]: ["",""],
     [ResultCode.EXPIRED_TOKEN]: ["",""],
+
+    // input errors
+    [ResultCode.INCORRECT_INPUT]: ["Неверный ввод", "Возможно, вы оставили поле ввода пустым или ввели недопустимые символы"]
 }

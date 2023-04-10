@@ -4,6 +4,7 @@ import TestOverlay from "../components/test/TestOverlay.vue";
 import TestMenu from "../components/test/TestMenu.vue";
 import TestNotifications from "../components/test/TestNotifications.vue";
 import type {RouteRecordRaw} from "vue-router";
+import TestUnitEcon from "@/components/test/TestUnitEcon.vue";
 
 export const testRoutes: RouteRecordRaw[] = [
     {
@@ -24,6 +25,9 @@ export const testRoutes: RouteRecordRaw[] = [
             },{
                 path: 'notifications',
                 component: TestNotifications
+            },{
+                path: 'unit-econ',
+                component: TestUnitEcon
             },
         ]
     },
