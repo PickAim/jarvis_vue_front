@@ -48,7 +48,11 @@ export class SavableCalcActions<Q, R> implements ISavableCalcRequestActions<Q, R
         return this.calcStore.requests;
     }
 
-    getRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
+    getStore(): ISavableCalcStoreActions<Q, R> {
+        return this.calcStore;
+    }
+
+    getCalcRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
         return this.calcStore.requests.find((r) => (r.info.id === id));
     }
 }

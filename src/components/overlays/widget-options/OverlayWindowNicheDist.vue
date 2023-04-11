@@ -1,7 +1,7 @@
 <template>
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
-      <header>Настройка виджета цен ниши {{nicheName}}</header>
+      <header>Настройка виджета цен ниши {{saveResultID}}</header>
       <div class="input-block">
       </div>
       <ControlButton class="submit">Подтвердить</ControlButton>
@@ -14,21 +14,21 @@ import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecor
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {OverlayWidgetSettingsActions} from "@/component-actions/overlays-actions/OverlayWidgetSettingsActions";
 import {useWidgetStore} from "@/stores/widgetStore";
-import {Widget, WidgetOptions} from "@/types/Objects";
+import {Widget} from "@/types/Objects";
 import {storeToRefs} from "pinia";
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import {computed} from "vue";
 
-const actions = new OverlayWidgetSettingsActions<"unitCalcNiche">();
+const actions = new OverlayWidgetSettingsActions<"nicheDist">();
 const widgetStore = useWidgetStore();
 const {overlayOptions} = storeToRefs(useOverlayStateStore());
 const {widgetList} = storeToRefs(widgetStore)
 
-const nicheName = computed(() => {
+const saveResultID = computed(() => {
   if(!overlayOptions.value) return "";
-  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"unitCalcNiche">).settings;
+  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).settings;
   if(!settings) return "";
-  return settings.nicheName
+  return settings.saveResultID;
 })
 </script>
 

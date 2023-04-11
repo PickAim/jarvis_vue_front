@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div class="input-wrapper">
+  <div class="unit-econ-wrapper">
+    <div class="calc-input-wrapper">
       <ControlTextbox placeholder="Название ниши"
                       input-type="text"
                       v-model="requestInput.niche"/>
@@ -10,8 +10,33 @@
       <ControlTextbox placeholder="Стоимость упаковки"
                       input-type="number"
                       v-model="requestInput.pack"/>
+      <ControlCheckBox v-model="optionalFlags.isTransitCalcInput">Рассчитать транзит</ControlCheckBox>
+      <div class="transit-calc-input-wrapper" :class="{active: optionalFlags.isTransitCalcInput}">
+        <ControlTextbox placeholder="Стоимость транзита маркетплейса"
+                        input-type="number"
+                        v-model="requestInput.market_place_transit_price"/>
+        <ControlTextbox placeholder="Стоимость транзита"
+                        input-type="number"
+                        v-model="requestInput.transit_price"/>
+        <ControlTextbox placeholder="Число товаров"
+                        input-type="number"
+                        v-model="requestInput.transit_count"/>
+      </div>
+      <ControlCheckBox v-model="optionalFlags.isWarehouseInput">Указать склад</ControlCheckBox>
+      <div class="warehouse-input-wrapper" :class="{active: optionalFlags.isWarehouseInput}">
+        <ControlTextbox placeholder="Наименование склада"
+                        input-type="text"
+                        v-model="requestInput.warehouse_name"/>
+      </div>
       <ControlButton @click="calculateClickHandler()">Расчёт</ControlButton>
-      {{res}}
+    </div>
+    <div class="saved-requests-wrapper">
+      <SavedCalcRequestItemContainer :name="'unitEcon'"
+                                     :actions="new UnitEconCalcActions(useUnitEconCalcStore(), useAuthStore())"
+                                     :calc-request-data="{request:{}, result:{}, info:{name:'REQUEST', id: '123213'}}"/>
+    </div>
+    <div class="calc-result-wrapper">
+      <div class="result-item"></div>
     </div>
   </div>
 </template>
@@ -24,11 +49,11 @@ import {UnitEconCalcActions} from "@/requests/request-actions/CalcActions";
 import {useAuthStore} from "@/stores/authStore";
 import {WorkspaceSectionUnitEconActions} from "@/component-actions/WorkspaceSectionUnitEconActions";
 import {useUnitEconCalcStore} from "@/stores/CalcStores";
-import {storeToRefs} from "pinia";
 import ControlButton from "@/components/controls/ControlButton.vue";
+import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
+import SavedCalcRequestItemContainer
+  from "@/components/calc-requests/saved-calc-results-items/SavedCalcRequestItem.vue";
 
-// const actions = new WorkspaceSectionUnitEconActions();
-const store = useUnitEconCalcStore();
 const actions = new WorkspaceSectionUnitEconActions();
 let res = ref(1);
 
@@ -55,6 +80,24 @@ const resultOutput = reactive<{ [ind in keyof UnitEconResultData]: string }>({
   transit_price: ""
 })
 
+const optionalFlags = reactive({
+  isWarehouseInput: false,
+  isTransitCalcInput: false
+})
+
+watch(optionalFlags, (o, n) => {
+  if(!o.isTransitCalcInput){
+    requestInput.transit_count = undefined;
+    requestInput.transit_price = undefined;
+    requestInput.market_place_transit_price = undefined;
+  }
+  if(!o.isWarehouseInput){
+    requestInput.warehouse_name = undefined;
+  }
+}, {deep: true});
+
+
+
 function calculateClickHandler() {
   const response = actions.calculate(requestInput);
 }
@@ -70,7 +113,40 @@ function getAllClickHandler() {
 </script>
 
 <style scoped lang="scss">
-.input-wrapper{
-  width: 400px;
+.unit-econ-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.checkbox-wrapper{
+  margin-top: 10px;
+}
+
+.calc-input-wrapper, .saved-requests-wrapper, .calc-result-wrapper{
+  flex: 1 0;
+  margin-inline: 3px;
+}
+
+.calc-input-wrapper{
+  .transit-calc-input-wrapper, .warehouse-input-wrapper{
+    display: none;
+
+    &.active{
+      display: unset;
+    }
+  }
+}
+
+.saved-requests-wrapper{
+  .request-item{
+    border: 3px solid black;
+  }
+}
+
+.calc-result-wrapper{
+  .result-item{
+    border: 3px solid black;
+  }
 }
 </style>

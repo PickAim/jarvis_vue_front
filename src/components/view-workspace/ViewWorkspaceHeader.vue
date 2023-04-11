@@ -1,5 +1,5 @@
 <template>
-  <header class="wrapper">
+  <header class="unit-econ-wrapper">
     <div class="logo"/>
     <ControlButtonRoundWhite class="menu-button"/>
   </header>

@@ -35,6 +35,11 @@
 </script>
 
 <style scoped lang="scss">
+.menu-wrapper{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s ease;

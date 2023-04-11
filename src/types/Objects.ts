@@ -1,5 +1,6 @@
 import type {ResponseType} from "axios";
 import type {ResultCode} from "@/types/ResultCode";
+import type {CalcRequestName} from "@/types/CalcRequestsTypes";
 
 export abstract class AbstractData{}
 
@@ -45,28 +46,6 @@ export interface ActiveSessionData extends AbstractData{
     readonly login_date: number;
 }
 
-export interface UNITCalcRequestData extends AbstractData {
-    readonly buy: number;
-    readonly pack: number;
-    readonly niche: string;
-    readonly transit_count?: number;
-    readonly transit_price?: number;
-    readonly market_place_transit_price?: number;
-    readonly warehouse_name?: string;
-}
-
-export interface UNITCalcResponseData extends AbstractData{
-    readonly Pcost?: number  // Закупочная себестоимость
-    readonly Pack?: number  // Упаковка
-    readonly Mcomm?: number // Комиссия маркетплейса
-    readonly Log?: number // Логистика
-    readonly Store?: number // Хранение
-    readonly Margin?: number // Маржа в копейках
-    readonly TProfit?: number // Чистая прибыль с транзита
-    readonly ROI?: number // ROI
-    readonly TMargin?: number // Маржа с транзита (%)
-}
-
 export interface UserData extends AbstractData{
     readonly phone?: string;
     readonly reg_date?: number;
@@ -84,7 +63,7 @@ export interface SubscribeData extends AbstractData{
     pay_api_key?: string;
 }
 
-export type WidgetName = "unitCalcNiche" | "unitCalcResult";
+export type WidgetName = CalcRequestName;
 
 export type Widget<O extends WidgetName = WidgetName> = {
     gridIndex: number,
@@ -98,12 +77,12 @@ export type UnitCalcNicheWidgetOptions = {
 }
 
 export type UnitCalcResultWidgetOptions = {
-    saveResultID: number
+    saveResultID: string
 }
 
-export interface WidgetOptions{
-    unitCalcNiche: UnitCalcNicheWidgetOptions,
-    unitCalcResult: UnitCalcResultWidgetOptions
+export type WidgetOptions = {
+    unitEcon: UnitCalcNicheWidgetOptions,
+    nicheDist: UnitCalcResultWidgetOptions
 }
 
 export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | WidgetName;

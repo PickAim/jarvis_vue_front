@@ -53,8 +53,8 @@ const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
 const {widgetList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
-for(let i = 0; i < 8; i++) widgetStore.addWidget("unitCalcNiche", {
-  nicheName: Math.random().toString().substring(2,4)
+for(let i = 0; i < 8; i++) widgetStore.addWidget("nicheDist", {
+  saveResultID: Math.random().toString().substring(2,4)
 });
 
 let startPos = [0,0];

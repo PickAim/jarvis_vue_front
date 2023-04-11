@@ -5,6 +5,8 @@ export enum CalcRequestType {
     nicheDist = 1
 }
 
+export type CalcRequestName = "unitEcon" | "nicheDist";
+
 export interface CalcRequestData<Q, R>{
     request: Q;
     result: R;
@@ -28,15 +30,15 @@ export interface UnitEconRequestData extends AbstractData {
 }
 
 export interface UnitEconResultData extends AbstractData{
-    product_cost?: [number, number];  // Закупочная себестоимость
-    pack_cost?: [number, number];  // Упаковка
-    marketplace_commission?: [number, number]; // Комиссия маркетплейса
-    logistic_price?: [number, number]; // Логистика
-    storage_price?: [number, number]; // Хранение
-    margin?: [number, number]; // Маржа в копейках
-    transit_price?: [number, number]; // Чистая прибыль с транзита
-    roi?: [number, number]; // ROI
-    transit_margin?: [number, number]; // Маржа с транзита (%)
+    product_cost?: number;  // Закупочная себестоимость
+    pack_cost?: number;  // Упаковка
+    marketplace_commission?: number; // Комиссия маркетплейса
+    logistic_price?: number; // Логистика
+    storage_price?: number; // Хранение
+    margin?: number; // Маржа в копейках
+    transit_price?: number; // Чистая прибыль с транзита
+    roi?: number; // ROI
+    transit_margin?: number; // Маржа с транзита (%)
     recommended_price: number; // Рекомендованная стоимость
 }
 

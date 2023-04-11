@@ -1,4 +1,3 @@
-import SavableCalcRequestActions from "@/requests/request-actions/SavableCalcRequestActions";
 import type {
     NicheRequestData,
     NicheResultData,
@@ -16,8 +15,9 @@ export class UnitEconCalcActions<Q extends UnitEconRequestData, R extends UnitEc
     }
 }
 
-export class NicheDistCalcActions extends SavableCalcRequestActions<NicheRequestData, NicheResultData>{
-    constructor(authStore: IAuthStore) {
-        super("/niche-dist", authStore);
+export class NicheDistCalcActions<Q extends NicheRequestData, R extends NicheResultData>
+    extends SavableCalcActions<Q, R>{
+    constructor(calcStore: ISavableCalcStoreActions<Q, R>, authStore: IAuthStore) {
+        super("/niche-dist", calcStore, authStore);
     }
 }

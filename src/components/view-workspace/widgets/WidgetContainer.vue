@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import {defineProps, defineEmits, computed, ref} from "vue";
 import type {Widget, WidgetName} from "@/types/Objects";
-import * as widgets from "@/components/view-workspace/widgets/index";
+import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 
 const props = defineProps<{

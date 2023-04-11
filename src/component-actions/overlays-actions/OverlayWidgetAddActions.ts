@@ -10,8 +10,8 @@ export class OverlayWidgetAddActions extends OverlayActions{
     }
 
     addWidget(){
-        this.widgetStore.addWidget("unitCalcNiche", {
-            nicheName: Math.random().toString().substring(2,4)
+        this.widgetStore.addWidget("nicheDist", {
+            saveResultID: Math.random().toString().substring(2,4)
         });
         this.overlayState.closeOverlay();
     }

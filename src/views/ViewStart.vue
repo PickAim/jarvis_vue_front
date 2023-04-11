@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="unit-econ-wrapper">
     <ViewStartHeader class="header"/>
     <ViewStartMain class="main"/>
     <ViewStartFooter class="footer"/>
@@ -21,7 +21,7 @@ window.addEventListener('keydown', (e) => {
 </script>
 
 <style scoped lang="scss">
-.wrapper{
+.unit-econ-wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;

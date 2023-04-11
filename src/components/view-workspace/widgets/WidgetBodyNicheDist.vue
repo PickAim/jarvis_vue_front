@@ -1,6 +1,6 @@
 <template>
   <div class="widget-body">
-    <div class="title">{{options.settings.nicheName}}</div>
+    <div class="title">{{options.settings.saveResultID}}</div>
     <BarChart class="bar-chart" :font-size="widgetSize*4"/>
   </div>
 </template>
@@ -11,7 +11,7 @@ import {defineProps} from "vue";
 import {Widget} from "@/types/Objects";
 
 defineProps<{
-  options: Widget<"unitCalcNiche">,
+  options: Widget<"nicheDist">,
   widgetSize: number
 }>();
 </script>

@@ -5,8 +5,9 @@ export interface ISavableCalcRequestActions<Q, R>{
     calculate(request: Q): Promise<ResponseData<R>>,
     saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>>>,
     deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<void>>,
-    getRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined,
+    getCalcRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined,
     getAll(): CalcRequestData<Q, R>[],
+    getStore(): ISavableCalcStoreActions<Q, R>,
     loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>>
 }
 
