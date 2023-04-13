@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import OverlayHeader from "@/components/overlays/OverlayHeader.vue";
 import {defineProps} from "vue";
+import OverlayTemplate from "@/components/overlays/OverlayTemplate.vue";
 
 defineProps<{
   headerText: string

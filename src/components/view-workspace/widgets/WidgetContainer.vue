@@ -33,7 +33,7 @@ import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 
 const props = defineProps<{
   gridWidth: number,
-  options: Widget<WidgetName>,
+  options: Widget,
   widgetSize: number
   isOtherMoving: boolean
 }>();

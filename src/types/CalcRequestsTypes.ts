@@ -5,6 +5,10 @@ export enum CalcRequestType {
     nicheDist = 1
 }
 
+export interface CalcRequestDataTypes{
+    [CalcRequestType.unitEcon]: UnitEconRequestData
+}
+
 export type CalcRequestName = "unitEcon" | "nicheDist";
 
 export interface CalcRequestData<Q, R>{

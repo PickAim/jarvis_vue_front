@@ -1,5 +1,6 @@
 <template>
   <div class="saved-calc-item-wrapper">
+    <ComponentPreloader :is-loading="isLoading"/>
     <header>
       <div class="name">
         {{props.calcRequestData.info.name}}
@@ -13,21 +14,19 @@
     <main>
       <component :is="savedRequestItems[name]"
                  :calc-request-data="calcRequestData"
-                 @update="updateHandler"
-                 @delete="deleteHandler"
-                 @edit="updateHandler"/>
+                 @edit="editHandler"/>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, ref} from "vue";
+import {defineEmits, defineProps, ref, toRefs} from "vue";
 import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-items/index";
 import type {CalcRequestData, CalcRequestName} from "@/types/CalcRequestsTypes";
-import type {ISavableCalcRequestActions} from "@/requests/request-actions/interfaces/ISavableCalc";
 import {ResultCode} from "@/types/ResultCode";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
+import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 
 const props = defineProps<{
   name: CalcRequestName,
@@ -36,31 +35,33 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: "update", id: string): Promise<void>,
-  (e: "delete", id: string): Promise<void>,
   (e: "edit", id: string): void
 }>()
+
+const item = toRefs(props).calcRequestData;
 const isLoading = ref(false);
 
-async function editHandler(item: CalcRequestData<any, any>){
-  if (!item.info.id) return;
-  emit("edit", item.info.id);
+async function editHandler(){
+  if (!item.value.info.id) return;
+  emit("edit", item.value.info.id);
 }
 
-async function updateHandler(item: CalcRequestData<any, any>){
-  if (!item.info.id) return;
+async function updateHandler(){
+  console.log(isLoading.value);
+  if (!item.value.info.id) return;
   isLoading.value = true;
-  const res = await props.actions.calculate(item.request);
+  console.log(isLoading.value);
+  const res = await props.actions.calculate(item.value.request);
   if(res.code === ResultCode.OK) {
-    await props.actions.saveRequest({request: item.request, result: res.result, info: item.info});
+    await props.actions.saveRequest({request: item.value.request, result: res.result, info: item.value.info});
   }
   isLoading.value = false;
 }
 
-async function deleteHandler(item: CalcRequestData<any, any>){
-  if (!item.info.id) return;
+async function deleteHandler(){
+  if (!item.value.info.id) return;
   isLoading.value = true;
-  await props.actions.deleteRequest(item.info.id);
+  await props.actions.deleteRequest(item.value.info.id);
   isLoading.value = false;
 }
 </script>
@@ -68,9 +69,11 @@ async function deleteHandler(item: CalcRequestData<any, any>){
 <style scoped lang="scss">
 .saved-calc-item-wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: stretch;
   border: 3px solid black;
+  z-index: 1;
 
   header{
     display: flex;

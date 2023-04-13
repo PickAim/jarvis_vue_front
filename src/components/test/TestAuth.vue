@@ -58,13 +58,6 @@ async function logout(){
   setResult(await accountHandler.logout());
 }
 
-function openOverlay(){
-  isLoading.value = true;
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 1000);
-}
-
 function setResult(response: ResponseData<object>){
   let res: string;
   switch(response.code){

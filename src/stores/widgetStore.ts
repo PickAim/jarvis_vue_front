@@ -20,7 +20,7 @@ export const useWidgetStore = defineStore('widgets', {
             };
             this.widgetList.push(widget);
         },
-        getWidget(ind: number): Widget<WidgetName>{
+        getWidget(ind: number): Widget{
             return this.widgetList[ind];
         },
         swapPosition(ind: number){

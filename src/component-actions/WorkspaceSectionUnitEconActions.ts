@@ -3,9 +3,10 @@ import type {
     UnitEconRequestData,
     UnitEconResultData
 } from "@/types/CalcRequestsTypes";
-import {UnitEconCalcActions} from "@/requests/request-actions/CalcActions";
+import {UnitEconCalcActions} from "@/requests/request-actions/SavableCalcActions";
 import {useAuthStore} from "@/stores/authStore";
 import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
+import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";
 
 export class WorkspaceSectionUnitEconActions extends
     AbstractWorkspaceSavableCalcActions<UnitEconRequestData, UnitEconResultData>{
@@ -16,10 +17,6 @@ export class WorkspaceSectionUnitEconActions extends
     }
 
     createEmptyRequestObject(): UnitEconRequestData {
-        return {
-            buy: 0,
-            niche: "",
-            pack: 0
-        }
+        return CalcRequestObjectsFactory.createUnitEconRequestData();
     }
 }

@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import {defineEmits, defineProps, onMounted, ref} from "vue";
 
-const props = defineProps<{ modelValue?: boolean }>()
+defineProps<{ modelValue?: boolean }>()
 const emits = defineEmits(['update:modelValue'])
 const buttonStatus = ref(false);
 const id = ref("");

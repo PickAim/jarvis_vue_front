@@ -1,11 +1,21 @@
 <template>
-  <div class="logo_rotating">
+  <div class="logo_rotating" ref="logo">
     <img src="/src/assets/Logo.svg" alt="">
   </div>
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
 
+const logo = ref<HTMLElement>();
+const width = ref<string>("100%");
+
+setTimeout(() => {
+  if (logo.value) {
+    width.value = Math.min(logo.value.clientHeight, logo.value.clientWidth) * 0.7 + 'px';
+    console.log(width.value)
+  }
+}, 100)
 </script>
 
 <style scoped lang="scss">
@@ -64,7 +74,8 @@
 }
 
 .logo_rotating{
-  width: 200px;
+  max-width: 300px;
+  width: v-bind("width");
   height: 100%;
   display: flex;
   align-items: center;

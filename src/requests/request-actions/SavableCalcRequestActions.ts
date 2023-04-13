@@ -3,41 +3,75 @@ import AbstractRequestActions from "@/requests/request-actions/AbstractRequestAc
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import type {ResponseData} from "@/types/Objects";
 import {Configs} from "@/Configs";
+import {ResultCode} from "@/types/ResultCode";
+import type {ISavableCalcRequestActions} from "@/requests/request-actions/interfaces/ISavableCalc";
 
-export default class SavableCalcRequestActions<Q, R> extends AbstractRequestActions{
+export class SavableCalcRequestActions<Q, R> extends AbstractRequestActions
+    implements ISavableCalcRequestActions<Q, R>{
     constructor(private baseRequestURL: string, authStore: IAuthStore) {
         super(authStore);
     }
 
     async calculate(request: Q): Promise<ResponseData<R>>{
         // TODO check
-        const res = await this.requestHandler.makeRequest<R>({
+        return await this.requestHandler.makeRequest<R>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/calculator'
         });
-        return res;
     }
 
-    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>>> {
+    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>["info"]>> {
         // TODO check
-        const res = await this.requestHandler.makeRequest<CalcRequestData<Q, R>>({
+        return await this.requestHandler.makeRequest<CalcRequestData<Q, R>["info"]>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save'
         });
-        return res;
     }
 
     async deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<void>> {
         // TODO check
-        const res = await this.requestHandler.makeRequest<void>({
+        return await this.requestHandler.makeRequest<void>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete'
         });
-        return res;
     }
 
     async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
        // TODO check
-        const res = await this.requestHandler.makeRequest<CalcRequestData<Q, R>[]>({
+        return await this.requestHandler.makeRequest<CalcRequestData<Q, R>[]>({
             url: this.baseRequestURL + '/get-all'
         });
-        return res;
+    }
+}
+
+export class DummySavableCalcRequestActions<Q, R> extends AbstractRequestActions
+    implements ISavableCalcRequestActions<Q, R>{
+    constructor(private baseRequestURL: string, authStore: IAuthStore) {
+        super(authStore);
+    }
+
+    async calculate(request: Q): Promise<ResponseData<R>>{
+        return new Promise(resolve => {
+            setTimeout(() => resolve({
+                code: ResultCode.OK}), 500)
+        })
+    }
+
+    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>["info"]>> {
+        return new Promise(resolve => {
+            setTimeout(() => resolve({
+                code: ResultCode.OK,
+                result: {id: (Math.random().toFixed(2)).toString(), date: 123, name: calcRequest.info.name}
+            }), 500);
+        })
+    }
+
+    async deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<void>> {
+        return new Promise(resolve => {
+            setTimeout(() => resolve({code: ResultCode.OK}), 500)
+        })
+    }
+
+    async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
+        return new Promise(resolve => {
+            setTimeout(() => resolve({code: ResultCode.OK}), 500)
+        })
     }
 }

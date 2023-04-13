@@ -3,7 +3,7 @@ import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import type {TokenData} from "@/types/Objects";
 import type {ResultCode} from "@/types/ResultCode";
 
-export const useAuthStore = defineStore<"authStore",{},{}, IAuthStore>("authStore", {
+export const useAuthStore = defineStore<"authStore",any,any, IAuthStore>("authStore", {
     actions:{
         // TODO: add token storage realization
         getTokens(): TokenData {

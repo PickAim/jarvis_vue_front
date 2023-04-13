@@ -8,16 +8,22 @@ import type {
     UnitEconResultData
 } from "@/types/CalcRequestsTypes";
 
-function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> {
+function State<Q, R>(): ISavableCalcStoreState<Q, R>{
     return {
-        requests: [],
-        getAll(this: ISavableCalcStoreState<Q, R>): CalcRequestData<Q, R>[] {
+        requests: []
+    }
+}
+
+function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> &
+    ThisType<ISavableCalcStoreState<Q, R> & ISavableCalcStoreActions<Q, R>>{
+    return {
+        getAll(): CalcRequestData<Q, R>[] {
             return this.requests;
         },
-        getRequest(this: ISavableCalcStoreState<Q, R>, id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
-            return this.requests[0];
+        getRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
+            return this.requests.find((r) => r.info.id && r.info.id === id);
         },
-        saveRequest(this: ISavableCalcStoreState<Q, R>, calcRequest: CalcRequestData<Q, R>): void {
+        saveRequest(calcRequest: CalcRequestData<Q, R>): void {
             if(calcRequest.info.id === undefined) return;
             const ind = this.requests.findIndex((r) => r.info.id && r.info.id === calcRequest.info.id);
             if(ind === -1)
@@ -25,30 +31,24 @@ function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> {
             else
                 this.requests[ind] = calcRequest;
         },
-        deleteRequest(this: ISavableCalcStoreState<Q, R>, id: CalcRequestInfoData["id"]): void {
-            const ind = this.requests.findIndex((r) => r.info.id && r.info.id === id);
+        deleteRequest(id: CalcRequestInfoData["id"]): void {
+            const ind = this.requests.findIndex((r) => r.info.id && (r.info.id === id));
             if(ind !== -1)
                 this.requests.splice(ind, 1);
         }
     }
 }
 
-function State<Q, R>(): () => ISavableCalcStoreState<Q, R>{
-    return () => ({
-        requests: []
-    })
-}
-
 export const useUnitEconCalcStore = defineStore<"unitEconCalcStore",
-    ISavableCalcStoreState<UnitEconRequestData, UnitEconResultData>, {},
+    ISavableCalcStoreState<UnitEconRequestData, UnitEconResultData>, any,
     ISavableCalcStoreActions<UnitEconRequestData, UnitEconResultData>>("unitEconCalcStore", {
-    state: State(),
+    state: State,
     actions: Actions()
 });
 
 export const useNicheDistCalcStore = defineStore<"nicheDistCalcStore",
-    ISavableCalcStoreState<NicheRequestData, NicheResultData>, {},
+    ISavableCalcStoreState<NicheRequestData, NicheResultData>, any,
     ISavableCalcStoreActions<UnitEconRequestData, UnitEconRequestData>>("nicheDistCalcStore", {
-    state: State(),
+    state: State,
     actions: Actions()
 });

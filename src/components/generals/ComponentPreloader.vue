@@ -1,5 +1,5 @@
 <template>
-  <div :class="{active: isLoading}" class="loader">
+  <div :class="{active: isLoading}" class="preloader">
     <LogoRotating/>
   </div>
 </template>
@@ -12,7 +12,7 @@ defineProps<{isLoading: boolean}>()
 </script>
 
 <style scoped lang="scss">
-.loader{
+.preloader{
   background-color: black;
   position: absolute;
   display: flex;
