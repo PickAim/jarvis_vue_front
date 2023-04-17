@@ -41,9 +41,6 @@ const phoneInput = ref("")
 const passwordInput = ref("")
 const passwordRepeatInput = ref("")
 const actions = new OverlayRegistrationActions()
-
-console.log("LOGIN WINDOW")
-
 </script>
 
 <style scoped lang="scss">

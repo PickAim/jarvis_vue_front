@@ -11,6 +11,7 @@ import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFa
 export class WorkspaceSectionUnitEconActions extends
     AbstractWorkspaceSavableCalcActions<UnitEconRequestData, UnitEconResultData>{
     actions;
+
     constructor() {
         super()
         this.actions = new UnitEconCalcActions(useUnitEconCalcStore(), useAuthStore());

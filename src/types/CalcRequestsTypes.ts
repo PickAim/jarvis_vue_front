@@ -40,10 +40,10 @@ export interface UnitEconResultData extends AbstractData{
     logistic_price?: number; // Логистика
     storage_price?: number; // Хранение
     margin?: number; // Маржа в копейках
-    transit_price?: number; // Чистая прибыль с транзита
+    recommended_price: number; // Рекомендованная стоимость
+    transit_profit?: number; // Чистая прибыль с транзита
     roi?: number; // ROI
     transit_margin?: number; // Маржа с транзита (%)
-    recommended_price: number; // Рекомендованная стоимость
 }
 
 export interface NicheRequestData {

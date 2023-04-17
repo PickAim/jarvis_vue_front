@@ -28,8 +28,6 @@ export default class AxiosRequestController implements IRequestController{
         const requestBody = {...this.authStore.getTokens(), ...body}
         // TODO: don't send update token!
 
-        console.log(requestBody);
-
         let req;
         if (method == "GET") {
             config.params = requestBody;
@@ -56,8 +54,6 @@ export default class AxiosRequestController implements IRequestController{
             if (!(err.response.data instanceof Object) || !(err.response.data.jarvis_exception !== undefined))
                 return {code: ResultCode.FAIL, error: {description: err.response.statusText}};
 
-            console.log(err.response)
-
             // check token expired and update
             if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN){
                 const updRes = await this.updateToken();
@@ -70,7 +66,7 @@ export default class AxiosRequestController implements IRequestController{
     }
 
     async updateToken(): Promise<ResponseData<object>> {
-        const request: RequestData = {url: "/update/update_all_tokens"};
+        const request: RequestData = {url: "/update/update-all-tokens"};
         const response = await this.makeRequest<TokenData>(request);
         if(response.code == ResultCode.OK && response.result !== undefined){
             const tokens = response.result;

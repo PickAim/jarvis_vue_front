@@ -26,6 +26,7 @@ export interface ISavableCalcStoreActions<Q, R>{
     saveRequest(calcRequest: CalcRequestData<Q, R>): void,
     deleteRequest(id: CalcRequestInfoData["id"]): void,
     getRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined,
+    getRequestIndex(id: CalcRequestInfoData["id"]): number,
     getAll(): CalcRequestData<Q, R>[]
 }
 

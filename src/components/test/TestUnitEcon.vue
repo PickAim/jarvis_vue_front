@@ -1,6 +1,21 @@
 <template>
   <div class="unit-econ-wrapper">
     <div class="calc-input-wrapper">
+      <div class="calc-control-button-wrapper">
+        <ComponentPreloader :is-loading="isCalculating || isSaving"/>
+        <ControlButton @click="getAllClickHandler"
+                       class="button">[Запросить с сервера]</ControlButton>
+        <ControlButton @click="calculateClickHandler()"
+                       class="button">Расчёт</ControlButton>
+        <ControlButton @click="saveClickHandler()"
+                       class="button">Сохранить</ControlButton>
+        <ControlButton v-show="calcRequestData.info.id !== undefined"
+                       @click="newClickHandler()"
+                       class="button">Создать новый на основе этого</ControlButton>
+      </div>
+      <ControlTextbox placeholder="Название запроса"
+                      input-type="text"
+                      v-model="calcRequestData.info.name"/>
       <ControlTextbox placeholder="Название ниши"
                       input-type="text"
                       v-model="calcRequestData.request.niche"/>
@@ -10,8 +25,8 @@
       <ControlTextbox placeholder="Стоимость упаковки"
                       input-type="number"
                       v-model="calcRequestData.request.pack"/>
-      <ControlCheckBox v-model="optionalFlags.isTransitCalcInput">Рассчитать транзит</ControlCheckBox>
-      <div class="transit-calc-input-wrapper" :class="{active: optionalFlags.isTransitCalcInput}">
+      <ControlCheckBox v-model="isTransitCalcInput">Рассчитать транзит</ControlCheckBox>
+      <div class="transit-calc-input-wrapper" :class="{active: isTransitCalcInput}">
         <ControlTextbox placeholder="Стоимость транзита маркетплейса"
                         input-type="number"
                         v-model="calcRequestData.request.market_place_transit_price"/>
@@ -22,41 +37,46 @@
                         input-type="number"
                         v-model="calcRequestData.request.transit_count"/>
       </div>
-      <ControlCheckBox v-model="optionalFlags.isWarehouseInput">Указать склад</ControlCheckBox>
-      <div class="warehouse-input-wrapper" :class="{active: optionalFlags.isWarehouseInput}">
+      <ControlCheckBox v-model="isWarehouseInput">Указать склад</ControlCheckBox>
+      <div class="warehouse-input-wrapper" :class="{active: isWarehouseInput}">
         <ControlTextbox placeholder="Наименование склада"
                         input-type="text"
                         v-model="calcRequestData.request.warehouse_name"/>
       </div>
-      <div class="calc-control-button-wrapper">
-        <ControlButton @click="calculateClickHandler()" class="button">Расчёт</ControlButton>
-        <ControlButton @click="saveClickHandler()" class="button">Сохранить</ControlButton>
-        <ControlButton @click="newClickHandler()" class="button">Создать новый на основе этого</ControlButton>
-      </div>
     </div>
     <div class="saved-requests-wrapper">
       <SavedCalcRequestList name="unitEcon"
-                            :actions="actions"/>
+                            :actions="actions"
+                            @edit="requestEditHandler"/>
     </div>
     <div class="calc-result-wrapper">
-      <div class="result-item"></div>
+      {{calcRequestData.result}}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
-import {reactive, ref, watch} from "vue";
-import type {CalcRequestData, UnitEconRequestData, UnitEconResultData} from "@/types/CalcRequestsTypes";
+import {nextTick, reactive, ref, triggerRef, watch, watchEffect} from "vue";
+import type {
+  CalcRequestData,
+  CalcRequestInfoData,
+  UnitEconRequestData,
+  UnitEconResultData
+} from "@/types/CalcRequestsTypes";
 import {WorkspaceSectionUnitEconActions} from "@/component-actions/WorkspaceSectionUnitEconActions";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";
 import SavedCalcRequestList from "@/components/calc-requests/SavedCalcRequestList.vue";
+import {ResultCode} from "@/types/ResultCode";
+import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 
 const actions = new WorkspaceSectionUnitEconActions();
-let isCalculating = ref(false);
-let isCalculated = ref(false);
+const isCalculating = ref(false);
+const isSaving = ref(false);
+const isWarehouseInput = ref(false);
+const isTransitCalcInput = ref(false);
 
 const calcRequestData = reactive<CalcRequestData<UnitEconRequestData, UnitEconResultData>>({
   request: CalcRequestObjectsFactory.createUnitEconRequestData(),
@@ -66,62 +86,74 @@ const calcRequestData = reactive<CalcRequestData<UnitEconRequestData, UnitEconRe
   }
 });
 
-const optionalFlags = reactive({
-  isWarehouseInput: false,
-  isTransitCalcInput: false
-})
-
-watch(optionalFlags, (v) => {
-  if(!v.isTransitCalcInput){
+function transitCalcInputCheckboxChanged(v: boolean){
+  if(!v) {
     calcRequestData.request.transit_count = undefined;
     calcRequestData.request.transit_price = undefined;
     calcRequestData.request.market_place_transit_price = undefined;
   }
-  if(!v.isWarehouseInput){
-    calcRequestData.request.warehouse_name = undefined;
+  else {
+    calcRequestData.request.transit_count = NaN;
+    calcRequestData.request.transit_price = NaN;
+    calcRequestData.request.market_place_transit_price = NaN;
   }
-}, {deep: true});
-
-function calculateClickHandler() {
-  const response = actions.calculateString(calcRequestData.request);
 }
 
-function saveClickHandler() {
-  // TODO
-  actions.saveRequest({
-    request: {
-      buy: 0,
-      market_place_transit_price: 0,
-      niche: "qweqwe",
-      pack:0,
-      transit_count: 0,
-      transit_price: 0,
-      warehouse_name: ""
-    },
-    result: {
-      logistic_price: 0,
-      margin: 0,
-      marketplace_commission: 0,
-      pack_cost: 0,
-      product_cost: 0,
-      recommended_price: 0,
-      roi: 0,
-      storage_price: 0,
-      transit_margin: 0,
-      transit_price: 0
-    },
-    info: {
-      name: "NEW REQUEST"
-    }
-  })
+function warehouseInputCheckboxChanged(v: boolean){
+  if(!v) {
+    calcRequestData.request.warehouse_name = undefined;
+  }
+  else {
+    calcRequestData.request.warehouse_name = "";
+  }
+}
+
+watch(isTransitCalcInput, transitCalcInputCheckboxChanged);
+watch(isWarehouseInput, warehouseInputCheckboxChanged);
+
+transitCalcInputCheckboxChanged(false);
+warehouseInputCheckboxChanged(false);
+
+async function calculateClickHandler() {
+  isCalculating.value = true;
+  const response = await actions.calculate(calcRequestData.request);
+  if(response.code === ResultCode.OK && response.result !== undefined)
+    calcRequestData.result = response.result;
+  isCalculating.value = false;
+}
+
+async function saveClickHandler() {
+  isSaving.value = true;
+  const response = await actions.saveRequest(calcRequestData);
+  if(response.code === ResultCode.OK && response.result)
+    calcRequestData.info = response.result.info;
+  isSaving.value = false;
 }
 
 function newClickHandler() {
-  // TODO
+  calcRequestData.info.id = undefined;
 }
 
-function getAllClickHandler() {
-  // TODO
+function requestEditHandler(id: CalcRequestInfoData["id"]) {
+  const item = actions.getCalcRequest(id);
+  if (!item) return;
+  isTransitCalcInput.value = item.request.transit_price !== undefined;
+  isWarehouseInput.value = item.request.warehouse_name !== undefined;
+  nextTick(() => {
+    calcRequestData.request = {} as UnitEconRequestData;
+    console.log(calcRequestData.request, item.request)
+    Object.assign(calcRequestData.request, item.request);
+
+    calcRequestData.result = CalcRequestObjectsFactory.createUnitEconResultData();
+    calcRequestData.result = item.result;
+    Object.assign(calcRequestData.info, item.info);
+  })
+}
+
+async function getAllClickHandler() {
+  isSaving.value = true;
+  await actions.loadAll();
+  isSaving.value = false;
 }
 
 </script>
@@ -131,6 +163,7 @@ function getAllClickHandler() {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-top: 10px;
 }
 
 .checkbox-wrapper{
@@ -138,15 +171,14 @@ function getAllClickHandler() {
 }
 
 .calc-input-wrapper, .saved-requests-wrapper, .calc-result-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   flex: 1 0;
   margin-inline: 3px;
 }
 
 .calc-input-wrapper{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
   .transit-calc-input-wrapper, .warehouse-input-wrapper{
     display: none;
 
@@ -156,10 +188,10 @@ function getAllClickHandler() {
   }
 
   .calc-control-button-wrapper{
-    margin-top: 20px;
+    position: relative;
 
     .button{
-      margin-top: 5px;
+      margin-bottom: 5px;
       width: 100%;
     }
   }

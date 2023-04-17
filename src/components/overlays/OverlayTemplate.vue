@@ -20,8 +20,6 @@ const {isLoading} = storeToRefs(useOverlayStateStore())
 defineProps<{
   headerText: string
 }>()
-
-console.log("TEMPLATE")
 </script>
 
 <style scoped lang="scss">

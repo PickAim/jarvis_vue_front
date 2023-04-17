@@ -23,11 +23,6 @@ const notificationsStore = useNotificationsStore()
 const {activeNotificationsList} = storeToRefs(notificationsStore);
 const {hideAllNotifications} = notificationsStore;
 
-
-function noteLog(){
-  console.log(activeNotificationsList.value)
-}
-
 </script>
 
 <style scoped lang="scss">
@@ -82,7 +77,7 @@ function noteLog(){
 
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .list-enter-from,
 .list-leave-to {

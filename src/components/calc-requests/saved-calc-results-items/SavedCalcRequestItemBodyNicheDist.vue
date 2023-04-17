@@ -1,6 +1,6 @@
 <template>
   <div class="unit-econ-wrapper">
-    {{props.calcRequestData.info.name}}
+    {{props.item.info.name}}
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import {defineProps} from "vue";
 import {CalcRequestData} from "@/types/CalcRequestsTypes";
 
 const props = defineProps<{
-  calcRequestData: CalcRequestData<any, any>
+  item: CalcRequestData<any, any>
 }>()
 </script>
 

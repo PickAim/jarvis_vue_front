@@ -9,13 +9,14 @@ import {ref} from "vue";
 
 const logo = ref<HTMLElement>();
 const width = ref<string>("100%");
+const maxWidth = ref("unset");
 
 setTimeout(() => {
   if (logo.value) {
     width.value = Math.min(logo.value.clientHeight, logo.value.clientWidth) * 0.7 + 'px';
-    console.log(width.value)
+    maxWidth.value = "200px";
   }
-}, 100)
+})
 </script>
 
 <style scoped lang="scss">
@@ -74,7 +75,7 @@ setTimeout(() => {
 }
 
 .logo_rotating{
-  max-width: 300px;
+  max-width: v-bind("maxWidth");
   width: v-bind("width");
   height: 100%;
   display: flex;

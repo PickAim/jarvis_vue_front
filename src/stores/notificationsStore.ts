@@ -55,7 +55,6 @@ export const useNotificationsStore = defineStore('notifications', {
         showNotification(id: number){
             const note = this.getNotification(id);
             if(note) {
-                console.log(`SHOW ${id}`)
                 note.isShow = true;
                 this.stopNotificationTimer(id);
             }

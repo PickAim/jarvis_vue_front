@@ -7,7 +7,7 @@ export abstract class AbstractData{}
 export interface RequestData extends AbstractData{
     readonly url: string;
     readonly method?: "POST" | "GET";
-    readonly body?: object | AbstractData;
+    readonly body?: any;
     readonly responseType?: ResponseType;
 }
 

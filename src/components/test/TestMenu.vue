@@ -19,9 +19,9 @@
       </RouterLink>
     </nav>
     <main v-show="isSelected">
-      <ControlButton @click="isSelected=false">Назад</ControlButton>
+      <ControlButton @click="isSelected=false; router.push('/test/')">Назад</ControlButton>
       <router-view v-slot="{ Component }">
-        <component :is="Component" ></component>
+        <component :is="Component"></component>
       </router-view>
     </main>
   </div>
@@ -30,8 +30,13 @@
 <script setup lang="ts">
   import {ref} from "vue";
   import ControlButton from "@/components/controls/ControlButton.vue";
+  import {useRouter} from "vue-router";
 
+  const router = useRouter();
   const isSelected = ref(false)
+  if(!window.location.href.endsWith("/test/")){
+    isSelected.value = true;
+  }
 </script>
 
 <style scoped lang="scss">

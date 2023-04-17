@@ -21,7 +21,6 @@ export class OverlayRegistrationActions extends OverlayActions{
         this.startLoading();
         try {
             const response = await this.accountRequestActions.registration(data);
-            console.log(response);
             if(response.code === ResultCode.OK)
                 this.notificationsStore.addSuccessNotification(["Успех", "Вы зарегестрированы"]);
             else

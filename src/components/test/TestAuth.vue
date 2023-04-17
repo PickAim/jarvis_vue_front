@@ -18,14 +18,15 @@
 
 <script setup lang="ts">
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
-import type {ResponseData} from "@/types/Objects";
+import type {LoginData, RegData, ResponseData} from "@/types/Objects";
 import {ref} from "vue";
 import {ResultCode} from "@/types/ResultCode";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {useAuthStore} from "@/stores/authStore";
 
-const password = "qwe123@#$QWE"
-const passwordWrong = "qwe123"
+const rightRegData: RegData = {email: "k.buiko04@mail.ru", password: "qwe123@#$QWE", phone: "123123123123"}
+const rightLoginData: LoginData = {login: rightRegData.email, password: rightRegData.password}
+const wrongRegData: RegData = {email: "k.buiko04@mail.ru", phone: "79137428483", password: "qwe123"}
 
 const accountHandler = new AccountRequestActions(useAuthStore());
 let requestResult = ref("0");
@@ -33,7 +34,7 @@ let isLoading = ref(false);
 
 async function loginPassword(){
     requestResult.value = "";
-    setResult(await accountHandler.loginPassword({login: "k.buiko04@mail.ru", password: password}));
+    setResult(await accountHandler.loginPassword(rightLoginData));
 }
 
 async function loginToken(){
@@ -44,13 +45,13 @@ async function loginToken(){
 async function registration(){
   requestResult.value = "";
   setResult(await accountHandler
-      .registration({email: "k.buiko04@mail.ru", phone: "79137428483", password: password}));
+      .registration(rightRegData));
 }
 
 async function registrationWrong(){
   requestResult.value = "";
   setResult(await accountHandler
-      .registration({email: "k.buiko05@mail.ru", phone: "70137428483", password: passwordWrong}));
+      .registration(wrongRegData));
 }
 
 async function logout(){

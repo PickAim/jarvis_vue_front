@@ -1,11 +1,12 @@
 <template>
-  <div class="checkbox-wrapper">
+  <div class="checkbox-wrapper" >
     <input :id="id"
            class="checkbox-input"
            type="checkbox"
-           @change="buttonStatus = $event.target.checked; emits('update:modelValue', buttonStatus)"/>
+           :checked="modelValue"
+           @change="emits('update:modelValue', $event.target.checked)"/>
     <label class="checkbox-label" :for="id">
-      <div class="checkbox-mark" :class="{active: buttonStatus}"/>
+      <div class="checkbox-mark" :class="{active: modelValue}"/>
       <div class="checkbox-text">
         <slot/>
       </div>
@@ -17,6 +18,7 @@
 import {defineEmits, defineProps, onMounted, ref} from "vue";
 
 defineProps<{ modelValue?: boolean }>()
+
 const emits = defineEmits(['update:modelValue'])
 const buttonStatus = ref(false);
 const id = ref("");

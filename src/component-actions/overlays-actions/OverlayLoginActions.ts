@@ -21,7 +21,6 @@ export class OverlayLoginActions extends OverlayActions{
         this.startLoading();
         try {
             const response = await this.accountRequestActions.loginPassword(data);
-            console.log(response);
             if(response.code === ResultCode.OK)
                 this.notificationsStore.addSuccessNotification(["Успех", "Вход совершён"]);
             else

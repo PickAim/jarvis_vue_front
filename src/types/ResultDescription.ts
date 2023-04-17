@@ -25,5 +25,5 @@ export const ResultDescription: {[code in ResultCode]: [string, string]} = {
     [ResultCode.EXPIRED_TOKEN]: ["",""],
 
     // input errors
-    [ResultCode.INCORRECT_INPUT]: ["Неверный ввод", "Возможно, вы оставили поле ввода пустым или ввели недопустимые символы"]
+    [ResultCode.INCORRECT_INPUT]: ["Ошибка ввода", "Возможно, вы оставили поле ввода пустым или ввели недопустимые символы"]
 }

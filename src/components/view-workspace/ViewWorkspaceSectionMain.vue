@@ -174,7 +174,6 @@ const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) =>
   } else clearScrollInterval(2)
 
   if (mousePos[1] > (panelPos[1] + panelSize.height - offset)){
-    console.log("ASD");
     clearScrollInterval(3)
     scrollTimerHandlersArray[3] = window.setInterval(() => {
       panel.scrollTop += step * moveSpeedScale[3];

@@ -3,7 +3,7 @@
     <ComponentPreloader :is-loading="isLoading"/>
     <header>
       <div class="name">
-        {{props.calcRequestData.info.name}}
+        {{ props.item.info.name }}
       </div>
       <div class="right-button-wrapper">
         <ControlButtonRound class="update-button" @click="updateHandler">U</ControlButtonRound>
@@ -13,14 +13,14 @@
     </header>
     <main>
       <component :is="savedRequestItems[name]"
-                 :calc-request-data="calcRequestData"
+                 :item="item"
                  @edit="editHandler"/>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, ref, toRefs} from "vue";
+import {defineEmits, defineProps, ref} from "vue";
 import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-items/index";
 import type {CalcRequestData, CalcRequestName} from "@/types/CalcRequestsTypes";
 import {ResultCode} from "@/types/ResultCode";
@@ -30,7 +30,7 @@ import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 
 const props = defineProps<{
   name: CalcRequestName,
-  calcRequestData: CalcRequestData<any, any>,
+  item: CalcRequestData<any, any>,
   actions: AbstractWorkspaceSavableCalcActions<any, any>
 }>()
 
@@ -38,30 +38,27 @@ const emit = defineEmits<{
   (e: "edit", id: string): void
 }>()
 
-const item = toRefs(props).calcRequestData;
 const isLoading = ref(false);
 
 async function editHandler(){
-  if (!item.value.info.id) return;
-  emit("edit", item.value.info.id);
+  if (props.item.info.id === undefined) return;
+  emit("edit", props.item.info.id);
 }
 
 async function updateHandler(){
-  console.log(isLoading.value);
-  if (!item.value.info.id) return;
+  if (props.item.info.id === undefined) return;
   isLoading.value = true;
-  console.log(isLoading.value);
-  const res = await props.actions.calculate(item.value.request);
+  const res = await props.actions.calculate(props.item.request);
   if(res.code === ResultCode.OK) {
-    await props.actions.saveRequest({request: item.value.request, result: res.result, info: item.value.info});
+    await props.actions.saveRequest({request: props.item.request, result: res.result, info: props.item.info});
   }
   isLoading.value = false;
 }
 
 async function deleteHandler(){
-  if (!item.value.info.id) return;
+  if (props.item.info.id === undefined) return;
   isLoading.value = true;
-  await props.actions.deleteRequest(item.value.info.id);
+  await props.actions.deleteRequest(props.item.info.id);
   isLoading.value = false;
 }
 </script>
@@ -109,7 +106,7 @@ async function deleteHandler(){
   }
 
   main{
-    height: 100px;
+    min-height: 100px;
     border: 3px solid black;
   }
 }

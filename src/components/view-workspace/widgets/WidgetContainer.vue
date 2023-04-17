@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import {defineProps, defineEmits, computed, ref} from "vue";
-import type {Widget, WidgetName} from "@/types/Objects";
+import type {Widget} from "@/types/Objects";
 import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 
@@ -72,12 +72,10 @@ const gridStyle = computed(() => { return {
 
 function movingStart(e: MouseEvent){
   const target = e.target as HTMLElement;
-  console.log(target.parentElement)
   const widget = e.currentTarget as HTMLElement;
   const panel = widget.parentElement;
 
   if(target.className === "move-button" && widget && panel) {
-    console.log(panel.scrollTop)
     emit('moveStart');
     document.addEventListener('mouseup', movingStop);
     isMoving.value = true;

@@ -3,7 +3,7 @@
     <SavedCalcRequestItem v-for="item in actions.getStore().requests"
                           class="request-item"
                           :key="item.info.id"
-                          :calc-request-data="item"
+                          :item="item"
                           :name="name"
                           :actions="actions"
                           @edit="editHandler(item)"/>
@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import SavedCalcRequestItem from "@/components/calc-requests/saved-calc-results-items/SavedCalcRequestItem.vue";
-import {defineProps} from "vue";
-import {CalcRequestData, CalcRequestName} from "@/types/CalcRequestsTypes";
+import {defineProps, defineEmits} from "vue";
+import {CalcRequestData, CalcRequestInfoData, CalcRequestName} from "@/types/CalcRequestsTypes";
 import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
 
 defineProps<{
@@ -21,8 +21,12 @@ defineProps<{
   actions: AbstractWorkspaceSavableCalcActions<any, any>
 }>()
 
+const emits = defineEmits<{
+  (e: 'edit', id: CalcRequestInfoData["id"]): void
+}>()
+
 function editHandler(item: CalcRequestData<any, any>){
-  // TODO: put emit here
+  emits('edit', item.info.id);
 }
 </script>
 

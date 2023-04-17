@@ -2,6 +2,7 @@ import AbstractRequestActions from "@/requests/request-actions/AbstractRequestAc
 import type {LoginData, RegData, ResponseData, TokenData} from "@/types/Objects";
 import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
+import {Configs} from "@/Configs";
 
 export default class AccountRequestActions extends AbstractRequestActions{
     constructor(private authStore: IAuthStore) {
@@ -14,8 +15,6 @@ export default class AccountRequestActions extends AbstractRequestActions{
             method: "POST",
             body: loginData,
         });
-        console.log("LOGIN-PASSWORD-REQUEST");
-        console.log(response);
         if(response.code == ResultCode.OK && response.result !== undefined){
             const tokens = response.result;
             this.authStore.setTokens(tokens);
@@ -25,7 +24,7 @@ export default class AccountRequestActions extends AbstractRequestActions{
 
     async loginToken(): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
-            url: "/access/auth/",
+            url: Configs.AccessRequestPrefix + "auth/",
             method: "GET",
         });
     }
@@ -56,7 +55,7 @@ export default class AccountRequestActions extends AbstractRequestActions{
     async logout(): Promise<ResponseData<object>>{
         this.authStore.setTokens({access_token: "", update_token: ""});
         return await this.requestHandler.makeRequest({
-            url: "/access/log_out/",
+            url: "/access/logout/",
         });
     }
 }

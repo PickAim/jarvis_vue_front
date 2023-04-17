@@ -48,9 +48,7 @@ const buttonPanel = ref<HTMLElement | null>(null);
 const isDescShow = ref(false);
 
 function onScroll(){
-  console.log("a")
   if(descPanel.value && buttonPanel.value) {
-    console.log("b")
     descPanel.value.scrollTop = buttonPanel.value.scrollTop;
   }
 }

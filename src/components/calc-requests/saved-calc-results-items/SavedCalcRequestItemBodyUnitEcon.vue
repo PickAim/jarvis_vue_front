@@ -1,6 +1,7 @@
 <template>
   <div class="niche-dist-wrapper">
-    {{props.calcRequestData.info.id}}
+    {{props.item.request}}<br>
+    {{props.item.result}}
   </div>
 </template>
 
@@ -9,7 +10,7 @@ import {defineProps} from "vue";
 import {CalcRequestData} from "@/types/CalcRequestsTypes";
 
 const props = defineProps<{
-  calcRequestData: CalcRequestData<any, any>
+  item: CalcRequestData<any, any>
 }>()
 </script>
 

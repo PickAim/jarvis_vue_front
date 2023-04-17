@@ -15,28 +15,33 @@ export class SavableCalcRequestActions<Q, R> extends AbstractRequestActions
     async calculate(request: Q): Promise<ResponseData<R>>{
         // TODO check
         return await this.requestHandler.makeRequest<R>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/calculator'
+            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/calculate',
+            method: "POST",
+            body: request
         });
     }
 
     async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>["info"]>> {
         // TODO check
         return await this.requestHandler.makeRequest<CalcRequestData<Q, R>["info"]>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save'
+            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save',
+            method: "POST",
+            body: calcRequest
         });
     }
 
     async deleteRequest(id: CalcRequestInfoData['id']): Promise<ResponseData<void>> {
         // TODO check
         return await this.requestHandler.makeRequest<void>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete'
+            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete',
+            body: {request_id: id}
         });
     }
 
     async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
        // TODO check
         return await this.requestHandler.makeRequest<CalcRequestData<Q, R>[]>({
-            url: this.baseRequestURL + '/get-all'
+            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/get-all'
         });
     }
 }
@@ -58,7 +63,8 @@ export class DummySavableCalcRequestActions<Q, R> extends AbstractRequestActions
         return new Promise(resolve => {
             setTimeout(() => resolve({
                 code: ResultCode.OK,
-                result: {id: (Math.random().toFixed(2)).toString(), date: 123, name: calcRequest.info.name}
+                result: calcRequest.info.id ? calcRequest.info :
+                    {id: (Math.random().toFixed(2)).toString(), date: 123, name: calcRequest.info.name}
             }), 500);
         })
     }
