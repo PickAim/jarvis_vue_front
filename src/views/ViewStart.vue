@@ -26,7 +26,8 @@ window.addEventListener('keydown', (e) => {
   flex-direction: column;
   align-items: center;
   z-index: 0;
-
+  height: 100vh;
+  overflow: scroll;
   .header{
   }
   .main{

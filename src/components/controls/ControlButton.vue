@@ -25,12 +25,16 @@ withDefaults(defineProps<{
 
 button{
   display: block;
-  width: 100%;
+  width: 136px;
   height: 100%;
-  border: 2px solid black;
-  background-color: white;
+  background-color: transparent;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
 
-  &.enabled {
+ /* &.enabled {
     &:hover {
       border-width: 3px;
     }
@@ -38,5 +42,5 @@ button{
       border-width: 2px;
     }
   }
-}
+*/}
 </style>

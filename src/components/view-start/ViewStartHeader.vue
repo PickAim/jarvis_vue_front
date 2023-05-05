@@ -1,7 +1,10 @@
 <template>
   <header>
-    <div class="logo"/>
+    <img src="\src\assets\19-19 1.png" alt="">
     <div class="buttons-wrapper">
+      <ControlButton class="about_product" >О продукте</ControlButton>
+      <ControlButton class="Tarifs" >Тарифы</ControlButton>
+      <ControlButton class="question" >Вопросы</ControlButton>
       <ControlButton class="login-button"
                      @click="router.push('workspace')">На работу</ControlButton>
       <ControlButton class="login-button"
@@ -24,29 +27,35 @@ const router = useRouter();
 <style scoped lang="scss">
 header{
   display: flex;
-  justify-content: space-between;
-  position: fixed;
+  justify-content: flex-start;
   width: 100%;
-  height: 60px;
-  padding-block: 10px;
-  padding-inline: 20px;
-  background-color: black;
+  max-width: 1280px;
+  height: 160px;
+  background: linear-gradient(286.19deg, #1E1C4C 22.13%, #33298F 97.7%);
 
-  .logo{
-    width: 40px;
-    height: 40px;
-    background-color: white;
+  img{
+  width: 127px;
+  height: 128px;
+  margin-top: 8px;
+  margin-left: 62px;
+  margin-right: 37px;
   }
-  .buttons-wrapper{
+.buttons-wrapper{
     display: flex;
     flex-direction: row;
     width: 300px;
     height: 100%;
+    align-items: center;
 
-    .login-button, .reg-button{
-      flex-grow: 1;
-      width: 100%;
-      height: 100%;
+  .login-button, .reg-button, .about_product, .Tarifs, .question{
+      width: 136px;
+      height: 29px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: #FFFFFF;
     }
   }
 }
