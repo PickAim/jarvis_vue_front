@@ -2,21 +2,22 @@
   <header>
     <img src="\src\assets\19-19 1.png" alt="">
     <div class="buttons-wrapper">
-      <ControlButton class="about_product" >О продукте</ControlButton>
-      <ControlButton class="Tarifs" >Тарифы</ControlButton>
-      <ControlButton class="question" >Вопросы</ControlButton>
-      <ControlButton class="login-button"
-                     @click="router.push('workspace')">На работу</ControlButton>
-      <ControlButton class="login-button"
-                     @click="actions.openLoginOverlay()">Вход</ControlButton>
-      <ControlButton class="reg-button"
-                     @click="actions.openRegistrationOverlay()">Регистрация</ControlButton>
+      <button class="about-product" >О продукте</button>
+      <button class="tarifs" >Тарифы</button>
+      <button class="question" >Вопросы</button>
+      <button class="login-button"
+                     @click="router.push('workspace')">На работу</button>
+      <button class="login-button"
+                     @click="actions.openLoginOverlay()">Вход</button>
+      <button class="reg-button"
+                     @click="actions.openRegistrationOverlay()">Регистрация</button>
+                  
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import ControlButton from "@/components/controls/ControlButton.vue";
+//import ControlButton from "@/components/controls/ControlButton.vue";
 import {ViewStartActions} from "@/component-actions/ViewStartActions";
 import {useRouter} from "vue-router";
 
@@ -30,33 +31,43 @@ header{
   justify-content: flex-start;
   width: 100%;
   max-width: 1280px;
-  height: 160px;
-  background: linear-gradient(286.19deg, #1E1C4C 22.13%, #33298F 97.7%);
-
+  height: 156px;
+  background: url(src/assets/Rectangl.png);
+  background-repeat: no-repeat;
   img{
-  width: 127px;
-  height: 128px;
-  margin-top: 8px;
-  margin-left: 62px;
-  margin-right: 37px;
+    height: 128px;
+    width: 127px;
+    margin: 8px 37px 0px 62px;
   }
-.buttons-wrapper{
+  h1{
+      @font-face {
+          font-family:Inter;
+          src: url(src\assets\Inter-SemiBold.otf);
+          }
+    }
+  p{
+      @font-face {
+        font-family:Montserrat ;
+        src: url(src\assets\Montserrat-LightItalic.ttf);
+      }
+    }
+}
+.buttons-wrapper { 
     display: flex;
     flex-direction: row;
-    width: 300px;
+    width: 1000px;
     height: 100%;
     align-items: center;
-
-  .login-button, .reg-button, .about_product, .Tarifs, .question{
+    button {
+      @font-face {
+        font-family:Inter;
+        src: url(src\assets\Inter-SemiBold.otf);
+      }
       width: 136px;
-      height: 29px;
-      font-family: 'Inter';
-      font-style: normal;
+      height: 37px;
       font-weight: 400;
       font-size: 24px;
-      line-height: 29px;
       color: #FFFFFF;
     }
-  }
 }
 </style>
