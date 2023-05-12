@@ -1,13 +1,12 @@
 <template>
   <div class="view-start-wrapper">
-    <ViewStartHeader class="header"/>
+
     <ViewStartMain class="main"/>
     <ViewStartFooter class="footer"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
 import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
 import ViewStartMain from "@/components/view-start/ViewStartMain.vue";
 import {useRouter} from "vue-router";
@@ -27,6 +26,7 @@ window.addEventListener('keydown', (e) => {
   align-items: center;
   z-index: 0;
   height: 100vh;
+  width: 100vw;
   overflow: auto;
   .header{
   }

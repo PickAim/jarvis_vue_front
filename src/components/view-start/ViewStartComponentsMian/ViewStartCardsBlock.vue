@@ -1,129 +1,136 @@
 <template>
     <main>
-        <div class="skills-block">
-            <div class="two-blocks">
-                <div class="what-you-have">
-                    <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
+
+        <div class="two-blocks">
+            <div class="what-you-have">
+                <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
+            </div>
+            <div class="card-blocks">
+                <div class="firs-cards">
+                    
+                        <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
+                            запланировать поставку</h1>
+                    
+                    <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 50px; left: 540px;">img</div>
+                    <div style="width: 50px; height: 10px; background-color: aquamarine;position: relative; top: 25px;"></div>
                 </div>
-                <div class="card-blocks">
+                <div class="bottom-cards">
                     <div class="block-with-sign">
-                        <div class="cards-image-first">
-                            <img src="src\assets\Group 23 (1).png" alt="">
-                        </div>
-                        <div class="cards-text-first">
                             <h1>Рутинная работа отнимает <br> много времени, которое можно <br> посвятить запуску новых товаров <br> и масштабированию бизнеса</h1>
-                        </div>
+                            <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 120px; left: 220px;"></div>
+                            <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 90px;"></div>
                     </div>
                     <div class="block-with-sign">
-                        <div class="cards-image-second">
-                            <img src="src\assets\Group 12.png" alt="">
-                        </div>
-                        <div class="cards-text-second">
                             <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
-                        </div>
-                    </div>
-                    <div class="block-with-sign">
-                        <div class="cards-image-third">
-                            <img src="src\assets\Group 22.png" alt="">
-                        </div>
-                        <div class="cards-text-third">
-                            <h1>Отсутствие внешней аналитики</h1>
-                        </div>
-                    </div>
-                    <div class="block-with-sign">
-                        <div class="cards-image-fourth">
-                            <img src="src\assets\Group 24.png" alt="">
-                        </div>
-                        <div class="cards-text-fourth">
-                            <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br> запланировать поставку</h1>
-                        </div>
+                            <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 155px; left: 220px;"></div>
+                            <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 120px;"></div>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 </template>
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
-    main{
-        width: 100%;
-        color: #EEEFF3;
-        background-color: #EEEFF3;
-        display: flex;
-        flex-direction: column;
-        max-width: 1280px;
-        flex: 0 0 auto;
-    }
-    main h1{
-        @font-face {
-            font-family:Inter;
-            src: url(src\assets\Inter-SemiBold.otf);
-            }
-    }
-    main p{
-        @font-face {
-        font-family:Montserrat ;
-        src: url(src\assets\Montserrat-LightItalic.ttf);
-        }
-    }
-    .skills-block{
-        margin-top: -32px;
-        display: flex;
-        flex-direction: row;
-        background-color: #EEEFF3;
-        color: #3129F1;
-        height: 628px;
-    }
-    .two-blocks{
-        display: flex;
-        justify-content: center;
-        height: 370px;
-        margin-left: 98px;
-        margin-top: 172px;
-    }
-    .card-blocks{
-        display: grid;
-        grid-template-columns: 269px 269px;
-        grid-template-rows: 172px 172px;
-        row-gap: 26px;
-        column-gap: 21px;
-        height: 370px;
-        width: 559px;
-    }
-    .what-you-have{
-        display: flex;
-        width: 433px;
-        height: 116px;
-        justify-content: center;
-        align-items: center;
-        margin-top: 108px;
-        margin-right: 97px;
-    }
-    .what-you-have h1{
-        font-weight: 700;
-        font-size: 48px;
-        line-height: 58px;
-        color: #0E028E;
-    }
-    .block-with-sign{
+main {
+    width: 100%;
+    height: 711px;
+    //max-width: 1280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #312889;
-    border: 1px solid #312889;
-    border-radius: 21px;
-    color: #FFFFFF;
-    .cards-image-first{
+    flex: 0 0 auto;
+    color: black;
+
+}
+
+h1 {
+    @font-face {
+        font-family: Inter;
+        src: url(src\assets\Inter-SemiBold.otf);
+    }
+}
+
+p {
+    @font-face {
+        font-family: Montserrat;
+        src: url(src\assets\Montserrat-LightItalic.ttf);
+    }
+}
+
+
+.two-blocks {
     display: flex;
     justify-content: center;
-    width: 49.58px;
-    height: 49.58px;
-    margin-top: 17px;
-    margin-bottom: 17.42px;
+    align-items: center;
+    width: 1280px;
+    gap: 88px;
+}
+
+
+.what-you-have {
+    
+    h1 {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 59px;
     }
-    .cards-image-second{
+}
+
+.card-blocks {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 22px;
+    width: 613px;
+    height: 100%;
+}
+
+.firs-cards {
+    display: flex;
+    flex-direction: column;
+    width: 613px;
+    height: 261px;
+    border-radius: 21px;
+    border: 1px solid black;
+    color: black;
+    h1{
+        font-weight: 700;
+font-size: 15px;
+line-height: 18px;
+        margin: 45px 0px 0px 14px;
+
+    }
+}
+
+.bottom-cards {
+    display: flex;
+    flex-direction: row;
+    column-gap: 49px;
+}
+
+.block-with-sign {
+    display: flex;
+    flex-direction: column;
+    
+    //background: #312889;
+    width: 282px;
+    height: 322px;
+    left: 598px;
+    top: 1189px;
+    border: 1px solid black;
+    border-radius: 25px;
+    h1{
+        font-weight: 700;
+font-size: 15px;
+line-height: 18px;
+        margin: 54px 0px 0px 14px;
+    }
+
+    .cards-image-second {
         display: flex;
         justify-content: center;
         width: 42.75px;
@@ -131,7 +138,8 @@
         margin-top: 19px;
         margin-bottom: 29px;
     }
-    .cards-image-third{
+
+    .cards-image-third {
         display: flex;
         justify-content: center;
         width: 173px;
@@ -139,7 +147,8 @@
         margin-top: 18px;
         margin-bottom: 33px;
     }
-    .cards-image-fourth{
+
+    .cards-image-fourth {
         display: flex;
         justify-content: center;
         width: 28.31px;
@@ -147,25 +156,17 @@
         margin-top: 19px;
         margin-bottom: 16px;
     }
-    .cards-text-first{
-    margin: 0px 10px 20px 13px;
-    text-align: center;
-    font-size: 14px
+
+    .cards-text-first {
+        margin: 0px 10px 20px 13px;
+        text-align: center;
+        font-size: 14px
     }
-    .cards-text-second{
-    margin: 0px 14px 40px 14px;
-    text-align: center;
-    font-size: 14px
-    }
-    .cards-text-third{
-    margin: 0px 16px 51px 18px;
-    text-align: center;
-    font-size: 14px
-    }
-    .cards-text-fourth{
-    margin: 0px 24px 23px 26px;
-    text-align: center;
-    font-size: 14px
-    }
+
+    .cards-text-second {
+        margin: 0px 14px 40px 14px;
+        text-align: center;
+        font-size: 14px
+    }    
 }
 </style>
