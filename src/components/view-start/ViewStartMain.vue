@@ -16,7 +16,6 @@ main {
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-  //background:  #191919;
 
   h1 {
     @font-face {

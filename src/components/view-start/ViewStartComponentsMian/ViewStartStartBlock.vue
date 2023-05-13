@@ -9,9 +9,7 @@
         <h1>
           Рекомендательный <br>сервис аналитики <br> Вашего бизнеса на Wildberries
         </h1>
-        <div
-          style="width: 50px; height: 50px; background-color: aquamarine;position: relative; top: -120px; left: 250px; color: black;">
-          img</div>
+        <div class="fake-img">img</div>
       </div>
       <div class="about-neyrosite">
         <h1>Нейросеть, которая не только даст всю интересующую<br> аналитику, но и подскажет что делать дальше,<br>чтобы
@@ -62,12 +60,11 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-
+  height: 1000px;
 }
 
 .jarvis-logo {
-  margin-top: 280px;
+  margin-top: 400px;
 
   img {
     width: 1732px;
@@ -79,15 +76,25 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60vw;
+  width: 1172px;
   background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
   backdrop-filter: blur(15px);
   position: relative;
   bottom: 350px;
 
+  .fake-img {
+    width: 50px;
+    height: 50px;
+    background-color: aquamarine;
+    position: relative;
+    top: -120px;
+    left: 110px;
+    color: black;
+  }
+
   h1 {
-    font-weight: 700;
-    font-size: 2vw;
+    font-weight: 600;
+    font-size: 60px;
     line-height: 80px;
     text-align: center;
     margin-top: 40px;
@@ -106,9 +113,9 @@ main {
 
 
   h1 {
-    font-weight: 300;
-    font-size: 2vw;
-    line-height: 29px
+    font-weight: 200;
+    font-size: 34px;
+    line-height: 35px;
   }
 
   .button-try {
@@ -123,4 +130,5 @@ main {
     background: #B7FF44;
     color: #000000;
   }
-}</style>
+}
+</style>

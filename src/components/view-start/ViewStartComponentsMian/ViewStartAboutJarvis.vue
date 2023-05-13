@@ -32,15 +32,14 @@
                 <div class="neon-line"></div>
             </div>
             <button class="button-try">Попробовать сейчас</button>
-            <div class="circle-first"></div>
-            <div class="circle-second"></div>
-            <div class="circle-back"></div>
-            <div class="circle-back-second"></div>
-            <div class="circle-back-third"></div>
+            <ViewStartDashboard />
+            <ViewStartСircleBlock />
         </div>
     </main>
 </template>
 <script setup lang="ts">
+import ViewStartDashboard from './ViewStartDashboard.vue';
+import ViewStartСircleBlock from './ViewStartСircleBlock.vue'
 </script> 
 <style scoped lang="scss">
 main {
@@ -67,7 +66,7 @@ main {
 }
 
 .jarvis-wrapper {
-    height: 2326px;
+    height: 3748px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -131,62 +130,9 @@ main {
 
 .neon-line {
     border-left: 1px solid #B7FF44;
-    ;
     height: 1311px;
     position: absolute;
     bottom: 54px;
     left: 517.5px;
-}
-
-.circle-first {
-    height: 100px;
-    width: 100px;
-    border-radius: 100px;
-    background-color: #B7FF44;
-    position: relative;
-    z-index: 0;
-    top: -318px;
-    left: 510px;
-}
-
-.circle-second {
-    height: 285px;
-    width: 285px;
-    border-radius: 300px;
-    background-color: #B7FF44;
-    position: relative;
-    z-index: 0;
-    bottom: 1356px;
-    right: 480px;
-}
-
-.circle-back {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background-color: #B7FF44;
-    position: relative;
-    z-index: 0;
-    bottom: 1700px;
-}
-
-.circle-back-second {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background-color: #B7FF44;
-    position: relative;
-    z-index: 0;
-    bottom: 1348px;
-}
-
-.circle-back-third {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background-color: #B7FF44;
-    position: relative;
-    z-index: 0;
-    bottom: 998px;
 }
 </style>

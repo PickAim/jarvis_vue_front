@@ -13,6 +13,5 @@ footer {
   width: 100%;
   height: 200px;
   background-color: black;
-  //max-width: 1280px;
 }
 </style>

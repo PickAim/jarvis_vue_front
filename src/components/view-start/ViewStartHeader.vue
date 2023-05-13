@@ -7,7 +7,6 @@
       <button class="login-button" @click="router.push('workspace')">На работу</button>
       <button class="login-button" @click="actions.openLoginOverlay()">Вход</button>
       <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
-
     </div>
   </header>
 </template>
@@ -26,12 +25,9 @@ header {
   display: flex;
   justify-content: center;
   width: 100%;
-  //max-width: 1280px;
-  //background-color: #191919;;
   border-top-left-radius: 45px;
   border-top-right-radius: 45px;
-  color:white;
-  //border: 1px solid black;
+  color: white;
 
   h1 {
     @font-face {
