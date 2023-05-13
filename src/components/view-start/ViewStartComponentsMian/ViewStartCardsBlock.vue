@@ -1,6 +1,5 @@
 <template>
     <main>
-
         <div class="two-blocks">
             <div class="what-you-have">
                 <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
@@ -38,7 +37,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 </template>
 <script setup lang="ts">
@@ -77,7 +75,6 @@ main {
     gap: 88px;
 }
 
-
 .what-you-have {
 
     h1 {
@@ -110,7 +107,6 @@ main {
         font-size: 15px;
         line-height: 18px;
         margin: 45px 0px 0px 14px;
-
     }
 }
 
@@ -123,8 +119,6 @@ main {
 .block-with-sign {
     display: flex;
     flex-direction: column;
-
-    //background: #312889;
     width: 282px;
     height: 322px;
     border: 1px solid black;
@@ -136,6 +130,5 @@ main {
         line-height: 18px;
         margin: 54px 0px 0px 14px;
     }
-
 }
 </style>
