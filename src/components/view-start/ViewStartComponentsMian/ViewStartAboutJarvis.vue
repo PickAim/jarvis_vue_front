@@ -88,11 +88,12 @@ main {
     .button-try {
         width: 465px;
         height: 102px;
-        left: 407px;
-        top: 3204px;
         border: 1px solid #B7FF44;
         border-radius: 12px;
         margin-top: 56px;
+        font-weight: 700;
+        font-size: 23px;
+        line-height: 28px;
     }
 }
 
