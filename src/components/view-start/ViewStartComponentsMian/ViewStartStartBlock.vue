@@ -9,7 +9,9 @@
         <h1>
           Рекомендательный <br>сервис аналитики <br> Вашего бизнеса на Wildberries
         </h1>
-        <div style="width: 50px; height: 50px; background-color: aquamarine;position: relative; top: -120px; left: 250px; color: black;">img</div>
+        <div
+          style="width: 50px; height: 50px; background-color: aquamarine;position: relative; top: -120px; left: 250px; color: black;">
+          img</div>
       </div>
       <div class="about-neyrosite">
         <h1>Нейросеть, которая не только даст всю интересующую<br> аналитику, но и подскажет что делать дальше,<br>чтобы
@@ -38,7 +40,7 @@ main {
   border: 1px solid black;
   background-color: #191919;
   color: #FFFFFF;
-  
+
 
   h1 {
     @font-face {
@@ -61,15 +63,15 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+
 }
 
 .jarvis-logo {
   margin-top: 280px;
 
   img {
-  width: 1732px;
-  height: 380px;
+    width: 1732px;
+    height: 380px;
   }
 }
 
@@ -82,6 +84,7 @@ main {
   backdrop-filter: blur(15px);
   position: relative;
   bottom: 350px;
+
   h1 {
     font-weight: 700;
     font-size: 2vw;
@@ -120,5 +123,4 @@ main {
     background: #B7FF44;
     color: #000000;
   }
-}
-</style>
+}</style>

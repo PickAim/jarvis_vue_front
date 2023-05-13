@@ -7,23 +7,33 @@
             </div>
             <div class="card-blocks">
                 <div class="firs-cards">
-                    
-                        <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
-                            запланировать поставку</h1>
-                    
-                    <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 50px; left: 540px;">img</div>
-                    <div style="width: 50px; height: 10px; background-color: aquamarine;position: relative; top: 25px;"></div>
+                    <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
+                        запланировать поставку</h1>
+                    <div
+                        style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 50px; left: 540px;">
+                        img</div>
+                    <div style="width: 50px; height: 10px; background-color: aquamarine;position: relative; top: 25px;">
+                    </div>
                 </div>
                 <div class="bottom-cards">
                     <div class="block-with-sign">
-                            <h1>Рутинная работа отнимает <br> много времени, которое можно <br> посвятить запуску новых товаров <br> и масштабированию бизнеса</h1>
-                            <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 120px; left: 220px;"></div>
-                            <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 90px;"></div>
+                        <h1>Рутинная работа отнимает <br> много времени, которое можно <br> посвятить запуску новых товаров
+                            <br> и масштабированию бизнеса
+                        </h1>
+                        <div
+                            style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 120px; left: 220px;">
+                        </div>
+                        <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 90px;">
+                        </div>
                     </div>
                     <div class="block-with-sign">
-                            <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
-                            <div style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 155px; left: 220px;"></div>
-                            <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 120px;"></div>
+                        <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
+                        <div
+                            style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 155px; left: 220px;">
+                        </div>
+                        <div
+                            style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 120px;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,7 +47,6 @@
 main {
     width: 100%;
     height: 711px;
-    //max-width: 1280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,22 +54,20 @@ main {
     flex: 0 0 auto;
     color: black;
 
-}
+    h1 {
+        @font-face {
+            font-family: Inter;
+            src: url(src\assets\Inter-SemiBold.otf);
+        }
+    }
 
-h1 {
-    @font-face {
-        font-family: Inter;
-        src: url(src\assets\Inter-SemiBold.otf);
+    p {
+        @font-face {
+            font-family: Montserrat;
+            src: url(src\assets\Montserrat-LightItalic.ttf);
+        }
     }
 }
-
-p {
-    @font-face {
-        font-family: Montserrat;
-        src: url(src\assets\Montserrat-LightItalic.ttf);
-    }
-}
-
 
 .two-blocks {
     display: flex;
@@ -72,7 +79,7 @@ p {
 
 
 .what-you-have {
-    
+
     h1 {
         font-weight: 700;
         font-size: 48px;
@@ -97,10 +104,11 @@ p {
     border-radius: 21px;
     border: 1px solid black;
     color: black;
-    h1{
+
+    h1 {
         font-weight: 700;
-font-size: 15px;
-line-height: 18px;
+        font-size: 15px;
+        line-height: 18px;
         margin: 45px 0px 0px 14px;
 
     }
@@ -115,58 +123,19 @@ line-height: 18px;
 .block-with-sign {
     display: flex;
     flex-direction: column;
-    
+
     //background: #312889;
     width: 282px;
     height: 322px;
-    left: 598px;
-    top: 1189px;
     border: 1px solid black;
     border-radius: 25px;
-    h1{
+
+    h1 {
         font-weight: 700;
-font-size: 15px;
-line-height: 18px;
+        font-size: 15px;
+        line-height: 18px;
         margin: 54px 0px 0px 14px;
     }
 
-    .cards-image-second {
-        display: flex;
-        justify-content: center;
-        width: 42.75px;
-        height: 50px;
-        margin-top: 19px;
-        margin-bottom: 29px;
-    }
-
-    .cards-image-third {
-        display: flex;
-        justify-content: center;
-        width: 173px;
-        height: 53px;
-        margin-top: 18px;
-        margin-bottom: 33px;
-    }
-
-    .cards-image-fourth {
-        display: flex;
-        justify-content: center;
-        width: 28.31px;
-        height: 46px;
-        margin-top: 19px;
-        margin-bottom: 16px;
-    }
-
-    .cards-text-first {
-        margin: 0px 10px 20px 13px;
-        text-align: center;
-        font-size: 14px
-    }
-
-    .cards-text-second {
-        margin: 0px 14px 40px 14px;
-        text-align: center;
-        font-size: 14px
-    }    
 }
 </style>

@@ -4,47 +4,30 @@
             <div class="question-about-jarvis">
                 <h1>Что умеет Jarvis?</h1>
             </div>
-            <div class="jarvis-block">
-                <div class="elements-jarvis-block">
-                    <img src="src\assets\Снимок экрана 2023-03-07 в 21 1.png" alt="">
-                    <div class="information-block-title">
-                        <h1>Рекомендательная <br /> система</h1>
-                        <div class="offer-information">
-                            <h1>Предлагает рекомендации по <br> работе с Вашими продажами: <br> предлагает цену товара,
-                                заранее <br> сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши
-                                и многое другое. <br> Благодаря этому вы не упустите <br> момент принятия решения, что <br>
-                                предотвратит упущенную прибыль <br> и сократит Ваши расходы</h1>
-                        </div>
-                    </div>
+            <div class="jarvis">
+                
+                <div class="jarvis-block">
+                    <h1>Рекомендательная <br /> система</h1>
+                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
+                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
+                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
+                        <br> и сократит Ваши расходы</h2>
                 </div>
-            </div>
-            <div class="jarvis-block">
-                <div class="elements-jarvis-block-back">
-                    <div class="information-block-title-back">
-                        <h1>Внешняя аналитика</h1>
-                        <div class="offer-information-back">
-                            <h1>Собирает данные со всего <br> маркетплейса и предоставляет <br> актуальную аналитику
-                                рынка.<br> Благодаря внешней аналитике и <br> рекомендательной системе Вы <br> всегда
-                                знаете, как идут дела у Ваших <br> конкурентов, и сможете выходить на <br> новые ниши
-                                максимально <br> подготовленными и <br> информированными</h1>
-                        </div>
-                    </div>
-                    <img src="src\assets\Снимок экрана 2023-03-07 в 21 1.png" alt="">
+                <div class="jarvis-block">
+                    <h1>Рекомендательная <br /> система</h1>
+                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
+                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
+                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
+                        <br> и сократит Ваши расходы</h2>
                 </div>
-            </div>
-            <div class="jarvis-block">
-                <div class="elements-jarvis-block">
-                    <img src="src\assets\Снимок экрана 2023-03-07 в 21 1.png" alt="">
-                    <div class="information-block-title">
-                        <h1>Расчет индексов <br /> показателей магазина</h1>
-                        <div class="offer-information">
-                            <h1>Позволяет оценить финансовое <br> здоровье вашего магазина, выявить <br> рентабельные
-                                позиции и отсеять <br> нерентабельные. На основе <br> внутренней аналитики <br>
-                                рекомендательная система подскажет,<br> как эффективнее масштабировать <br>наиболее
-                                прибыльные товары и <br> увеличить продажи</h1>
-                        </div>
-                    </div>
+                <div class="jarvis-block">
+                    <h1>Рекомендательная <br /> система</h1>
+                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
+                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
+                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
+                        <br> и сократит Ваши расходы</h2>
                 </div>
+                <div class="neon-line"></div>
             </div>
         </div>
     </main>
@@ -59,6 +42,7 @@ main {
     display: flex;
     flex-direction: column;
     //max-width: 1280px;
+    justify-content: center;
     flex: 0 0 auto;
 
     h1 {
@@ -79,9 +63,10 @@ main {
 .jarvis-wrapper {
     height: 2326px;
     border: 1px solid black;
-    //background: url(src/assets/BackgroundJarvis.jpg);
-    //background-repeat: no-repeat;
-    //background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #191919;
 
     .question-about-jarvis {
         text-align: center;
@@ -95,94 +80,38 @@ main {
         }
     }
 }
-
-.jarvis-block {
-    .elements-jarvis-block {
+.jarvis{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%); 
+    backdrop-filter: blur(15px); 
+    width: 1035px; 
+    height: 1405px;
+    .jarvis-block {
         display: flex;
-        flex-direction: row;
-        margin-left: 56px;
-
-        img {
-            width: 568px;
-            height: 461px;
-            margin-top: 60px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        gap: 110px;
+        margin-top: 163px;
+        h1 {
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 44px;
         }
-
-        .information-block-title {
-            margin-left: 81px;
-
-            h1 {
-                font-weight: 700;
-                font-size: 40px;
-                line-height: 49px;
-                text-align: center;
-                margin-bottom: 29px;
-            }
-
-            .offer-information {
-                display: flex;
-                justify-content: center;
-                width: 504px;
-                height: 364px;
-                //background: rgba(158, 158, 158, 0.2);
-                //backdrop-filter: blur(5px);
-                border-radius: 24px;
-                border: 1px solid black;
-
-                h1 {
-                    font-weight: 400;
-                    font-size: 20px;
-                    line-height: 24px;
-                    text-align: center;
-                    margin: 72px 48px 61px 67px;
-                }
-            }
+    
+        h2 {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
         }
     }
 }
-
-.elements-jarvis-block-back {
-    display: flex;
-    flex-direction: row;
-    margin-left: 82px;
-    margin-top: 164px;
-    margin-bottom: 134px;
-
-    .information-block-title-back {
-        margin-right: 77px;
-
-        h1 {
-            font-weight: 700;
-            font-size: 40px;
-            line-height: 49px;
-            text-align: center;
-            margin-bottom: 31px;
-        }
-
-        .offer-information-back {
-            display: flex;
-            justify-content: center;
-            width: 504px;
-            height: 364px;
-            //background: rgba(158, 158, 158, 0.2);
-            //backdrop-filter: blur(5px);
-            border-radius: 24px;
-            border: 1px solid black;
-
-            h1 {
-                font-weight: 400;
-                font-size: 20px;
-                line-height: 24px;
-                text-align: center;
-                margin: 58px 58px 75px 57px;
-            }
-        }
-    }
-
-    img {
-        width: 568px;
-        height: 461px;
-        margin-top: 34px;
-    }
+.neon-line{
+    border-left: 1px solid #B7FF44;;
+    height: 1311px;
+    position: absolute;
+    bottom: 54px;
+    left: 517.5px;
 }
 </style>
