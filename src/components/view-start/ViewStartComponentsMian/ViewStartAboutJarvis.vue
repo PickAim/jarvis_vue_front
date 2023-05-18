@@ -1,12 +1,15 @@
 <template>
-    <main>
+    <div class="View-About-Jarvis">
         <div class="jarvis-wrapper">
             <div class="question-about-jarvis">
                 <h1>Что умеет Jarvis?</h1>
             </div>
             <div class="jarvis">
                 <div class="jarvis-block">
-                    <h1>Рекомендательная <br /> система</h1>
+                    <div class="first-left-block">
+                        <div class="first-image"></div>
+                        <h1>Рекомендательная <br /> система</h1>
+                    </div>
                     <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
                         сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
                         Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
@@ -14,35 +17,40 @@
                     </h2>
                 </div>
                 <div class="jarvis-block">
-                    <h1>Рекомендательная <br /> система</h1>
-                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
-                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
-                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
-                        <br> и сократит Ваши расходы
+                    <div class="second-left-block">
+                        <div class="second-image"></div>
+                        <h1>Расчет индексов <br> показателей магазина</h1>
+                    </div>
+                    <h2>Собирает данные со всего <br> маркетплейса и предоставляет <br> актуальную аналитику рынка. <br>
+                        Благодаря внешней аналитике и <br> рекомендательной системе Вы <br> всегда знаете, как идут дела у
+                        <br> Ваших конкурентов, и сможете <br> выходить на новые ниши <br> максимально подготовленными и
+                        <br> информированными
                     </h2>
                 </div>
                 <div class="jarvis-block">
-                    <h1>Рекомендательная <br /> система</h1>
-                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
-                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
-                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
-                        <br> и сократит Ваши расходы
+                    <div class="first-left-block">
+                        <div class="third-image"></div>
+                        <h1>Расчет индексов <br> показателей магазина</h1>
+                    </div>
+                    <h2>Позволяет оценить финансовое <br> здоровье вашего магазина, выявить <br> рентабельные позиции и
+                        отсеять <br> нерентабельные. На основе <br> внутренней аналитики <br> рекомендательная система <br>
+                        подскажет, как эффективнее <br> масштабировать наиболее <br> прибыльные товары и увеличить <br>
+                        продажи
                     </h2>
                 </div>
                 <div class="neon-line"></div>
             </div>
             <button class="button-try">Попробовать сейчас</button>
-            <ViewStartDashboard />
+            <ViewStartTariffs />
             <ViewStartСircleBlock />
         </div>
-    </main>
+    </div>
 </template>
 <script setup lang="ts">
-import ViewStartDashboard from './ViewStartDashboard.vue';
-import ViewStartСircleBlock from './ViewStartСircleBlock.vue'
+import ViewStartTariffs from './ViewStartTariffs.vue';
 </script> 
 <style scoped lang="scss">
-main {
+.View-About-Jarvis {
     width: 100%;
     color: #EEEFF3;
     display: flex;
@@ -66,7 +74,7 @@ main {
 }
 
 .jarvis-wrapper {
-    height: 3748px;
+    height: 500vh;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -103,16 +111,15 @@ main {
     position: relative;
     background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
     backdrop-filter: blur(15px);
-    width: 1035px;
-    height: 1405px;
+    width: 50vw;
+    height: 142vh;
     z-index: 100;
 
     .jarvis-block {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         text-align: center;
         align-items: center;
-        gap: 110px;
         margin-top: 163px;
 
         h1 {
@@ -126,14 +133,46 @@ main {
             font-size: 20px;
             line-height: 24px;
         }
+
+        .first-left-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 80px;
+
+            .first-image {
+                height: 100px;
+                width: 100px;
+                background-color: #B7FF44;
+            }
+
+            .third-image {
+                height: 100px;
+                width: 100px;
+                background-color: #B7FF44;
+            }
+        }
+
+        .second-left-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 80px;
+            .second-image {
+                height: 100px;
+                width: 100px;
+                background-color: #B7FF44;
+            }
+        }
+
     }
 }
 
 .neon-line {
     border-left: 1px solid #B7FF44;
-    height: 1311px;
+    height: 130vh;
     position: absolute;
     bottom: 54px;
     left: 517.5px;
-}
-</style>
+}</style>

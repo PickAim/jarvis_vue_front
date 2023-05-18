@@ -1,36 +1,36 @@
 <template>
-    <main>
-        <div class="dashboard-wrapper">
-            <div class="external-dashboard">
-                <div class="fake-image">Img</div>
+    <div class="View-Tariffs-Block">
+        <div class="tariffs-wrapper">
+            <div class="external-tariffs">
+                <div class="tariffs-image">Img</div>
                 <div class="board-info">
                     <h1>Дашборд <br> с системой виджетов</h1>
                     <h1>Внутренняя аналитика</h1>
                     <h1>Рекомендации <br> по ценообразованию</h1>
                 </div>
-                <button class="button-try">Попробовать сейчас</button>
+                <button class="simple-button-try">Попробовать сейчас</button>
             </div>
-            <div class="mid-dashboard">
-                <div class="fake-image-2">Img</div>
+            <div class="mid-tariffs">
+                <div class="tariffs-image-2">Img</div>
                 <div class="board-info-2">
                     <h1>Дашборд <br> с системой виджетов</h1>
                     <h1>Внутренняя аналитика</h1>
                     <h1>Внешняя аналитика</h1>
                     <h1>Рекомендации <br> по ценообразованию</h1>
                 </div>
-                <button class="button-try-2">Попробовать сейчас</button>
+                <button class="basic-button-try">Попробовать сейчас</button>
             </div>
-            <div class="external-dashboard">
-                <div class="fake-image">Img</div>
+            <div class="external-tariffs">
+                <div class="tariffs-image">Img</div>
                 <div class="board-info">
                     <h1>Дашборд <br> с системой виджетов</h1>
                     <h1>Внутренняя аналитика</h1>
                     <h1>Рекомендации <br> по ценообразованию</h1>
                 </div>
-                <button class="button-try">Попробовать сейчас</button>
+                <button class="simple-button-try">Попробовать сейчас</button>
             </div>
         </div>
-    </main>
+    </div>
 </template>
     
 <script setup lang="ts">
@@ -38,7 +38,7 @@
 </script>
     
 <style scoped lang="scss">
-main {
+.View-Tariffs-Block {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -64,7 +64,7 @@ main {
     }
 }
 
-.dashboard-wrapper {
+.tariffs-wrapper {
     display: flex;
     flex-direction: row;
     margin-top: 50px;
@@ -72,7 +72,7 @@ main {
     align-items: center;
 }
 
-.external-dashboard {
+.external-tariffs {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,7 +82,7 @@ main {
     backdrop-filter: blur(5px);
     border-radius: 24px;
 
-    .fake-image {
+    .tariffs-image {
         width: 150px;
         height: 150px;
         background-color: #B7FF44;
@@ -100,7 +100,7 @@ main {
         }
     }
 
-    .button-try {
+    .simple-button-try {
         width: 287px;
         height: 63px;
         background: #B7FF44;
@@ -113,7 +113,7 @@ main {
     }
 }
 
-.mid-dashboard {
+.mid-tariffs {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,7 +124,7 @@ main {
     backdrop-filter: blur(5px);
     border-radius: 24px;
 
-    .fake-image-2 {
+    .tariffs-image-2 {
         width: 150px;
         height: 150px;
         background-color: #FFFFFF;
@@ -144,7 +144,7 @@ main {
         }
     }
 
-    .button-try-2 {
+    .basic-button-try {
         width: 287px;
         height: 63px;
         border: 1px solid #000000;

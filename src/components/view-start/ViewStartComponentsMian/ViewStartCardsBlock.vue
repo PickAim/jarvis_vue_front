@@ -1,48 +1,37 @@
 <template>
-    <main>
-        <div class="two-blocks">
+    <div class="View-Cards-Block">
+        <div class="cards-block">
             <div class="what-you-have">
                 <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
             </div>
-            <div class="card-blocks">
-                <div class="firs-cards">
+            <div class="opportunity-cards">
+                <div class="first-cards">
                     <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
                         запланировать поставку</h1>
-                    <div
-                        style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 50px; left: 540px;">
-                        img</div>
-                    <div style="width: 50px; height: 10px; background-color: aquamarine;position: relative; top: 25px;">
-                    </div>
+                    <div class="first-image">Img</div>
+                    <div class="first-line">Line</div>
                 </div>
                 <div class="bottom-cards">
                     <div class="block-with-sign">
                         <h1>Рутинная работа отнимает <br> много времени, которое можно <br> посвятить запуску новых товаров
-                            <br> и масштабированию бизнеса
-                        </h1>
-                        <div
-                            style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 120px; left: 220px;">
-                        </div>
-                        <div style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 90px;">
-                        </div>
+                            <br> и масштабированию бизнеса</h1>
+                        <div class="second-image">Img</div>
+                        <div class="second-line">Line</div>
                     </div>
                     <div class="block-with-sign">
                         <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
-                        <div
-                            style="width: 50px; height: 50px; background-color: aquamarine; position: relative; top: 155px; left: 220px;">
-                        </div>
-                        <div
-                            style="width: 60px; height: 10px; background-color: aquamarine; position:relative; top: 120px;">
-                        </div>
+                        <div class="third-image">Img</div>
+                        <div class="third-line">Line</div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 </template>
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
-main {
+.View-Cards-Block {
     width: 100%;
     height: 711px;
     display: flex;
@@ -67,11 +56,11 @@ main {
     }
 }
 
-.two-blocks {
+.cards-block {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1280px;
+    width: 120vw;
     gap: 88px;
 }
 
@@ -84,7 +73,7 @@ main {
     }
 }
 
-.card-blocks {
+.opportunity-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -93,7 +82,7 @@ main {
     height: 100%;
 }
 
-.firs-cards {
+.first-cards {
     display: flex;
     flex-direction: column;
     width: 613px;
@@ -107,6 +96,23 @@ main {
         font-size: 15px;
         line-height: 18px;
         margin: 45px 0px 0px 14px;
+    }
+
+    .first-image {
+        width: 50px;
+        height: 50px;
+        background-color: aquamarine;
+        position: relative;
+        top: 50px;
+        left: 540px;
+    }
+
+    .first-line {
+        width: 50px;
+        height: 10px;
+        background-color: aquamarine;
+        position: relative;
+        top: 25px;
     }
 }
 
@@ -130,5 +136,38 @@ main {
         line-height: 18px;
         margin: 54px 0px 0px 14px;
     }
-}
-</style>
+
+    .second-image {
+        width: 50px;
+        height: 50px;
+        background-color: aquamarine;
+        position: relative;
+        top: 120px;
+        left: 220px;
+    }
+
+    .second-line {
+        width: 60px;
+        height: 10px;
+        background-color: aquamarine;
+        position: relative;
+        top: 90px;
+    }
+
+    .third-image {
+        width: 50px;
+        height: 50px;
+        background-color: aquamarine;
+        position: relative;
+        top: 155px;
+        left: 220px;
+    }
+
+    .third-line {
+        width: 60px;
+        height: 10px;
+        background-color: aquamarine;
+        position: relative;
+        top: 120px;
+    }
+}</style>

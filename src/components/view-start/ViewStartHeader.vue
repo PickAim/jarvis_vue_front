@@ -25,9 +25,8 @@ header {
   display: flex;
   justify-content: center;
   width: 100%;
-  border-top-left-radius: 45px;
-  border-top-right-radius: 45px;
   color: white;
+  background: #191919;
 
   h1 {
     @font-face {
@@ -47,11 +46,12 @@ header {
 .buttons-wrapper {
   display: flex;
   flex-direction: row;
-  width: 1000px;
   height: 109px;
+  max-width: 1000px;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
-
+  
   button {
     @font-face {
       font-family: Inter;

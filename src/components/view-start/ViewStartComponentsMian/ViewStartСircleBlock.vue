@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <div class="View-Circle-Block">
         <div class="circle-wrapper">
             <div class="circle-first"></div>
             <div class="circle-second"></div>
@@ -7,7 +7,7 @@
             <div class="circle-back-second"></div>
             <div class="circle-back-third"></div>
         </div>
-    </main>
+    </div>
 </template>
     
 <script setup lang="ts">
@@ -15,7 +15,7 @@
 </script>
     
 <style scoped lang="scss">
-main {
+.View-Circle-Block {
     width: 100%;
     display: flex;
     flex-direction: column;

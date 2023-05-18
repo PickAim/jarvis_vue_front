@@ -1,32 +1,31 @@
 <template>
-  <main>
-    <ViewStartHeader />
-    <div class="StartMain">
+  <div class="View-Start-Block">
+    <div class="Start-Main">
       <div class="jarvis-logo">
         <img src="src\assets\jarvis.png" alt="">
       </div>
-      <div class="top-paragraf">
+      <div class="top-paragraph">
         <h1>
           Рекомендательный <br>сервис аналитики <br> Вашего бизнеса на Wildberries
         </h1>
-        <div class="fake-img">img</div>
+        <div class="start-block-image">img</div>
       </div>
-      <div class="about-neyrosite">
+      <div class="about-network">
         <h1>Нейросеть, которая не только даст всю интересующую<br> аналитику, но и подскажет что делать дальше,<br>чтобы
           быстрее расти и больше зарабатывать
         </h1>
         <button class="button-try">Попробовать сейчас</button>
       </div>
     </div>
-  </main>
+  </div>
 </template>
   
 <script setup lang="ts">
-import ViewStartHeader from '../ViewStartHeader.vue';
+
 </script>
   
 <style scoped lang="scss">
-main {
+.View-Start-Block {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -34,7 +33,8 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-radius: 45px;
+  border-bottom-left-radius: 45px;
+  border-bottom-right-radius: 45px;
   border: 1px solid black;
   background-color: #191919;
   color: #FFFFFF;
@@ -55,34 +55,40 @@ main {
   }
 }
 
-.StartMain {
+.Start-Main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 1000px;
+  height: 100vh;
+  min-height: 46vw;
+  width: 100%;
 }
 
 .jarvis-logo {
-  margin-top: 400px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
 
   img {
-    width: 1732px;
-    height: 380px;
+    width: 90%;
+
   }
 }
 
-.top-paragraf {
+.top-paragraph {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1172px;
+  height: 18vw;
+  width: 70%;
   background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
   backdrop-filter: blur(15px);
-  position: relative;
-  bottom: 350px;
+  position: absolute;
 
-  .fake-img {
+
+  .start-block-image {
     width: 50px;
     height: 50px;
     background-color: aquamarine;
@@ -94,28 +100,24 @@ main {
 
   h1 {
     font-weight: 600;
-    font-size: 60px;
-    line-height: 80px;
+    font-size: 3vw;
+    line-height: 1.5em;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
   }
 }
 
-.about-neyrosite {
+.about-network {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  bottom: 200px;
   gap: 45px;
-
-
+  position: absolute;
+  bottom: 30px;
   h1 {
     font-weight: 200;
-    font-size: 34px;
-    line-height: 35px;
+    font-size: 36px;
+    line-height: 1em;
   }
 
   .button-try {
@@ -126,7 +128,6 @@ main {
     line-height: 28px;
     border: 1px solid;
     border-radius: 12px;
-    margin-bottom: 62px;
     background: #B7FF44;
     color: #000000;
   }
