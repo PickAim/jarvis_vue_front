@@ -40,6 +40,7 @@
 <style scoped lang="scss">
 .View-Tariffs-Block {
     width: 100%;
+    min-width: 70vw;
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
@@ -70,14 +71,15 @@
     margin-top: 50px;
     gap: 19px;
     align-items: center;
+    height: 100vh;
 }
 
 .external-tariffs {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 376px;
-    height: 802px;
+    width: 20vw;
+    height: 82vh;
     border: 1px solid #B7FF44;
     backdrop-filter: blur(5px);
     border-radius: 24px;
@@ -92,8 +94,9 @@
 
     .board-info {
         font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
+        font-size: 1.5rem;
+        line-height: 1.6rem;
+        margin-top: 3vh;
 
         h1 {
             padding-top: 99px;
@@ -101,7 +104,7 @@
     }
 
     .simple-button-try {
-        width: 287px;
+        width: 15vw;
         height: 63px;
         background: #B7FF44;
         color: #000000;
@@ -117,8 +120,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 917px;
+    width: 22vw;
+    height: 92vh;
     background: #B7FF44;
     border: 1px solid rgba(183, 255, 68, 0.4);
     backdrop-filter: blur(5px);
@@ -134,10 +137,10 @@
 
     .board-info-2 {
         font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
+        font-size: 1.5rem;
+        line-height: 2.4rem;
         color: #000000;
-        margin-top: 60px;
+        
 
         h1 {
             padding-top: 90px;
@@ -145,7 +148,7 @@
     }
 
     .basic-button-try {
-        width: 287px;
+        width: 15vw;
         height: 63px;
         border: 1px solid #000000;
         border-radius: 12px;

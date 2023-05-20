@@ -1,6 +1,6 @@
 <template>
     <div class="View-Cards-Block">
-        <div class="cards-block">
+        <div class="cards-wrapper">
             <div class="what-you-have">
                 <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
             </div>
@@ -32,8 +32,9 @@
 </script>
 <style scoped lang="scss">
 .View-Cards-Block {
+    height: 80vh;
+    min-height: 70vh;
     width: 100%;
-    height: 711px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,12 +57,15 @@
     }
 }
 
-.cards-block {
+.cards-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120vw;
-    gap: 88px;
+    gap: 400px;
+   width: 100%;
+   height: 70vh;
+   position: absolute;
+
 }
 
 .what-you-have {
@@ -78,23 +82,23 @@
     justify-content: center;
     flex-wrap: wrap;
     row-gap: 22px;
-    width: 613px;
-    height: 100%;
+    width: 42.5vw;
+
 }
 
 .first-cards {
     display: flex;
     flex-direction: column;
-    width: 613px;
-    height: 261px;
+    width: 42.5vw;
+    height: 27vh;
     border-radius: 21px;
     border: 1px solid black;
     color: black;
 
     h1 {
         font-weight: 700;
-        font-size: 15px;
-        line-height: 18px;
+        font-size: 1rem;
+        line-height: 1rem;
         margin: 45px 0px 0px 14px;
     }
 
@@ -104,7 +108,7 @@
         background-color: aquamarine;
         position: relative;
         top: 50px;
-        left: 540px;
+        left: 700px;
     }
 
     .first-line {
@@ -120,13 +124,15 @@
     display: flex;
     flex-direction: row;
     column-gap: 49px;
+    width: 42.5vw;
+    min-height: 40vh;
 }
 
 .block-with-sign {
     display: flex;
     flex-direction: column;
-    width: 282px;
-    height: 322px;
+    width: 22vw;
+    height: 33.5vh;
     border: 1px solid black;
     border-radius: 25px;
 

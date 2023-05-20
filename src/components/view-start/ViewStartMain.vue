@@ -3,12 +3,14 @@
     <ViewStartStartBlock />
     <ViewStartCardsBlock />
     <ViewStartAboutJarvis />
+    <ViewStartFooter/>
   </main>
 </template>
 <script setup lang="ts">
 import ViewStartStartBlock from './ViewStartComponentsMian/ViewStartStartBlock.vue';
 import ViewStartCardsBlock from './ViewStartComponentsMian/ViewStartCardsBlock.vue';
 import ViewStartAboutJarvis from './ViewStartComponentsMian/ViewStartAboutJarvis.vue';
+import ViewStartFooter from './ViewStartFooter.vue';
 </script>
 <style scoped lang="scss">
 main {

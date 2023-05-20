@@ -42,12 +42,13 @@
             </div>
             <button class="button-try">Попробовать сейчас</button>
             <ViewStartTariffs />
-            <ViewStartСircleBlock />
+            <ViewStartTrustedBlock/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import ViewStartTariffs from './ViewStartTariffs.vue';
+import ViewStartTrustedBlock from './ViewStartTrustedBlock.vue';
 </script> 
 <style scoped lang="scss">
 .View-About-Jarvis {
@@ -75,6 +76,8 @@ import ViewStartTariffs from './ViewStartTariffs.vue';
 
 .jarvis-wrapper {
     height: 500vh;
+    width: 100%;
+    min-width: 70vw;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -174,5 +177,5 @@ import ViewStartTariffs from './ViewStartTariffs.vue';
     height: 130vh;
     position: absolute;
     bottom: 54px;
-    left: 517.5px;
+    left: 500.5px;
 }</style>

@@ -26,7 +26,7 @@ header {
   justify-content: center;
   width: 100%;
   color: white;
-  background: #191919;
+  background-color:#191919;
 
   h1 {
     @font-face {
@@ -47,7 +47,7 @@ header {
   display: flex;
   flex-direction: row;
   height: 109px;
-  max-width: 1000px;
+  max-width: 70vw;
   width: 100%;
   align-items: center;
   justify-content: space-between;

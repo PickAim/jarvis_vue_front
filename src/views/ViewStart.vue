@@ -32,7 +32,7 @@ window.addEventListener('keydown', (e) => {
   position: relative;
   .header{
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     top: 0;
     
   }
