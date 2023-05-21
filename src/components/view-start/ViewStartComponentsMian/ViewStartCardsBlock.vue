@@ -82,14 +82,14 @@
     justify-content: center;
     flex-wrap: wrap;
     row-gap: 22px;
-    width: 42.5vw;
+    width: 40vw;
 
 }
 
 .first-cards {
     display: flex;
     flex-direction: column;
-    width: 42.5vw;
+    width: 40vw;
     height: 27vh;
     border-radius: 21px;
     border: 1px solid black;
@@ -124,8 +124,8 @@
     display: flex;
     flex-direction: row;
     column-gap: 49px;
-    width: 42.5vw;
-    min-height: 40vh;
+    width: 40vw;
+
 }
 
 .block-with-sign {

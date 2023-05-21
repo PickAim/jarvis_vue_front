@@ -41,23 +41,29 @@
                 <div class="neon-line"></div>
             </div>
             <button class="button-try">Попробовать сейчас</button>
-            <ViewStartTariffs />
+            <ViewStartTariffs/>
             <ViewStartTrustedBlock/>
+            <ViewStartComponentsText/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import ViewStartTariffs from './ViewStartTariffs.vue';
-import ViewStartTrustedBlock from './ViewStartTrustedBlock.vue';
+import ViewStartComponentsText from "../ViewStartJarvisComponentsBlock/ViewStartComponentsText.vue";
+import ViewStartTrustedBlock from "../ViewStartJarvisComponentsBlock/ViewStartTrustedBlock.vue";
+import ViewStartTariffs from "../ViewStartJarvisComponentsBlock/ViewStartTariffs.vue"
 </script> 
 <style scoped lang="scss">
 .View-About-Jarvis {
     width: 100%;
-    color: #EEEFF3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #FFFFFF;
+  background-color: #191919;
+  color: #FFFFFF;
 
     h1 {
         @font-face {

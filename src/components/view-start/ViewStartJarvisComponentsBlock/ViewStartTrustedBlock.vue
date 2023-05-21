@@ -37,8 +37,7 @@
     align-items: center;
     text-align: center;
     color: #FFFFFF;
-    position: relative;
-    top: 4vh;
+
 
     .trust-wrapper {
         display: flex;
