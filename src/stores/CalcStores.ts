@@ -12,7 +12,7 @@ import type {
     UnitEconResultData
 } from "@/types/CalcRequestsTypes";
 
-const copyObject = <T>(obj: T): T => Object.assign({}, obj);
+const copyObject = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 
 function State<Q, R>(): ISavableCalcStoreState<Q, R>{
     return {

@@ -24,13 +24,11 @@ withDefaults(defineProps<{
 }
 
 button{
-  display: block;
   width: 100%;
-  height: 100%;
+  height: 60px;
   border: 2px solid black;
   background-color: white;
-
-  &.enabled {
+ &.enabled {
     &:hover {
       border-width: 3px;
     }

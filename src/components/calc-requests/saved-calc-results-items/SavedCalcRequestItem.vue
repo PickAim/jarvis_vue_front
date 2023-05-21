@@ -41,6 +41,7 @@ const emit = defineEmits<{
 const isLoading = ref(false);
 
 async function editHandler(){
+  console.log("Edit1", props.item.info.id)
   if (props.item.info.id === undefined) return;
   emit("edit", props.item.info.id);
 }
