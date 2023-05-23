@@ -1,14 +1,19 @@
 <template>
-  <div class="widget-unit-calc-result">
-    <BarChart class="bar-chart" :font-size="widgetSize*4"/>
-  </div>
+  <WidgetBodyContainer :widget-size="widgetSize">
+    <div class="title">UNIT экономика</div>
+  </WidgetBodyContainer>
 </template>
 
 <script setup lang="ts">
-import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
+import {defineProps} from "vue";
+import type {Widget} from "@/types/WidgetTypes";
+import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
 
+defineProps<{
+  options: Widget<"unitEcon">,
+  widgetSize: number
+}>();
 </script>
 
 <style scoped lang="scss">
-
 </style>

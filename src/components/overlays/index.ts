@@ -15,7 +15,15 @@ import {default as nicheDist} from './widget-options/OverlayWindowNicheDist.vue'
 import {default as unitEcon} from './OverlayWindowLogin.vue';
 import {default as widgetAdd} from './OverlayWindowWidgetAdd.vue';
 import {default as widgetSettings} from './OverlayWindowWidgetSettings.vue';
-import type {OverlayName} from "@/types/Objects";
+import OverlayWindowAverageCheck from "@/components/overlays/widget-options/OverlayWindowAverageCheck.vue";
+import OverlayWindowStoreProfitability from "@/components/overlays/widget-options/OverlayWindowStoreProfitability.vue";
+import OverlayWindowLostRevenue from "@/components/overlays/widget-options/OverlayWindowLostRevenue.vue";
+import OverlayWindowNicheDist from "@/components/overlays/widget-options/OverlayWindowNicheDist.vue";
+import OverlayWindowOrdersAndRedemptions
+    from "@/components/overlays/widget-options/OverlayWindowOrdersAndRedemptions.vue";
+import OverlayWindowRemains from "@/components/overlays/widget-options/OverlayWindowRemains.vue";
+import OverlayWindowTurnover from "@/components/overlays/widget-options/OverlayWindowTurnover.vue";
+import type {OverlayName} from "@/types/OverlayTypes";
 
 export const overlays: {[name in OverlayName]: any} = {
     login,
@@ -25,4 +33,10 @@ export const overlays: {[name in OverlayName]: any} = {
     unitEcon,
     widgetAdd,
     widgetSettings,
+    storeProfitability: OverlayWindowStoreProfitability,
+    remains: OverlayWindowRemains,
+    turnover: OverlayWindowTurnover,
+    lostRevenue: OverlayWindowLostRevenue,
+    averageCheck: OverlayWindowAverageCheck,
+    ordersAndRedemptions: OverlayWindowOrdersAndRedemptions
 }

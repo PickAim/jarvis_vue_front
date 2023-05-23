@@ -1,5 +1,6 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import type {OverlayOptions, WidgetName} from "@/types/Objects";
+import type {WidgetName} from "@/types/WidgetTypes";
+import type {OverlayOptions} from "@/types/OverlayTypes";
 
 export class WorkspaceSectionMainActions{
     overlayState;

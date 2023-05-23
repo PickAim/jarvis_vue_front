@@ -1,5 +1,5 @@
 <template>
-  <ViewWorkspaceSectionContainer>
+  <ViewWorkspaceSectionContainer :style="{'--widgetSizeMode': widgetSizeMode}">
     <template v-slot:header>Главная страница</template>
     <div class="main-section-wrapper">
       <div class="size-select">
@@ -46,7 +46,8 @@ import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {WorkspaceSectionMainActions} from "@/component-actions/WorkspaceSectionMainActions";
-import type {Widget} from "@/types/Objects";
+import type {Widget} from "@/types/WidgetTypes";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/WidgetSizeCalculator";
 
 const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);
@@ -54,7 +55,7 @@ const widgetStore = useWidgetStore();
 const {widgetList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
 for(let i = 0; i < 8; i++) widgetStore.addWidget("nicheDist", {
-  saveResultID: Math.random().toString().substring(2,4)
+  nicheName: "sfrsg"
 });
 
 let startPos = [0,0];
@@ -63,11 +64,8 @@ let movingWidgetIndex = -1;
 
 const isCtrl = ref(false);
 const isWidgetMoving = ref(false);
-
-const widgetSize = [250,200];
-const widgetSizeScale = computed(() => (1 + (widgetSizeMode.value - 1) * 0.3));
-const widgetWidth = computed(() => (widgetSize[0] * widgetSizeScale.value + 'px'))
-const widgetHeight = computed(() => (widgetSize[1] * widgetSizeScale.value + 'px'))
+const widgetWidth = computed(() => widgetBodyWidth(widgetSizeMode.value) + 'px');
+const widgetHeight = computed(() => widgetBodyHeight(widgetSizeMode.value) + 'px');
 
 const scrollTimerHandlersArray = [-1,-1,-1,-1];
 
@@ -194,13 +192,11 @@ function clearScrollInterval(id: number){
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  --widget-width: v-bind(widgetWidth);
-  --widget-height: v-bind(widgetHeight);
   --grid-gap: 20px;
 
   .widget-panel {
     display: grid;
-    grid-template-columns: repeat(v-bind(gridWidth), var(--widget-width));
+    grid-template-columns: repeat(v-bind(gridWidth), v-bind(widgetWidth));
     grid-gap: var(--grid-gap);
     width: fit-content;
     height: fit-content;

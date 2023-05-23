@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import type {OverlayName, OverlayOptions} from "@/types/Objects";
 import {ref} from "vue";
+import type {OverlayName, OverlayOptions} from "@/types/OverlayTypes";
 
 export const useOverlayStateStore = defineStore('overlayState', () => {
     const overlayName = ref<OverlayName>("login");

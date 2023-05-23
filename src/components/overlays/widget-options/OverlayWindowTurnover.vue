@@ -19,9 +19,17 @@ import {useOverlayStateStore} from "@/stores/overlayStore";
 import {computed} from "vue";
 import type {Widget} from "@/types/WidgetTypes";
 
+const actions = new OverlayWidgetSettingsActions<"nicheDist">();
 const widgetStore = useWidgetStore();
 const {overlayOptions} = storeToRefs(useOverlayStateStore());
 const {widgetList} = storeToRefs(widgetStore)
+
+const saveResultID = computed(() => {
+  if(!overlayOptions.value) return "";
+  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).settings;
+  if(!settings) return "";
+  return settings.saveResultID;
+})
 </script>
 
 <style scoped lang="scss">

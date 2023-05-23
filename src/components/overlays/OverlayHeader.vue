@@ -35,7 +35,12 @@ header{
   .close-button{
     height: $headerHeight;
     width: $headerHeight;
-    background-color: #444;
+    border-color: #444;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-bottom-left-radius: 20px;
+    background: transparent;
+
   }
 }
 </style>

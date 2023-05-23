@@ -1,6 +1,6 @@
 <template>
   <WidgetBodyContainer :widget-size="widgetSize">
-    <div class="title">Распределение в нише</div>
+    <div class="title">Окупаемость магазина</div>
   </WidgetBodyContainer>
 </template>
 
@@ -10,7 +10,7 @@ import type {Widget} from "@/types/WidgetTypes";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
 
 defineProps<{
-  options: Widget<"nicheDist">,
+  options: Widget<"storeProfitability">,
   widgetSize: number
 }>();
 </script>

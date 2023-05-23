@@ -19,5 +19,7 @@ defineProps<{
 <style scoped lang="scss">
 .overlay-decorate-wrapper{
   background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
 }
 </style>
