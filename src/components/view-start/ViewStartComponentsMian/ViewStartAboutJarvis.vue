@@ -6,44 +6,54 @@
             </div>
             <div class="jarvis">
                 <div class="jarvis-block">
-                    <div class="first-left-block">
-                        <div class="first-image"></div>
+                    <div class="left-block">
                         <h1>Рекомендательная <br /> система</h1>
+                        <h3>IMG</h3>
                     </div>
-                    <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее <br>
-                        сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое другое.<br>
-                        Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную прибыль
-                        <br> и сократит Ваши расходы
-                    </h2>
+                    <div class="text-info">
+                        <h2>Предлагает рекомендации по <br> работе с Вашими продажами:<br> предлагает цену товара, заранее
+                            <br>
+                            сообщает о необходимости <br> поставки, рекомендует наиболее <br> выгодные ниши и многое
+                            другое.<br>
+                        </h2>
+                        <h4> Благодаря этому вы не упустите <br> момент принятия решения, что <br> предотвратит упущенную
+                            прибыль
+                            <br> и сократит Ваши расходы
+                        </h4>
+                    </div>
                 </div>
                 <div class="jarvis-block">
-                    <div class="second-left-block">
-                        <div class="second-image"></div>
-                        <h1>Расчет индексов <br> показателей магазина</h1>
+                    <div class="left-block">
+                        <h1>Внешняя аналитика</h1>
+                        <h3>IMG</h3>
                     </div>
-                    <h2>Собирает данные со всего <br> маркетплейса и предоставляет <br> актуальную аналитику рынка. <br>
-                        Благодаря внешней аналитике и <br> рекомендательной системе Вы <br> всегда знаете, как идут дела у
-                        <br> Ваших конкурентов, и сможете <br> выходить на новые ниши <br> максимально подготовленными и
-                        <br> информированными
-                    </h2>
+                    <div class="text-info">
+                        <h2>Собирает данные со всего <br> маркетплейса и предоставляет <br> актуальную аналитику рынка.
+                        </h2>
+                        <h4>Благодаря внешней аналитике и <br> рекомендательной системе Вы всегда знаете, <br> как идут дела
+                            у Ваших конкурентов, и <br> сможете выходить на новые ниши <br> максимально подготовленными и
+                            <br> информированными</h4>
+                    </div>
                 </div>
                 <div class="jarvis-block">
-                    <div class="first-left-block">
-                        <div class="third-image"></div>
+                    <div class="left-block">
                         <h1>Расчет индексов <br> показателей магазина</h1>
+                        <h3>IMG</h3>
                     </div>
-                    <h2>Позволяет оценить финансовое <br> здоровье вашего магазина, выявить <br> рентабельные позиции и
-                        отсеять <br> нерентабельные. На основе <br> внутренней аналитики <br> рекомендательная система <br>
-                        подскажет, как эффективнее <br> масштабировать наиболее <br> прибыльные товары и увеличить <br>
-                        продажи
-                    </h2>
+                    <div class="text-info">
+                        <h2>Позволяет оценить финансовое <br> здоровье вашего магазина, выявить <br> рентабельные позиции и
+                            отсеять <br> нерентабельные. </h2>
+                        <h4>На основе внутренней аналитики <br> рекомендательная система подскажет, как <br> эффективнее
+                            масштабировать наиболее <br> прибыльные товары и увеличить продажи</h4>
+                    </div>
                 </div>
-                <div class="neon-line"></div>
+
             </div>
             <button class="button-try">Попробовать сейчас</button>
-            <ViewStartTariffs/>
-            <ViewStartTrustedBlock/>
-            <ViewStartComponentsText/>
+            <ViewStartTariffs />
+            <ViewStartTrustedBlock />
+            <ViewStartComponentsText />
+            <ViewStartFormBlock/>
         </div>
     </div>
 </template>
@@ -51,19 +61,18 @@
 import ViewStartComponentsText from "../ViewStartJarvisComponentsBlock/ViewStartComponentsText.vue";
 import ViewStartTrustedBlock from "../ViewStartJarvisComponentsBlock/ViewStartTrustedBlock.vue";
 import ViewStartTariffs from "../ViewStartJarvisComponentsBlock/ViewStartTariffs.vue"
+import ViewStartFormBlock from "../ViewStartJarvisComponentsBlock/ViewStartFormBlock.vue"
 </script> 
 <style scoped lang="scss">
 .View-About-Jarvis {
-    width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border: 1px solid #FFFFFF;
-  background-color: #191919;
-  color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #191919;
+    color: #FFFFFF;
 
     h1 {
         @font-face {
@@ -81,13 +90,10 @@ import ViewStartTariffs from "../ViewStartJarvisComponentsBlock/ViewStartTariffs
 }
 
 .jarvis-wrapper {
-    height: 500vh;
-    width: 100%;
-    min-width: 70vw;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
     background: #191919;
 
     .question-about-jarvis {
@@ -102,6 +108,57 @@ import ViewStartTariffs from "../ViewStartJarvisComponentsBlock/ViewStartTariffs
         }
     }
 
+    .jarvis {
+        display: grid;
+        position: relative;
+        background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
+        backdrop-filter: blur(15px);
+        z-index: 100;
+        align-items: center;
+
+        .jarvis-block {
+            display: grid;
+            grid-template-columns: 400px 400px;
+            grid-template-rows: 250px;
+            justify-content: space-around;
+            align-items: start;
+            margin: 45px 15px 40px 15px;
+
+
+
+            .text-info {
+                display: flex;
+                flex-direction: column;
+                text-align: start;
+                gap: 10px;
+                padding-left: 50px;
+                
+                border-left:  #B7FF44;
+                h2 {
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 24px;
+                }
+            }
+
+            .left-block {
+                display: flex;
+                flex-direction: column;
+                
+
+                h1 {
+                    font-weight: 700;
+                    font-size: 36px;
+                    line-height: 44px;
+                }
+
+                h3 {
+                    color: #B7FF44;
+                }
+            }
+        }
+    }
+
     .button-try {
         width: 465px;
         height: 102px;
@@ -112,76 +169,4 @@ import ViewStartTariffs from "../ViewStartJarvisComponentsBlock/ViewStartTariffs
         font-size: 23px;
         line-height: 28px;
     }
-}
-
-.jarvis {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
-    backdrop-filter: blur(15px);
-    width: 50vw;
-    height: 142vh;
-    z-index: 100;
-
-    .jarvis-block {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        align-items: center;
-        margin-top: 163px;
-
-        h1 {
-            font-weight: 700;
-            font-size: 36px;
-            line-height: 44px;
-        }
-
-        h2 {
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 24px;
-        }
-
-        .first-left-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 80px;
-
-            .first-image {
-                height: 100px;
-                width: 100px;
-                background-color: #B7FF44;
-            }
-
-            .third-image {
-                height: 100px;
-                width: 100px;
-                background-color: #B7FF44;
-            }
-        }
-
-        .second-left-block {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 80px;
-            .second-image {
-                height: 100px;
-                width: 100px;
-                background-color: #B7FF44;
-            }
-        }
-
-    }
-}
-
-.neon-line {
-    border-left: 1px solid #B7FF44;
-    height: 130vh;
-    position: absolute;
-    bottom: 54px;
-    left: 500.5px;
 }</style>

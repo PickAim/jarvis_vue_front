@@ -24,7 +24,6 @@ import ViewStartText_4 from "./ViewStartTextBlock/ViewStartText_4.vue";
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid #FFFFFF;
     background-color: #191919;
     color: #FFFFFF;
 

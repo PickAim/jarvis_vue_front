@@ -8,20 +8,27 @@
                 <div class="first-cards">
                     <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
                         запланировать поставку</h1>
-                    <div class="first-image">Img</div>
-                    <div class="first-line">Line</div>
+                    <div class="card-items">
+                        <h1>LINE</h1>
+                        <h1>IMG</h1>
+                    </div>
                 </div>
                 <div class="bottom-cards">
                     <div class="block-with-sign">
                         <h1>Рутинная работа отнимает <br> много времени, которое можно <br> посвятить запуску новых товаров
-                            <br> и масштабированию бизнеса</h1>
-                        <div class="second-image">Img</div>
-                        <div class="second-line">Line</div>
+                            <br> и масштабированию бизнеса
+                        </h1>
+                        <div class="card-items">
+                            <h1>LINE</h1>
+                            <h1>IMG</h1>
+                        </div>
                     </div>
                     <div class="block-with-sign">
                         <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
-                        <div class="third-image">Img</div>
-                        <div class="third-line">Line</div>
+                        <div class="card-items">
+                            <h1>LINE</h1>
+                            <h1>IMG</h1>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,15 +39,11 @@
 </script>
 <style scoped lang="scss">
 .View-Cards-Block {
-    height: 80vh;
-    min-height: 70vh;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    flex: 0 0 auto;
-    color: black;
+    margin-top: 50px;
+    margin-bottom: 50px;
 
     h1 {
         @font-face {
@@ -59,13 +62,9 @@
 
 .cards-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 400px;
-   width: 100%;
-   height: 70vh;
-   position: absolute;
-
+    flex-wrap: wrap;
 }
 
 .what-you-have {
@@ -79,18 +78,15 @@
 
 .opportunity-cards {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    row-gap: 22px;
-    width: 40vw;
-
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
 }
 
 .first-cards {
     display: flex;
     flex-direction: column;
-    width: 40vw;
-    height: 27vh;
+    justify-content: space-between;
     border-radius: 21px;
     border: 1px solid black;
     color: black;
@@ -99,40 +95,29 @@
         font-weight: 700;
         font-size: 1rem;
         line-height: 1rem;
-        margin: 45px 0px 0px 14px;
+        margin: 45px 14px 45px 14px;
     }
 
-    .first-image {
-        width: 50px;
-        height: 50px;
-        background-color: aquamarine;
-        position: relative;
-        top: 50px;
-        left: 700px;
-    }
+    .card-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 
-    .first-line {
-        width: 50px;
-        height: 10px;
-        background-color: aquamarine;
-        position: relative;
-        top: 25px;
     }
 }
 
 .bottom-cards {
     display: flex;
     flex-direction: row;
-    column-gap: 49px;
-    width: 40vw;
+    justify-content: space-around;
+    gap: 10px;
 
 }
 
 .block-with-sign {
     display: flex;
     flex-direction: column;
-    width: 22vw;
-    height: 33.5vh;
+    justify-content: space-between;
     border: 1px solid black;
     border-radius: 25px;
 
@@ -140,40 +125,13 @@
         font-weight: 700;
         font-size: 15px;
         line-height: 18px;
-        margin: 54px 0px 0px 14px;
+        margin: 54px 14px 54px 14px;
     }
 
-    .second-image {
-        width: 50px;
-        height: 50px;
-        background-color: aquamarine;
-        position: relative;
-        top: 120px;
-        left: 220px;
+    .card-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
-
-    .second-line {
-        width: 60px;
-        height: 10px;
-        background-color: aquamarine;
-        position: relative;
-        top: 90px;
-    }
-
-    .third-image {
-        width: 50px;
-        height: 50px;
-        background-color: aquamarine;
-        position: relative;
-        top: 155px;
-        left: 220px;
-    }
-
-    .third-line {
-        width: 60px;
-        height: 10px;
-        background-color: aquamarine;
-        position: relative;
-        top: 120px;
-    }
-}</style>
+}
+</style>

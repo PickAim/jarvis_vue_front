@@ -39,14 +39,10 @@
     
 <style scoped lang="scss">
 .View-Tariffs-Block {
-    width: 100%;
-    min-width: 70vw;
     display: flex;
     flex-direction: column;
-    flex: 0 0 auto;
     justify-content: center;
     align-items: center;
-    text-align: center;
     border-radius: 45px;
     color: #FFFFFF;
 
@@ -68,18 +64,18 @@
 .tariffs-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-top: 50px;
     gap: 19px;
     align-items: center;
-    height: 100vh;
+
 }
 
 .external-tariffs {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20vw;
-    height: 82vh;
+    padding: 20px 25px 20px 25px;
     border: 1px solid #B7FF44;
     backdrop-filter: blur(5px);
     border-radius: 24px;
@@ -88,7 +84,6 @@
         width: 150px;
         height: 150px;
         background-color: #B7FF44;
-        margin-top: 50px;
         color: #000000;
     }
 
@@ -120,8 +115,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 22vw;
-    height: 92vh;
+    padding: 25px 30px 25px 30px;
     background: #B7FF44;
     border: 1px solid rgba(183, 255, 68, 0.4);
     backdrop-filter: blur(5px);
@@ -131,7 +125,7 @@
         width: 150px;
         height: 150px;
         background-color: #FFFFFF;
-        margin-top: 40px;
+        
         color: #000000;
     }
 
