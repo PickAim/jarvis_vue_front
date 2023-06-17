@@ -1,5 +1,5 @@
 <template>
-    <div class="View-Cards-Block">
+    <div class="view-cards-block">
         <div class="cards-wrapper">
             <div class="what-you-have">
                 <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
@@ -38,12 +38,12 @@
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
-.View-Cards-Block {
+.view-cards-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    padding: 50px;
+    background-color: white;
 
     h1 {
         @font-face {
@@ -65,10 +65,10 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    margin: 0px 20px;
 }
 
 .what-you-have {
-
     h1 {
         font-weight: 700;
         font-size: 48px;
@@ -102,7 +102,6 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
     }
 }
 
@@ -111,7 +110,6 @@
     flex-direction: row;
     justify-content: space-around;
     gap: 10px;
-
 }
 
 .block-with-sign {

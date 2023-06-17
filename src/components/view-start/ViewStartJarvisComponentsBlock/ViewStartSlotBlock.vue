@@ -1,7 +1,8 @@
 <template>
-    <div class="text-wrapper">
-
-        <h1>ТЕКСТ</h1>
+    <div class="slot-wrapper">
+        <h1>
+            <slot name="header">Здесь будет текст</slot>
+        </h1>
         <div class="arrow-link">arrow</div>
     </div>
 </template>
@@ -9,8 +10,8 @@
 
 </script>
 <style scoped lang="scss">
-.text-wrapper {
-    width: 50vw;
+.slot-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;

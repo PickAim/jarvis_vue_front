@@ -7,15 +7,21 @@
             <div class="line-block">
                 <div class="advantages">
                     <div class="advantages-image">IMG</div>
-                    <h1>Актуальность и точность <br> предоставляемых данных</h1>
                 </div>
                 <div class="advantages">
                     <div class="advantages-image">IMG</div>
-                    <h1>3 года работы <br> с маркетплейсами</h1>
                 </div>
                 <div class="advantages">
                     <div class="advantages-image">IMG</div>
-                    <h1>100+ клиентов выведено <br> на маркетплейсы</h1>
+                </div>
+                <div class="advantages-info">
+                    <h1>Актуальность и точность предоставляемых данных</h1>
+                </div>
+                <div class="advantages-info">
+                    <h1>3 года работы с маркетплейсами</h1>
+                </div>
+                <div class="advantages-info">
+                    <h1>100+ клиентов выведено на маркетплейсы</h1>
                 </div>
             </div>
             <button class="button-try">Попробовать сейчас</button>
@@ -28,16 +34,13 @@
     
 <style scoped lang="scss">
 .trusted-block {
-    width: 100%;
-    min-width: 60vw;
     display: flex;
     flex-direction: column;
-    flex: 0 0 auto;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #FFFFFF;
-
+    margin: 50px 0px;
 
     .trust-wrapper {
         display: flex;
@@ -45,6 +48,8 @@
         align-items: center;
         margin: 10px;
         width: 100%;
+        max-width: 1200px;
+        padding: 0px 40px;
 
         .paragraph-about-trust {
             display: flex;
@@ -52,38 +57,48 @@
 
             h1 {
                 font-weight: 700;
-                font-size: 3rem;
-                line-height: 2.5em;
+                font-size: 48px;
+                line-height: 59px;
             }
         }
 
         .line-block {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 80px;
-            margin-top: 20px;
-            margin-bottom: 6vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            padding: 0px 50px;
 
             .advantages {
                 display: flex;
                 flex-direction: column;
-                gap: 50px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
 
                 .advantages-image {
-                    width: 15vw;
-                    height: 20vh;
-                    background-color: aquamarine;
-                    color: black;
+                    padding-bottom: 20px;
+                    color: #B7FF44;
+                }
+            }
+
+            .advantages-info {
+                padding-top: 80px;
+                border-top: 1px solid #B7FF44;
+
+                h1 {
+                    font-weight: 500;
+                    font-size: 20px;
+                    line-height: 29px;
                 }
             }
         }
     }
 
     .button-try {
-        width: 20vw;
-        height: 10vh;
+        width: 465px;
+        height: 102px;
         border: 1px solid #B7FF44;
         border-radius: 12px;
     }

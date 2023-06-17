@@ -1,33 +1,42 @@
 <template>
-    <div class="View-Tariffs-Block">
+    <div class="view-tariffs-block">
+        <div class="tarifs-name">
+            <h1>ТАРИФЫ:</h1>
+        </div>
         <div class="tariffs-wrapper">
-            <div class="external-tariffs">
-                <div class="tariffs-image">Img</div>
-                <div class="board-info">
-                    <h1>Дашборд <br> с системой виджетов</h1>
-                    <h1>Внутренняя аналитика</h1>
-                    <h1>Рекомендации <br> по ценообразованию</h1>
+            <div class="basic-tarif">
+                <div class="first-tarif">
+                    <h1>IMG</h1>
+                    <div class="board-info">
+                        <h1>Дашборд с системой виджетов</h1>
+                        <h1>Внутренняя аналитика</h1>
+                        <h1>Рекомендации по ценообразованию</h1>
+                    </div>
+                    <button class="simple-button-try">Попробовать сейчас</button>
                 </div>
-                <button class="simple-button-try">Попробовать сейчас</button>
             </div>
-            <div class="mid-tariffs">
-                <div class="tariffs-image-2">Img</div>
-                <div class="board-info-2">
-                    <h1>Дашборд <br> с системой виджетов</h1>
-                    <h1>Внутренняя аналитика</h1>
-                    <h1>Внешняя аналитика</h1>
-                    <h1>Рекомендации <br> по ценообразованию</h1>
+            <div class="basic-tarif">
+                <div class="second-tarif">
+                    <h1>IMG</h1>
+                    <div class="board-info">
+                        <h1>Дашборд с системой виджетов</h1>
+                        <h1>Внутренняя аналитика</h1>
+                        <h1>Внешняя аналитика</h1>
+                        <h1>Рекомендации по ценообразованию</h1>
+                    </div>
+                    <button class="mid-simple-button-try">Попробовать сейчас</button>
                 </div>
-                <button class="basic-button-try">Попробовать сейчас</button>
             </div>
-            <div class="external-tariffs">
-                <div class="tariffs-image">Img</div>
-                <div class="board-info">
-                    <h1>Дашборд <br> с системой виджетов</h1>
-                    <h1>Внутренняя аналитика</h1>
-                    <h1>Рекомендации <br> по ценообразованию</h1>
+            <div class="basic-tarif">
+                <div class="third-tarif">
+                    <h1>IMG</h1>
+                    <div class="board-info">
+                        <h1>Дашборд с системой виджетов</h1>
+                        <h1>Внутренняя аналитика</h1>
+                        <h1>Рекомендации по ценообразованию</h1>
+                    </div>
+                    <button class="simple-button-try">Попробовать сейчас</button>
                 </div>
-                <button class="simple-button-try">Попробовать сейчас</button>
             </div>
         </div>
     </div>
@@ -38,119 +47,128 @@
 </script>
     
 <style scoped lang="scss">
-.View-Tariffs-Block {
+.view-tariffs-block {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    border-radius: 45px;
+    margin: 50px 0px;
     color: #FFFFFF;
+    background-color: #191919;
+    width: 100%;
 
-    h1 {
-        @font-face {
-            font-family: Inter;
-            src: url(src\assets\fonts\Inter-SemiBold.otf);
-        }
-    }
-
-    p {
-        @font-face {
-            font-family: Montserrat;
-            src: url(src\assets\fonts\Montserrat-LightItalic.ttf);
-        }
-    }
-}
-
-.tariffs-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 50px;
-    gap: 19px;
-    align-items: center;
-
-}
-
-.external-tariffs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 25px 20px 25px;
-    border: 1px solid #B7FF44;
-    backdrop-filter: blur(5px);
-    border-radius: 24px;
-
-    .tariffs-image {
-        width: 150px;
-        height: 150px;
-        background-color: #B7FF44;
-        color: #000000;
-    }
-
-    .board-info {
-        font-weight: 700;
-        font-size: 1.5rem;
-        line-height: 1.6rem;
-        margin-top: 3vh;
+    .tarifs-name {
+        padding-bottom: 50px;
 
         h1 {
-            padding-top: 99px;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 59px;
         }
     }
 
-    .simple-button-try {
-        width: 15vw;
-        height: 63px;
-        background: #B7FF44;
-        color: #000000;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 23px;
-        line-height: 28px;
-        margin-top: 70px;
-    }
-}
+    .tariffs-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        column-gap: 19px;
+        width: 100%;
+        max-width: 1000px;
 
-.mid-tariffs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 25px 30px 25px 30px;
-    background: #B7FF44;
-    border: 1px solid rgba(183, 255, 68, 0.4);
-    backdrop-filter: blur(5px);
-    border-radius: 24px;
+        .basic-tarif {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 400px;
+            width: 100%;
 
-    .tariffs-image-2 {
-        width: 150px;
-        height: 150px;
-        background-color: #FFFFFF;
-        
-        color: #000000;
-    }
+            h1 {
+                padding: 20px 0px 20px 0px;
+            }
 
-    .board-info-2 {
-        font-weight: 700;
-        font-size: 1.5rem;
-        line-height: 2.4rem;
-        color: #000000;
-        
+            .first-tarif {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: 1px solid #B7FF44;
+                backdrop-filter: blur(5px);
+                border-radius: 24px;
 
-        h1 {
-            padding-top: 90px;
+                .board-info {
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+
+                    h1 {
+                        padding: 40px 0px 40px 0px;
+                    }
+                }
+            }
+
+            .second-tarif {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #B7FF44;
+                color: #000000;
+                border: 1px solid #B7FF44;
+                backdrop-filter: blur(5px);
+                border-radius: 24px;
+
+                .board-info {
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+
+                    h1 {
+                        padding: 40px 0px 40px 0px;
+                    }
+                }
+
+                .mid-simple-button-try {
+                    padding: 10px;
+                    background: #B7FF44;
+                    color: #000000;
+                    border: 1px solid #000000;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    font-size: 23px;
+                    line-height: 28px;
+                    margin: 10px;
+                }
+            }
+
+            .third-tarif {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: 1px solid #B7FF44;
+                backdrop-filter: blur(5px);
+                border-radius: 24px;
+
+                .board-info {
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+
+                    h1 {
+                        padding: 40px 0px 40px 0px;
+                    }
+                }
+            }
+
+            .simple-button-try {
+                padding: 10px;
+                background: #B7FF44;
+                color: #000000;
+                border-radius: 12px;
+                font-weight: 700;
+                font-size: 23px;
+                line-height: 28px;
+                margin: 10px;
+            }
         }
     }
-
-    .basic-button-try {
-        width: 15vw;
-        height: 63px;
-        border: 1px solid #000000;
-        border-radius: 12px;
-        color: #000000;
-        font-weight: 700;
-        font-size: 23px;
-        line-height: 28px;
-        margin-top: 39px;
-    }
-}
-</style>
+}</style>

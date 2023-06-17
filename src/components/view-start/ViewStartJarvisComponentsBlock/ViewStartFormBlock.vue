@@ -1,5 +1,5 @@
 <template>
-    <div class="StartFormBlock">
+    <div class="start-form-block">
         <div class="question-block">
             <h1>ОСТАЛИСЬ ВОПРОСЫ?</h1>
             <h2>Оставьте заявку и мы свяжемся <br> с вами в ближайшее время</h2>
@@ -18,12 +18,14 @@
 
 </script>
 <style scoped lang="scss">
-.StartFormBlock {
+.start-form-block {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
-    margin-top: 50px;
+    align-items: center;
+    text-align: center;
+    margin: 50px 0px;
     gap: 50px;
+    color: #FFFFFF;
 
     .question-block {
         align-items: center;
@@ -71,5 +73,4 @@
             }
         }
     }
-}
-</style>
+}</style>

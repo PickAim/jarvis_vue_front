@@ -26,7 +26,7 @@ header {
   justify-content: center;
   width: 100%;
   color: white;
-  background-color:#191919;
+  background-color: #191919;
 
   h1 {
     @font-face {
@@ -46,12 +46,12 @@ header {
 .buttons-wrapper {
   display: flex;
   flex-direction: row;
-  height: 109px;
-  max-width: 70vw;
+  height: 130px;
+  max-width: 90vw;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
-  
+  justify-content: space-around;
+
   button {
     @font-face {
       font-family: Inter;

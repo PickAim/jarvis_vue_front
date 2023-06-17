@@ -31,6 +31,7 @@
     position: relative;
     top: -960px;
     left: 120px;
+
     .circle-first {
         height: 100px;
         width: 100px;
@@ -41,7 +42,7 @@
         top: -318px;
         left: 480px;
     }
-    
+
     .circle-second {
         height: 285px;
         width: 285px;
@@ -52,7 +53,7 @@
         bottom: 1356px;
         right: 610px;
     }
-    
+
     .circle-back {
         width: 50px;
         height: 50px;
@@ -62,7 +63,7 @@
         z-index: 0;
         bottom: 1700px;
     }
-    
+
     .circle-back-second {
         width: 50px;
         height: 50px;
@@ -72,7 +73,7 @@
         z-index: 0;
         bottom: 1348px;
     }
-    
+
     .circle-back-third {
         width: 50px;
         height: 50px;
@@ -83,5 +84,4 @@
         bottom: 998px;
     }
 }
-
 </style>

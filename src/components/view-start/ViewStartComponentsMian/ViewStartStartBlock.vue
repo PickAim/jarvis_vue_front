@@ -1,6 +1,6 @@
 <template>
-  <div class="View-Start-Block">
-    <div class="Start-Main">
+  <div class="view-start-block">
+    <div class="start-main">
       <div class="jarvis-logo">
         <img src="src\assets\jarvis.png" alt="">
       </div>
@@ -24,8 +24,7 @@
 </script>
   
 <style scoped lang="scss">
-.View-Start-Block {
-  width: 100%;
+.view-start-block {
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
@@ -54,7 +53,7 @@
   }
 }
 
-.Start-Main {
+.start-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,73 +61,63 @@
   height: 100vh;
   min-height: 46vw;
   width: 100%;
-}
 
-.jarvis-logo {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
+  .jarvis-logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
 
-  img {
-    width: 90%;
+    img {
+      width: 90%;
 
-  }
-}
-
-.top-paragraph {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 18vw;
-  width: 70%;
-  background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
-  backdrop-filter: blur(15px);
-  position: absolute;
-
-
-  .start-block-image {
-    width: 50px;
-    height: 50px;
-    background-color: aquamarine;
-    position: relative;
-    top: -120px;
-    left: 110px;
-    color: black;
+    }
   }
 
-  h1 {
-    font-weight: 600;
-    font-size: 3vw;
-    line-height: 1.5em;
-    text-align: center;
-  }
-}
+  .top-paragraph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18vw;
+    width: 70%;
+    background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
+    backdrop-filter: blur(15px);
+    position: absolute;
 
-.about-network {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 45px;
-  position: absolute;
-  bottom: 30px;
-  h1 {
-    font-weight: 200;
-    font-size: 36px;
-    line-height: 1em;
+    h1 {
+      font-weight: 600;
+      font-size: 3vw;
+      line-height: 1.5em;
+      text-align: center;
+    }
   }
 
-  .button-try {
-    width: 287px;
-    height: 63px;
-    font-weight: 700;
-    font-size: 23px;
-    line-height: 28px;
-    border: 1px solid;
-    border-radius: 12px;
-    background: #B7FF44;
-    color: #000000;
+  .about-network {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+    position: absolute;
+    bottom: 30px;
+
+    h1 {
+      font-weight: 200;
+      font-size: 2vw;
+      line-height: 1em;
+    }
+
+    .button-try {
+      width: 287px;
+      height: 63px;
+      font-weight: 700;
+      font-size: 1vw;
+      line-height: 28px;
+      border: 1px solid;
+      border-radius: 12px;
+      background: #B7FF44;
+      color: #000000;
+    }
   }
 }
 </style>

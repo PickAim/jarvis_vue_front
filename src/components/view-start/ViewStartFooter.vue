@@ -1,10 +1,10 @@
 <template>
   <footer>
-   <!-- <div class="footer-wrapper">
+    <div class="footer-wrapper">
       <img src="\src\assets\jarvis.png" alt="">
-<h1>rjyf</h1>
-
-    </div>-->
+      <a href="">Контакты</a>
+      <a href="">Мы в социальных сетях:</a>
+    </div>
   </footer>
 </template>
 
@@ -14,16 +14,29 @@
 
 <style scoped lang="scss">
 footer {
-  /*width: 100%;
+  width: 100%;
   background: #191919;
-  .footer-wrapper{
+  color: #FFFFFF;
+  display: flex;
+  justify-content: start;
 
-    img{
-      width: 400px;
-      height: 100px;
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    padding: 50px 40px;
 
+    img {
+      width: 300px;
+      height: 70px;
+    }
+
+    a {
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 44px;
     }
   }
-  */
+
 }
 </style>
