@@ -16,7 +16,9 @@ export class CalcRequestObjectsFactory{
                 market_place_transit_price: NaN,
                 transit_count: NaN,
                 transit_price: NaN,
-                warehouse_name: ""
+                warehouse_name: "",
+                marketplace_id: 1,
+                category: ""
             }
     }
 

@@ -24,7 +24,7 @@ export default class AccountRequestActions extends AbstractRequestActions{
 
     async loginToken(): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
-            url: Configs.AccessRequestPrefix + "auth/",
+            url: Configs.AccessRequestPrefix + "/auth/",
             method: "GET",
         });
     }

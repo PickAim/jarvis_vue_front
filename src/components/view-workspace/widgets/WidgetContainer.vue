@@ -18,7 +18,7 @@
       </div>
     </header>
     <main>
-      <component :is="widgets[options.widgetName]"
+      <component :is="widgets[options.config.widgetName]"
                  :options="options"
                  :widgetSize="widgetSize"/>
     </main>
@@ -26,15 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits, computed, ref} from "vue";
+import {defineProps, defineEmits, computed, ref, watch} from "vue";
 import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
-import type {Widget} from "@/types/WidgetTypes";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/WidgetSizeCalculator";
+import type {Widget, WidgetName} from "@/types/WidgetTypes";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 const props = defineProps<{
   gridWidth: number,
-  options: Widget,
+  options: WidgetClass<WidgetName>,
   widgetSize: number
   isOtherMoving: boolean
 }>();
@@ -59,8 +60,8 @@ const startOffset = ref([0, 0])
 const topPosition = ref(0);
 const leftPosition = ref(0);
 
-const gridColumn = computed(() => Math.floor((props.options.gridIndex) % props.gridWidth) + 1);
-const gridRow = computed(() => Math.floor((props.options.gridIndex) / props.gridWidth) + 1);
+const gridColumn = computed(() => Math.floor((props.options.config.gridIndex) % props.gridWidth) + 1);
+const gridRow = computed(() => Math.floor((props.options.config.gridIndex) / props.gridWidth) + 1);
 
 const columnDelta = computed(() => Math.floor(props.options.targetIndex % props.gridWidth) + 1 - gridColumn.value);
 const rowDelta = computed(() => Math.floor(props.options.targetIndex / props.gridWidth) + 1 - gridRow.value);

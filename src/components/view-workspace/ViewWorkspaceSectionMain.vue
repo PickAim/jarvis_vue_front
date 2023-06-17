@@ -18,7 +18,7 @@
            @mouseup="onPanelMouseUp"
            @mouseleave="onPanelMouseLeave"
            ref="container">
-        <WidgetContainer v-for="(w, ind) in widgetList"
+        <WidgetContainer v-for="(w, ind) in widgetClassList"
                          :key="ind"
                          :options="w"
                          :grid-width="gridWidth"
@@ -45,18 +45,18 @@ import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
-import {WorkspaceSectionMainActions} from "@/component-actions/WorkspaceSectionMainActions";
+import {WorkspaceSectionMainActions} from "@/component-classes/WorkspaceSectionMainActions";
 import type {Widget} from "@/types/WidgetTypes";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/WidgetSizeCalculator";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
 
 const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
-const {widgetList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
+const {widgetClassList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
-for(let i = 0; i < 8; i++) widgetStore.addWidget("nicheDist", {
-  nicheName: "sfrsg"
-});
+// for(let i = 0; i < 8; i++) widgetStore.addWidget("nicheDist", {
+//   nicheName: "sfrsg"
+// });
 
 let startPos = [0,0];
 let isPanelScrolling = false;
@@ -117,11 +117,11 @@ function onPanelMouseMove(e: MouseEvent){
 
 function onWidgetMouseEnter(idx: number){
   if(!isWidgetMoving.value || (idx === movingWidgetIndex)) return;
-  widgetStore.getWidget(idx).targetIndex = widgetStore.getWidget(movingWidgetIndex).gridIndex;
+  widgetClassList.value[idx].targetIndex = widgetClassList.value[movingWidgetIndex].config.gridIndex;
 }
 
 function onWidgetMouseLeave(idx: number) {
-  widgetStore.getWidget(idx).targetIndex = -1;
+  widgetClassList.value[idx].targetIndex = -1;
 }
 
 function onWidgetMoveStart(idx: number){

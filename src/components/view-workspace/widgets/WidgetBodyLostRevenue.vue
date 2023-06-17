@@ -8,9 +8,10 @@
 import {defineProps} from "vue";
 import type {Widget} from "@/types/WidgetTypes";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 defineProps<{
-  options: Widget<"lostRevenue">,
+  options: WidgetClass<"averageCheck">,
   widgetSize: number
 }>();
 </script>

@@ -14,7 +14,7 @@
 import SavedCalcRequestItem from "@/components/calc-requests/saved-calc-results-items/SavedCalcRequestItem.vue";
 import {defineProps, defineEmits} from "vue";
 import {CalcRequestData, CalcRequestInfoData, CalcRequestName} from "@/types/CalcRequestsTypes";
-import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
+import {AbstractWorkspaceSavableCalcActions} from "@/component-classes/AbstractWorkspaceSavableCalcActions";
 
 defineProps<{
   name: CalcRequestName,

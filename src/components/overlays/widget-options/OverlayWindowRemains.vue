@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {OverlayWidgetSettingsActions} from "@/component-actions/overlays-actions/OverlayWidgetSettingsActions";
+import {OverlayWidgetSettingsActions} from "@/component-classes/overlays-actions/OverlayWidgetSettingsActions";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {storeToRefs} from "pinia";
 import {useOverlayStateStore} from "@/stores/overlayStore";
@@ -22,11 +22,11 @@ import type {Widget} from "@/types/WidgetTypes";
 const actions = new OverlayWidgetSettingsActions<"nicheDist">();
 const widgetStore = useWidgetStore();
 const {overlayOptions} = storeToRefs(useOverlayStateStore());
-const {widgetList} = storeToRefs(widgetStore)
+const {widgetClassList} = storeToRefs(widgetStore)
 
 const saveResultID = computed(() => {
   if(!overlayOptions.value) return "";
-  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).settings;
+  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).options;
   if(!settings) return "";
   return settings.saveResultID;
 })

@@ -1,9 +1,11 @@
-export type Widget<O extends WidgetName = WidgetName> = {
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+
+export type WidgetSaveInfo<O extends WidgetName = WidgetName> = {
     gridIndex: number,
-    targetIndex: number,
     widgetName: WidgetName,
-    settings?: WidgetOptions[O]
+    options?: WidgetOptions[O]
 }
+export type Widget<O extends WidgetName = WidgetName> = WidgetSaveInfo<O> & { targetIndex: number }
 export type UnitCalcNicheWidgetOptions = {
     nicheName: string
 }
@@ -35,6 +37,4 @@ export interface WidgetOptions {
 }
 
 export type WidgetName = keyof WidgetOptions;
-export type WidgetSettingsOverlayOptions = {
-    index: number
-}
+export type WidgetSettingsOverlayOptions = WidgetClass<WidgetName>;

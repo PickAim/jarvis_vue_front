@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {ViewStartActions} from "@/component-actions/ViewStartActions";
+import {ViewStartActions} from "@/component-classes/ViewStartActions";
 import {useRouter} from "vue-router";
 
 const actions = new ViewStartActions();

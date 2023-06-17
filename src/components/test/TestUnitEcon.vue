@@ -71,7 +71,7 @@ import type {
   UnitEconRequestData,
   UnitEconResultData
 } from "@/types/CalcRequestsTypes";
-import {WorkspaceSectionUnitEconActions} from "@/component-actions/WorkspaceSectionUnitEconActions";
+import {WorkspaceSectionUnitEconActions} from "@/component-classes/WorkspaceSectionUnitEconActions";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";

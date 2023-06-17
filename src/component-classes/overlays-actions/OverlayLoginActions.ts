@@ -1,12 +1,12 @@
-import {OverlayActions} from "@/component-actions/overlays-actions/OverlayActions";
-import type {RegData} from "@/types/Objects";
+import {OverlayActions} from "@/component-classes/overlays-actions/OverlayActions";
+import type {LoginData} from "@/types/Objects";
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
 import {ResultCode} from "@/types/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {ResultDescription} from "@/types/ResultDescription";
 import {useAuthStore} from "@/stores/authStore";
 
-export class OverlayRegistrationActions extends OverlayActions{
+export class OverlayLoginActions extends OverlayActions{
     accountRequestActions: AccountRequestActions;
     notificationsStore;
 
@@ -16,13 +16,13 @@ export class OverlayRegistrationActions extends OverlayActions{
         this.notificationsStore = useNotificationsStore();
     }
 
-    async registration(data: RegData){
+    async login(data: LoginData){
         // TODO: add data validation
         this.startLoading();
         try {
-            const response = await this.accountRequestActions.registration(data);
+            const response = await this.accountRequestActions.loginPassword(data);
             if(response.code === ResultCode.OK)
-                this.notificationsStore.addSuccessNotification(["Успех", "Вы зарегестрированы"]);
+                this.notificationsStore.addSuccessNotification(["Успех", "Вход совершён"]);
             else
                 this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }

@@ -24,9 +24,11 @@ export interface CalcRequestInfoData {
 }
 
 export interface UnitEconRequestData extends AbstractData {
+    marketplace_id: number;
+    niche: string; // Need
+    category: string;
     buy: number; // Need
     pack: number; // Need
-    niche: string; // Need
     transit_count?: number;
     transit_price?: number;
     market_place_transit_price?: number;
