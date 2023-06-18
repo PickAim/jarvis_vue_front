@@ -29,7 +29,7 @@
                          @move-start="onWidgetMoveStart(ind)"
                          @move-stop="onWidgetMoveStop(ind)"
                          @close="widgetStore.deleteWidget(ind)"
-                         @edit="onEditClick(w, ind)"/>
+                         @edit="onEditClick(w)"/>
       </div>
     </div>
   </ViewWorkspaceSectionContainer>
@@ -46,8 +46,9 @@ import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {WorkspaceSectionMainActions} from "@/component-classes/WorkspaceSectionMainActions";
-import type {Widget} from "@/types/WidgetTypes";
+import type {WidgetName} from "@/types/WidgetTypes";
 import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 const actions = new WorkspaceSectionMainActions();
 const container = ref<HTMLElement | null>(null);
@@ -83,8 +84,8 @@ window.addEventListener('mousemove', (e) => {
   if(container.value) onWidgetMoveEdgeScroll(e, container.value);
 })
 
-function onEditClick(w: Widget, ind: number){
-  actions.openWidgetSettingsOverlay(w.widgetName, {index: ind})
+function onEditClick<N extends WidgetName>(w: WidgetClass<N>){
+  actions.openWidgetSettingsOverlay(w);
 }
 
 function onPanelMouseDown(e: MouseEvent){

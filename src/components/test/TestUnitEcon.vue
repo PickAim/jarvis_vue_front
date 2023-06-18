@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
-import {computed, nextTick, reactive, ref, triggerRef, watch, watchEffect} from "vue";
+import {computed, nextTick, reactive, ref, watch} from "vue";
 import type {
   CalcRequestData,
   CalcRequestInfoData,
@@ -78,7 +78,6 @@ import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFa
 import SavedCalcRequestList from "@/components/calc-requests/SavedCalcRequestList.vue";
 import {ResultCode} from "@/types/ResultCode";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
-import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 
 const actions = new WorkspaceSectionUnitEconActions();
@@ -153,14 +152,12 @@ function newClickHandler() {
 }
 
 function requestEditHandler(id: CalcRequestInfoData["id"]) {
-  console.log("Edit2")
   const item = actions.getCalcRequest(id);
   if (!item) return;
   isTransitCalcInput.value = item.request.transit_price !== undefined;
   isWarehouseInput.value = item.request.warehouse_name !== undefined;
   nextTick(() => {
     calcRequestData.request = {} as UnitEconRequestData;
-    console.log(calcRequestData.request, item.request)
     Object.assign(calcRequestData.request, item.request);
 
     calcRequestData.result = CalcRequestObjectsFactory.createUnitEconResultData();

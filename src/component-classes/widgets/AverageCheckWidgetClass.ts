@@ -1,12 +1,20 @@
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
-import type {WidgetName} from "@/types/WidgetTypes";
 
-export class AverageCheckWidgetClass<N extends WidgetName = "averageCheck"> extends WidgetClass<N> {
-    constructor(config: WidgetClass<N>["config"]) {
+export class AverageCheckWidgetClass extends WidgetClass<"averageCheck"> {
+    inputText = "";
+
+    constructor(config: WidgetClass<"averageCheck">["config"]) {
         super(config);
+        if (config.options === undefined) {
+            config.options = {
+                inputText: ""
+            }
+        }
     }
 
     render(): void {
-        // TODO: todo
+        if(this.config.options) {
+            this.inputText = this.config.options.inputText;
+        }
     }
 }

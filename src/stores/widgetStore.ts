@@ -1,8 +1,8 @@
 import {defineStore} from 'pinia'
-import type {Widget, WidgetName, WidgetOptions, WidgetSaveInfo} from "@/types/WidgetTypes";
+import type {WidgetName, WidgetOptions, WidgetSaveInfo} from "@/types/WidgetTypes";
 import type {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 import {useLocalStorage} from "@vueuse/core";
-import {reactive, ref, watch} from "vue";
+import {ref} from "vue";
 import {AverageCheckWidgetClass} from "@/component-classes/widgets/AverageCheckWidgetClass";
 import {LostRevenueWidgetClass} from "@/component-classes/widgets/LostRevenueWidgetClass";
 import {NicheDistWidgetClass} from "@/component-classes/widgets/NicheDistWidgetClass";
@@ -12,46 +12,46 @@ import {StoreProfitabilityWidgetClass} from "@/component-classes/widgets/StorePr
 import {TurnoverWidgetClass} from "@/component-classes/widgets/TurnoverWidgetClass";
 import {UnitEconWidgetClass} from "@/component-classes/widgets/UnitEconWidgetClass";
 
-function getWidgetClassInstance<N extends WidgetName, C extends WidgetClass<N>>(config: WidgetClass<N>["config"]):
-    WidgetClass<N> {
+function getWidgetClassInstance<N extends WidgetName>(config: WidgetClass<N>["config"]) {
     switch (config.widgetName) {
         case "averageCheck":
-            return new AverageCheckWidgetClass(config);
+            return new AverageCheckWidgetClass(config as WidgetSaveInfo<"averageCheck">);
         case "lostRevenue":
-            return new LostRevenueWidgetClass(config);
+            return new LostRevenueWidgetClass(config as WidgetSaveInfo<"lostRevenue">);
         case "nicheDist":
-            return new NicheDistWidgetClass(config);
+            return new NicheDistWidgetClass(config as WidgetSaveInfo<"nicheDist">);
         case "ordersAndRedemptions":
-            return new OrdersAndRedemptionsWidgetClass(config);
+            return new OrdersAndRedemptionsWidgetClass(config as WidgetSaveInfo<"ordersAndRedemptions">);
         case "remains":
-            return new RemainsWidgetClass(config);
+            return new RemainsWidgetClass(config as WidgetSaveInfo<"remains">);
         case "storeProfitability":
-            return new StoreProfitabilityWidgetClass(config);
+            return new StoreProfitabilityWidgetClass(config as WidgetSaveInfo<"storeProfitability">);
         case "turnover":
-            return new TurnoverWidgetClass(config);
+            return new TurnoverWidgetClass(config as WidgetSaveInfo<"turnover">);
         case "unitEcon":
-            return new UnitEconWidgetClass(config);
+            return new UnitEconWidgetClass(config as WidgetSaveInfo<"unitEcon">);
     }
 }
 
 export const useWidgetStore = defineStore('widgets', () => {
-    const widgetConfigs = useLocalStorage("widgetConfigs", [] as WidgetSaveInfo[], {deep: true});
-    watch(widgetConfigs, () => {
-        console.log("changed2");
-    }, {deep: true})
+    const widgetConfigs = useLocalStorage("widgetConfigs", [] as WidgetSaveInfo[],
+        {listenToStorageChanges: false});
     const gridWidth = useLocalStorage("widgetGridSize", 4);
     const widgetSizeMode = useLocalStorage("widgetSize", 2);
     const widgetClassList = ref([] as WidgetClass<WidgetName>[]);
     const saveWidgetPosition = useLocalStorage("widgetSavePosition", false);
 
     function initWidgets() {
-        widgetConfigs.value.forEach(w => addClass(w))
-        console.log(widgetClassList.value)
+        widgetConfigs.value.forEach(w => {
+            addClass(w).render();
+        })
     }
+    initWidgets();
 
     function addClass(configs: WidgetSaveInfo) {
         const widgetClass = getWidgetClassInstance(configs);
         widgetClassList.value.push(widgetClass);
+        return widgetClass;
     }
 
     function addWidget<N extends WidgetName>(widgetName: N, options: WidgetOptions[N]) {
@@ -74,9 +74,9 @@ export const useWidgetStore = defineStore('widgets', () => {
 
     function deleteWidget(ind: number) {
         if (ind >= widgetConfigs.value.length || ind < 0) return;
-        const gridIndex = widgetConfigs.value[ind].gridIndex;
+        const gridIndex = widgetClassList.value[ind].config.gridIndex;
         if (!saveWidgetPosition.value)
-            widgetClassList.value.forEach(w => {
+            widgetClassList.value.forEach((w) => {
                 if (w.config.gridIndex > gridIndex) w.config.gridIndex--;
             });
         widgetClassList.value.splice(ind, 1);
@@ -86,8 +86,6 @@ export const useWidgetStore = defineStore('widgets', () => {
     function editWidget(ind: number, options: WidgetOptions[WidgetName]) {
         widgetConfigs.value[ind].options = options;
     }
-
-    initWidgets();
 
     return {
         widgetConfigs, gridWidth, widgetSizeMode, widgetClassList, saveWidgetPosition, addClass, addWidget,

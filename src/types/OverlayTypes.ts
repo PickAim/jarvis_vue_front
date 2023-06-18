@@ -1,6 +1,6 @@
-import type {WidgetName, WidgetSettingsOverlayOptions} from "@/types/WidgetTypes";
+import type {WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
 
-export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | WidgetName;
+export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | "widgetOptions";
 export type OverlayOptions =
-    { [ind in WidgetName]: WidgetSettingsOverlayOptions } &
-    { [ind in Exclude<OverlayName, WidgetName>]: undefined };
+    { widgetOptions: WidgetOptionsOverlayProperties } &
+    { [ind in Exclude<OverlayName, "widgetOptions">]: undefined };

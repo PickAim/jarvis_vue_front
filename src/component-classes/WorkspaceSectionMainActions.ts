@@ -1,5 +1,5 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import type {WidgetName} from "@/types/WidgetTypes";
+import type {WidgetName, WidgetOptions, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
 import type {OverlayOptions} from "@/types/OverlayTypes";
 
 export class WorkspaceSectionMainActions{
@@ -17,7 +17,7 @@ export class WorkspaceSectionMainActions{
         this.overlayState.openOverlay('widgetSettings');
     }
 
-    openWidgetSettingsOverlay<N extends WidgetName, O extends OverlayOptions[N]>(name: N, options: O){
-        this.overlayState.openOverlay(name, options);
+    openWidgetSettingsOverlay<N extends WidgetName>(options: WidgetOptionsOverlayProperties){
+        this.overlayState.openOverlay("widgetOptions", options);
     }
 }

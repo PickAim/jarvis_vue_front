@@ -1,4 +1,4 @@
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import type {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 export type WidgetSaveInfo<O extends WidgetName = WidgetName> = {
     gridIndex: number,
@@ -21,7 +21,9 @@ export type OrdersAndRedemptionsWidgetOptions = {
     isAverage: boolean,
     averagePeriod: number
 }
-export type AverageCheckWidgetOptions = undefined;
+export type AverageCheckWidgetOptions = {
+    inputText: string
+};
 export type LostRevenueWidgetOptions = undefined;
 export type TurnoverWidgetOptions = undefined;
 
@@ -37,4 +39,4 @@ export interface WidgetOptions {
 }
 
 export type WidgetName = keyof WidgetOptions;
-export type WidgetSettingsOverlayOptions = WidgetClass<WidgetName>;
+export type WidgetOptionsOverlayProperties = WidgetClass<WidgetName>;

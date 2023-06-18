@@ -1,17 +1,16 @@
 <template>
   <WidgetBodyContainer :widget-size="widgetSize">
-    <div class="title">Средний чек</div>
+    <div class="title">Средний чек{{options.inputText}}</div>
   </WidgetBodyContainer>
 </template>
 
 <script setup lang="ts">
 import {defineProps} from "vue";
-import type {Widget} from "@/types/WidgetTypes";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {AverageCheckWidgetClass} from "@/component-classes/widgets/AverageCheckWidgetClass";
 
 defineProps<{
-  options: WidgetClass<"averageCheck">,
+  options: AverageCheckWidgetClass,
   widgetSize: number
 }>();
 </script>

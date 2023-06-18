@@ -1,61 +1,51 @@
 <template>
-  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
-    <main>
-      <header>Настройка виджета цен ниши {{saveResultID}}</header>
-      <div class="input-block">
-      </div>
-      <ControlButton class="submit">Подтвердить</ControlButton>
-    </main>
-  </OverlayTemplateDecorated>
+  <div class="overlay-body-average-check">
+    <ControlTextbox placeholder="Текст"
+                    :modelValue="options.config.options.inputText"
+                    @update:model-value="v => widgetOptions.inputText = v"/>
+    <ControlButton class="submit-button" @click="onSubmitClick">
+      Подтвердить
+    </ControlButton>
+  </div>
 </template>
 
 <script setup lang="ts">
-import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
+import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import {defineProps, defineEmits, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {OverlayWidgetSettingsActions} from "@/component-classes/overlays-actions/OverlayWidgetSettingsActions";
-import {useWidgetStore} from "@/stores/widgetStore";
-import {storeToRefs} from "pinia";
-import {useOverlayStateStore} from "@/stores/overlayStore";
-import {computed} from "vue";
-import type {Widget} from "@/types/WidgetTypes";
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import type {WidgetOptions} from "@/types/WidgetTypes";
+import _ from "lodash";
+type widgetName = "averageCheck";
 
-const actions = new OverlayWidgetSettingsActions<"nicheDist">();
-const widgetStore = useWidgetStore();
-const {overlayOptions} = storeToRefs(useOverlayStateStore());
-const {widgetList} = storeToRefs(widgetStore)
+defineProps<{
+  options: WidgetClass<widgetName>
+}>()
 
-const saveResultID = computed(() => {
-  if(!overlayOptions.value) return "";
-  const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).options;
-  if(!settings) return "";
-  return settings.saveResultID;
-})
+const emit = defineEmits<{
+  (ev: 'submit', options: WidgetOptions[widgetName]): void
+}>()
+
+const widgetOptions = reactive<WidgetOptions[widgetName]>({
+  inputText: ""
+});
+
+function onSubmitClick() {
+  emit('submit', _.cloneDeep(widgetOptions));
+}
 </script>
 
 <style scoped lang="scss">
-.overlay-window-wrapper{
-  width:450px;
-}
-
-main{
+.overlay-body-average-check {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 50px;
+  padding-inline: 20px;
+  align-items: stretch;
 
-  header{
-    font-size: 30px;
-  }
-
-  .input-block{
-    width: 300px;
-  }
-
-  .submit{
-    font-size: 22px;
-    margin-top: 30px;
-    height: 50px;
-    width: 250px;
+  .submit-button {
+    margin-top: 20px;
+    width: 100%;
   }
 }
 </style>
