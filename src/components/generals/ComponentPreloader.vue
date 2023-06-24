@@ -22,7 +22,7 @@ defineProps<{isLoading: boolean}>()
   width: 100%;
   top:0;
   left:0;
-  z-index: 10;
+  //z-index: 100;
   background-color: rgba(0,0,0,0.8);
   opacity: 0;
   transition: 0.3s;

@@ -6,7 +6,7 @@ export class StoreProfitabilityWidgetClass<N extends WidgetName = "storeProfitab
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }

@@ -6,7 +6,7 @@ export class NicheDistWidgetClass<N extends WidgetName = "nicheDist"> extends Wi
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }

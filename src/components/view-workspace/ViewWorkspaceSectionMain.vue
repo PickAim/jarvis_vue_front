@@ -55,10 +55,6 @@ const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
 const {widgetClassList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
-// for(let i = 0; i < 8; i++) widgetStore.addWidget("nicheDist", {
-//   nicheName: "sfrsg"
-// });
-
 let startPos = [0,0];
 let isPanelScrolling = false;
 let movingWidgetIndex = -1;
@@ -66,7 +62,6 @@ let movingWidgetIndex = -1;
 const isCtrl = ref(false);
 const isWidgetMoving = ref(false);
 const widgetWidth = computed(() => widgetBodyWidth(widgetSizeMode.value) + 'px');
-const widgetHeight = computed(() => widgetBodyHeight(widgetSizeMode.value) + 'px');
 
 const scrollTimerHandlersArray = [-1,-1,-1,-1];
 

@@ -6,7 +6,7 @@ export class TurnoverWidgetClass<N extends WidgetName = "turnover"> extends Widg
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }

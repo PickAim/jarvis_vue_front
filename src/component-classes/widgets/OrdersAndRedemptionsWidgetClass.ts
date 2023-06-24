@@ -6,7 +6,7 @@ export class OrdersAndRedemptionsWidgetClass<N extends WidgetName = "ordersAndRe
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }

@@ -1,23 +1,23 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import type {WidgetName, WidgetOptions, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
-import type {OverlayOptions} from "@/types/OverlayTypes";
+import type {WidgetName, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
 
-export class WorkspaceSectionMainActions{
+export class WorkspaceSectionMainActions {
     overlayState;
 
     constructor() {
         this.overlayState = useOverlayStateStore();
     }
 
-    openWidgetAddOverlay(){
+    openWidgetAddOverlay() {
         this.overlayState.openOverlay('widgetAdd');
+
     }
 
-    openWidgetPanelSettingsOverlay(){
+    openWidgetPanelSettingsOverlay() {
         this.overlayState.openOverlay('widgetSettings');
     }
 
-    openWidgetSettingsOverlay<N extends WidgetName>(options: WidgetOptionsOverlayProperties){
+    openWidgetSettingsOverlay<N extends WidgetName>(options: WidgetOptionsOverlayProperties) {
         this.overlayState.openOverlay("widgetOptions", options);
     }
 }

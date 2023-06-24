@@ -94,6 +94,8 @@ const calcRequestData = reactive<CalcRequestData<UnitEconRequestData, UnitEconRe
   }
 });
 
+console.log("UNIT ECON TEST");
+
 const chartResult = computed(() => [
   [calcRequestData.result.logistic_price, "Логистики"],
   [calcRequestData.result.margin, "Маржа"],

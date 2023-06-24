@@ -43,7 +43,7 @@ export const useWidgetStore = defineStore('widgets', () => {
 
     function initWidgets() {
         widgetConfigs.value.forEach(w => {
-            addClass(w).render();
+            addClass(w);
         })
     }
     initWidgets();
@@ -54,7 +54,11 @@ export const useWidgetStore = defineStore('widgets', () => {
         return widgetClass;
     }
 
-    function addWidget<N extends WidgetName>(widgetName: N, options: WidgetOptions[N]) {
+    async function renderWidgets() {
+        return Promise.allSettled(widgetClassList.value.map((v)=>v.render()));
+    }
+
+    function addWidget<N extends WidgetName>(widgetName: N, options: WidgetOptions[N] | undefined) {
         const widget: WidgetSaveInfo<N> = {
             widgetName: widgetName,
             options: options,
@@ -89,6 +93,6 @@ export const useWidgetStore = defineStore('widgets', () => {
 
     return {
         widgetConfigs, gridWidth, widgetSizeMode, widgetClassList, saveWidgetPosition, addClass, addWidget,
-        swapPosition, deleteWidget, editWidget, initWidgets
+        swapPosition, deleteWidget, editWidget, initWidgets, renderWidgets
     }
 })

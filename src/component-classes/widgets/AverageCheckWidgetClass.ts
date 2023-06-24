@@ -12,7 +12,7 @@ export class AverageCheckWidgetClass extends WidgetClass<"averageCheck"> {
         }
     }
 
-    render(): void {
+    async render(): Promise<void> {
         if(this.config.options) {
             this.inputText = this.config.options.inputText;
         }

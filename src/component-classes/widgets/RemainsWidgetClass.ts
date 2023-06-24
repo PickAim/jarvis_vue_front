@@ -6,7 +6,7 @@ export class RemainsWidgetClass<N extends WidgetName = "remains"> extends Widget
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }

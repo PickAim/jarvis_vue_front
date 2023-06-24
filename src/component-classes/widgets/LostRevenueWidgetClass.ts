@@ -6,7 +6,7 @@ export class LostRevenueWidgetClass<N extends WidgetName = "lostRevenue"> extend
         super(config);
     }
 
-    render(): void {
+    async render(): Promise<void> {
         // TODO: todo
     }
 }
