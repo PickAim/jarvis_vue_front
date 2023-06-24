@@ -18,22 +18,24 @@
       </div>
     </header>
     <main>
-      <component :is="widgets[options.widgetName]"
+      <component :is="widgets[options.config.widgetName]"
                  :options="options"
-                 :widgetSize="WidgetSize"/>
+                 :widgetSize="widgetSize"/>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits, computed, ref} from "vue";
-import type {Widget} from "@/types/Objects";
+import {defineProps, defineEmits, computed, ref, watch} from "vue";
 import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
+import type {Widget, WidgetName} from "@/types/WidgetTypes";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
+import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 const props = defineProps<{
   gridWidth: number,
-  options: Widget,
+  options: WidgetClass<WidgetName>,
   widgetSize: number
   isOtherMoving: boolean
 }>();
@@ -58,8 +60,8 @@ const startOffset = ref([0, 0])
 const topPosition = ref(0);
 const leftPosition = ref(0);
 
-const gridColumn = computed(() => Math.floor((props.options.gridIndex) % props.gridWidth) + 1);
-const gridRow = computed(() => Math.floor((props.options.gridIndex) / props.gridWidth) + 1);
+const gridColumn = computed(() => Math.floor((props.options.config.gridIndex) % props.gridWidth) + 1);
+const gridRow = computed(() => Math.floor((props.options.config.gridIndex) / props.gridWidth) + 1);
 
 const columnDelta = computed(() => Math.floor(props.options.targetIndex % props.gridWidth) + 1 - gridColumn.value);
 const rowDelta = computed(() => Math.floor(props.options.targetIndex / props.gridWidth) + 1 - gridRow.value);
@@ -69,6 +71,9 @@ const gridStyle = computed(() => { return {
   top: topPosition.value + 'px',
   left: leftPosition.value + 'px'
 }})
+
+const widgetWidth = computed(() => widgetBodyWidth(props.widgetSize) + 'px');
+const widgetHeight = computed(() => widgetBodyHeight(props.widgetSize) + 'px');
 
 function movingStart(e: MouseEvent){
   const target = e.target as HTMLElement;
@@ -102,8 +107,9 @@ document.addEventListener('mousemove', mouseMove);
 </script>
 
 <style scoped lang="scss">
-$width: var(--widget-width);
-$height: var(--widget-height);
+$headerHeight: 40px;
+$width: v-bind(widgetWidth);
+$height: calc(v-bind(widgetHeight) + $headerHeight);
 $grid-gap: var(--grid-gap);
 
 .widget-place {
@@ -126,7 +132,7 @@ $grid-gap: var(--grid-gap);
   background-color: black;
   display: flex;
   width: $width;
-  max-height: $height;
+  height: $height;
   border-radius: 20px;
   overflow: hidden;
   flex-direction: column;
@@ -156,7 +162,7 @@ $grid-gap: var(--grid-gap);
   }
 
   header{
-    height: 40px;
+    height: $headerHeight;
     flex: 0 0 auto;
     background-color: #111;
     display: flex;
@@ -193,7 +199,6 @@ $grid-gap: var(--grid-gap);
 
   main {
     color: white;
-    flex: 1 0;
     overflow: hidden;
     background-color: #000;
     display: flex;

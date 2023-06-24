@@ -14,7 +14,6 @@ import type {
 import type {ResponseData} from "@/types/Objects";
 import {ResultCode} from "@/types/ResultCode";
 import {
-    DummySavableCalcRequestActions,
     SavableCalcRequestActions
 } from "@/requests/request-actions/SavableCalcRequestActions";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
@@ -60,7 +59,7 @@ export abstract class SavableCalcActions<Q, R> implements ISavableCalcActions<Q,
         if(response.code === ResultCode.OK && response.result){
             response.result.forEach(r => {
                 this.deleteUndefinedRequestFields(r);
-                this.calcStore.saveRequest(r)
+                this.calcStore.saveRequest(r);
             });
         }
         return response;

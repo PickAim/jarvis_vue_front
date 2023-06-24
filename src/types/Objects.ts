@@ -1,6 +1,5 @@
 import type {ResponseType} from "axios";
 import type {ResultCode} from "@/types/ResultCode";
-import type {CalcRequestName} from "@/types/CalcRequestsTypes";
 
 export abstract class AbstractData{}
 
@@ -63,34 +62,3 @@ export interface SubscribeData extends AbstractData{
     pay_api_key?: string;
 }
 
-export type WidgetName = CalcRequestName;
-
-export type Widget<O extends WidgetName = WidgetName> = {
-    gridIndex: number,
-    targetIndex: number,
-    widgetName: WidgetName,
-    settings?: WidgetOptions[O]
-}
-
-export type UnitCalcNicheWidgetOptions = {
-    nicheName: string
-}
-
-export type UnitCalcResultWidgetOptions = {
-    saveResultID: string
-}
-
-export type WidgetOptions = {
-    unitEcon: UnitCalcNicheWidgetOptions,
-    nicheDist: UnitCalcResultWidgetOptions
-}
-
-export type OverlayName = "login" | "registration" | "controlPanel" | "widgetAdd" | "widgetSettings" | WidgetName;
-
-export type WidgetSettingsOverlayOptions = {
-    index: number
-}
-
-export type OverlayOptions =
-    {[ind in WidgetName]: WidgetSettingsOverlayOptions} &
-    {[ind in Exclude<OverlayName, WidgetName>]: undefined};

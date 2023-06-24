@@ -5,7 +5,7 @@ import type {
 } from "@/types/CalcRequestsTypes";
 import {UnitEconCalcActions} from "@/requests/request-actions/SavableCalcActions";
 import {useAuthStore} from "@/stores/authStore";
-import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
+import {AbstractWorkspaceSavableCalcActions} from "@/component-classes/AbstractWorkspaceSavableCalcActions";
 import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";
 
 export class WorkspaceSectionUnitEconActions extends

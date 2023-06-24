@@ -5,7 +5,7 @@ import {ResultCode} from "@/types/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {ResultDescription} from "@/types/ResultDescription";
 
-export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
+export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
     abstract actions: ISavableCalcActions<Q, R>;
 
     notificationsStore;
@@ -17,12 +17,12 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
     // TODO: add notifications
     async calculate(calcRequest: Q): Promise<ResponseData<R>> {
         const transformedRequest = this.convertRequestToNumber(calcRequest);
-        if(transformedRequest === undefined) {
+        if (transformedRequest === undefined) {
             this.notificationsStore.addErrorNotification(ResultDescription[ResultCode.INCORRECT_INPUT]);
             return {code: ResultCode.INCORRECT_INPUT}
         }
         const response = await this.actions.calculate(transformedRequest);
-        if(response.code !== ResultCode.OK) {
+        if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }
         return response;
@@ -30,7 +30,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
 
     async deleteRequest(id: CalcRequestInfoData["id"]): Promise<ResponseData<void>> {
         const response = await this.actions.deleteRequest(id);
-        if(response.code !== ResultCode.OK) {
+        if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }
         return response;
@@ -38,7 +38,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
 
     async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>>> {
         const transformedRequest = this.convertRequestToNumber(calcRequest.request);
-        if(transformedRequest === undefined) {
+        if (transformedRequest === undefined) {
             this.notificationsStore.addErrorNotification(ResultDescription[ResultCode.INCORRECT_INPUT]);
             return {code: ResultCode.INCORRECT_INPUT}
         }
@@ -48,7 +48,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
             info: calcRequest.info
         };
         const response = await this.actions.saveRequest(transformedRequestData);
-        if(response.code !== ResultCode.OK) {
+        if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }
         return response;
@@ -56,7 +56,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
 
     async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
         const response = await this.actions.loadAll();
-        if(response.code !== ResultCode.OK) {
+        if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
         }
         return response;
@@ -77,17 +77,19 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R>{
 
     private convertRequestToNumber(request: Q): Q | undefined {
         const transformedRequest: Q = this.createEmptyRequestObject();
+
         let key: keyof Q;
-        for(key in transformedRequest) {
-            if(request[key] === undefined) {
+        for (key in transformedRequest) {
+            if (request[key] === undefined) {
                 transformedRequest[key] = request[key];
                 continue;
             }
-            if(typeof(transformedRequest[key]) == "string")
+            if (typeof (transformedRequest[key]) == "string")
                 transformedRequest[key] = request[key];
-            if(typeof(transformedRequest[key]) == "number"){
-                const num = parseFloat(request[key] as string || "");
-                if(isNaN(num)) return;
+            if (typeof (transformedRequest[key]) == "number") {
+                const num = parseFloat(request[key] as string ?? "");
+                if (isNaN(num))
+                    return;
                 transformedRequest[key] = num as Q[keyof Q];
             }
         }
