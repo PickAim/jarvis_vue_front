@@ -4,14 +4,16 @@
       <h1>ТАРИФЫ:</h1>
     </div>
     <div class="tariffs-wrapper">
-      <div class="tariff first-tariff">
-        <h2>IMG</h2>
-        <div class="board-info">
-          <span>Дашборд с системой виджетов</span>
-          <span>Внутренняя аналитика</span>
-          <span>Рекомендации по ценообразованию</span>
+      <div class="tariff-side-wrapper">
+        <div class="tariff first-tariff">
+          <h2>IMG</h2>
+          <div class="board-info">
+            <span>Дашборд с системой виджетов</span>
+            <span>Внутренняя аналитика</span>
+            <span>Рекомендации по ценообразованию</span>
+          </div>
+          <button class="simple-button-try">Попробовать сейчас</button>
         </div>
-        <button class="simple-button-try">Попробовать сейчас</button>
       </div>
       <div class="tariff second-tariff">
         <h2>IMG</h2>
@@ -23,14 +25,16 @@
         </div>
         <button class="simple-button-try">Попробовать сейчас</button>
       </div>
-      <div class="tariff third-tariff">
-        <h2>IMG</h2>
-        <div class="board-info">
-          <span>Дашборд с системой виджетов</span>
-          <span>Внутренняя аналитика</span>
-          <span>Рекомендации по ценообразованию</span>
+      <div class="tariff-side-wrapper">
+        <div class="tariff third-tariff">
+          <h2>IMG</h2>
+          <div class="board-info">
+            <span>Дашборд с системой виджетов</span>
+            <span>Внутренняя аналитика</span>
+            <span>Рекомендации по ценообразованию</span>
+          </div>
+          <button class="simple-button-try">Попробовать сейчас</button>
         </div>
-        <button class="simple-button-try">Попробовать сейчас</button>
       </div>
     </div>
   </div>
@@ -68,8 +72,19 @@
     column-gap: 19px;
     max-width: 1000px;
 
+    .tariff-side-wrapper {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      overflow: hidden;
+      align-items: center;
+      padding-block: 20px;
+    }
+
     .tariff {
       display: flex;
+      height: 100%;
+      overflow: hidden;
       flex-direction: column;
       align-items: center;
       text-align: center;
@@ -77,7 +92,6 @@
       border: 1px solid #B7FF44;
       border-radius: 24px;
       padding: 10px;
-      height: 100%;
 
       h1 {
         margin: 20px;
@@ -102,7 +116,7 @@
       }
 
       &.first-tariff, &.third-tariff {
-        height: 90%;
+        margin-block: 20px;
       }
 
       .simple-button-try {
