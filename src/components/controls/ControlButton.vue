@@ -25,8 +25,11 @@ withDefaults(defineProps<{
 
 button{
   width: 100%;
-  border: 2px solid black;
-  background-color: white;
+  background-color: transparent;
+  border: 1px solid #B7FF44;
+border-radius: 11px;
+color: #FFFFFF;
+padding: 14px 49px;
  &.enabled {
     &:hover {
       border-width: 3px;

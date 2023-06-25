@@ -3,28 +3,14 @@
     <main>
       <header>Регистрация</header>
       <div class="input-block">
-        <ControlTextbox
-            placeholder="Почта"
-            input-type="email"
-            v-model="emailInput"/>
-        <ControlTextbox
-            placeholder="Телефон"
-            input-type="text"
-            v-model="phoneInput"/>
-        <ControlTextbox
-            placeholder="Пароль"
-            input-type="password"
-            v-model="passwordInput"/>
-        <ControlTextbox
-            placeholder="Пароль ещё раз"
-            input-type="password"
-            v-model="passwordRepeatInput"/>
+        <ControlTextbox placeholder="Почта" input-type="email" v-model="emailInput" />
+        <ControlTextbox placeholder="Телефон" input-type="text" v-model="phoneInput" />
+        <ControlTextbox placeholder="Пароль" input-type="password" v-model="passwordInput" />
+        <ControlTextbox placeholder="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput" />
       </div>
-      <ControlButton
-          class="submit"
-          :disabled="passwordInput!==passwordRepeatInput"
-          @click="actions.registration({phone: phoneInput, email: emailInput, password: passwordInput})"
-      >Подтвердить</ControlButton>
+      <ControlButton class="submit" :disabled="passwordInput !== passwordRepeatInput"
+        @click="actions.registration({ phone: phoneInput, email: emailInput, password: passwordInput })">Подтвердить
+      </ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>
@@ -33,6 +19,7 @@
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
+
 import {ref} from "vue";
 import {OverlayRegistrationActions} from "@/component-classes/overlays-actions/OverlayRegistrationActions";
 
@@ -44,25 +31,35 @@ const actions = new OverlayRegistrationActions()
 </script>
 
 <style scoped lang="scss">
-.overlay-window-wrapper{
-  width:450px;
+.overlay-window-wrapper {
+  width: 450px;
+  background: linear-gradient(180deg, rgba(52, 52, 52, 0.5) 0%, rgba(217, 217, 217, 0.07) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(15px);
+  border-radius: 21px;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 90px;
 
-  header{
-    font-size: 40px;
+
+  border-radius: 21px;
+
+  header {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FFFFFF;
   }
 
-  .input-block{
-    width: 300px;
+  .input-block {
+    width: 100%;
   }
 
-  .submit{
+  .submit {
     font-size: 22px;
     margin-top: 30px;
     height: 50px;

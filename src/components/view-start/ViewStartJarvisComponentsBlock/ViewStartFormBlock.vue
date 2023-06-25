@@ -48,13 +48,12 @@
         flex-direction: column;
 
         .button-try {
-            width: 100%;
             border: 1px solid #B7FF44;
             border-radius: 23px;
             font-weight: 700;
             font-size: 28px;
             line-height: 34px;
-            padding: 34px 46px 34px 46px;
+            padding: 34px ;
             margin-top: 80px;
         }
 

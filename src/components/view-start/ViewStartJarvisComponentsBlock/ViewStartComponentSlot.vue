@@ -4,32 +4,31 @@
             <h1>ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ:</h1>
         </div>
         <div class="slots-wrapper">
-
-            <ViewStartSlotBlock>
+            <ViewStartQuestionBlock>
                 <template v-slot:header>
                     Текст 1
                 </template>
-            </ViewStartSlotBlock>
-            <ViewStartSlotBlock>
+            </ViewStartQuestionBlock>
+            <ViewStartQuestionBlock>
                 <template v-slot:header>
                     Текст 2
                 </template>
-            </ViewStartSlotBlock>
-            <ViewStartSlotBlock>
+            </ViewStartQuestionBlock>
+            <ViewStartQuestionBlock>
                 <template v-slot:header>
                     Текст 3
                 </template>
-            </ViewStartSlotBlock>
-            <ViewStartSlotBlock>
+            </ViewStartQuestionBlock>
+            <ViewStartQuestionBlock>
                 <template v-slot:header>
                     Текст 4
                 </template>
-            </ViewStartSlotBlock>
+            </ViewStartQuestionBlock>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import ViewStartSlotBlock from '../ViewStartJarvisComponentsBlock/ViewStartSlotBlock.vue';
+import ViewStartQuestionBlock from '../ViewStartJarvisComponentsBlock/ViewStartQuestionBlock.vue';
 
 </script>
 <style scoped lang="scss">
