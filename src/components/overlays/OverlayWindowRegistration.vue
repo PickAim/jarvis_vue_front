@@ -19,8 +19,9 @@
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import { ref } from "vue";
-import { OverlayRegistrationActions } from "@/component-actions/overlays-actions/OverlayRegistrationActions";
+
+import {ref} from "vue";
+import {OverlayRegistrationActions} from "@/component-classes/overlays-actions/OverlayRegistrationActions";
 
 const emailInput = ref("")
 const phoneInput = ref("")

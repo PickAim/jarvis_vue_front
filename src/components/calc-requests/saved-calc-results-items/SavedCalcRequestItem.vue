@@ -25,7 +25,7 @@ import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-i
 import type {CalcRequestData, CalcRequestName} from "@/types/CalcRequestsTypes";
 import {ResultCode} from "@/types/ResultCode";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
-import {AbstractWorkspaceSavableCalcActions} from "@/component-actions/AbstractWorkspaceSavableCalcActions";
+import {AbstractWorkspaceSavableCalcActions} from "@/component-classes/AbstractWorkspaceSavableCalcActions";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 
 const props = defineProps<{

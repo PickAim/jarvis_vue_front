@@ -1,5 +1,6 @@
 <template>
   <div class="workspace-wrapper">
+    <ComponentPreloader :is-loading="viewMain.isLoading"/>
     <ViewWorkspaceHeader/>
     <div class="middle-wrapper">
       <ViewWorkspaceLeftPanel/>
@@ -13,6 +14,12 @@
 <script setup lang="ts">
 import ViewWorkspaceHeader from "@/components/view-workspace/ViewWorkspaceHeader.vue";
 import ViewWorkspaceLeftPanel from "@/components/view-workspace/ViewWorkspaceLeftPanel.vue";
+import {ViewWorkspaceActions} from "@/component-classes/ViewWorkspaceActions";
+import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
+import {reactive} from "vue";
+
+const viewMain = reactive(new ViewWorkspaceActions());
+viewMain.initWorkspacesSections();
 </script>
 
 <style scoped lang="scss">

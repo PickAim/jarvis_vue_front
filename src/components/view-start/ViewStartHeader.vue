@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 
-import { ViewStartActions } from "@/component-actions/ViewStartActions";
+import { ViewStartActions } from "@/component-classes/ViewStartActions";
 import { useRouter } from "vue-router";
 
 const actions = new ViewStartActions();

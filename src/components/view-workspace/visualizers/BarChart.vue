@@ -3,14 +3,14 @@
     <Bar
         id="my-chart-id"
         :options="chartOptions"
-        :data="chartData"
+        :data="data"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+import {defineProps, reactive} from 'vue';
 import { Bar } from 'vue-chartjs'
-import {defineProps, ref, computed} from 'vue';
 import {
   Chart as ChartJS,
   Title,
@@ -19,44 +19,35 @@ import {
   BarElement,
   CategoryScale,
   LinearScale,
-  ChartOptions,
-  ChartData
+  ChartData,
+  ChartOptions
 } from 'chart.js'
+
+defineProps<{
+  data: ChartData,
+  type: string
+}>()
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-const props = defineProps<{
-  fontSize: number
-}>()
-const fontSize = ref(5);
-setInterval(()=>fontSize.value+=10, 500);
-const chartData = computed<ChartData>(() => {
-  return {
-    labels: ['January', 'February', 'March'],
-    datasets: [{data: [Math.random()*10, Math.random()*10, Math.random()*10], backgroundColor: '#f87979'}],
-  }
-})
-
-const chartOptions = computed<ChartOptions>(() => {
-  return {
-    maintainAspectRatio: false,
-    responsive: true,
-    aspectRatio: 2,
-    plugins: {
-      legend: {
-        display: false,
-        position: 'top',
+const chartOptions = reactive<ChartOptions>({
+  maintainAspectRatio: false,
+  responsive: true,
+  aspectRatio: 2,
+  plugins: {
+    legend: {
+      display: true,
+      position: 'top',
+    },
+    title: {
+      font: {
+        size: 14
       },
-      title: {
-        font: {
-          size: props.fontSize
-        },
-        display: false,
-        text: 'Chart.js Bar Chart'
-      }
+      display: false,
+      text: 'Chart.js Bar Chart'
     }
   }
-})
+});
 
 </script>
 

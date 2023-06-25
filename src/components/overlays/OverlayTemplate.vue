@@ -29,6 +29,8 @@ defineProps<{
   min-height: 65vh;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
 
   .header{
     width: 100%;

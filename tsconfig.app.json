@@ -4,6 +4,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
+    "lib": ["ES2021", "DOM"],
+    "target": "ES2015",
     "outDir": "./dist",
     "paths": {
       "@/*": ["./src/*"]

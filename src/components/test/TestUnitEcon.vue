@@ -4,14 +4,18 @@
       <div class="calc-control-button-wrapper">
         <ComponentPreloader :is-loading="isCalculating || isSaving"/>
         <ControlButton @click="getAllClickHandler"
-                       class="button">[Запросить с сервера]</ControlButton>
+                       class="button">[Запросить с сервера]
+        </ControlButton>
         <ControlButton @click="calculateClickHandler()"
-                       class="button">Расчёт</ControlButton>
+                       class="button">Расчёт
+        </ControlButton>
         <ControlButton @click="saveClickHandler()"
-                       class="button">Сохранить</ControlButton>
+                       class="button">Сохранить
+        </ControlButton>
         <ControlButton v-show="calcRequestData.info.id !== undefined"
                        @click="newClickHandler()"
-                       class="button">Создать новый на основе этого</ControlButton>
+                       class="button">Создать новый на основе этого
+        </ControlButton>
       </div>
       <ControlTextbox placeholder="Название запроса"
                       input-type="text"
@@ -50,27 +54,31 @@
                             @edit="requestEditHandler"/>
     </div>
     <div class="calc-result-wrapper">
-      {{calcRequestData.result}}
+      <DoughnutBar class="result-chart"
+                   :data-and-labels="chartResult"
+                   :data="chartData"
+                   :title="chartTitle" v-if="chartResult[0][0] >= 0"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
-import {nextTick, reactive, ref, triggerRef, watch, watchEffect} from "vue";
+import {computed, nextTick, reactive, ref, watch} from "vue";
 import type {
   CalcRequestData,
   CalcRequestInfoData,
   UnitEconRequestData,
   UnitEconResultData
 } from "@/types/CalcRequestsTypes";
-import {WorkspaceSectionUnitEconActions} from "@/component-actions/WorkspaceSectionUnitEconActions";
+import {WorkspaceSectionUnitEconActions} from "@/component-classes/WorkspaceSectionUnitEconActions";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";
 import SavedCalcRequestList from "@/components/calc-requests/SavedCalcRequestList.vue";
 import {ResultCode} from "@/types/ResultCode";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
+import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 
 const actions = new WorkspaceSectionUnitEconActions();
 const isCalculating = ref(false);
@@ -86,24 +94,35 @@ const calcRequestData = reactive<CalcRequestData<UnitEconRequestData, UnitEconRe
   }
 });
 
-function transitCalcInputCheckboxChanged(v: boolean){
-  if(!v) {
+console.log("UNIT ECON TEST");
+
+const chartResult = computed(() => [
+  [calcRequestData.result.logistic_price, "Логистики"],
+  [calcRequestData.result.margin, "Маржа"],
+  [calcRequestData.result.marketplace_commission, "Комиссия маркетплейса"],
+  [calcRequestData.result.pack_cost, "Стоиомсть упаковки"],
+  [calcRequestData.result.product_cost, "Себестоимость"],
+  [calcRequestData.result.storage_price, "Хранение"]
+])
+const chartTitle = computed(() => `Рекомендуемая цена:
+${chartResult.value.reduce((a,v)=> a + (typeof(v[0]) == "number" ? v[0] : Number.parseInt(v[0]??"0")), 0) }`);
+
+function transitCalcInputCheckboxChanged(v: boolean) {
+  if (!v) {
     calcRequestData.request.transit_count = undefined;
     calcRequestData.request.transit_price = undefined;
     calcRequestData.request.market_place_transit_price = undefined;
-  }
-  else {
+  } else {
     calcRequestData.request.transit_count = NaN;
     calcRequestData.request.transit_price = NaN;
     calcRequestData.request.market_place_transit_price = NaN;
   }
 }
 
-function warehouseInputCheckboxChanged(v: boolean){
-  if(!v) {
+function warehouseInputCheckboxChanged(v: boolean) {
+  if (!v) {
     calcRequestData.request.warehouse_name = undefined;
-  }
-  else {
+  } else {
     calcRequestData.request.warehouse_name = "";
   }
 }
@@ -117,7 +136,7 @@ warehouseInputCheckboxChanged(false);
 async function calculateClickHandler() {
   isCalculating.value = true;
   const response = await actions.calculate(calcRequestData.request);
-  if(response.code === ResultCode.OK && response.result !== undefined)
+  if (response.code === ResultCode.OK && response.result !== undefined)
     calcRequestData.result = response.result;
   isCalculating.value = false;
 }
@@ -125,7 +144,7 @@ async function calculateClickHandler() {
 async function saveClickHandler() {
   isSaving.value = true;
   const response = await actions.saveRequest(calcRequestData);
-  if(response.code === ResultCode.OK && response.result)
+  if (response.code === ResultCode.OK && response.result)
     calcRequestData.info = response.result.info;
   isSaving.value = false;
 }
@@ -141,7 +160,6 @@ function requestEditHandler(id: CalcRequestInfoData["id"]) {
   isWarehouseInput.value = item.request.warehouse_name !== undefined;
   nextTick(() => {
     calcRequestData.request = {} as UnitEconRequestData;
-    console.log(calcRequestData.request, item.request)
     Object.assign(calcRequestData.request, item.request);
 
     calcRequestData.result = CalcRequestObjectsFactory.createUnitEconResultData();
@@ -159,18 +177,18 @@ async function getAllClickHandler() {
 </script>
 
 <style scoped lang="scss">
-.unit-econ-wrapper{
+.unit-econ-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-top: 10px;
 }
 
-.checkbox-wrapper{
+.checkbox-wrapper {
   margin-top: 10px;
 }
 
-.calc-input-wrapper, .saved-requests-wrapper, .calc-result-wrapper{
+.calc-input-wrapper, .saved-requests-wrapper, .calc-result-wrapper {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -178,34 +196,38 @@ async function getAllClickHandler() {
   margin-inline: 3px;
 }
 
-.calc-input-wrapper{
-  .transit-calc-input-wrapper, .warehouse-input-wrapper{
+.calc-input-wrapper {
+  .transit-calc-input-wrapper, .warehouse-input-wrapper {
     display: none;
 
-    &.active{
+    &.active {
       display: unset;
     }
   }
 
-  .calc-control-button-wrapper{
+  .calc-control-button-wrapper {
     position: relative;
 
-    .button{
+    .button {
       margin-bottom: 5px;
       width: 100%;
     }
   }
 }
 
-.saved-requests-wrapper{
-  .request-item{
+.saved-requests-wrapper {
+  .request-item {
     border: 3px solid black;
   }
 }
 
-.calc-result-wrapper{
-  .result-item{
+.calc-result-wrapper {
+  .result-item {
     border: 3px solid black;
   }
+}
+
+.result-chart {
+  height: 400px;
 }
 </style>
