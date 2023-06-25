@@ -102,7 +102,16 @@
         z-index: 100;
         max-width: 1200px;
         margin: 50px 80px;
-        padding: 40px 20px 40px 20px;
+        padding: 40px 20px;
+
+        @media (max-width: 1150px) {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            padding: 0px;
+            margin: 50px 250px;
+            background: none;
+        }
 
         .text-info {
             display: flex;
@@ -112,10 +121,40 @@
             border-left: 2px solid #B7FF44;
             padding: 30px;
 
+            @media (max-width: 1150px) {
+                border: none;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 60px;
+                background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
+        backdrop-filter: blur(15px);
+        margin-bottom: 50px;
+        gap: 10px;
+            }
+
             h2 {
                 font-weight: 400;
                 font-size: 20px;
                 line-height: 24px;
+
+                @media (max-width: 1150px) {
+                    font-weight: 700;
+                    font-size: 15px;
+                    line-height: 18px;
+
+
+                }
+            }
+
+            h4 {
+                @media (max-width: 1150px) {
+                    padding: 10px;
+                    border: 1px solid #B7FF44;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 16px;
+                }
             }
         }
 
@@ -126,9 +165,18 @@
             justify-content: center;
             gap: 10px;
 
+            @media (max-width: 1150px) {
+                padding: 0px 20px;
+                display: flex;
+                flex-direction: column;
+                background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
+        backdrop-filter: blur(15px);
+        
+            }
+
             h1 {
                 font-weight: 700;
-                font-size: 36px;
+                font-size: 24px;
                 line-height: 44px;
             }
 
@@ -139,12 +187,12 @@
     }
 
     .button-try {
-        width: 465px;
-        height: 102px;
         border: 1px solid #B7FF44;
         border-radius: 12px;
         font-weight: 700;
         font-size: 23px;
         line-height: 28px;
+        padding: 15px;
     }
-}</style>
+}
+</style>

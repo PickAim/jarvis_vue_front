@@ -1,5 +1,5 @@
 <template>
-    <div class="slot-wrapper">
+    <div class="questions-wrapper">
         <h1>
             <slot name="header">Здесь будет текст</slot>
         </h1>
@@ -10,7 +10,7 @@
 
 </script>
 <style scoped lang="scss">
-.slot-wrapper {
+.questions-wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;

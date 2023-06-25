@@ -73,8 +73,8 @@ defineEmits(['update:modelValue'])
       height: 100%;
       width: 100%;
       bottom: 0;
-      border-width: 3px;
-      border-color: #555;
+      border-bottom: 1px solid rgba(183, 255, 68, 1);
+      background-color: transparent;
       outline: none;
       box-sizing: border-box;
       transition: border-width 0.1s linear, border-color 0.1s linear;

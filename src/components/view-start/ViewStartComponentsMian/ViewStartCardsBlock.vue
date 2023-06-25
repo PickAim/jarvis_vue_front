@@ -66,13 +66,27 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 0px 20px;
+    @media (max-width: 1150px) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .what-you-have {
+    
     h1 {
         font-weight: 700;
         font-size: 48px;
         line-height: 59px;
+        
+    }
+    @media (max-width: 1150px) {
+        h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 59px;
+        text-align: center;
+    } 
     }
 }
 
@@ -132,4 +146,7 @@
         justify-content: space-between;
     }
 }
+
+
+     
 </style>
