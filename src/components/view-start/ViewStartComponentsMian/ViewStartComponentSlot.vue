@@ -28,10 +28,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import ViewStartQuestionBlock from '../ViewStartJarvisComponentsBlock/ViewStartQuestionBlock.vue';
+import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
 
 </script>
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 .text-menu-wrapper {
     display: flex;
     flex-direction: column;
@@ -59,6 +61,25 @@ import ViewStartQuestionBlock from '../ViewStartJarvisComponentsBlock/ViewStartQ
         width: 100%;
         max-width: 1200px;
         padding: 0px 50px;
+    }
+}
+
+@media (max-width: $tag-width) {
+    .text-menu-wrapper {
+        margin: 50px 20px;
+
+        .questions {
+
+            h1 {
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 29.26px;
+            }
+        }
+
+        .slots-wrapper {
+            max-width: 600px;
+        }
     }
 }
 </style>

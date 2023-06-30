@@ -21,6 +21,8 @@ const router = useRouter();
 </script>
 
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 header {
   display: flex;
   justify-content: center;
@@ -61,6 +63,12 @@ header {
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
+  }
+}
+
+@media (max-width: $tag-width) {
+  .buttons-wrapper {
+    display: none;
   }
 }
 </style>

@@ -13,6 +13,8 @@
 </script>
 
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 footer {
   width: 100%;
   background: #191919;
@@ -37,6 +39,22 @@ footer {
       line-height: 44px;
     }
   }
+}
 
+@media (max-width:$tag-width) {
+  footer {
+    .footer-wrapper {
+      img {
+        width: 150px;
+        height: 35px;
+      }
+
+      a {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+      }
+    }
+  }
 }
 </style>

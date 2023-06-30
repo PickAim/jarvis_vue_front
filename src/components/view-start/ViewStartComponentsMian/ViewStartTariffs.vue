@@ -45,6 +45,8 @@
 </script>
 
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 .view-tariffs-block {
   display: flex;
   flex-direction: column;
@@ -115,7 +117,8 @@
         border: 1px solid #B7FF44;
       }
 
-      &.first-tariff, &.third-tariff {
+      &.first-tariff,
+      &.third-tariff {
         margin-block: 20px;
       }
 
@@ -132,4 +135,61 @@
       }
     }
   }
-}</style>
+}
+
+@media (max-width: $tag-width) {
+  .view-tariffs-block {
+    padding: 0px 40px;
+
+    .tariffs-name {
+      padding: 0px;
+
+      h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+      }
+    }
+
+    .tariffs-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+
+      .tariff-side-wrapper {
+        overflow: hidden;
+      }
+
+      .tariff {
+        overflow: hidden;
+
+        h1 {}
+
+        .board-info {
+          line-height: 24px;
+          font-weight: 700;
+          font-size: 20px;
+
+          span {
+            padding-block: 25px;
+          }
+        }
+
+        &.second-tariff {}
+
+        &.first-tariff,
+        &.third-tariff {
+          margin-block: 20px;
+        }
+
+        .simple-button-try {
+          line-height: 24px;
+          font-size: 20px;
+          font-weight: 700;
+
+        }
+      }
+    }
+  }
+}
+</style>

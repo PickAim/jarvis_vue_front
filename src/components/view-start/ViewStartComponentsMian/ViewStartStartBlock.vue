@@ -108,8 +108,6 @@
     }
 
     .button-try {
-      width: 287px;
-      height: 63px;
       font-weight: 700;
       font-size: 1vw;
       line-height: 28px;
@@ -117,6 +115,7 @@
       border-radius: 12px;
       background: #B7FF44;
       color: #000000;
+      padding: 1vw;
     }
   }
 }

@@ -9,8 +9,8 @@
                     <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
                         запланировать поставку</h1>
                     <div class="card-items">
-                        <h1>LINE</h1>
-                        <h1>IMG</h1>
+                        <div class="card-items-line">LINE</div>
+                        <div class="card-items-img">IMG</div>
                     </div>
                 </div>
                 <div class="bottom-cards">
@@ -19,15 +19,15 @@
                             <br> и масштабированию бизнеса
                         </h1>
                         <div class="card-items">
-                            <h1>LINE</h1>
-                            <h1>IMG</h1>
+                            <div class="card-items-line">LINE</div>
+                            <div class="card-items-img">IMG</div>
                         </div>
                     </div>
                     <div class="block-with-sign">
                         <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
                         <div class="card-items">
-                            <h1>LINE</h1>
-                            <h1>IMG</h1>
+                            <div class="card-items-line">LINE</div>
+                            <div class="card-items-img">IMG</div>
                         </div>
                     </div>
                 </div>
@@ -38,6 +38,8 @@
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 .view-cards-block {
     display: flex;
     flex-direction: column;
@@ -66,27 +68,13 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 0px 20px;
-    @media (max-width: 1150px) {
-        display: flex;
-        flex-direction: column;
-    }
 }
 
 .what-you-have {
-    
     h1 {
         font-weight: 700;
         font-size: 48px;
         line-height: 59px;
-        
-    }
-    @media (max-width: 1150px) {
-        h1 {
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 59px;
-        text-align: center;
-    } 
     }
 }
 
@@ -109,13 +97,21 @@
         font-weight: 700;
         font-size: 1rem;
         line-height: 1rem;
-        margin: 45px 14px 45px 14px;
+        margin: 45px 14px;
     }
 
     .card-items {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        .card-items-line {
+            margin: 14px;
+        }
+
+        .card-items-img {
+            margin: 14px;
+        }
     }
 }
 
@@ -137,16 +133,93 @@
         font-weight: 700;
         font-size: 15px;
         line-height: 18px;
-        margin: 54px 14px 54px 14px;
+        margin: 54px 14px;
     }
 
     .card-items {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        .card-items-line {
+            margin: 14px;
+        }
+
+        .card-items-img {
+            margin: 14px;
+        }
     }
 }
 
+@media (max-width: $tag-width) {
+    .view-cards-block {
+        padding: 20px 0px;
+    }
 
-     
-</style>
+    .cards-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .what-you-have {
+        h1 {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 59px;
+            text-align: center;
+        }
+    }
+
+    .opportunity-cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    .first-cards {
+        h1 {
+            font-weight: 700;
+            font-size: 9px;
+            line-height: 11px;
+            margin: 25px 15px;
+        }
+
+        .card-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            .card-items-line {
+                display: none;
+            }
+
+            .card-items-img {
+                margin: 10px 20px;
+            }
+        }
+    }
+
+    .block-with-sign {
+        h1 {
+            font-weight: 700;
+            font-size: 9px;
+            line-height: 11px;
+            margin: 25px 15px;
+        }
+
+        .card-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            .card-items-line {
+                display: none;
+            }
+
+            .card-items-img {
+                margin: 10px 20px;
+            }
+        }
+    }
+}</style>

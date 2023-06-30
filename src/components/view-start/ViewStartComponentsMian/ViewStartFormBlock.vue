@@ -18,6 +18,8 @@
 
 </script>
 <style scoped lang="scss">
+$tag-width: 1150px;
+
 .start-form-block {
     display: flex;
     flex-direction: column;
@@ -34,6 +36,7 @@
             font-weight: 700;
             font-size: 48px;
             line-height: 59px;
+            margin-bottom: 20px;
         }
 
         h2 {
@@ -46,6 +49,7 @@
     .form-wrapper {
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         .button-try {
             border: 1px solid #B7FF44;
@@ -53,7 +57,7 @@
             font-weight: 700;
             font-size: 28px;
             line-height: 34px;
-            padding: 34px ;
+            padding: 20px;
             margin-top: 80px;
         }
 
@@ -72,4 +76,50 @@
             }
         }
     }
-}</style>
+}
+
+@media (max-width: $tag-width) {
+    .start-form-block {
+        margin: 0px;
+        gap: 25px;
+
+        .question-block {
+            h1 {
+                font-size: 24px;
+                font-weight: 700;
+                line-height: 29px;
+            }
+
+            h2 {
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 18px;
+            }
+        }
+
+        .form-wrapper {
+            display: flex;
+
+            .button-try {
+                font-size: 13px;
+                font-weight: 700;
+                line-height: 16px;
+                padding: 15px;
+                border-radius: 11px;
+                margin-top: 25px;
+            }
+
+            form {
+                gap: 35px;
+
+                input {
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 18px;
+                    padding: 10px 80px 10px 0px;
+                }
+            }
+        }
+    }
+}
+</style>
