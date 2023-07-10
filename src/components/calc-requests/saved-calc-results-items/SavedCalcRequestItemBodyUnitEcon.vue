@@ -7,10 +7,10 @@
 
 <script setup lang="ts">
 import {defineProps} from "vue";
-import {CalcRequestData} from "@/types/CalcRequestsTypes";
+import {CalculateRequestData} from "@/types/CalculateRequestsTypes";
 
 const props = defineProps<{
-  item: CalcRequestData<any, any>
+  item: CalculateRequestData<any, any>
 }>()
 </script>
 

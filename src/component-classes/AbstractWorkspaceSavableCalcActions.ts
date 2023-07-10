@@ -1,12 +1,16 @@
-import type {ResponseData} from "@/types/Objects";
-import type {CalcRequestData, CalcRequestInfoData} from "@/types/CalcRequestsTypes";
-import type {ISavableCalcActions, ISavableCalcStore} from "@/requests/request-actions/interfaces/ISavableCalc";
+import type {ResponseData} from "@/types/DataTypes";
+import type {
+    CalculateRequestData,
+    CalculateRequestInfoData,
+    ISavableCalculateActions,
+    ISavableCalculatorStore
+} from "@/types/CalculateRequestsTypes";
 import {ResultCode} from "@/types/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {ResultDescription} from "@/types/ResultDescription";
 
 export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
-    abstract actions: ISavableCalcActions<Q, R>;
+    abstract actions: ISavableCalculateActions<Q, R>;
 
     notificationsStore;
 
@@ -28,7 +32,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
         return response;
     }
 
-    async deleteRequest(id: CalcRequestInfoData["id"]): Promise<ResponseData<void>> {
+    async deleteRequest(id: CalculateRequestInfoData["id"]): Promise<ResponseData<void>> {
         const response = await this.actions.deleteRequest(id);
         if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
@@ -36,7 +40,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
         return response;
     }
 
-    async saveRequest(calcRequest: CalcRequestData<Q, R>): Promise<ResponseData<CalcRequestData<Q, R>>> {
+    async saveRequest(calcRequest: CalculateRequestData<Q, R>): Promise<ResponseData<CalculateRequestData<Q, R>>> {
         const transformedRequest = this.convertRequestToNumber(calcRequest.request);
         if (transformedRequest === undefined) {
             this.notificationsStore.addErrorNotification(ResultDescription[ResultCode.INCORRECT_INPUT]);
@@ -54,7 +58,7 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
         return response;
     }
 
-    async loadAll(): Promise<ResponseData<CalcRequestData<Q, R>[]>> {
+    async loadAll(): Promise<ResponseData<CalculateRequestData<Q, R>[]>> {
         const response = await this.actions.loadAll();
         if (response.code !== ResultCode.OK) {
             this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
@@ -62,16 +66,16 @@ export abstract class AbstractWorkspaceSavableCalcActions<Q, R> {
         return response;
     }
 
-    getAll(): CalcRequestData<Q, R>[] {
+    getAll(): CalculateRequestData<Q, R>[] {
         const requests = this.actions.getAll();
         return requests;
     }
 
-    getCalcRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
+    getCalcRequest(id: CalculateRequestInfoData["id"]): CalculateRequestData<Q, R> | undefined {
         return this.actions.getCalcRequest(id);
     }
 
-    getStore(): ISavableCalcStore<Q, R> {
+    getStore(): ISavableCalculatorStore<Q, R> {
         return this.actions.getStore();
     }
 

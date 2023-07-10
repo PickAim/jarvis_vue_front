@@ -1,5 +1,5 @@
 import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
-import type {LoginData, RegData, ResponseData, TokenData} from "@/types/Objects";
+import type {LoginData, RegData, ResponseData, TokenData} from "@/types/DataTypes";
 import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
 import {Configs} from "@/Configs";

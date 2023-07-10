@@ -66,11 +66,9 @@
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import {computed, nextTick, reactive, ref, watch} from "vue";
 import type {
-  CalcRequestData,
-  CalcRequestInfoData,
-  UnitEconRequestData,
-  UnitEconResultData
-} from "@/types/CalcRequestsTypes";
+  CalculateRequestData,
+  CalculateRequestInfoData
+} from "@/types/CalculateRequestsTypes";
 import {WorkspaceSectionUnitEconActions} from "@/component-classes/WorkspaceSectionUnitEconActions";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
@@ -79,6 +77,8 @@ import SavedCalcRequestList from "@/components/calc-requests/SavedCalcRequestLis
 import {ResultCode} from "@/types/ResultCode";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
+import type {UnitEconomyResultData} from "@/types/DataTypes";
+import {UnitEconomyRequestData} from "@/types/DataTypes";
 
 const actions = new WorkspaceSectionUnitEconActions();
 const isCalculating = ref(false);
@@ -86,7 +86,7 @@ const isSaving = ref(false);
 const isWarehouseInput = ref(false);
 const isTransitCalcInput = ref(false);
 
-const calcRequestData = reactive<CalcRequestData<UnitEconRequestData, UnitEconResultData>>({
+const calcRequestData = reactive<CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData>>({
   request: CalcRequestObjectsFactory.createUnitEconRequestData(),
   result: CalcRequestObjectsFactory.createUnitEconResultData(),
   info: {
@@ -153,13 +153,13 @@ function newClickHandler() {
   calcRequestData.info.id = undefined;
 }
 
-function requestEditHandler(id: CalcRequestInfoData["id"]) {
+function requestEditHandler(id: CalculateRequestInfoData["id"]) {
   const item = actions.getCalcRequest(id);
   if (!item) return;
   isTransitCalcInput.value = item.request.transit_price !== undefined;
   isWarehouseInput.value = item.request.warehouse_name !== undefined;
   nextTick(() => {
-    calcRequestData.request = {} as UnitEconRequestData;
+    calcRequestData.request = {} as UnitEconomyRequestData;
     Object.assign(calcRequestData.request, item.request);
 
     calcRequestData.result = CalcRequestObjectsFactory.createUnitEconResultData();

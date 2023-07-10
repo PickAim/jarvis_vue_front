@@ -1,39 +1,33 @@
 import {defineStore} from "pinia";
 import type {
-    ISavableCalcStoreActions,
-    ISavableCalcStoreState
-} from "@/requests/request-actions/interfaces/ISavableCalc";
-import type {
-    CalcRequestData,
-    CalcRequestInfoData,
-    NicheRequestData,
-    NicheResultData,
-    UnitEconRequestData,
-    UnitEconResultData
-} from "@/types/CalcRequestsTypes";
+    CalculateRequestData,
+    CalculateRequestInfoData, ISavableCalculatorStoreActions, ISavableCalculatorStoreState
+} from "@/types/CalculateRequestsTypes";
+import type {NicheDistRequestData, NicheDistResultData, UnitEconomyResultData} from "@/types/DataTypes";
+import {UnitEconomyRequestData} from "@/types/DataTypes";
 
 const copyObject = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 
-function State<Q, R>(): ISavableCalcStoreState<Q, R>{
+function State<Q, R>(): ISavableCalculatorStoreState<Q, R>{
     return {
         requests: []
     }
 }
 
-function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> &
-    ThisType<ISavableCalcStoreState<Q, R> & ISavableCalcStoreActions<Q, R>>{
+function Actions<Q, R>(): ISavableCalculatorStoreActions<Q, R> &
+    ThisType<ISavableCalculatorStoreState<Q, R> & ISavableCalculatorStoreActions<Q, R>>{
     return {
-        getAll(): CalcRequestData<Q, R>[] {
+        getAll(): CalculateRequestData<Q, R>[] {
             return this.requests;
         },
-        getRequestIndex(id: CalcRequestInfoData["id"]): number {
+        getRequestIndex(id: CalculateRequestInfoData["id"]): number {
             return this.requests.findIndex((r) => r.info.id !== undefined && r.info.id === id);
         },
-        getRequest(id: CalcRequestInfoData["id"]): CalcRequestData<Q, R> | undefined {
+        getRequest(id: CalculateRequestInfoData["id"]): CalculateRequestData<Q, R> | undefined {
             const r = this.requests[this.getRequestIndex(id)]
-            return copyObject(r);
+            return (r ? copyObject(r) : r);
         },
-        saveRequest(calcRequest: CalcRequestData<Q, R>): void {
+        saveRequest(calcRequest: CalculateRequestData<Q, R>): void {
             if(calcRequest.info.id === undefined) return;
             const ind = this.getRequestIndex(calcRequest.info.id);
             const requestToSave = copyObject(calcRequest);
@@ -42,7 +36,7 @@ function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> &
             else
                 this.requests[ind] = requestToSave;
         },
-        deleteRequest(id: CalcRequestInfoData["id"]): void {
+        deleteRequest(id: CalculateRequestInfoData["id"]): void {
             const ind = this.getRequestIndex(id);
             if(ind !== -1)
                 this.requests.splice(ind, 1);
@@ -51,15 +45,15 @@ function Actions<Q, R>(): ISavableCalcStoreActions<Q, R> &
 }
 
 export const useUnitEconCalcStore = defineStore<"unitEconCalcStore",
-    ISavableCalcStoreState<UnitEconRequestData, UnitEconResultData>, any,
-    ISavableCalcStoreActions<UnitEconRequestData, UnitEconResultData>>("unitEconCalcStore", {
+    ISavableCalculatorStoreState<UnitEconomyRequestData, UnitEconomyResultData>, any,
+    ISavableCalculatorStoreActions<UnitEconomyRequestData, UnitEconomyResultData>>("unitEconCalcStore", {
     state: State,
     actions: Actions()
 });
 
 export const useNicheDistCalcStore = defineStore<"nicheDistCalcStore",
-    ISavableCalcStoreState<NicheRequestData, NicheResultData>, any,
-    ISavableCalcStoreActions<UnitEconRequestData, UnitEconRequestData>>("nicheDistCalcStore", {
+    ISavableCalculatorStoreState<NicheDistRequestData, NicheDistResultData>, any,
+    ISavableCalculatorStoreActions<UnitEconomyRequestData, UnitEconomyRequestData>>("nicheDistCalcStore", {
     state: State,
     actions: Actions()
 });

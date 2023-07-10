@@ -13,19 +13,19 @@
 <script setup lang="ts">
 import SavedCalcRequestItem from "@/components/calc-requests/saved-calc-results-items/SavedCalcRequestItem.vue";
 import {defineProps, defineEmits} from "vue";
-import {CalcRequestData, CalcRequestInfoData, CalcRequestName} from "@/types/CalcRequestsTypes";
+import {CalculateRequestData, CalculateRequestInfoData, CalculateRequestName} from "@/types/CalculateRequestsTypes";
 import {AbstractWorkspaceSavableCalcActions} from "@/component-classes/AbstractWorkspaceSavableCalcActions";
 
 defineProps<{
-  name: CalcRequestName,
+  name: CalculateRequestName,
   actions: AbstractWorkspaceSavableCalcActions<any, any>
 }>()
 
 const emits = defineEmits<{
-  (e: 'edit', id: CalcRequestInfoData["id"]): void
+  (e: 'edit', id: CalculateRequestInfoData["id"]): void
 }>()
 
-function editHandler(item: CalcRequestData<any, any>){
+function editHandler(item: CalculateRequestData<any, any>){
   emits('edit', item.info.id);
 }
 </script>

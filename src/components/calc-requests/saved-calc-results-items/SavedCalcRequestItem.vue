@@ -22,15 +22,15 @@
 <script setup lang="ts">
 import {defineEmits, defineProps, ref} from "vue";
 import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-items/index";
-import type {CalcRequestData, CalcRequestName} from "@/types/CalcRequestsTypes";
+import type {CalculateRequestData, CalculateRequestName} from "@/types/CalculateRequestsTypes";
 import {ResultCode} from "@/types/ResultCode";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import {AbstractWorkspaceSavableCalcActions} from "@/component-classes/AbstractWorkspaceSavableCalcActions";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 
 const props = defineProps<{
-  name: CalcRequestName,
-  item: CalcRequestData<any, any>,
+  name: CalculateRequestName,
+  item: CalculateRequestData<any, any>,
   actions: AbstractWorkspaceSavableCalcActions<any, any>
 }>()
 

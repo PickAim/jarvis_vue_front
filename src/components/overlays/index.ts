@@ -13,7 +13,7 @@ import {default as registration} from './OverlayWindowRegistration.vue';
 import {default as controlPanel} from './OverlayWindowControlPanel.vue';
 import {default as widgetAdd} from './OverlayWindowWidgetAdd.vue';
 import {default as widgetSettings} from './OverlayWindowWidgetSettings.vue';
-import {default as widgetOptions} from './OverlayWindowWidgetOptions.vue'
+import {default as widgetOptions} from './OverlayWindowWidgetOptions.vue';
 import type {OverlayName} from "@/types/OverlayTypes";
 
 export const overlays: {[name in OverlayName]: any} = {
