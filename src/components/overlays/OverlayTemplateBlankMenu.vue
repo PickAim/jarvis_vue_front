@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import OverlayTemplate from "@/components/overlays/OverlayTemplate.vue";
 
 defineProps<{

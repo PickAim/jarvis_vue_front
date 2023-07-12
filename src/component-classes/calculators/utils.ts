@@ -1,13 +1,14 @@
 // Decorator
 export function requestMethod(originalMethod: any, _context: any) {
+    console.log("decorator init");
     async function replacementMethod(this: { isBusy: boolean }, ...args: any[]) {
+        console.log("run");
         if (this.isBusy) return;
         this.isBusy = true;
         const result = await originalMethod.call(this, ...args);
         this.isBusy = false;
         return result;
     }
-
     return replacementMethod;
 }
 
@@ -48,6 +49,14 @@ export function convertMoneyToRoubles<T extends Record<string, any>>(data: T, ke
     Object.keys(data).forEach(key => {
         if (keys.includes(key)) {
             (data[key] as number) /= 100;
+        }
+    });
+}
+
+export function removeKeys<T extends Record<string, any>>(data: T, keys: (keyof T)[]): void {
+    Object.keys(data).forEach(key => {
+        if (keys.includes(key)) {
+            delete data[key];
         }
     });
 }

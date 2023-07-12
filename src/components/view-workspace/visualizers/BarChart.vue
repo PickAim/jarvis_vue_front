@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, reactive} from 'vue';
+import {reactive} from 'vue';
 import { Bar } from 'vue-chartjs'
 import {
   Chart as ChartJS,

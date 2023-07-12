@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
 import {AverageCheckWidgetClass} from "@/component-classes/widgets/AverageCheckWidgetClass";
 

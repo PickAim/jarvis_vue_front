@@ -1,16 +1,15 @@
 <template>
   <div class="niche-dist-wrapper">
-    {{props.item.request}}<br>
-    {{props.item.result}}
+    {{ request.info.name }}
   </div>
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import {CalculateRequestData} from "@/types/CalculateRequestsTypes";
+import type {NicheDistRequestData, NicheDistResultData} from "@/types/DataTypes";
 
-const props = defineProps<{
-  item: CalculateRequestData<any, any>
+defineProps<{
+  request: CalculateRequestData<NicheDistRequestData, NicheDistResultData>
 }>()
 </script>
 

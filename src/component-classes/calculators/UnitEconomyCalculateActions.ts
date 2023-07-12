@@ -3,7 +3,7 @@ import {SavableCalculateActions} from "@/component-classes/calculators/SavableCa
 import {UnitEconomyRequestActions} from "@/requests/request-actions/SavableCalculateRequestActions";
 import {convertMoneyToPennie, convertMoneyToRoubles} from "@/component-classes/calculators/utils";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
-import {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {UnitEconomyRequestData} from "@/types/DataTypes";
 
 export class UnitEconomyCalculateActions<Q extends UnitEconomyRequestData, R extends UnitEconomyResultData>
     extends SavableCalculateActions<UnitEconomyRequestData, UnitEconomyResultData> {
@@ -14,7 +14,6 @@ export class UnitEconomyCalculateActions<Q extends UnitEconomyRequestData, R ext
     constructor() {
         super(new UnitEconomyRequestActions(), useUnitEconCalcStore());
     }
-
 
     prepareRequestData(request: Q): Q {
         // Convert data to server-format (to pennies)

@@ -2,7 +2,7 @@
   <div class="unit-econ-wrapper">
     <div class="calc-input-wrapper">
       <div class="calc-control-button-wrapper">
-        <ComponentPreloader :is-loading="isCalculating || isSaving"/>
+        <ComponentPreloader :is-loading="calculator.isBusy"/>
         <ControlButton @click="getAllClickHandler"
                        class="button">[Запросить с сервера]
         </ControlButton>
@@ -12,166 +12,114 @@
         <ControlButton @click="saveClickHandler()"
                        class="button">Сохранить
         </ControlButton>
-        <ControlButton v-show="calcRequestData.info.id !== undefined"
+        <ControlButton v-show="calculator.info.id !== undefined"
                        @click="newClickHandler()"
                        class="button">Создать новый на основе этого
         </ControlButton>
       </div>
       <ControlTextbox placeholder="Название запроса"
                       input-type="text"
-                      v-model="calcRequestData.info.name"/>
+                      v-model="calculator.info.name"/>
       <ControlTextbox placeholder="Название ниши"
                       input-type="text"
-                      v-model="calcRequestData.request.niche"/>
+                      v-model="calculator.request.niche"/>
       <ControlTextbox placeholder="Себестоимость товара"
                       input-type="number"
-                      v-model="calcRequestData.request.buy"/>
+                      v-model="calculator.request.buy"/>
       <ControlTextbox placeholder="Стоимость упаковки"
                       input-type="number"
-                      v-model="calcRequestData.request.pack"/>
-      <ControlCheckBox v-model="isTransitCalcInput">Рассчитать транзит</ControlCheckBox>
-      <div class="transit-calc-input-wrapper" :class="{active: isTransitCalcInput}">
+                      v-model="calculator.request.pack"/>
+      <ControlCheckBox v-model="calculator.isTransitOn">Рассчитать транзит</ControlCheckBox>
+      <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitOn}">
         <ControlTextbox placeholder="Стоимость транзита маркетплейса"
                         input-type="number"
-                        v-model="calcRequestData.request.market_place_transit_price"/>
+                        v-model="calculator.request.market_place_transit_price"/>
         <ControlTextbox placeholder="Стоимость транзита"
                         input-type="number"
-                        v-model="calcRequestData.request.transit_price"/>
+                        v-model="calculator.request.transit_price"/>
         <ControlTextbox placeholder="Число товаров"
                         input-type="number"
-                        v-model="calcRequestData.request.transit_count"/>
+                        v-model="calculator.request.transit_count"/>
       </div>
-      <ControlCheckBox v-model="isWarehouseInput">Указать склад</ControlCheckBox>
-      <div class="warehouse-input-wrapper" :class="{active: isWarehouseInput}">
+      <ControlCheckBox v-model="calculator.isWarehouseOn">Указать склад</ControlCheckBox>
+      <div class="warehouse-input-wrapper" :class="{active: calculator.isWarehouseOn}">
         <ControlTextbox placeholder="Наименование склада"
                         input-type="text"
-                        v-model="calcRequestData.request.warehouse_name"/>
+                        v-model="calculator.request.warehouse_name"/>
       </div>
     </div>
     <div class="saved-requests-wrapper">
-      <SavedCalcRequestList name="unitEcon"
-                            :actions="actions"
-                            @edit="requestEditHandler"/>
+      <SavedItemsList name="unitEcon"
+                      :calculator="calculator"
+                      :calculator-class="UnitEconomyCalculator"/>
     </div>
     <div class="calc-result-wrapper">
       <DoughnutBar class="result-chart"
                    :data-and-labels="chartResult"
-                   :data="chartData"
-                   :title="chartTitle" v-if="chartResult[0][0] >= 0"/>
+                   :title="chartTitle" v-if="chartResult.length >= 0"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
-import {computed, nextTick, reactive, ref, watch} from "vue";
-import type {
-  CalculateRequestData,
-  CalculateRequestInfoData
-} from "@/types/CalculateRequestsTypes";
-import {WorkspaceSectionUnitEconActions} from "@/component-classes/WorkspaceSectionUnitEconActions";
+import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
-import {CalcRequestObjectsFactory} from "@/object-factories/CalcRequestObjectsFactory";
-import SavedCalcRequestList from "@/components/calc-requests/SavedCalcRequestList.vue";
-import {ResultCode} from "@/types/ResultCode";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
-import {UnitEconomyRequestData} from "@/types/DataTypes";
+import {UnitEconomyCalculator} from "@/component-classes/calculators/UnitEconomyCalculator";
+import SavedItemsList from "@/components/calc-requests/SavedItemsList.vue";
 
-const actions = new WorkspaceSectionUnitEconActions();
-const isCalculating = ref(false);
-const isSaving = ref(false);
-const isWarehouseInput = ref(false);
-const isTransitCalcInput = ref(false);
-
-const calcRequestData = reactive<CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData>>({
-  request: CalcRequestObjectsFactory.createUnitEconRequestData(),
-  result: CalcRequestObjectsFactory.createUnitEconResultData(),
-  info: {
-    name: "Запрос"
-  }
-});
+const calculator = reactive(new UnitEconomyCalculator());
 
 console.log("UNIT ECON TEST");
 
-const chartResult = computed(() => [
-  [calcRequestData.result.logistic_price, "Логистики"],
-  [calcRequestData.result.margin, "Маржа"],
-  [calcRequestData.result.marketplace_commission, "Комиссия маркетплейса"],
-  [calcRequestData.result.pack_cost, "Стоиомсть упаковки"],
-  [calcRequestData.result.product_cost, "Себестоимость"],
-  [calcRequestData.result.storage_price, "Хранение"]
-])
-const chartTitle = computed(() => `Рекомендуемая цена:
-${chartResult.value.reduce((a,v)=> a + (typeof(v[0]) == "number" ? v[0] : Number.parseInt(v[0]??"0")), 0) }`);
-
-function transitCalcInputCheckboxChanged(v: boolean) {
-  if (!v) {
-    calcRequestData.request.transit_count = undefined;
-    calcRequestData.request.transit_price = undefined;
-    calcRequestData.request.market_place_transit_price = undefined;
-  } else {
-    calcRequestData.request.transit_count = NaN;
-    calcRequestData.request.transit_price = NaN;
-    calcRequestData.request.market_place_transit_price = NaN;
-  }
+const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
+  margin: "Маржа",
+  logistic_price: "Логистики",
+  pack_cost: "Стоиомсть упаковки",
+  product_cost: "Себестоимость",
+  storage_price: "Хранение",
+  marketplace_commission: "Комиссия маркетплейса",
+  transit_margin: "Комиссия транзита",
+  transit_profit: "Транизтная выручка",
+  recommended_price: "",
+  roi: ""
 }
 
-function warehouseInputCheckboxChanged(v: boolean) {
-  if (!v) {
-    calcRequestData.request.warehouse_name = undefined;
-  } else {
-    calcRequestData.request.warehouse_name = "";
-  }
-}
+const chartResult = computed(() => {
+  const result = [];
+  if (!calculator.result) return result;
+  Object.keys(calculator.result).forEach((key) => {
+    const value = calculator.result[key];
+    if (value !== undefined) {
+      const title = chartKeyToTitle[key];
+      if (title === "") return;
+      result.push([value, title]);
+    }
+  });
+  return result;
+});
 
-watch(isTransitCalcInput, transitCalcInputCheckboxChanged);
-watch(isWarehouseInput, warehouseInputCheckboxChanged);
-
-transitCalcInputCheckboxChanged(false);
-warehouseInputCheckboxChanged(false);
+const chartTitle = computed(() => `Рекомендуемая цена: ${calculator.result?.recommended_price}`);
 
 async function calculateClickHandler() {
-  isCalculating.value = true;
-  const response = await actions.calculate(calcRequestData.request);
-  if (response.code === ResultCode.OK && response.result !== undefined)
-    calcRequestData.result = response.result;
-  isCalculating.value = false;
+  await calculator.calculate();
 }
 
 async function saveClickHandler() {
-  isSaving.value = true;
-  const response = await actions.saveRequest(calcRequestData);
-  if (response.code === ResultCode.OK && response.result)
-    calcRequestData.info = response.result.info;
-  isSaving.value = false;
+  await calculator.saveRequest();
 }
 
 function newClickHandler() {
-  calcRequestData.info.id = undefined;
-}
-
-function requestEditHandler(id: CalculateRequestInfoData["id"]) {
-  const item = actions.getCalcRequest(id);
-  if (!item) return;
-  isTransitCalcInput.value = item.request.transit_price !== undefined;
-  isWarehouseInput.value = item.request.warehouse_name !== undefined;
-  nextTick(() => {
-    calcRequestData.request = {} as UnitEconomyRequestData;
-    Object.assign(calcRequestData.request, item.request);
-
-    calcRequestData.result = CalcRequestObjectsFactory.createUnitEconResultData();
-    calcRequestData.result = item.result;
-    Object.assign(calcRequestData.info, item.info);
-  })
+  calculator.createNewRequest();
 }
 
 async function getAllClickHandler() {
-  isSaving.value = true;
-  await actions.loadAll();
-  isSaving.value = false;
+  console.log("get all")
+  await calculator.loadAll();
 }
 
 </script>

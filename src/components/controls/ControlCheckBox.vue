@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 
 defineProps<{ modelValue?: boolean }>()
 

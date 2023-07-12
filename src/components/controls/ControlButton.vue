@@ -7,8 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps, withDefaults} from "vue";
-
 defineEmits(['click'])
 withDefaults(defineProps<{
   disabled?: boolean

@@ -1,7 +1,11 @@
 import {Calculator} from "@/component-classes/calculators/Calculator";
-import type {CalculateRequestData, CalculateRequestInfoData, ISavableCalculateActions} from "@/types/CalculateRequestsTypes";
-import {requestMethod} from "@/component-classes/calculators/utils";
+import type {
+    CalculateRequestData,
+    CalculateRequestInfoData,
+    ISavableCalculateActions
+} from "@/types/CalculateRequestsTypes";
 import {ResultCode} from "@/types/ResultCode";
+import {ResultDescription} from "@/types/ResultDescription";
 
 export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableCalculateActions<Q, R>> {
     isRequestChanged = false;
@@ -15,32 +19,45 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
 
     afterSuccessfulCalculating(result: R | undefined) {
         this.isRequestChanged = false;
-        super.afterSuccessfulCalculating(result);
+        return super.afterSuccessfulCalculating(result);
     }
 
-    @requestMethod
     async deleteRequest(id: CalculateRequestInfoData["id"]) {
-        await this.calculateActions.deleteRequest(id);
-    }
-
-    @requestMethod
-    async loadAll() {
-        await this.calculateActions.loadAll();
-    }
-
-    @requestMethod
-    async saveRequest() {
-        if (!this.result || this.isRequestChanged) return;
-        const response = await this.calculateActions.saveRequest({
-            request: this.request,
-            result: this.result,
-            info: this.info
-        });
-        if (response.code !== ResultCode.OK || !response.result) {
-            // TODO: make report about network error
-        } else {
-            this.info = response.result;
+        if (this.isBusy) return;
+        this.isBusy = true;
+        const response = await this.calculateActions.deleteRequest(id);
+        if(response.code !== ResultCode.OK) {
+            this.notificator.addErrorNotification(ResultDescription[response.code]);
         }
+        this.isBusy = false;
+    }
+
+    async loadAll() {
+        if (this.isBusy) return;
+        this.isBusy = true;
+        const response = await this.calculateActions.loadAll();
+        if(response.code !== ResultCode.OK) {
+            this.notificator.addErrorNotification(ResultDescription[response.code]);
+        }
+        this.isBusy = false;
+    }
+
+    async saveRequest() {
+        if (this.isBusy) return;
+        this.isBusy = true;
+        if (this.result && this.isRequestChanged) {
+            const response = await this.calculateActions.saveRequest({
+                request: this.request,
+                result: this.result,
+                info: this.info
+            });
+            if (response.code !== ResultCode.OK || !response.result) {
+                this.notificator.addErrorNotification(ResultDescription[response.code]);
+            } else {
+                this.info = response.result;
+            }
+        }
+        this.isBusy = false;
     }
 
     getAll(): CalculateRequestData<Q, R>[] {
@@ -51,14 +68,13 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
         return this.calculateActions.getStore();
     }
 
-    selectCalcRequest(id: CalculateRequestInfoData["id"]) {
+    selectCalcRequest(id: CalculateRequestInfoData["id"]): void {
         const request = this.calculateActions.getCalcRequest(id);
         if (request) {
             this.request = request.request;
             this.result = request.result;
             this.info = request.info;
         }
-        return request;
     }
 
     createNewRequest() {

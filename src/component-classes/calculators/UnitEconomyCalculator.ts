@@ -4,7 +4,7 @@ import type {
 } from "@/types/CalculateRequestsTypes";
 import {UnitEconomyCalculateActions} from "@/component-classes/calculators/UnitEconomyCalculateActions";
 import {SavableCalculator} from "@/component-classes/calculators/SavableCalculator";
-import {checkAndConvert} from "@/component-classes/calculators/utils";
+import {checkAndConvert, removeKeys} from "@/component-classes/calculators/utils";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyRequestData} from "@/types/DataTypes";
 
@@ -15,6 +15,12 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     isWarehouseOn = false;
     isTransitOn = false;
 
+    requestTransitKeys: (keyof RequestType)[] = ["market_place_transit_price", "transit_count", "transit_price"];
+    requestWarehouseKeys: (keyof RequestType)[] = ["warehouse_name"];
+
+    resultTransitKeys: (keyof ResultType)[] = ["transit_profit", "transit_margin", "marketplace_commission"];
+    resultWarehouseKeys: (keyof ResultType)[] = ["storage_price"];
+
     constructor() {
         super(new UnitEconomyCalculateActions(), "Запрос UNIT экономики");
     }
@@ -24,22 +30,12 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     }
 
     beforeCalculating() {
-        // Check number-parseFloat, string not empty, if flagged values false set it to undefined
-        const transitKeys: (keyof RequestType)[] =
-            ["market_place_transit_price", "transit_count", "transit_price"];
-        const warehouseKeys: (keyof RequestType)[] =
-            ["warehouse_name"];
         const pattern = new UnitEconomyRequestData();
-        if (!this.isTransitOn) {
-            transitKeys.forEach(key => {
-                delete pattern[key];
-            })
-        }
-        if (!this.isWarehouseOn) {
-            warehouseKeys.forEach(key => {
-                delete pattern[key];
-            })
-        }
+        if (!this.isTransitOn)
+            removeKeys(pattern, this.requestTransitKeys);
+        if (!this.isWarehouseOn)
+            removeKeys(pattern, this.requestWarehouseKeys);
+        console.log("STEP 1", pattern);
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
             console.log(requestOrKey);
@@ -48,32 +44,19 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
         }
     }
 
-    afterSuccessfulCalculating(result: ResultType): void {
-        // Override it to prepare and validate data
-        const transitKeys: (keyof ResultType)[] =
-            ["transit_profit", "transit_margin", "marketplace_commission"];
-        const warehouseKeys: (keyof ResultType)[] =
-            ["storage_price"];
-        if (!this.isTransitOn) {
-            transitKeys.forEach(key => {
-                delete result[key];
-            })
-        }
-        if (!this.isWarehouseOn) {
-            warehouseKeys.forEach(key => {
-                delete result[key];
-            })
-        }
-        super.afterSuccessfulCalculating(result);
+    afterSuccessfulCalculating(result: ResultType) {
+        if (!this.isTransitOn)
+            removeKeys(result, this.resultTransitKeys);
+        if (!this.isWarehouseOn)
+            removeKeys(result, this.resultWarehouseKeys);
+        return super.afterSuccessfulCalculating(result);
     }
 
-
-    selectCalcRequest(id: CalculateRequestInfoData["id"]): CalculateRequestData<RequestType, ResultType> | undefined {
-        const request =  super.selectCalcRequest(id);
-        if (request) {
-            this.isTransitOn = "transit_count" in request.request;
-            this.isWarehouseOn = "warehouse_name" in request.request;
+    selectCalcRequest(id: CalculateRequestInfoData["id"]): void {
+        super.selectCalcRequest(id);
+        if (this.request) {
+            this.isTransitOn = "transit_count" in this.request;
+            this.isWarehouseOn = "warehouse_name" in this.request;
         }
-        return request;
     }
 }
