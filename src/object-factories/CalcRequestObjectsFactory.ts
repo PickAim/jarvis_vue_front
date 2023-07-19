@@ -1,12 +1,12 @@
 import type {
     NicheRequestData,
-    NicheResultData,
-    UnitEconRequestData,
-    UnitEconResultData
-} from "@/types/CalcRequestsTypes";
+    NicheResultData
+} from "@/types/CalculateRequestsTypes";
+import type {UnitEconomyResultData} from "@/types/DataTypes";
+import {UnitEconomyRequestData} from "@/types/DataTypes";
 
 export class CalcRequestObjectsFactory{
-    static createUnitEconRequestData(object?: UnitEconRequestData): UnitEconRequestData{
+    static createUnitEconRequestData(object?: UnitEconomyRequestData): UnitEconomyRequestData{
         return object ?
             Object.assign({}, object) :
             {
@@ -22,7 +22,7 @@ export class CalcRequestObjectsFactory{
             }
     }
 
-    static createUnitEconResultData(object?: UnitEconResultData): UnitEconResultData{
+    static createUnitEconResultData(object?: UnitEconomyResultData): UnitEconomyResultData{
         return object ?
             Object.assign({}, object) :
             {

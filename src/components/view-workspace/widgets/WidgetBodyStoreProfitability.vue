@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import type {Widget} from "@/types/WidgetTypes";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
 

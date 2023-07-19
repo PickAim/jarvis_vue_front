@@ -1,5 +1,5 @@
 import {OverlayActions} from "@/component-classes/overlays-actions/OverlayActions";
-import type {RegData} from "@/types/Objects";
+import type {RegData} from "@/types/DataTypes";
 import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
 import {ResultCode} from "@/types/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";

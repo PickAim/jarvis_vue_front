@@ -26,10 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, defineEmits, computed, ref, watch} from "vue";
+import {computed, ref} from "vue";
 import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
-import type {Widget, WidgetName} from "@/types/WidgetTypes";
+import type {WidgetName} from "@/types/WidgetTypes";
 import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 

@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import type {Notification} from "@/stores/notificationsStore";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 

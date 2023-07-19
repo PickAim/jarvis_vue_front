@@ -1,5 +1,5 @@
-import {WorkspaceSectionUnitEconActions} from "@/component-classes/WorkspaceSectionUnitEconActions";
 import {useWidgetStore} from "@/stores/widgetStore";
+import {UnitEconomyCalculator} from "@/component-classes/calculators/UnitEconomyCalculator";
 
 export class ViewWorkspaceActions {
     isLoading = false;
@@ -15,7 +15,7 @@ export class ViewWorkspaceActions {
 
     prepareData() {
         const operations = [
-            (new WorkspaceSectionUnitEconActions()).loadAll()
+            (new UnitEconomyCalculator()).loadAll()
         ]
         return Promise.allSettled(operations);
     }

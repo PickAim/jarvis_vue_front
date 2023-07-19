@@ -1,10 +1,11 @@
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
-import type {CalcRequestData} from "@/types/CalcRequestsTypes";
-import type {UnitEconRequestData, UnitEconResultData} from "@/types/CalcRequestsTypes";
+import type {CalculateRequestData} from "@/types/CalculateRequestsTypes";
 import {useUnitEconCalcStore} from "@/stores/CalcStores";
+import type {UnitEconomyResultData} from "@/types/DataTypes";
+import {UnitEconomyRequestData} from "@/types/DataTypes";
 
 export class UnitEconWidgetClass extends WidgetClass<"unitEcon"> {
-    request: CalcRequestData<UnitEconRequestData, UnitEconResultData> | undefined = undefined;
+    request: CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData> | undefined = undefined;
 
     constructor(config: WidgetClass<"unitEcon">["config"]) {
         if(config.options === undefined) {

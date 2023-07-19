@@ -1,5 +1,5 @@
 import type IRequestController from "@/requests/request-actions/interfaces/IRequestController";
-import type {RequestData, ResponseData, TokenData} from "@/types/Objects";
+import type {RequestData, ResponseData, TokenData} from "@/types/DataTypes";
 import axios, {AxiosError} from "axios";
 import type {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {ResultCode} from "@/types/ResultCode";

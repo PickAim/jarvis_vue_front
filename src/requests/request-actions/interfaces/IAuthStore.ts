@@ -1,4 +1,4 @@
-import type {TokenData} from "@/types/Objects";
+import type {TokenData} from "@/types/DataTypes";
 import type {ResultCode} from "@/types/ResultCode";
 
 export default interface IAuthStore {
