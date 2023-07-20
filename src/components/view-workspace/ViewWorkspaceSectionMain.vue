@@ -47,7 +47,7 @@ import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {WorkspaceSectionMainActions} from "@/component-classes/WorkspaceSectionMainActions";
 import type {WidgetName} from "@/types/WidgetTypes";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
+import {widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 const actions = new WorkspaceSectionMainActions();

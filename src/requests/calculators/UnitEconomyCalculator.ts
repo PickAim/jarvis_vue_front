@@ -1,5 +1,4 @@
 import type {
-    CalculateRequestData,
     CalculateRequestInfoData
 } from "@/types/RequestTypes";
 import {UnitEconomyActions} from "@/requests/request-actions/calculations/UnitEconomyActions";

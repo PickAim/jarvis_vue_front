@@ -5,7 +5,6 @@ import type {
     ISavableCalculateActions
 } from "@/types/RequestTypes";
 import {ResultCode} from "@/types/ResultCode";
-import {ResultDescription} from "@/types/ResultDescription";
 
 export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableCalculateActions<Q, R>> {
     isRequestChanged = false;
