@@ -5,8 +5,8 @@ import type {
     CalculateRequestInfoData,
     ISavableCalculateActions, ISavableCalculateRequestActions,
     ISavableCalculatorStore
-} from "@/types/CalculateRequestsTypes";
-import {CalculateActions} from "@/requests/calculate-actions/CalculateActions";
+} from "@/types/RequestTypes";
+import {CalculateActions} from "@/requests/request-actions/calculations/CalculateActions";
 import {ResultDescription} from "@/types/ResultDescription";
 
 export abstract class SavableCalculateActions<Q, R>

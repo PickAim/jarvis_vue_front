@@ -1,6 +1,6 @@
 import type {ResponseData} from "@/types/DataTypes";
 
-export type CalculateRequestName = "unitEcon" | "nicheDist";
+export type CalculateRequestName = "unitEcon" | "nicheDist" | "downturn" | "turnover";
 
 export interface CalculateRequestData<Q, R> {
     request: Q;
@@ -14,28 +14,11 @@ export interface CalculateRequestInfoData {
     name: string;
 }
 
-// function initData<T extends Record<string, any>>
-// (this: T, data: T) {
-//     for (const classKey in data) {
-//         if (classKey in this && classKey in data) {
-//             if(typeof(this[classKey]) === "number") {
-//                 const parsed = parseFloat(data[classKey] as string);
-//                 if (!isNaN(parsed)) {
-//                     (this[classKey] as unknown) = parsed;
-//                 }
-//             }
-//             else if(typeof(this[classKey]) === typeof(data[classKey])) {
-//                 this[classKey] = data[classKey];
-//             }
-//         }
-//     }
-// }
-
-export interface ICalculateRequestActions<Q, R> {
+export interface ICalculateRequester<Q, R> {
     calculate(request: Q): Promise<ResponseData<R>>
 }
 
-export type ICalculateActions<Q, R> = ICalculateRequestActions<Q, R>;
+export type ICalculateActions<Q, R> = ICalculateRequester<Q, R>;
 
 export interface ISavableCalculateRequestActions<Q, R> extends ICalculateActions<Q, R> {
     saveRequest(calcRequest: CalculateRequestData<Q, R>): Promise<ResponseData<CalculateRequestData<Q, R>["info"]>>,
@@ -70,3 +53,9 @@ export interface ISavableCalculatorStoreActions<Q, R> {
 }
 
 export type ISavableCalculatorStore<Q, R> = ISavableCalculatorStoreActions<Q, R> & ISavableCalculatorStoreState<Q, R>
+
+export interface IInfoRequester<Q, R> {
+    getInfo(request: Q): Promise<ResponseData<R>>
+}
+
+export type IInfoActions<Q, R> = IInfoRequester<Q, R>;

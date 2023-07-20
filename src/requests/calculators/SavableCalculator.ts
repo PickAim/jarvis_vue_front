@@ -3,7 +3,7 @@ import type {
     CalculateRequestData,
     CalculateRequestInfoData,
     ISavableCalculateActions
-} from "@/types/CalculateRequestsTypes";
+} from "@/types/RequestTypes";
 import {ResultCode} from "@/types/ResultCode";
 import {ResultDescription} from "@/types/ResultDescription";
 

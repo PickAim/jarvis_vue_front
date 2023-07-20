@@ -1,7 +1,7 @@
 import type {
     CalculateRequestData,
     CalculateRequestInfoData, ISavableCalculateRequestActions
-} from "@/types/CalculateRequestsTypes";
+} from "@/types/RequestTypes";
 import type {NicheDistRequestData, NicheDistResultData, ResponseData, UnitEconomyResultData} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
 import {CalculateRequester} from "@/requests/requesters/CalculateRequester";

@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import type {
     CalculateRequestData,
     CalculateRequestInfoData, ISavableCalculatorStoreActions, ISavableCalculatorStoreState
-} from "@/types/CalculateRequestsTypes";
+} from "@/types/RequestTypes";
 import type {NicheDistRequestData, NicheDistResultData, UnitEconomyResultData} from "@/types/DataTypes";
 import type {UnitEconomyRequestData} from "@/types/DataTypes";
 

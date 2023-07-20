@@ -1,14 +1,13 @@
-import type {ISavableCalculatorStore} from "@/types/CalculateRequestsTypes";
-import {SavableCalculateActions} from "@/requests/calculate-actions/SavableCalculateActions";
+import type {ISavableCalculatorStore} from "@/types/RequestTypes";
+import {SavableCalculateActions} from "@/requests/request-actions/calculations/SavableCalculateActions";
 import {NicheDistRequestActions} from "@/requests/requesters/SavableCalculateRequester";
 import type {NicheDistRequestData, NicheDistResultData} from "@/types/DataTypes";
 
-export class NicheDistCalcActions<Q extends NicheDistRequestData, R extends NicheDistResultData>
+export class NicheDistActions<Q extends NicheDistRequestData, R extends NicheDistResultData>
     extends SavableCalculateActions<NicheDistRequestData, NicheDistResultData> {
     constructor(calcStore: ISavableCalculatorStore<Q, R>) {
         super(new NicheDistRequestActions(), calcStore);
     }
-
 
     prepareRequestData(request: NicheDistRequestData): NicheDistRequestData {
         return super.prepareRequestData(request);

@@ -1,15 +1,15 @@
 import type {ResponseData} from "@/types/DataTypes";
 import {ResultCode} from "@/types/ResultCode";
-import type {ICalculateActions, ICalculateRequestActions} from "@/types/CalculateRequestsTypes";
-import {useNotificationsStore} from "@/stores/notificationsStore";
+import type {ICalculateActions, ICalculateRequester} from "@/types/RequestTypes";
 import {ResultDescription} from "@/types/ResultDescription";
+import {RequestActions} from "@/requests/request-actions/RequestActions";
 
-export class CalculateActions<Q, R, TRequester extends ICalculateRequestActions<Q, R> = ICalculateRequestActions<Q, R>>
+export class CalculateActions<Q, R, TRequester extends ICalculateRequester<Q, R> = ICalculateRequester<Q, R>>
+    extends RequestActions<Q, R>
     implements ICalculateActions<Q, R> {
-    notificator;
 
     constructor(protected requester: TRequester) {
-        this.notificator = useNotificationsStore();
+        super();
     }
 
     async calculate(request: Q): Promise<ResponseData<R>> {
@@ -20,13 +20,5 @@ export class CalculateActions<Q, R, TRequester extends ICalculateRequestActions<
             this.notificator.addErrorNotification(ResultDescription[response.code]);
             return response;
         }
-    }
-
-    prepareRequestData(request: Q): Q {
-        return request;
-    }
-
-    prepareResultData(result: R): R {
-        return result;
     }
 }

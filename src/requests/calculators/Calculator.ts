@@ -1,5 +1,5 @@
 import {ResultCode} from "@/types/ResultCode";
-import type {ICalculateActions} from "@/types/CalculateRequestsTypes";
+import type {ICalculateActions} from "@/types/RequestTypes";
 
 export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActions<Q, R> = ICalculateActions<Q, R>> {
     request: Q = {} as Q;
@@ -25,12 +25,12 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
         this.isBusy = false;
     }
 
-    beforeCalculating(): Q | undefined {
+    protected beforeCalculating(): Q | undefined {
         // Override it to prepare and validate data
         return this.request;
     }
 
-    afterSuccessfulCalculating(result: R | undefined): R | undefined {
+    protected afterSuccessfulCalculating(result: R | undefined): R | undefined {
         // Override it to prepare and validate data
         return result;
     }

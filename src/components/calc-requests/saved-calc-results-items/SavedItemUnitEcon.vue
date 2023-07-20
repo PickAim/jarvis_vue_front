@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import {CalculateRequestData} from "@/types/CalculateRequestsTypes";
+import {CalculateRequestData} from "@/types/RequestTypes";
 import {
   UnitEconomyRequestData,
   UnitEconomyResultData

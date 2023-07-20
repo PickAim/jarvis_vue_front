@@ -2,10 +2,10 @@ import Requester from "@/requests/requesters/Requester";
 import type {ProductDownturnRequestData, ProductDownturnResultData, ResponseData} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
 
-import type {ICalculateRequestActions} from "@/types/CalculateRequestsTypes";
+import type {ICalculateRequester} from "@/types/RequestTypes";
 
 export class CalculateRequester<Q, R> extends Requester
-    implements ICalculateRequestActions<Q, R> {
+    implements ICalculateRequester<Q, R> {
     constructor(protected baseRequestURL: string) {
         super();
     }
@@ -19,16 +19,23 @@ export class CalculateRequester<Q, R> extends Requester
     }
 }
 
-export class ProductDownturnRequester
+export class DownturnRequester
     extends CalculateRequester<ProductDownturnRequestData, ProductDownturnResultData>{
     constructor() {
         super("/product-downturn");
     }
 }
 
-export class ProductTurnoverRequester
-    extends CalculateRequester<, >{
+export class TurnoverRequester
+    extends CalculateRequester<,>{
     constructor() {
         super("/product-turnover");
+    }
+}
+
+export class NicheCharacteristicsRequester
+    extends CalculateRequester<,>{
+    constructor() {
+        super("/niche-characteristics");
     }
 }

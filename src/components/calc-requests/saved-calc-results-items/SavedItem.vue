@@ -22,7 +22,7 @@
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
-import {CalculateRequestData} from "@/types/CalculateRequestsTypes";
+import {CalculateRequestData} from "@/types/RequestTypes";
 import {ref} from "vue";
 import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-items/index";
 

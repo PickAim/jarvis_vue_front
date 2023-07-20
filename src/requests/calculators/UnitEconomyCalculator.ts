@@ -1,8 +1,8 @@
 import type {
     CalculateRequestData,
     CalculateRequestInfoData
-} from "@/types/CalculateRequestsTypes";
-import {UnitEconomyCalculateActions} from "@/requests/calculate-actions/UnitEconomyCalculateActions";
+} from "@/types/RequestTypes";
+import {UnitEconomyActions} from "@/requests/request-actions/calculations/UnitEconomyActions";
 import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
@@ -22,7 +22,7 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     resultWarehouseKeys: (keyof ResultType)[] = ["storage_price"];
 
     constructor() {
-        super(new UnitEconomyCalculateActions(), "Запрос UNIT экономики");
+        super(new UnitEconomyActions(), "Запрос UNIT экономики");
     }
 
     initDefault(): void {

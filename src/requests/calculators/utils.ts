@@ -1,16 +1,16 @@
 // Decorator
-export function requestMethod(originalMethod: any, _context: any) {
-    console.log("decorator init");
-    async function replacementMethod(this: { isBusy: boolean }, ...args: any[]) {
-        console.log("run");
-        if (this.isBusy) return;
-        this.isBusy = true;
-        const result = await originalMethod.call(this, ...args);
-        this.isBusy = false;
-        return result;
-    }
-    return replacementMethod;
-}
+// export function requestMethod(originalMethod: any, _context: any) {
+//     console.log("decorator init");
+//     async function replacementMethod(this: { isBusy: boolean }, ...args: any[]) {
+//         console.log("run");
+//         if (this.isBusy) return;
+//         this.isBusy = true;
+//         const result = await originalMethod.call(this, ...args);
+//         this.isBusy = false;
+//         return result;
+//     }
+//     return replacementMethod;
+// }
 
 export function checkAndConvert<T extends Record<string, any>> (pattern: T, data: T): T | string {
     Object.keys(pattern).forEach(key => {

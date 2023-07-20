@@ -1,5 +1,5 @@
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
-import type {CalculateRequestData} from "@/types/CalculateRequestsTypes";
+import type {CalculateRequestData} from "@/types/RequestTypes";
 import {useUnitEconCalcStore} from "@/stores/CalcStores";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyRequestData} from "@/types/DataTypes";

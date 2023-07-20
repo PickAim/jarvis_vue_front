@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import SavedItem from "@/components/calc-requests/saved-calc-results-items/SavedItem.vue";
-import {CalculateRequestInfoData, CalculateRequestName} from "@/types/CalculateRequestsTypes";
+import {CalculateRequestInfoData, CalculateRequestName} from "@/types/RequestTypes";
 import type {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 
 const props = defineProps<{
