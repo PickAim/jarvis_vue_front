@@ -1,9 +1,9 @@
 import {useUnitEconCalcStore} from "@/stores/CalcStores";
-import {SavableCalculateActions} from "@/component-classes/calculators/SavableCalculateActions";
-import {UnitEconomyRequestActions} from "@/requests/request-actions/SavableCalculateRequestActions";
-import {convertMoneyToPennie, convertMoneyToRoubles} from "@/component-classes/calculators/utils";
+import {SavableCalculateActions} from "@/requests/calculate-actions/SavableCalculateActions";
+import {UnitEconomyRequestActions} from "@/requests/requesters/SavableCalculateRequester";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import {convertMoneyToPennie, convertMoneyToRoubles} from "@/requests/calculate-actions/utils";
 
 export class UnitEconomyCalculateActions<Q extends UnitEconomyRequestData, R extends UnitEconomyResultData>
     extends SavableCalculateActions<UnitEconomyRequestData, UnitEconomyResultData> {

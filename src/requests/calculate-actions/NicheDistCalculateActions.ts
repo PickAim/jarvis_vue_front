@@ -1,6 +1,6 @@
 import type {ISavableCalculatorStore} from "@/types/CalculateRequestsTypes";
-import {SavableCalculateActions} from "@/component-classes/calculators/SavableCalculateActions";
-import {NicheDistRequestActions} from "@/requests/request-actions/SavableCalculateRequestActions";
+import {SavableCalculateActions} from "@/requests/calculate-actions/SavableCalculateActions";
+import {NicheDistRequestActions} from "@/requests/requesters/SavableCalculateRequester";
 import type {NicheDistRequestData, NicheDistResultData} from "@/types/DataTypes";
 
 export class NicheDistCalcActions<Q extends NicheDistRequestData, R extends NicheDistResultData>

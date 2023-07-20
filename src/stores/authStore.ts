@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
+import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import type {TokenData} from "@/types/DataTypes";
 import type {ResultCode} from "@/types/ResultCode";
 

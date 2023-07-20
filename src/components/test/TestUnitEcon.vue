@@ -69,7 +69,7 @@ import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
-import {UnitEconomyCalculator} from "@/component-classes/calculators/UnitEconomyCalculator";
+import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
 import SavedItemsList from "@/components/calc-requests/SavedItemsList.vue";
 
 const calculator = reactive(new UnitEconomyCalculator());

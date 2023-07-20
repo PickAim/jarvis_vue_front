@@ -2,9 +2,9 @@ import type {
     CalculateRequestData,
     CalculateRequestInfoData
 } from "@/types/CalculateRequestsTypes";
-import {UnitEconomyCalculateActions} from "@/component-classes/calculators/UnitEconomyCalculateActions";
-import {SavableCalculator} from "@/component-classes/calculators/SavableCalculator";
-import {checkAndConvert, removeKeys} from "@/component-classes/calculators/utils";
+import {UnitEconomyCalculateActions} from "@/requests/calculate-actions/UnitEconomyCalculateActions";
+import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
+import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyRequestData} from "@/types/DataTypes";
 
@@ -35,7 +35,6 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
             removeKeys(pattern, this.requestTransitKeys);
         if (!this.isWarehouseOn)
             removeKeys(pattern, this.requestWarehouseKeys);
-        console.log("STEP 1", pattern);
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
             console.log(requestOrKey);

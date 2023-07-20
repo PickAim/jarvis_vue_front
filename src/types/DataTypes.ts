@@ -92,3 +92,10 @@ export interface NicheDistRequestData {
 export interface NicheDistResultData {
     a: number;
 }
+
+export interface ProductDownturnRequestData {
+    productIDs?: number[];
+}
+
+export type ProductDownturnResultData =
+    {[productGlobalID: number]: {[warehouseID: number]: {[productType: string]: number}}};

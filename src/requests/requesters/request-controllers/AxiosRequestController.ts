@@ -1,9 +1,9 @@
-import type IRequestController from "@/requests/request-actions/interfaces/IRequestController";
+import type IRequestController from "@/requests/requesters/interfaces/IRequestController";
 import type {RequestData, ResponseData, TokenData} from "@/types/DataTypes";
 import axios, {AxiosError} from "axios";
 import type {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {ResultCode} from "@/types/ResultCode";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
+import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 
 export default class AxiosRequestController implements IRequestController{
     axiosInst: AxiosInstance

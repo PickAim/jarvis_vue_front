@@ -4,10 +4,10 @@ import type {
 } from "@/types/CalculateRequestsTypes";
 import type {NicheDistRequestData, NicheDistResultData, ResponseData, UnitEconomyResultData} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
-import {CalculateRequestActions} from "@/requests/request-actions/CalculateRequestActions";
-import {UnitEconomyRequestData} from "@/types/DataTypes";
+import {CalculateRequester} from "@/requests/requesters/CalculateRequester";
+import type {UnitEconomyRequestData} from "@/types/DataTypes";
 
-export class SavableCalculateRequestActions<Q, R> extends CalculateRequestActions<Q, R>
+export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
     implements ISavableCalculateRequestActions<Q, R> {
     constructor(baseRequestURL: string) {
         super(baseRequestURL);
@@ -36,14 +36,14 @@ export class SavableCalculateRequestActions<Q, R> extends CalculateRequestAction
 }
 
 export class UnitEconomyRequestActions
-    extends SavableCalculateRequestActions<UnitEconomyRequestData, UnitEconomyResultData> {
+    extends SavableCalculateRequester<UnitEconomyRequestData, UnitEconomyResultData> {
     constructor() {
         super("/unit-econ");
     }
 }
 
 export class NicheDistRequestActions
-    extends SavableCalculateRequestActions<NicheDistRequestData, NicheDistResultData> {
+    extends SavableCalculateRequester<NicheDistRequestData, NicheDistResultData> {
     constructor() {
         super("/niche-frequency");
     }

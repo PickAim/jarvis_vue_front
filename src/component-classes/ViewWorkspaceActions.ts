@@ -1,5 +1,5 @@
 import {useWidgetStore} from "@/stores/widgetStore";
-import {UnitEconomyCalculator} from "@/component-classes/calculators/UnitEconomyCalculator";
+import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
 
 export class ViewWorkspaceActions {
     isLoading = false;

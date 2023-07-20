@@ -1,12 +1,12 @@
-import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
+import Requester from "@/requests/requesters/Requester";
 import type {LoginData, RegData, ResponseData, TokenData} from "@/types/DataTypes";
 import {ResultCode} from "@/types/ResultCode";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
+import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import {Configs} from "@/Configs";
 
-export default class AccountRequestActions extends AbstractRequestActions{
+export default class AccountRequester extends Requester{
     constructor(private authStore: IAuthStore) {
-        super(authStore);
+        super();
     }
 
     async loginPassword(loginData: LoginData): Promise<ResponseData<object>>{

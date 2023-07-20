@@ -4,7 +4,7 @@ import type {
     CalculateRequestInfoData, ISavableCalculatorStoreActions, ISavableCalculatorStoreState
 } from "@/types/CalculateRequestsTypes";
 import type {NicheDistRequestData, NicheDistResultData, UnitEconomyResultData} from "@/types/DataTypes";
-import {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {UnitEconomyRequestData} from "@/types/DataTypes";
 
 const copyObject = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 

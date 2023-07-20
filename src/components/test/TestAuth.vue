@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
+import AccountRequester from "@/requests/requesters/AccountRequester";
 import type {LoginData, RegData, ResponseData} from "@/types/DataTypes";
 import {ref} from "vue";
 import {ResultCode} from "@/types/ResultCode";
@@ -28,7 +28,7 @@ const rightRegData: RegData = {email: "k.buiko04@mail.ru", password: "qwe123@#$Q
 const rightLoginData: LoginData = {login: rightRegData.email, password: rightRegData.password}
 const wrongRegData: RegData = {email: "k.buiko04@mail.ru", phone: "79137428483", password: "qwe123"}
 
-const accountHandler = new AccountRequestActions(useAuthStore());
+const accountHandler = new AccountRequester(useAuthStore());
 let requestResult = ref("0");
 let isLoading = ref(false);
 

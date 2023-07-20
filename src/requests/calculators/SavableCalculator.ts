@@ -1,4 +1,4 @@
-import {Calculator} from "@/component-classes/calculators/Calculator";
+import {Calculator} from "@/requests/calculators/Calculator";
 import type {
     CalculateRequestData,
     CalculateRequestInfoData,
@@ -25,20 +25,14 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
     async deleteRequest(id: CalculateRequestInfoData["id"]) {
         if (this.isBusy) return;
         this.isBusy = true;
-        const response = await this.calculateActions.deleteRequest(id);
-        if(response.code !== ResultCode.OK) {
-            this.notificator.addErrorNotification(ResultDescription[response.code]);
-        }
+        await this.calculateActions.deleteRequest(id);
         this.isBusy = false;
     }
 
     async loadAll() {
         if (this.isBusy) return;
         this.isBusy = true;
-        const response = await this.calculateActions.loadAll();
-        if(response.code !== ResultCode.OK) {
-            this.notificator.addErrorNotification(ResultDescription[response.code]);
-        }
+        await this.calculateActions.loadAll();
         this.isBusy = false;
     }
 
@@ -51,9 +45,7 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
                 result: this.result,
                 info: this.info
             });
-            if (response.code !== ResultCode.OK || !response.result) {
-                this.notificator.addErrorNotification(ResultDescription[response.code]);
-            } else {
+            if (response.code === ResultCode.OK && response.result) {
                 this.info = response.result;
             }
         }

@@ -37,22 +37,6 @@ export function checkAndConvert<T extends Record<string, any>> (pattern: T, data
     return pattern;
 }
 
-export function convertMoneyToPennie<T extends Record<string, any>>(data: T, keys: (keyof T)[]): void {
-    Object.keys(data).forEach(key => {
-        if (keys.includes(key)) {
-            (data[key] as number) *= 100;
-        }
-    });
-}
-
-export function convertMoneyToRoubles<T extends Record<string, any>>(data: T, keys: (keyof T)[]): void {
-    Object.keys(data).forEach(key => {
-        if (keys.includes(key)) {
-            (data[key] as number) /= 100;
-        }
-    });
-}
-
 export function removeKeys<T extends Record<string, any>>(data: T, keys: (keyof T)[]): void {
     Object.keys(data).forEach(key => {
         if (keys.includes(key)) {

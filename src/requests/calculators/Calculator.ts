@@ -1,18 +1,13 @@
-import {requestMethod} from "@/component-classes/calculators/utils";
 import {ResultCode} from "@/types/ResultCode";
-import {useNotificationsStore} from "@/stores/notificationsStore";
 import type {ICalculateActions} from "@/types/CalculateRequestsTypes";
-import {ResultDescription} from "@/types/ResultDescription";
 
 export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActions<Q, R> = ICalculateActions<Q, R>> {
     request: Q = {} as Q;
     result: R | undefined;
     isBusy = false;
-    notificator;
 
     protected constructor(public calculateActions: TCalculateActions) {
         this.initDefault();
-        this.notificator = useNotificationsStore();
     }
 
     abstract initDefault(): void;
@@ -25,9 +20,6 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
             const response = await this.calculateActions.calculate(request as Q);
             if (response.code === ResultCode.OK && response.result) {
                 this.result = this.afterSuccessfulCalculating(response.result);
-            } else {
-                this.notificator.addErrorNotification(ResultDescription[response.code]);
-                // TODO: Some error message
             }
         }
         this.isBusy = false;

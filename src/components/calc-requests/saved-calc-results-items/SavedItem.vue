@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
-import {SavableCalculator} from "@/component-classes/calculators/SavableCalculator";
+import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 import {CalculateRequestData} from "@/types/CalculateRequestsTypes";
 import {ref} from "vue";
 import {savedRequestItems} from "@/components/calc-requests/saved-calc-results-items/index";
