@@ -3,13 +3,15 @@
     <template v-slot:header>Главная страница</template>
     <div class="main-section-wrapper">
       <div class="size-select">
-        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{i}}</ControlButton>
+        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>
       </div>
       <div class="widget-panel-buttons">
         <ControlButtonRound class="widget-panel-settings-button"
-                            @click="actions.openWidgetPanelSettingsOverlay()">SET</ControlButtonRound>
+                            @click="actions.openWidgetPanelSettingsOverlay()">SET
+        </ControlButtonRound>
         <ControlButtonRound class="widget-add-button"
-                            @click="actions.openWidgetAddOverlay()">ADD</ControlButtonRound>
+                            @click="actions.openWidgetAddOverlay()">ADD
+        </ControlButtonRound>
       </div>
       <div class="widget-panel"
            :class="{scrollable: isCtrl}"
@@ -55,7 +57,7 @@ const container = ref<HTMLElement | null>(null);
 const widgetStore = useWidgetStore();
 const {widgetClassList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 
-let startPos = [0,0];
+let startPos = [0, 0];
 let isPanelScrolling = false;
 let movingWidgetIndex = -1;
 
@@ -63,7 +65,7 @@ const isCtrl = ref(false);
 const isWidgetMoving = ref(false);
 const widgetWidth = computed(() => widgetBodyWidth(widgetSizeMode.value) + 'px');
 
-const scrollTimerHandlersArray = [-1,-1,-1,-1];
+const scrollTimerHandlersArray = [-1, -1, -1, -1];
 
 window.addEventListener('keydown', (e) => {
   if (e.ctrlKey)
@@ -76,43 +78,43 @@ window.addEventListener('keyup', (e) => {
 });
 
 window.addEventListener('mousemove', (e) => {
-  if(container.value) onWidgetMoveEdgeScroll(e, container.value);
+  onWidgetMoveEdgeScroll(e, container.value);
 })
 
-function onEditClick<N extends WidgetName>(w: WidgetClass<N>){
+function onEditClick<N extends WidgetName>(w: WidgetClass<N>) {
   actions.openWidgetSettingsOverlay(w);
 }
 
-function onPanelMouseDown(e: MouseEvent){
-  if(!e.ctrlKey || !container.value) return;
+function onPanelMouseDown(e: MouseEvent) {
+  if (!e.ctrlKey || !container.value) return;
   startPos = [e.pageX - container.value.offsetLeft, e.pageY - container.value.offsetTop];
   isPanelScrolling = true;
 }
 
-function onPanelMouseUp(){
+function onPanelMouseUp() {
   isPanelScrolling = false;
 }
 
-function onPanelMouseLeave(){
+function onPanelMouseLeave() {
   isPanelScrolling = false;
   isCtrl.value = false;
 }
 
-function onPanelMouseMove(e: MouseEvent){
-  if(isPanelScrolling && !e.ctrlKey) isPanelScrolling = false;
-  if(!isPanelScrolling || !container.value) return;
+function onPanelMouseMove(e: MouseEvent) {
+  if (isPanelScrolling && !e.ctrlKey) isPanelScrolling = false;
+  if (!isPanelScrolling || !container.value) return;
   e.preventDefault();
   const currentPos = [e.pageX - container.value.offsetLeft, e.pageY - container.value.offsetTop];
   const move = ([startPos[0] - currentPos[0], startPos[1] - currentPos[1]]);
-  if(container.value) {
+  if (container.value) {
     container.value.scrollTop += move[1] * 2;
     container.value.scrollLeft += move[0] * 2;
   }
   startPos = currentPos;
 }
 
-function onWidgetMouseEnter(idx: number){
-  if(!isWidgetMoving.value || (idx === movingWidgetIndex)) return;
+function onWidgetMouseEnter(idx: number) {
+  if (!isWidgetMoving.value || (idx === movingWidgetIndex)) return;
   widgetClassList.value[idx].targetIndex = widgetClassList.value[movingWidgetIndex].config.gridIndex;
 }
 
@@ -120,19 +122,19 @@ function onWidgetMouseLeave(idx: number) {
   widgetClassList.value[idx].targetIndex = -1;
 }
 
-function onWidgetMoveStart(idx: number){
+function onWidgetMoveStart(idx: number) {
   isWidgetMoving.value = true;
   movingWidgetIndex = idx;
 }
 
-function onWidgetMoveStop(ind: number){
+function onWidgetMoveStop(ind: number) {
   isWidgetMoving.value = false;
   scrollTimerHandlersArray.forEach((t, ind) => clearScrollInterval(ind));
   widgetStore.swapPosition(ind);
 }
 
 const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) => {
-  if(!isWidgetMoving.value) return;
+  if (!isWidgetMoving.value) return;
   const panelSize = panel.getBoundingClientRect();
   const panelPos = [panel.offsetLeft, panel.offsetTop];
   const mousePos = [e.pageX, e.pageY];
@@ -146,28 +148,28 @@ const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) =>
     Math.min(1, (mousePos[1] - (panelPos[1] + panelSize.height - offset)) / offset),
   ]
 
-  if(mousePos[0] < (panelPos[0] + offset)){
+  if (mousePos[0] < (panelPos[0] + offset)) {
     clearScrollInterval(0)
     scrollTimerHandlersArray[0] = window.setInterval(() => {
       panel.scrollLeft -= step * moveSpeedScale[0];
     }, delay);
   } else clearScrollInterval(0)
 
-  if (mousePos[1] < (panelPos[1] + offset)){
+  if (mousePos[1] < (panelPos[1] + offset)) {
     clearScrollInterval(1)
     scrollTimerHandlersArray[1] = window.setInterval(() => {
       panel.scrollTop -= step * moveSpeedScale[1];
     }, delay);
   } else clearScrollInterval(1)
 
-  if (mousePos[0] > (panelPos[0] + panelSize.width - offset)){
+  if (mousePos[0] > (panelPos[0] + panelSize.width - offset)) {
     clearScrollInterval(2)
     scrollTimerHandlersArray[2] = window.setInterval(() => {
       panel.scrollLeft += step * moveSpeedScale[2];
     }, delay);
   } else clearScrollInterval(2)
 
-  if (mousePos[1] > (panelPos[1] + panelSize.height - offset)){
+  if (mousePos[1] > (panelPos[1] + panelSize.height - offset)) {
     clearScrollInterval(3)
     scrollTimerHandlersArray[3] = window.setInterval(() => {
       panel.scrollTop += step * moveSpeedScale[3];
@@ -175,7 +177,7 @@ const onWidgetMoveEdgeScroll = _.throttle((e: MouseEvent, panel: HTMLElement) =>
   } else clearScrollInterval(3)
 }, 100);
 
-function clearScrollInterval(id: number){
+function clearScrollInterval(id: number) {
   clearInterval(scrollTimerHandlersArray[id]);
   scrollTimerHandlersArray[id] = -1;
 }
@@ -208,7 +210,8 @@ function clearScrollInterval(id: number){
       &:active {
         cursor: grabbing;
       }
-      *{
+
+      * {
         pointer-events: none;
       }
     }
@@ -218,7 +221,7 @@ function clearScrollInterval(id: number){
     }
   }
 
-  .widget-panel-buttons{
+  .widget-panel-buttons {
     position: absolute;
     bottom: 40px;
     right: 20px;
@@ -229,13 +232,13 @@ function clearScrollInterval(id: number){
     height: fit-content;
     z-index: 10;
 
-    .widget-panel-settings-button{
+    .widget-panel-settings-button {
       flex: 0 0 auto;
       width: 80px;
       height: 80px;
     }
 
-    .widget-add-button{
+    .widget-add-button {
       flex: 0 0 auto;
       width: 120px;
       height: 120px;
@@ -243,7 +246,7 @@ function clearScrollInterval(id: number){
     }
   }
 
-  .size-select{
+  .size-select {
     display: inline-flex;
   }
 }

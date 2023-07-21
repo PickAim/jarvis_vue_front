@@ -5,7 +5,7 @@ import type {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 
-export default class AxiosRequestController implements IRequestController{
+export default class AxiosRequestController implements IRequestController {
     axiosInst: AxiosInstance
 
     constructor(private authStore: IAuthStore) {
@@ -26,6 +26,7 @@ export default class AxiosRequestController implements IRequestController{
             responseType: responseType
         }
         const requestBody = {...this.authStore.getTokens(), ...body}
+        console.log(url, requestBody)
         // TODO: don't send update token!
 
         let req;
@@ -42,12 +43,11 @@ export default class AxiosRequestController implements IRequestController{
         try {
             const result = await req;
             return {code: ResultCode.OK, result: result.data};
-        }
-        catch(err){
-            if(!(err instanceof AxiosError))
+        } catch (err) {
+            if (!(err instanceof AxiosError))
                 return {code: ResultCode.FAIL, error: {description: "Unknown error"}};
             if (!err.response)
-                if(err.request)
+                if (err.request)
                     return {code: ResultCode.CONNECTION_ERROR, error: {description: err.request}};
                 else
                     return {code: ResultCode.CONFIGURATION_ERROR, error: {description: err.message}};
@@ -55,9 +55,9 @@ export default class AxiosRequestController implements IRequestController{
                 return {code: ResultCode.FAIL, error: {description: err.response.statusText}};
 
             // check token expired and update
-            if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN){
+            if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN) {
                 const updRes = await this.updateToken();
-                if(updRes.code !== ResultCode.OK)
+                if (updRes.code !== ResultCode.OK)
                     return {code: updRes.code, error: updRes.error};
                 return await this.makeRequest<K>(request)
             }
@@ -68,7 +68,7 @@ export default class AxiosRequestController implements IRequestController{
     async updateToken(): Promise<ResponseData<object>> {
         const request: RequestData = {url: "/update/update-all-tokens"};
         const response = await this.makeRequest<TokenData>(request);
-        if(response.code == ResultCode.OK && response.result !== undefined){
+        if (response.code == ResultCode.OK && response.result !== undefined) {
             const tokens = response.result;
             this.authStore.setTokens(tokens);
         }

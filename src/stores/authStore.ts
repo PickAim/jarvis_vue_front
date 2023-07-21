@@ -3,20 +3,29 @@ import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import type {TokenData} from "@/types/DataTypes";
 import type {ResultCode} from "@/types/ResultCode";
 
-export const useAuthStore = defineStore<"authStore",any,any, IAuthStore>("authStore", {
-    actions:{
+export const useAuthStore = defineStore<"authStore", TokenData, any, IAuthStore>("authStore", {
+    state: () => ({
+        access_token: "",
+        imprint_token: "",
+        update_token: ""
+    }),
+    actions: {
         // TODO: add token storage realization
         getTokens(): TokenData {
-            return {} as TokenData;
+            return {
+                access_token: this.access_token,
+                imprint_token: this.imprint_token,
+                update_token: this.update_token
+            };
         },
-        setAccessToken(token: string): ResultCode {
-            return {} as ResultCode;
+        setAccessToken(token: string) {
+            this.access_token = token;
         },
-        setImprint(key: string | undefined): ResultCode {
-            return {} as ResultCode;
+        setImprint(token: string | undefined) {
+            this.imprint_token = token;
         },
-        setUpdateToken(token: string): ResultCode {
-            return {} as ResultCode;
+        setUpdateToken(token: string) {
+            this.update_token = token;
         },
         setTokens(token: TokenData) {
             this.setAccessToken(token.access_token);
