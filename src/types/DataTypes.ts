@@ -2,10 +2,10 @@ import type {ResponseType} from "axios";
 import type {ResultCode} from "@/types/ResultCode";
 
 export interface RequestData {
-    readonly url: string;
-    readonly method?: "POST" | "GET";
-    readonly body?: any;
-    readonly responseType?: ResponseType;
+    url: string;
+    method?: "POST" | "GET";
+    body?: any;
+    responseType?: ResponseType;
 }
 
 export interface ResponseData<K> {
@@ -14,20 +14,20 @@ export interface ResponseData<K> {
     error?: JarvisException
 }
 
-export interface JarvisException{
-    readonly jarvis_exception?: number,
-    readonly description: string
+export interface JarvisException {
+    jarvis_exception?: number,
+    description: string
 }
 
 export interface TokenData {
-    readonly access_token: string;
-    readonly update_token: string;
-    readonly imprint_token?: string;
+    access_token: string;
+    update_token: string;
+    imprint_token?: string;
 }
 
 export interface LoginData {
-    readonly login: string;
-    readonly password: string;
+    login: string;
+    password: string;
 }
 
 export interface RegData {
@@ -60,11 +60,17 @@ export interface SubscribeData {
     pay_api_key?: string;
 }
 
-export class UnitEconomyRequestData {
+export interface NicheRequestData {
+    niche: string;
+    category_id: number;
+    marketplace_id: number;
+}
+
+export class UnitEconomyRequestData implements NicheRequestData {
     buy = NaN; // Need
     pack = NaN; // Need
     niche = ""; // Need
-    category = ""; // Need
+    category_id = 0; // Need
     marketplace_id = 0;
     transit_count? = NaN;
     transit_price? = NaN;
@@ -85,17 +91,47 @@ export interface UnitEconomyResultData {
     transit_margin?: number; // Маржа с транзита (%)
 }
 
-export interface NicheDistRequestData {
-    a: number;
-}
+export type NicheDistRequestData = NicheRequestData;
 
 export interface NicheDistResultData {
-    a: number;
+    x: number[];
+    y: number[];
 }
 
-export interface ProductDownturnRequestData {
-    productIDs?: number[];
+export interface DownturnRequestData {
+    // TODO: Rename after server realization
+    product_ids?: number[];
 }
 
-export type ProductDownturnResultData =
-    {[productGlobalID: number]: {[warehouseID: number]: {[productType: string]: number}}};
+export type DownturnResultData =
+    { [productGlobalID: number]: { [warehouseID: number]: { [productType: string]: number } } };
+
+export interface TurnoverRequestData {
+    // TODO: Rename after server realization
+    product_ids?: number[];
+}
+
+export type TurnoverResultData =
+    { [productGlobalID: number]: { [warehouseID: number]: { [productType: string]: number } } };
+
+export type NicheCharacteristicsRequestData = NicheRequestData;
+
+export interface NicheCharacteristicsResultData {
+    card_count: number;
+    niche_profit: number;
+    card_trade_count: number;
+    mean_card_rating: number;
+    card_with_trades_count: number;
+    daily_mean_niche_profit: number;
+    daily_mean_trade_count: number;
+    mean_traded_card_cost: number;
+    month_mean_niche_profit_per_card: number;
+    monopoly_percent: number;
+    maximum_profit_idx: number;
+}
+
+export type AllMarketplacesResultData = { [marketplaceID: number]: string }
+
+export type AllNichesResultData = { [nicheID: number]: string }
+
+export type AllCategoriesResultData = { [categoryID: number]: string }

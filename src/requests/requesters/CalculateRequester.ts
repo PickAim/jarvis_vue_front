@@ -1,5 +1,11 @@
 import Requester from "@/requests/requesters/Requester";
-import type {ProductDownturnRequestData, ProductDownturnResultData, ResponseData} from "@/types/DataTypes";
+import type {
+    DownturnRequestData,
+    DownturnResultData, NicheCharacteristicsRequestData, NicheCharacteristicsResultData,
+    ResponseData,
+    TurnoverRequestData,
+    TurnoverResultData
+} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
 
 import type {ICalculateRequester} from "@/types/RequestTypes";
@@ -20,21 +26,21 @@ export class CalculateRequester<Q, R> extends Requester
 }
 
 export class DownturnRequester
-    extends CalculateRequester<ProductDownturnRequestData, ProductDownturnResultData>{
+    extends CalculateRequester<DownturnRequestData, DownturnResultData> {
     constructor() {
         super("/product-downturn");
     }
 }
 
 export class TurnoverRequester
-    extends CalculateRequester<,>{
+    extends CalculateRequester<TurnoverRequestData, TurnoverResultData> {
     constructor() {
         super("/product-turnover");
     }
 }
 
 export class NicheCharacteristicsRequester
-    extends CalculateRequester<,>{
+    extends CalculateRequester<NicheCharacteristicsRequestData, NicheCharacteristicsResultData> {
     constructor() {
         super("/niche-characteristics");
     }
