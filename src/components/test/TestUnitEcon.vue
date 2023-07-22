@@ -2,7 +2,6 @@
   <div class="unit-econ-wrapper">
     <div class="calc-input-wrapper">
       <div class="calc-control-button-wrapper">
-        <ComponentPreloader :is-loading="calculator.isBusy"/>
         <ControlButton @click="getAllClickHandler"
                        class="button">[Запросить с сервера]
         </ControlButton>
@@ -66,7 +65,6 @@ import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
-import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";

@@ -1,14 +1,18 @@
 import type IRequestController from "@/requests/requesters/interfaces/IRequestController";
 import type {RequestData, ResponseData, TokenData} from "@/types/DataTypes";
-import axios, {AxiosError} from "axios";
+import axios, {AxiosError, CanceledError} from "axios";
 import type {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {ResultCode} from "@/types/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
+import {useRequestStore} from "@/stores/requestStore";
+import {Configs} from "@/Configs";
 
 export default class AxiosRequestController implements IRequestController {
     axiosInst: AxiosInstance
+    requestStore;
 
     constructor(private authStore: IAuthStore) {
+        this.requestStore = useRequestStore();
         this.axiosInst = axios.create({
             baseURL: 'http://localhost:8090/',
             headers: {
@@ -22,11 +26,17 @@ export default class AxiosRequestController implements IRequestController {
         Promise<ResponseData<K>> {
         const {url, body = {}, method = "GET", responseType = "json"} = request;
 
+        const controller = new AbortController();
         const config: AxiosRequestConfig = {
-            responseType: responseType
+            responseType: responseType,
+            signal: controller.signal
         }
-        const requestBody = {...this.authStore.getTokens(), ...body}
-        console.log(url, requestBody)
+        const requestBody = body;
+        if (url.startsWith(Configs.UpdateRequestPrefix)) {
+            Object.assign(requestBody, this.authStore.getTokens());
+        } else if (url.startsWith(Configs.AccessRequestPrefix)) {
+            requestBody["access_token"] = this.authStore.getTokens().access_token;
+        }
         // TODO: don't send update token!
 
         let req;
@@ -40,33 +50,46 @@ export default class AxiosRequestController implements IRequestController {
         if (!req)
             return {code: ResultCode.CONFIGURATION_ERROR}
 
+        let response;
         try {
+            this.requestStore.loadingStart(controller);
             const result = await req;
-            return {code: ResultCode.OK, result: result.data};
+            this.requestStore.loadingStop();
+            response = {code: ResultCode.OK, result: result.data};
         } catch (err) {
-            if (!(err instanceof AxiosError))
-                return {code: ResultCode.FAIL, error: {description: "Unknown error"}};
-            if (!err.response)
-                if (err.request)
-                    return {code: ResultCode.CONNECTION_ERROR, error: {description: err.request}};
-                else
-                    return {code: ResultCode.CONFIGURATION_ERROR, error: {description: err.message}};
-            if (!(err.response.data instanceof Object) || !(err.response.data.jarvis_exception !== undefined))
-                return {code: ResultCode.FAIL, error: {description: err.response.statusText}};
-
-            // check token expired and update
-            if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN) {
+            if (err instanceof CanceledError) {
+                console.log(err)
+                response = {code: ResultCode.CANCEL_ERROR, error: {description: "Cancelled error"}};
+            } else if (!(err instanceof AxiosError)) {
+                response = {code: ResultCode.FAIL, error: {description: "Unknown error"}};
+            } else if (!err.response) {
+                if (err.request) {
+                    response = {code: ResultCode.CONNECTION_ERROR, error: {description: err.request}};
+                } else {
+                    response = {code: ResultCode.CONFIGURATION_ERROR, error: {description: err.message}};
+                }
+            } else if (!(err.response.data instanceof Object) || !(err.response.data.jarvis_exception !== undefined)) {
+                response = {code: ResultCode.FAIL, error: {description: err.response.statusText}};
+            } else if (err.response.data.jarvis_exception === ResultCode.EXPIRED_TOKEN) {
+                // check token expired and update
                 const updRes = await this.updateToken();
-                if (updRes.code !== ResultCode.OK)
-                    return {code: updRes.code, error: updRes.error};
-                return await this.makeRequest<K>(request)
+                if (updRes.code !== ResultCode.OK) {
+                    response = {code: updRes.code, error: updRes.error};
+                } else {
+                    response = await this.makeRequest<K>(request);
+                }
+            } else {
+                response = {code: err.response.data.jarvis_exception, error: err.response.data};
             }
-            return {code: err.response.data.jarvis_exception, error: err.response.data};
         }
+        if (response.code !== ResultCode.CANCEL_ERROR) {
+            this.requestStore.loadingStop();
+        }
+        return response;
     }
 
     async updateToken(): Promise<ResponseData<object>> {
-        const request: RequestData = {url: "/update/update-all-tokens"};
+        const request: RequestData = {url: Configs.UpdateRequestPrefix + "/update-all-tokens"};
         const response = await this.makeRequest<TokenData>(request);
         if (response.code == ResultCode.OK && response.result !== undefined) {
             const tokens = response.result;

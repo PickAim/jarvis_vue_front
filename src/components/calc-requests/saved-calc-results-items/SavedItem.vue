@@ -1,6 +1,5 @@
 <template>
   <div class="saved-item-wrapper">
-    <ComponentPreloader :is-loading="isLoading"/>
     <header>
       <div class="name">
         {{ request.info.name }}
@@ -20,7 +19,6 @@
 
 <script setup lang="ts">
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
-import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
 import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 import {CalculateRequestData} from "@/types/RequestTypes";
 import {ref} from "vue";

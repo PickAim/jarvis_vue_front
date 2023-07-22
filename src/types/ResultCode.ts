@@ -3,6 +3,7 @@ export enum ResultCode {
     FAIL = 1,
     CONNECTION_ERROR = 2,
     CONFIGURATION_ERROR = 3,
+    CANCEL_ERROR = 4,
 
     // authorization exceptions
     INCORRECT_LOGIN_OR_PASSWORD = 1010,

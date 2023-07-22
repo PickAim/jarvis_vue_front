@@ -1,6 +1,5 @@
 <template>
   <div class="template-wrapper" ref="templateWrapper">
-    <ComponentPreloader :is-loading="isLoading"/>
     <OverlayHeader class="header">{{headerText}}</OverlayHeader>
     <div class="main-wrapper">
       <slot/>
@@ -10,11 +9,6 @@
 
 <script setup lang="ts">
 import OverlayHeader from "@/components/overlays/OverlayHeader.vue";
-import {storeToRefs} from "pinia";
-import {useOverlayStateStore} from "@/stores/overlayStore";
-import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
-
-const {isLoading} = storeToRefs(useOverlayStateStore())
 
 defineProps<{
   headerText: string

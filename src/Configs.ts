@@ -1,3 +1,4 @@
 export const Configs = {
-    AccessRequestPrefix: "/access"
+    AccessRequestPrefix: "/access",
+    UpdateRequestPrefix: "/update"
 }
