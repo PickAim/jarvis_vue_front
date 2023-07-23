@@ -31,21 +31,23 @@ export default class AxiosRequestController implements IRequestController {
             responseType: responseType,
             signal: controller.signal
         }
-        const requestBody = body;
+
+        const tokens: TokenData = {} as TokenData;
         if (url.startsWith(Configs.UpdateRequestPrefix)) {
-            Object.assign(requestBody, this.authStore.getTokens());
+            Object.assign(tokens, this.authStore.getTokens());
         } else if (url.startsWith(Configs.AccessRequestPrefix)) {
-            requestBody["access_token"] = this.authStore.getTokens().access_token;
+            tokens["access_token"] = this.authStore.getTokens().access_token;
+            tokens["imprint_token"] = this.authStore.getTokens().imprint_token;
         }
-        // TODO: don't send update token!
+        config.params = tokens;
 
         let req;
         if (method == "GET") {
-            config.params = requestBody;
+            config.params = {...config.params, ...body};
             req = this.axiosInst.get<K>(url, config)
         }
         if (method == "POST") {
-            req = this.axiosInst.post<K>(url, requestBody, config)
+            req = this.axiosInst.post<K>(url, body, config)
         }
         if (!req)
             return {code: ResultCode.CONFIGURATION_ERROR}

@@ -25,7 +25,7 @@ export default class AccountRequester extends Requester{
     async loginToken(): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
             url: Configs.AccessRequestPrefix + "/auth/",
-            method: "GET",
+            method: "POST",
         });
     }
 
