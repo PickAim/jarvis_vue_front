@@ -17,8 +17,8 @@ import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecor
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 
-import {ref} from "vue";
-import {OverlayLoginActions} from "@/component-classes/overlays-actions/OverlayLoginActions";
+import { ref } from "vue";
+import { OverlayLoginActions } from "@/component-classes/overlays-actions/OverlayLoginActions";
 
 const loginInput = ref("")
 const passwordInput = ref("")

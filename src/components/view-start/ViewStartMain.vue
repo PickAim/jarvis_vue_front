@@ -7,7 +7,8 @@
     <ViewStartTrustedBlock />
     <ViewStartComponentSlot />
     <ViewStartFormBlock />
-    <!--<VitwStartHeaderOverlay/>-->
+    <ViewStartTraiffLinkBlock />
+    <!--<ViewStartHeaderOverlay/>-->
     <!--use on mobile version screen -->
   </main>
 </template>
@@ -18,9 +19,9 @@ import ViewStartAboutJarvis from "./ViewStartComponentsMian/ViewStartAboutJarvis
 import ViewStartTariffs from "./ViewStartComponentsMian/ViewStartTariffs.vue"
 import ViewStartTrustedBlock from "./ViewStartComponentsMian/ViewStartTrustedBlock.vue";
 import ViewStartComponentSlot from "./ViewStartComponentsMian/ViewStartComponentSlot.vue";
-import ViewStartFormBlock from "./ViewStartComponentsMian/ViewStartFormBlock.vue"
-/*import VitwStartHeaderOverlay from "./ViewStartComponentsMian/VitwStartHeaderOverlay.vue"*/
-
+import ViewStartFormBlock from "./ViewStartComponentsMian/ViewStartFormBlock.vue";
+/*import ViewStartHeaderOverlay from "./ViewStartComponentsMian/ViewStartHeaderOverlay.vue"*/
+import ViewStartTraiffLinkBlock from "./ViewStartTraiffLinkBlock.vue"
 </script>
 <style scoped lang="scss">
 main {
@@ -29,19 +30,5 @@ main {
   flex-direction: column;
   flex: 0 0 auto;
   background: #191919;
-
-  h1 {
-    @font-face {
-      font-family: Inter;
-      src: url(src\assets\fonts\Inter-SemiBold.otf);
-    }
-  }
-
-  p {
-    @font-face {
-      font-family: Montserrat;
-      src: url(src\assets\fonts\Montserrat-LightItalic.ttf);
-    }
-  }
 }
 </style>
