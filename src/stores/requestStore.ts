@@ -14,7 +14,6 @@ export const useRequestStore = defineStore('requestStore', () => {
     }
 
     function loadingStop() {
-        console.log("LOADING STOP");
         isLoading.value = false;
         abortController.value = undefined;
     }

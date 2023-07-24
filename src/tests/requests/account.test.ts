@@ -41,10 +41,10 @@ test('login test', async () => {
         password: "Str123ing##",
     });
     expect(response.code).toBe(ResultCode.OK);
-    console.log("LOGINED");
+
     const response2 = await requester.loginToken();
     expect(response2.code).toBe(ResultCode.OK);
-    console.log("TOKEN LOGINED");
+
     const requester3 = new DownturnRequester();
     const response3 = await requester3.calculate({});
     expect(response3.code).toBe(ResultCode.OK);
