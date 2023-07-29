@@ -14,4 +14,8 @@ export class ViewStartActions {
     openRegistrationOverlay(){
         this.overlayState.openOverlay('registration');
     }
+
+    openMobMenu(){
+        this.overlayState.openOverlay('mobmenu');
+    }
 }

@@ -2,12 +2,15 @@
   <header>
     <div class="buttons-wrapper">
       <button class="about-product">О продукте</button>
-      <button class="tariffs">Тарифы</button>
+      <button class="tariffs" @click="router.push('ViewTariffs')">Тарифы</button>
       <button class="question">Вопросы</button>
       <button class="login-button" @click="router.push('workspace')">На работу</button>
       <button class="login-button" @click="actions.openLoginOverlay()">Вход</button>
       <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
     </div>
+    <button class="mob-menu" @click="actions.openMobMenu()">
+      <img src="src\assets\icon-mob-menu.png" alt="">
+    </button>
   </header>
 </template>
 
@@ -15,7 +18,6 @@
 
 import { ViewStartActions } from "@/component-classes/ViewStartActions";
 import { useRouter } from "vue-router";
-
 const actions = new ViewStartActions();
 const router = useRouter();
 </script>
@@ -29,20 +31,6 @@ header {
   width: 100%;
   color: white;
   background-color: #191919;
-
-  h1 {
-    @font-face {
-      font-family: Inter;
-      src: url(src\assets\Inter-SemiBold.otf);
-    }
-  }
-
-  p {
-    @font-face {
-      font-family: Montserrat;
-      src: url(src\assets\Montserrat-LightItalic.ttf);
-    }
-  }
 }
 
 .buttons-wrapper {
@@ -55,20 +43,34 @@ header {
   justify-content: space-around;
 
   button {
-    @font-face {
-      font-family: Inter;
-      src: url(src\assets\fonts\Inter-SemiBold.otf);
-    }
-
     font-weight: 400;
     font-size: 24px;
     line-height: 29px;
   }
 }
 
-@media (max-width: $tag-width) {
-  .buttons-wrapper {
-    display: none;
-  }
+.mob-menu {
+  display: none;
 }
-</style>
+
+@media (max-width: $tag-width) {
+  header {
+    display: flex;
+    flex-direction: column; 
+
+    .buttons-wrapper {
+      display: none;
+    }
+
+    .mob-menu {
+      display: flex;
+      justify-content: flex-end;
+      margin: 50px 50px 0px 50px;
+
+      img {
+        width: 40px;
+        height: 20px;
+      }
+    }
+  }
+}</style>

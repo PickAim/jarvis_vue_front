@@ -1,5 +1,5 @@
 <template>
-    <div class="text-menu-wrapper">
+    <div class="text-menu-wrapper" id="questions">
         <div class="questions">
             <h1>ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ:</h1>
         </div>

@@ -7,21 +7,19 @@
     <ViewStartTrustedBlock />
     <ViewStartComponentSlot />
     <ViewStartFormBlock />
-    <ViewStartTraiffLinkBlock />
+    <!--<ViewStartTraiffLinkBlock />-->
     <!--<ViewStartHeaderOverlay/>-->
     <!--use on mobile version screen -->
   </main>
 </template>
 <script setup lang="ts">
-import ViewStartStartBlock from "./ViewStartComponentsMian/ViewStartStartBlock.vue";
-import ViewStartCardsBlock from "./ViewStartComponentsMian/ViewStartCardsBlock.vue";
-import ViewStartAboutJarvis from "./ViewStartComponentsMian/ViewStartAboutJarvis.vue";
-import ViewStartTariffs from "./ViewStartComponentsMian/ViewStartTariffs.vue"
-import ViewStartTrustedBlock from "./ViewStartComponentsMian/ViewStartTrustedBlock.vue";
-import ViewStartComponentSlot from "./ViewStartComponentsMian/ViewStartComponentSlot.vue";
-import ViewStartFormBlock from "./ViewStartComponentsMian/ViewStartFormBlock.vue";
-/*import ViewStartHeaderOverlay from "./ViewStartComponentsMian/ViewStartHeaderOverlay.vue"*/
-import ViewStartTraiffLinkBlock from "./ViewStartTraiffLinkBlock.vue"
+import ViewStartStartBlock from "./ViewStartComponentsMain/ViewStartStartBlock.vue";
+import ViewStartCardsBlock from "./ViewStartComponentsMain/ViewStartCardsBlock.vue";
+import ViewStartAboutJarvis from "./ViewStartComponentsMain/ViewStartAboutJarvis.vue";
+import ViewStartTariffs from "./ViewStartComponentsMain/ViewStartTariffs.vue"
+import ViewStartTrustedBlock from "./ViewStartComponentsMain/ViewStartTrustedBlock.vue";
+import ViewStartComponentSlot from "./ViewStartComponentsMain/ViewStartComponentSlot.vue";
+import ViewStartFormBlock from "./ViewStartComponentsMain/ViewStartFormBlock.vue";
 </script>
 <style scoped lang="scss">
 main {

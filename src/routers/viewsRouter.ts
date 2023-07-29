@@ -6,7 +6,7 @@ import ViewWorkspaceSectionUnitCalc
     from "@/components/view-workspace/ViewWorkspaceSectionUnitCalc.vue";
 import ViewWorkspaceSectionStatistic
     from "@/components/view-workspace/ViewWorkspaceSectionStatistic.vue";
-
+    import ViewTariffs from "../views/ViewTariffs.vue" ;
 export const viewRoutes: RouteRecordRaw[] = [
     {
         path: '/',
@@ -32,4 +32,10 @@ export const viewRoutes: RouteRecordRaw[] = [
                 path: 'statistic',
                 component: ViewWorkspaceSectionStatistic
             }]
-    }];
+    },
+    {
+        name: 'ViewStart',
+        path: '/ViewTariffs',
+        component: ViewTariffs,
+    }
+];

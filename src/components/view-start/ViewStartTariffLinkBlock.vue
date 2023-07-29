@@ -13,67 +13,67 @@
                 ТАРИФЫ:
             </div>
             <div class="tariff-table">
-                <div class="tariffs-types">
+                <div class="tariffs-types classes">
                     <div></div>
                     <div class="base-type">БАЗОВЫЙ</div>
                     <div class="advanced-type">ПРОДВИНУТЫЙ</div>
                     <div class="professional-type">ПРОФЕССИОНАЛЬНЫЙ</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Дашборд с ключивыми показателями</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Калькулятор юнит-экономики</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Оценка финансового здоровья магазина</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Расчет поставки</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Смарт-анализ товарной ниши</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Управление остатками на складах</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Рекомендации по цене</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">Сегментарный анализ</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="advantages">
+                <div class="advantages classes">
                     <div class="advantages-title">SEO-оптимизация</div>
                     <div>+</div>
                     <div>+</div>
                     <div>+</div>
                 </div>
-                <div class="type-price">
+                <div class="type-price classes">
                     <div></div>
                     <div class="price-block">
                         <button class="button-price">5000</button>
@@ -243,10 +243,12 @@ $tag-width: 1150px;
             max-width: 1000px;
             text-align: center;
             padding: 30px 40px;
-
+            .classes{
+                display: grid;
+                grid-template-columns: minmax(100px, 1.5fr) 1.5fr 1.5fr 1.5fr;
+            }
             .tariffs-types {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
                 text-align: center;
                 border-bottom: 1px solid rgba(183, 255, 68, 1);
                 padding: 10px 0px 20px 10px;
@@ -275,7 +277,6 @@ $tag-width: 1150px;
 
             .advantages {
                 display: grid;
-                grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;
                 padding: 10px;
                 text-align: center;
                 align-items: center;
@@ -293,7 +294,6 @@ $tag-width: 1150px;
 
             .type-price {
                 display: grid;
-                grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;
                 text-align: center;
                 padding: 10px;
 
