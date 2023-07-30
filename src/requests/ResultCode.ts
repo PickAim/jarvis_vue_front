@@ -5,6 +5,9 @@ export enum ResultCode {
     CONFIGURATION_ERROR = 3,
     CANCEL_ERROR = 4,
 
+    // registration exceptions
+    REGISTER_EXISTING_LOGIN = 1000,
+
     // authorization exceptions
     INCORRECT_LOGIN_OR_PASSWORD = 1010,
 
@@ -16,13 +19,17 @@ export enum ResultCode {
     NOT_HAS_SPECIAL_SIGNS = 1060,
     HAS_WHITE_SPACES = 1070,
 
-    // registration exceptions
-    REGISTER_EXISTING_LOGIN = 1080,
+    // phone number correctness exceptions
+    INVALID_PHONE_NUMBER = 1080,
+    INVALID_EMAIL = 1090,
 
     // token exceptions
     INCORRECT_TOKEN = 2010,
     EXPIRED_TOKEN = 2020,
 
-    // input error
-    INCORRECT_INPUT = 1101,
+    INCORRECT_GRANT_TYPE = 3010,
+
+    INCORRECT_NICHE = 4010,
+
+    TIMEOUT = 5040
 }

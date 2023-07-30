@@ -1,33 +1,38 @@
 import {defineStore} from "pinia";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import type {TokenData} from "@/types/DataTypes";
-import type {ResultCode} from "@/types/ResultCode";
+import {useLocalStorage} from "@vueuse/core";
 
-export const useAuthStore = defineStore<"authStore", TokenData, any, IAuthStore>("authStore", {
+export const useAuthStore = defineStore<any, any, any, IAuthStore>("authStore", {
     state: () => ({
-        access_token: "",
-        imprint_token: "",
-        update_token: ""
+        access_token: useLocalStorage<string | undefined>("accessToken", undefined),
+        imprint_token: useLocalStorage<string | undefined>("imprintToken", undefined),
+        update_token: useLocalStorage<string | undefined>("updateToken", undefined)
     }),
     actions: {
-        // TODO: add token storage realization
-        getTokens(): TokenData {
+        getTokens(): { [ind in keyof TokenData]: string | undefined } {
             return {
                 access_token: this.access_token,
                 imprint_token: this.imprint_token,
                 update_token: this.update_token
             };
         },
-        setAccessToken(token: string) {
+        setAccessToken(token: string | undefined) {
             this.access_token = token;
         },
         setImprint(token: string | undefined) {
             this.imprint_token = token;
         },
-        setUpdateToken(token: string) {
+        setUpdateToken(token: string | undefined) {
             this.update_token = token;
         },
-        setTokens(token: TokenData) {
+        setTokens(token: TokenData | undefined) {
+            if (!token) {
+                this.setAccessToken(undefined);
+                this.setImprint(undefined);
+                this.setUpdateToken(undefined);
+                return;
+            }
             this.setAccessToken(token.access_token);
             this.setImprint(token.imprint_token);
             this.setUpdateToken(token.update_token);

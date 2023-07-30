@@ -4,7 +4,7 @@ import type {
     CalculateRequestInfoData,
     ISavableCalculateActions
 } from "@/types/RequestTypes";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 
 export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableCalculateActions<Q, R>> {
     isRequestChanged = false;

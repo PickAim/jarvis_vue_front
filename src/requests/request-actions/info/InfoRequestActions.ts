@@ -1,8 +1,8 @@
 import type {IInfoActions, IInfoRequester} from "@/types/RequestTypes";
 import {RequestActions} from "@/requests/request-actions/RequestActions";
 import type {ResponseData} from "@/types/DataTypes";
-import {ResultCode} from "@/types/ResultCode";
-import {ResultDescription} from "@/types/ResultDescription";
+import {ResultCode} from "@/requests/ResultCode";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export class InfoRequestActions<Q, R>
     extends RequestActions<Q, R>
@@ -17,7 +17,7 @@ export class InfoRequestActions<Q, R>
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         } else {
-            this.notificator.addErrorNotification(ResultDescription[response.code]);
+            ErrorHandler.handle(response.code);
             return response;
         }
     }

@@ -1,5 +1,5 @@
 import {expect, test, beforeAll} from 'vitest'
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import {createPinia, setActivePinia} from "pinia";
 import AccountRequester from "@/requests/requesters/AccountRequester";
 import {useAuthStore} from "@/stores/authStore";

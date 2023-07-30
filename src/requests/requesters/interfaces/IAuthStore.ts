@@ -1,14 +1,13 @@
 import type {TokenData} from "@/types/DataTypes";
-import type {ResultCode} from "@/types/ResultCode";
 
 export default interface IAuthStore {
-    setAccessToken(token: string): void,
+    setAccessToken(token: string | undefined): void,
 
-    setUpdateToken(token: string): void,
+    setUpdateToken(token: string | undefined): void,
 
     setImprint(key: string | undefined): void,
 
-    setTokens(token: TokenData): void,
+    setTokens(token: TokenData | undefined): void,
 
-    getTokens(): TokenData,
+    getTokens(): { [ind in keyof TokenData]: string | undefined },
 }

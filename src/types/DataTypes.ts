@@ -1,5 +1,5 @@
 import type {ResponseType} from "axios";
-import type {ResultCode} from "@/types/ResultCode";
+import type {ResultCode} from "@/requests/ResultCode";
 
 export interface RequestData {
     url: string;

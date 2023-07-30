@@ -1,6 +1,6 @@
 import Requester from "@/requests/requesters/Requester";
 import type {LoginData, RegData, ResponseData, TokenData} from "@/types/DataTypes";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import {Configs} from "@/Configs";
 

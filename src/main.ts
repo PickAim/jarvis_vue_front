@@ -9,7 +9,6 @@ import '@/assets/tailwind.css'
 const app = createApp(App)
 
 app.use(createPinia())
-//app.use(VueDragscroll);
 app.use(router)
 
 app.mount('#app')

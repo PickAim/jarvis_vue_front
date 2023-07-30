@@ -1,10 +1,10 @@
 import {OverlayActions} from "@/component-classes/overlays-actions/OverlayActions";
 import type {RegData} from "@/types/DataTypes";
 import AccountRequester from "@/requests/requesters/AccountRequester";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import {useNotificationsStore} from "@/stores/notificationsStore";
-import {ResultDescription} from "@/types/ResultDescription";
 import {useAuthStore} from "@/stores/authStore";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export class OverlayRegistrationActions extends OverlayActions{
     accountRequestActions: AccountRequester;
@@ -21,13 +21,10 @@ export class OverlayRegistrationActions extends OverlayActions{
         this.startLoading();
         try {
             const response = await this.accountRequestActions.registration(data);
-            if(response.code === ResultCode.OK)
-                this.notificationsStore.addSuccessNotification(["Успех", "Вы зарегестрированы"]);
-            else
-                this.notificationsStore.addErrorNotification(ResultDescription[response.code]);
+            ErrorHandler.handle(response.code);
         }
         catch(e){
-            this.notificationsStore.addErrorNotification(ResultDescription[ResultCode.FAIL]);
+            ErrorHandler.handle(ResultCode.FAIL);
         }
         this.stopLoading();
     }

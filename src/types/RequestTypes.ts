@@ -1,6 +1,7 @@
 import type {ResponseData} from "@/types/DataTypes";
 
-export type CalculateRequestName = "unitEcon" | "nicheDist" | "downturn" | "turnover";
+export type SavableRequestName = "unitEcon" | "nicheDist";
+export type CalculateRequestName = SavableRequestName | "downturn" | "turnover";
 
 export interface CalculateRequestData<Q, R> {
     request: Q;

@@ -20,7 +20,7 @@
 import AccountRequester from "@/requests/requesters/AccountRequester";
 import type {LoginData, RegData, ResponseData} from "@/types/DataTypes";
 import {ref} from "vue";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {useAuthStore} from "@/stores/authStore";
 

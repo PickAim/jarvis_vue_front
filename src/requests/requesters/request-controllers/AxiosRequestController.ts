@@ -1,8 +1,8 @@
 import type IRequestController from "@/requests/requesters/interfaces/IRequestController";
 import type {RequestData, ResponseData, TokenData} from "@/types/DataTypes";
-import axios, {AxiosError, CanceledError} from "axios";
+import axios, {AxiosError, type AxiosResponse, CanceledError} from "axios";
 import type {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import {useRequestStore} from "@/stores/requestStore";
 import {Configs} from "@/Configs";
@@ -32,7 +32,7 @@ export default class AxiosRequestController implements IRequestController {
             signal: controller.signal
         }
 
-        const tokens: TokenData = {} as TokenData;
+        const tokens: Partial<TokenData> = {} as TokenData;
         if (url.startsWith(Configs.UpdateRequestPrefix)) {
             Object.assign(tokens, this.authStore.getTokens());
         } else if (url.startsWith(Configs.AccessRequestPrefix)) {
@@ -41,26 +41,22 @@ export default class AxiosRequestController implements IRequestController {
         }
         config.params = tokens;
 
-        let req;
-        if (method == "GET") {
-            config.params = {...config.params, ...body};
-            req = this.axiosInst.get<K>(url, config)
-        }
-        if (method == "POST") {
-            req = this.axiosInst.post<K>(url, body, config)
-        }
-        if (!req)
-            return {code: ResultCode.CONFIGURATION_ERROR}
-
         let response;
         try {
             this.requestStore.loadingStart(controller);
-            const result = await req;
-            this.requestStore.loadingStop();
+            let result: AxiosResponse<K> | undefined = undefined;
+            if (method == "GET") {
+                config.params = {...config.params, ...body};
+                result = await this.axiosInst.get<K>(url, config);
+            } else if (method == "POST") {
+                result = await this.axiosInst.post<K>(url, body, config);
+            }
+            if (!result) {
+                return {code: ResultCode.CONFIGURATION_ERROR}
+            }
             response = {code: ResultCode.OK, result: result.data};
         } catch (err) {
             if (err instanceof CanceledError) {
-                console.log(err)
                 response = {code: ResultCode.CANCEL_ERROR, error: {description: "Cancelled error"}};
             } else if (!(err instanceof AxiosError)) {
                 response = {code: ResultCode.FAIL, error: {description: "Unknown error"}};
@@ -84,6 +80,7 @@ export default class AxiosRequestController implements IRequestController {
                 response = {code: err.response.data.jarvis_exception, error: err.response.data};
             }
         }
+        // if not cancelled - stop loading
         if (response.code !== ResultCode.CANCEL_ERROR) {
             this.requestStore.loadingStop();
         }

@@ -1,4 +1,4 @@
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import type {ICalculateActions} from "@/types/RequestTypes";
 
 export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActions<Q, R> = ICalculateActions<Q, R>> {

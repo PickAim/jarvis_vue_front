@@ -1,5 +1,5 @@
 import type {ResponseData} from "@/types/DataTypes";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import type {
     CalculateRequestData,
     CalculateRequestInfoData,
@@ -7,7 +7,7 @@ import type {
     ISavableCalculatorStore
 } from "@/types/RequestTypes";
 import {CalculateActions} from "@/requests/request-actions/calculations/CalculateActions";
-import {ResultDescription} from "@/types/ResultDescription";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export abstract class SavableCalculateActions<Q, R>
     extends CalculateActions<Q, R, ISavableCalculateRequestActions<Q, R>>
@@ -19,10 +19,10 @@ export abstract class SavableCalculateActions<Q, R>
 
     async deleteRequest(id: CalculateRequestInfoData["id"]): Promise<ResponseData<void>> {
         const response = await this.requester.deleteRequest(id);
-        if(response.code === ResultCode.OK) {
+        if (response.code === ResultCode.OK) {
             this.calculateStore.deleteRequest(id);
         } else {
-            this.notificator.addErrorNotification(ResultDescription[response.code]);
+            ErrorHandler.handle(response.code);
         }
         return response;
     }
@@ -36,9 +36,7 @@ export abstract class SavableCalculateActions<Q, R>
                 info: response.result
             }
             this.calculateStore.saveRequest(savedCalcRequestData);
-            if (response.code !== ResultCode.OK) {
-                this.notificator.addErrorNotification(ResultDescription[response.code]);
-            }
+            ErrorHandler.handle(response.code);
             return {code: response.code, result: savedCalcRequestData.info};
         }
         return {code: response.code};
@@ -50,8 +48,8 @@ export abstract class SavableCalculateActions<Q, R>
             response.result.forEach(r => {
                 this.calculateStore.saveRequest(r);
             });
-        } else if(response.code !== ResultCode.OK) {
-            this.notificator.addErrorNotification(ResultDescription[response.code]);
+        } else if (response.code !== ResultCode.OK) {
+            ErrorHandler.handle(response.code);
         }
         return response;
     }
