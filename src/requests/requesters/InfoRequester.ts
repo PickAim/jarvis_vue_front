@@ -11,7 +11,6 @@ export class InfoRequester<Q, R> extends Requester implements IInfoRequester<Q, 
     async getInfo(request: Q): Promise<ResponseData<R>> {
         return await this.requestHandler.makeRequest<R>({
             url: this.baseRequestURL,
-            method: "GET",
             body: request
         });
     }

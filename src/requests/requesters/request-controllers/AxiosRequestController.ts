@@ -24,7 +24,7 @@ export default class AxiosRequestController implements IRequestController {
 
     async makeRequest<K>(request: RequestData):
         Promise<ResponseData<K>> {
-        const {url, body = {}, method = "GET", responseType = "json"} = request;
+        const {url, body = {}, method = "POST", responseType = "json"} = request;
 
         const controller = new AbortController();
         const config: AxiosRequestConfig = {
@@ -39,17 +39,18 @@ export default class AxiosRequestController implements IRequestController {
             tokens["access_token"] = this.authStore.getTokens().access_token;
             tokens["imprint_token"] = this.authStore.getTokens().imprint_token;
         }
-        config.params = tokens;
+
+        const requestBody = {"request_data": body, ...tokens};
 
         let response;
         try {
             this.requestStore.loadingStart(controller);
             let result: AxiosResponse<K> | undefined = undefined;
             if (method == "GET") {
-                config.params = {...config.params, ...body};
+                config.params = requestBody;
                 result = await this.axiosInst.get<K>(url, config);
             } else if (method == "POST") {
-                result = await this.axiosInst.post<K>(url, body, config);
+                result = await this.axiosInst.post<K>(url, requestBody, config);
             }
             if (!result) {
                 return {code: ResultCode.CONFIGURATION_ERROR}

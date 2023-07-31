@@ -37,8 +37,8 @@ test('registration test', async () => {
 test('login test', async () => {
     const requester = new AccountRequester(useAuthStore());
     const response = await requester.loginPassword({
-        login: "k.buiko04@mail.ru",
-        password: "Str123ing##",
+        login: "+11111111111",
+        password: "Apassword123!",
     });
     expect(response.code).toBe(ResultCode.OK);
 

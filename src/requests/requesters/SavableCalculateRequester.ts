@@ -16,7 +16,6 @@ export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
     async saveRequest(calcRequest: CalculateRequestData<Q, R>): Promise<ResponseData<CalculateRequestData<Q, R>["info"]>> {
         return await this.requestHandler.makeRequest<CalculateRequestData<Q, R>["info"]>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save',
-            method: "POST",
             body: calcRequest
         });
     }

@@ -19,7 +19,6 @@ export class CalculateRequester<Q, R> extends Requester
     async calculate(request: Q): Promise<ResponseData<R>> {
         return await this.requestHandler.makeRequest<R>({
             url: Configs.AccessRequestPrefix + this.baseRequestURL + '/calculate',
-            method: "POST",
             body: request
         });
     }

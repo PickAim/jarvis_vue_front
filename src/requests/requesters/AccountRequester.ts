@@ -12,7 +12,6 @@ export default class AccountRequester extends Requester{
     async loginPassword(loginData: LoginData): Promise<ResponseData<object>>{
         const response = await this.requestHandler.makeRequest<TokenData>({
             url: "/auth/",
-            method: "POST",
             body: loginData,
         });
         if(response.code == ResultCode.OK && response.result !== undefined){
@@ -25,14 +24,12 @@ export default class AccountRequester extends Requester{
     async loginToken(): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
             url: Configs.AccessRequestPrefix + "/auth/",
-            method: "POST",
         });
     }
 
     async registration(regData: RegData): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
             url: "/reg/",
-            method: "POST",
             body: regData,
         });
     }
@@ -40,7 +37,6 @@ export default class AccountRequester extends Requester{
     async passwordChange(passwords: {oldPassword: string, newPassword: string}): Promise<ResponseData<object>>{
         return await this.requestHandler.makeRequest({
             url: "/",
-            method: "POST",
             body: passwords,
         });
     }
