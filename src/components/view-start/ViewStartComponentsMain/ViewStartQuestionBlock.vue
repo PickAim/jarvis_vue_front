@@ -1,13 +1,27 @@
 <template>
     <div class="questions-wrapper">
         <h1>
-            <slot name="header">Здесь будет текст</slot>
+            <slot name="header">Здесь будет вопрос</slot>
         </h1>
-        <div class="arrow-link">arrow</div>
+        <div class="arrow-link">
+            <button class="button-link" @click="openText" >
+                <img src="src\assets\Arrow.png" alt="">
+            </button>
+        </div>
+    </div>
+    <div class="test" :class="{ active: isActive }">
+        <h1>
+            <slot name="description">Здесь будет ответ на вопрос</slot>
+        </h1>
     </div>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
+const isActive = ref(false)
 
+function openText() {
+    isActive.value =! isActive.value 
+}
 </script>
 <style scoped lang="scss">
 $tag-width: 1150px;
@@ -23,21 +37,34 @@ $tag-width: 1150px;
     margin-bottom: 30px;
 
     h1 {
-        font-weight: 700;
-        font-size: 40px;
-        line-height: 49px;
-
-        @media (max-width: $tag-width) {
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 29px;
-        }
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 39px;
+        color: #FFFFFF;
+        text-align: start;
     }
 
     .arrow-link {
-        width: 55px;
-        height: 2px;
-        background-color: #B7FF44;
+        .button-link{
+            img {
+                width: 70px;
+                height: 40px;
+            }
+        }
+    }
+}
+
+.test {
+    display: none;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #FFFFFF;
+    text-align: start;
+    &.active{
+        display: flex;
     }
 }
 
@@ -47,9 +74,9 @@ $tag-width: 1150px;
             font-weight: 400;
             font-size: 12px;
             line-height: 14.63px;
+            text-align: start;
         }
 
         .arrow-link {}
     }
-}
-</style>
+}</style>

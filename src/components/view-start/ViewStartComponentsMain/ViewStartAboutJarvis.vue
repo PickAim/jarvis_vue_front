@@ -8,7 +8,7 @@
                 <div class="block">
                     <div class="left-block">
                         <h1>Рекомендательная система</h1>
-                        <h3>IMG</h3>
+                        <img src="src\assets\About-Jarvis-1.png" alt="">
                     </div>
                     <div class="text-info">
                         <div class="text-1">Предлагает рекомендации по работе с Вашими продажами: предлагает цену товара,
@@ -25,7 +25,7 @@
                 <div class="block">
                     <div class="left-block">
                         <h1>Внешняя аналитика</h1>
-                        <h3>IMG</h3>
+                        <img src="src\assets\About-Jarvis-2.png" alt="">
                     </div>
                     <div class="text-info">
                         <div class="text-1">Собирает данные со всего маркетплейса и предоставляет актуальную аналитику
@@ -41,7 +41,7 @@
                 <div class="block">
                     <div class="left-block">
                         <h1>Расчет индексов показателей магазина</h1>
-                        <h3>IMG</h3>
+                        <img src="src\assets\About-Jarvis-3.png" alt="">
                     </div>
                     <div class="text-info">
                         <div class="text-1">Позволяет оценить финансовое здоровье вашего магазина, выявить рентабельные
@@ -144,7 +144,6 @@ $tag-width: 1150px;
             .text-info {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
                 text-align: start;
                 border-left: 2px solid #B7FF44;
                 padding: 30px 60px;

@@ -6,22 +6,42 @@
         <div class="slots-wrapper">
             <ViewStartQuestionBlock>
                 <template v-slot:header>
-                    Текст 1
+                    Чем вы отличаетесь от других сервисов аналитики?
+                </template>
+                <template v-slot:description>
+                    Помимо основного функционала аналитики, Jarvis предлагает
+                    рекомендации по развитию вашего бизнеса на основе
+                    самоокупающейся нейросети
                 </template>
             </ViewStartQuestionBlock>
             <ViewStartQuestionBlock>
                 <template v-slot:header>
-                    Текст 2
+                    Насколько точны ваши данные?
+                </template>
+                <template v-slot:description>
+                    Мы регулярно собираем данные и обновляем ежедневно.
+                    Точность соответствия с фактическими данными равна 99%
                 </template>
             </ViewStartQuestionBlock>
             <ViewStartQuestionBlock>
                 <template v-slot:header>
-                    Текст 3
+                    Если у меня есть менеджер, будет ли мне полезен сервис?
+                </template>
+                <template v-slot:description>
+                    Да, сервис будет полезен как селлерам работающим самостоятельно,
+                    так и тем у кого есть менеджер. Jarvis увеличит эффективность работы
+                    менеджера в разы. Если Вы менеджер маркетплейсов, то с нашим
+                    сервисом вы сможете вести больше клиентов одновременно
                 </template>
             </ViewStartQuestionBlock>
             <ViewStartQuestionBlock>
                 <template v-slot:header>
-                    Текст 4
+                    Могу ли я ознакомится с сервисом до
+                    приобретения подписки ?
+                </template>
+                <template v-slot:description>
+                    Да, у нас есть бесплатный тариф с которым вы можете ознакомиться
+                    с функционалом сервиса
                 </template>
             </ViewStartQuestionBlock>
         </div>

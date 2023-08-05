@@ -6,7 +6,7 @@
     <div class="tariffs-wrapper">
       <div class="tariff-side-wrapper">
         <div class="tariff first-tariff">
-          <h2>IMG</h2>
+          <img src="src\assets\Tariffs-1.png" alt="">
           <div class="board-info">
             <span>Дашборд с системой виджетов</span>
             <span>Внутренняя аналитика</span>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="tariff second-tariff">
-        <h2>IMG</h2>
+        <img src="src\assets\Tariffs-2.png" alt="">
         <div class="board-info">
           <span>Дашборд с системой виджетов</span>
           <span>Внутренняя аналитика</span>
@@ -27,7 +27,7 @@
       </div>
       <div class="tariff-side-wrapper">
         <div class="tariff third-tariff">
-          <h2>IMG</h2>
+          <img src="src\assets\Tariffs-3.png" alt="">
           <div class="board-info">
             <span>Дашборд с системой виджетов</span>
             <span>Внутренняя аналитика</span>

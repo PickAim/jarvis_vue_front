@@ -171,6 +171,13 @@
                     </h1>
                 </div>
             </div>
+            <div class="footer">
+                <div class="footer-wrapper">
+                    <img src="\src\assets\jarvis.png" alt="">
+                    <a href="">Контакты</a>
+                    <a href="">Мы в социальных сетях:</a>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -184,224 +191,252 @@ const router = useRouter();
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.view-start-wrapper{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: auto;
-  position: relative;
-  .view-cards-block {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 50px;
-      width: 100%;
-      background-color: rgba(25, 25, 25, 1);
-      color: rgba(255, 255, 255, 1);
-  
-      .buttons-wrapper {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-          align-items: center;
-          justify-content: space-around;
-  
-          img {
-              width: 200px;
-          }
-  
-          button {
-              font-weight: 400;
-              font-size: 24px;
-              line-height: 29px;
-          }
-  
-          .login-button {
-              border: 1px solid rgba(183, 255, 68, 1);
-              padding: 10px 25px;
-              border-radius: 15px;
-          }
-  
-          .reg-button {
-              border: 1px solid rgba(183, 255, 68, 1);
-              padding: 10px 25px;
-              border-radius: 15px;
-          }
-      }
-  
-      .tariff-title {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-  
-          .tariff-paragraph {
-              font-weight: 700;
-              font-size: 64px;
-              line-height: 78px;
-              margin: 70px 0px;
-              text-align: center;
-          }
-  
-          .tariff-table {
-              display: grid;
-              grid-template-rows: 1fr;
-              background: linear-gradient(97.84deg, rgba(217, 217, 217, 0.087) 4.44%, rgba(0, 0, 0, 0.249) 93.84%);
-              backdrop-filter: blur(15px);
-              max-width: 1000px;
-              text-align: center;
-              padding: 30px 40px;
-              .classes{
-                  display: grid;
-                  grid-template-columns: minmax(100px, 1.5fr) 1.5fr 1.5fr 1.5fr;
-              }
-              .tariffs-types {
-                  display: grid;
-                  text-align: center;
-                  border-bottom: 1px solid rgba(183, 255, 68, 1);
-                  padding: 10px 0px 20px 10px;
-  
-                  .base-type {
-                      font-weight: 700;
-                      font-size: 20px;
-                      line-height: 24px;
-                      color: #D9D9D9;
-                  }
-  
-                  .advanced-type {
-                      font-weight: 700;
-                      font-size: 20px;
-                      line-height: 24px;
-                      color: #7026EB;
-                  }
-  
-                  .professional-type {
-                      font-weight: 700;
-                      font-size: 20px;
-                      line-height: 24px;
-                      color: #B7FF44;
-                  }
-              }
-  
-              .advantages {
-                  display: grid;
-                  padding: 10px;
-                  text-align: center;
-                  align-items: center;
-  
-                  .advantages-title {
-                      text-align: start;
-                      align-items: center;
-                      font-weight: 700;
-                      font-size: 24px;
-                      line-height: 29px;
-                      color: #D9D9D9;
-                      padding: 20px 0px;
-                  }
-              }
-  
-              .type-price {
-                  display: grid;
-                  text-align: center;
-                  padding: 10px;
-  
-                  .price-block {
-                      .button-price {
-                          background-color: rgba(183, 255, 68, 1);
-                          color: rgba(0, 0, 0, 1);
-                          padding: 10px 30px;
-                          border-radius: 20px;
-                          font-weight: 700;
-                          font-size: 23px;
-                          line-height: 28px;
-                      }
-  
-                  }
-              }
-          }
-      }
-  
-      .tariff-description {
-          font-weight: 700;
-          font-size: 48px;
-          line-height: 59px;
-          text-align: center;
-          color: #FFFFFF;
-          margin: 70px 0px;
-      }
-  
-      .tariff-types-wrapper {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          max-width: 1100px;
-          justify-items: flex-start;
-          margin: 50px 0px;
-          column-gap: 30px;
-  
-          .tariffs-name {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-  
-              .base {
-                  background: #F0F0F0;
-                  font-weight: 700;
-                  font-size: 24px;
-                  line-height: 29px;
-                  text-align: center;
-                  color: #000000;
-                  border-radius: 17px;
-                  padding: 10px 30px;
-              }
-  
-              .advanced {
-                  font-weight: 700;
-                  font-size: 24px;
-                  line-height: 29px;
-                  text-align: center;
-                  color: #FFFFFF;
-                  background: #7026EB;
-                  border-radius: 17px;
-                  padding: 10px 30px;
-              }
-  
-              .professional {
-                  font-weight: 700;
-                  font-size: 24px;
-                  line-height: 29px;
-                  text-align: center;
-                  color: #000000;
-                  background: #B7FF44;
-                  border-radius: 17px;
-                  padding: 10px 30px;
-              }
-          }
-  
-          .description-white-line {
-              border-right: 2px solid #FFFFFF;
-              padding: 0px 50px 0px 0px;
-          }
-  
-          .description {
-              font-weight: 700;
-              font-size: 24px;
-              line-height: 29px;
-              color: #D9D9D9;
-              padding-top: 40px;
-  
-              .description-line {
-                  border-top: 1px solid #B7FF44;
-                  padding: 20px 0px;
-              }
-          }
-  
-      }
-  
-      @media (max-width: $tag-width) {}
-  }
- 
+.view-start-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+
+    .view-cards-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        width: 100%;
+        background-color: rgba(25, 25, 25, 1);
+        color: rgba(255, 255, 255, 1);
+
+        .buttons-wrapper {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+
+            img {
+                width: 200px;
+            }
+
+            button {
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 29px;
+            }
+
+            .login-button {
+                border: 1px solid rgba(183, 255, 68, 1);
+                padding: 10px 25px;
+                border-radius: 15px;
+            }
+
+            .reg-button {
+                border: 1px solid rgba(183, 255, 68, 1);
+                padding: 10px 25px;
+                border-radius: 15px;
+            }
+        }
+
+        .tariff-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .tariff-paragraph {
+                font-weight: 700;
+                font-size: 64px;
+                line-height: 78px;
+                margin: 70px 0px;
+                text-align: center;
+            }
+
+            .tariff-table {
+                display: grid;
+                grid-template-rows: 1fr;
+                background: linear-gradient(97.84deg, rgba(217, 217, 217, 0.087) 4.44%, rgba(0, 0, 0, 0.249) 93.84%);
+                backdrop-filter: blur(15px);
+                max-width: 1000px;
+                text-align: center;
+                padding: 30px 40px;
+
+                .classes {
+                    display: grid;
+                    grid-template-columns: minmax(100px, 1.5fr) 1.5fr 1.5fr 1.5fr;
+                }
+
+                .tariffs-types {
+                    display: grid;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(183, 255, 68, 1);
+                    padding: 10px 0px 20px 10px;
+
+                    .base-type {
+                        font-weight: 700;
+                        font-size: 20px;
+                        line-height: 24px;
+                        color: #D9D9D9;
+                    }
+
+                    .advanced-type {
+                        font-weight: 700;
+                        font-size: 20px;
+                        line-height: 24px;
+                        color: #7026EB;
+                    }
+
+                    .professional-type {
+                        font-weight: 700;
+                        font-size: 20px;
+                        line-height: 24px;
+                        color: #B7FF44;
+                    }
+                }
+
+                .advantages {
+                    display: grid;
+                    padding: 10px;
+                    text-align: center;
+                    align-items: center;
+
+                    .advantages-title {
+                        text-align: start;
+                        align-items: center;
+                        font-weight: 700;
+                        font-size: 24px;
+                        line-height: 29px;
+                        color: #D9D9D9;
+                        padding: 20px 0px;
+                    }
+                }
+
+                .type-price {
+                    display: grid;
+                    text-align: center;
+                    padding: 10px;
+
+                    .price-block {
+                        .button-price {
+                            background-color: rgba(183, 255, 68, 1);
+                            color: rgba(0, 0, 0, 1);
+                            padding: 10px 30px;
+                            border-radius: 20px;
+                            font-weight: 700;
+                            font-size: 23px;
+                            line-height: 28px;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .tariff-description {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 59px;
+            text-align: center;
+            color: #FFFFFF;
+            margin: 70px 0px;
+        }
+
+        .tariff-types-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1100px;
+            justify-items: flex-start;
+            margin: 50px 0px;
+            column-gap: 30px;
+
+            .tariffs-name {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .base {
+                    background: #F0F0F0;
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+                    text-align: center;
+                    color: #000000;
+                    border-radius: 17px;
+                    padding: 10px 30px;
+                }
+
+                .advanced {
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+                    text-align: center;
+                    color: #FFFFFF;
+                    background: #7026EB;
+                    border-radius: 17px;
+                    padding: 10px 30px;
+                }
+
+                .professional {
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 29px;
+                    text-align: center;
+                    color: #000000;
+                    background: #B7FF44;
+                    border-radius: 17px;
+                    padding: 10px 30px;
+                }
+            }
+
+            .description-white-line {
+                border-right: 2px solid #FFFFFF;
+                padding: 0px 50px 0px 0px;
+            }
+
+            .description {
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 29px;
+                color: #D9D9D9;
+                padding-top: 40px;
+
+                .description-line {
+                    border-top: 1px solid #B7FF44;
+                    padding: 20px 0px;
+                }
+            }
+        }
+
+        .footer {
+            width: 100%;
+            background: #191919;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: start;
+
+            .footer-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 45px;
+                padding: 50px 40px;
+
+                img {
+                    width: 300px;
+                    height: 70px;
+                }
+
+                a {
+                    font-weight: 700;
+                    font-size: 36px;
+                    line-height: 44px;
+                }
+            }
+        }
+
+        @media (max-width: $tag-width) {}
+    }
+
 }
 </style>

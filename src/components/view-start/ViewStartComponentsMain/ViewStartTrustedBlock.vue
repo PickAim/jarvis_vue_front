@@ -6,16 +6,22 @@
             </div>
             <div class="line-block">
                 <div class="advantages">
-                    <div class="advantages-image">IMG</div>
-                    <div class="advantages-text">Актуальность и точность предоставляемых данных</div>
+                    <div class="advantages-image">
+                        <img src="src\assets\Trusted-1.png" alt="">
+                    </div>
+                    <div class="advantages-image">
+                        <img src="src\assets\Trusted-2.png" alt="">
+                    </div>
+                    <div class="advantages-image">
+                        <img src="src\assets\Trusted-3.png" alt="">
+                    </div>
                 </div>
-                <div class="advantages">
-                    <div class="advantages-image">IMG</div>
+                <div class="advantages-description">
                     <div class="advantages-text">Актуальность и точность предоставляемых данных</div>
-                </div>
-                <div class="advantages">
-                    <div class="advantages-image">IMG</div>
-                    <div class="advantages-text">100+ клиентов выведено на маркетплейсы</div>
+                    <div class="advantages-text">3 года работы
+                        с маркетплейсами</div>
+                    <div class="advantages-text">100+ клиентов выведено
+                        на маркетплейсы</div>
                 </div>
             </div>
             <button class="button-try">Попробовать сейчас</button>
@@ -60,30 +66,34 @@ $tag-width: 1150px;
 
         .line-block {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
             margin: 100px 0px;
             padding: 0px 50px;
 
             .advantages {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
+                flex-direction: row;
+                justify-content: space-around;
                 align-items: center;
                 text-align: center;
+                border-bottom: 1px solid #B7FF44;
 
                 .advantages-image {
                     display: flex;
-                    padding-bottom: 50px;
-                    color: #B7FF44;
+                    flex-direction: column;
+
                 }
+
+            }
+
+            .advantages-description {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
 
                 .advantages-text {
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
                     align-items: center;
-                    padding-top: 50px;
-                    border-top: 1px solid #B7FF44;
+                    padding-top: 40px;
                     font-weight: 500;
                     font-size: 20px;
                     line-height: 29px;
@@ -104,41 +114,51 @@ $tag-width: 1150px;
         margin: 0px;
 
         .trust-wrapper {
+
+
             .paragraph-about-trust {
+                display: flex;
+                flex-direction: column;
 
                 h1 {
-                    font-size: 24px;
                     font-weight: 700;
-                    line-height: 29px;
+                    font-size: 48px;
+                    line-height: 59px;
                 }
             }
 
             .line-block {
                 display: grid;
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                padding: 0px;
-                margin: 80px 0px 0px 0px;
+                grid-template-columns: 1fr 1fr;
 
                 .advantages {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
+                    display: flex;
+                    flex-direction: column;
+                    border: none;
 
                     .advantages-image {
+                        img {
+                            width: 155px;
+                            height: 155px;
+                        }
+                    }
+                }
+
+                .advantages-description {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    padding-left: 20px;
+                    border-left: 1px solid #B7FF44;
+                    .advantages-text {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        padding: 20px;
-                    }
-
-                    .advantages-text {
-                        padding: 20px;
-                        border-top: none;
-                        border-left: 1px solid #B7FF44;
-                        font-weight: 500;
+                        padding: 0px;
+                        font-weight: 700;
                         font-size: 13px;
-                        line-height: 15.85px;
+                        line-height: 16px;
+                        text-align: center;
                     }
                 }
             }

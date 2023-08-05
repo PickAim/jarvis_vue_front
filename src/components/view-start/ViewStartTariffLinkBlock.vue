@@ -170,6 +170,13 @@
                 </h1>
             </div>
         </div>
+        <div class="footer">
+            <div class="footer-wrapper">
+                <img src="\src\assets\jarvis.png" alt="">
+                <a href="">Контакты</a>
+                <a href="">Мы в социальных сетях:</a>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -243,10 +250,12 @@ $tag-width: 1150px;
             max-width: 1000px;
             text-align: center;
             padding: 30px 40px;
-            .classes{
+
+            .classes {
                 display: grid;
                 grid-template-columns: minmax(100px, 1.5fr) 1.5fr 1.5fr 1.5fr;
             }
+
             .tariffs-types {
                 display: grid;
                 text-align: center;
@@ -386,9 +395,33 @@ $tag-width: 1150px;
                 padding: 20px 0px;
             }
         }
+    }
 
+    .footer {
+        width: 100%;
+        background: #191919;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: start;
+
+        .footer-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 45px;
+            padding: 50px 40px;
+
+            img {
+                width: 300px;
+                height: 70px;
+            }
+
+            a {
+                font-weight: 700;
+                font-size: 36px;
+                line-height: 44px;
+            }
+        }
     }
 
     @media (max-width: $tag-width) {}
-}
-</style>
+}</style>

@@ -3,14 +3,19 @@
         <div class="cards-wrapper">
             <div class="what-you-have">
                 <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
+                <img src="src\assets\Cards-block-LineUnderText.png" alt="">
             </div>
             <div class="opportunity-cards">
                 <div class="first-cards">
                     <h1>Сложно выбрать подходящий <br> момент чтобы встать в акцию, <br> запустить рекламу или <br>
                         запланировать поставку</h1>
                     <div class="card-items">
-                        <div class="card-items-line">LINE</div>
-                        <div class="card-items-img">IMG</div>
+                        <div class="card-items-line">
+                            <img src="src\assets\Cards-Block-Lil-Arrow.png" alt="">
+                        </div>
+                        <div class="card-items-img">
+                            <img src="src\assets\Cards-block-1.png" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="bottom-cards">
@@ -19,15 +24,23 @@
                             <br> и масштабированию бизнеса
                         </h1>
                         <div class="card-items">
-                            <div class="card-items-line">LINE</div>
-                            <div class="card-items-img">IMG</div>
+                            <div class="card-items-line">
+                                <img src="src\assets\Cards-Block-Lil-Arrow.png" alt="">
+                            </div>
+                            <div class="card-items-img">
+                                <img src="src\assets\Cards-block-2.png" alt="">
+                            </div>
                         </div>
                     </div>
-                    <div class="block-with-sign">
+                    <div class="block-with-sign-right">
                         <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
                         <div class="card-items">
-                            <div class="card-items-line">LINE</div>
-                            <div class="card-items-img">IMG</div>
+                            <div class="card-items-line">
+                                <img src="src\assets\Cards-Block-Lil-Arrow.png" alt="">
+                            </div>
+                            <div class="card-items-img">
+                                <img src="src\assets\Cards-block-3.png" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,6 +84,9 @@ $tag-width: 1150px;
 }
 
 .what-you-have {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     h1 {
         font-weight: 700;
         font-size: 48px;
@@ -90,14 +106,14 @@ $tag-width: 1150px;
     flex-direction: column;
     justify-content: space-between;
     border-radius: 21px;
-    border: 1px solid black;
-    color: black;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(25, 25, 25, 1);
 
     h1 {
         font-weight: 700;
         font-size: 1rem;
         line-height: 1rem;
-        margin: 45px 14px;
+        margin: 45px 14px 20px 14px;
     }
 
     .card-items {
@@ -106,11 +122,15 @@ $tag-width: 1150px;
         justify-content: space-between;
 
         .card-items-line {
-            margin: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            margin: 0px 14px 40px 14px;
         }
 
         .card-items-img {
-            margin: 14px;
+         height: 214px;
+         width: 214px;
         }
     }
 }
@@ -120,36 +140,80 @@ $tag-width: 1150px;
     flex-direction: row;
     justify-content: space-around;
     gap: 10px;
-}
 
-.block-with-sign {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid black;
-    border-radius: 25px;
-
-    h1 {
-        font-weight: 700;
-        font-size: 15px;
-        line-height: 18px;
-        margin: 54px 14px;
-    }
-
-    .card-items {
+    .block-with-sign {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
-
-        .card-items-line {
-            margin: 14px;
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(112, 38, 235, 1);
+        border-radius: 25px;
+    
+        h1 {
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 18px;
+            margin: 54px 14px;
         }
-
-        .card-items-img {
-            margin: 14px;
+    
+        .card-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
+            .card-items-line {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                margin: 0px 14px 40px 14px;
+            }
+    
+            .card-items-img {
+                img{
+                    height: 214px;
+                    width: 214px;
+                }
+            }
+        }
+    }
+    
+    .block-with-sign-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: rgba(0, 0, 0, 1);
+        background-color: rgba(183, 255, 68, 1);
+        border-radius: 25px;
+    
+        h1 {
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 18px;
+            margin: 54px 14px;
+        }
+    
+        .card-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
+            .card-items-line {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                margin: 0px 14px 40px 14px;
+            }
+    
+            .card-items-img {
+                img{
+                    height: 214px;
+                    width: 214px;
+                }
+            }
         }
     }
 }
+
 
 @media (max-width: $tag-width) {
     .view-cards-block {
@@ -167,6 +231,10 @@ $tag-width: 1150px;
             font-size: 24px;
             line-height: 59px;
             text-align: center;
+        }
+        img{
+            width: 0px;
+            height: 0px;
         }
     }
 
@@ -195,7 +263,12 @@ $tag-width: 1150px;
             }
 
             .card-items-img {
-                margin: 10px 20px;
+                display: flex;
+                flex-direction: column;
+                img{
+                    width: 117px;
+                    height: 117px;
+                }
             }
         }
     }
