@@ -67,9 +67,9 @@ $button-width: 65px;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
-  //z-index: 20;
+  z-index: 20;
 
-  .buttons-panel{
+  .buttons-panel {
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
@@ -77,7 +77,7 @@ $button-width: 65px;
     overflow-y: auto;
     width: $button-panel-width;
 
-    &:hover{
+    &:hover {
       $desc-clip-per: 0%;
     }
 
