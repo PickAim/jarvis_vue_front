@@ -1,5 +1,5 @@
 <template>
-  <div class="unit-econ-wrapper">
+  <div class="workspace-header-wrapper">
     <ViewStartHeader class="header"/>
     <ViewStartMain class="main"/>
     <ViewStartFooter class="footer"/>
@@ -21,17 +21,19 @@ window.addEventListener('keydown', (e) => {
 </script>
 
 <style scoped lang="scss">
-.unit-econ-wrapper{
+.workspace-header-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 0;
 
-  .header{
+  .header {
   }
-  .main{
+
+  .main {
   }
-  .footer{
+
+  .footer {
   }
 }
 </style>

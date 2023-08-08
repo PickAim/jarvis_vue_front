@@ -2,9 +2,9 @@
   <ViewWorkspaceSectionContainer :style="{'--widgetSizeMode': widgetSizeMode}">
     <template v-slot:header>Главная страница</template>
     <div class="main-section-wrapper">
-      <div class="size-select">
-        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>
-      </div>
+      <!--      <div class="size-select">-->
+      <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
+      <!--      </div>-->
       <div class="widget-panel-buttons">
         <ControlButtonRound class="widget-panel-settings-button"
                             @click="actions.openWidgetPanelSettingsOverlay()">SET
@@ -42,7 +42,6 @@ import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
 import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
 import {computed, ref} from "vue";
-import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
 import {storeToRefs} from "pinia";
@@ -53,7 +52,7 @@ import {widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
 const actions = new WorkspaceSectionMainActions();
-const container = ref<HTMLElement | null>(null);
+const container = ref<HTMLElement>(null as HTMLElement);
 const widgetStore = useWidgetStore();
 const {widgetClassList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
 

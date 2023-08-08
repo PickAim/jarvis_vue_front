@@ -2,7 +2,6 @@
   <div class="workspace-wrapper">
     <ViewWorkspaceHeader/>
     <div class="middle-wrapper">
-      <ViewWorkspaceLeftPanel/>
       <div class="section-wrapper">
         <RouterView/>
       </div>
@@ -12,7 +11,6 @@
 
 <script setup lang="ts">
 import ViewWorkspaceHeader from "@/components/view-workspace/ViewWorkspaceHeader.vue";
-import ViewWorkspaceLeftPanel from "@/components/view-workspace/ViewWorkspaceLeftPanel.vue";
 import {ViewWorkspaceActions} from "@/component-classes/ViewWorkspaceActions";
 import {reactive} from "vue";
 

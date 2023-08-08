@@ -1,5 +1,5 @@
 <template>
-  <div class="unit-econ-wrapper">
+  <div class="workspace-header-wrapper">
     {{ request.request }}<br>
     {{ request.result }}
   </div>
