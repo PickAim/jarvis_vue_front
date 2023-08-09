@@ -1,11 +1,7 @@
 import type {RouteRecordRaw} from "vue-router";
-import ViewStart from "../views/ViewStart.vue";
-import ViewWorkspace from "../views/ViewWorkspace.vue";
-import ViewWorkspaceSectionMain from "@/components/view-workspace/ViewWorkspaceSectionMain.vue";
-import ViewWorkspaceSectionUnitCalc
-    from "@/components/view-workspace/ViewWorkspaceSectionUnitCalc.vue";
-import ViewWorkspaceSectionStatistic
-    from "@/components/view-workspace/ViewWorkspaceSectionStatistic.vue";
+import ViewStart from "../components/view-start/ViewStart.vue";
+import ViewWorkspace from "../components/view-workspace/ViewWorkspace.vue";
+import {workspaceRouter} from "@/routers/workspaceRouter";
 
 export const viewRoutes: RouteRecordRaw[] = [
     {
@@ -16,20 +12,5 @@ export const viewRoutes: RouteRecordRaw[] = [
         name: 'workspace',
         path: '/workspace',
         component: ViewWorkspace,
-        children: [
-            {
-                name: 'workspace-main',
-                path: '',
-                component: ViewWorkspaceSectionMain
-            },
-            {
-                name: 'workspace-unit-calc',
-                path: 'unit-calc',
-                component: ViewWorkspaceSectionUnitCalc
-            },
-            {
-                name: 'workspace-statistic',
-                path: 'statistic',
-                component: ViewWorkspaceSectionStatistic
-            }]
+        children: workspaceRouter
     }];

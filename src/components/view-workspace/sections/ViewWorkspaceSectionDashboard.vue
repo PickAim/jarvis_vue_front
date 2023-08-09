@@ -1,11 +1,11 @@
 <template>
   <ViewWorkspaceSectionContainer :style="{'--widgetSizeMode': widgetSizeMode}">
     <template v-slot:header>Главная страница</template>
-    <div class="main-section-wrapper">
+    <div class="section-body-wrapper">
       <!--      <div class="size-select">-->
       <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
       <!--      </div>-->
-      <div class="widget-panel-buttons">
+      <div class="widget-buttons-panel">
         <ControlButtonRound class="widget-panel-settings-button"
                             @click="actions.openWidgetPanelSettingsOverlay()">SET
         </ControlButtonRound>
@@ -40,18 +40,18 @@
 <script setup lang="ts">
 import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
-import ViewWorkspaceSectionContainer from "@/components/view-workspace/ViewWorkspaceSectionContainer.vue";
+import ViewWorkspaceSectionContainer from "@/components/view-workspace/sections/ViewWorkspaceSectionContainer.vue";
 import {computed, ref} from "vue";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
-import {WorkspaceSectionMainActions} from "@/component-classes/WorkspaceSectionMainActions";
+import {WorkspaceSectionDashboardActions} from "@/component-classes/WorkspaceSectionDashboardActions";
 import type {WidgetName} from "@/types/WidgetTypes";
 import {widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
 import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
 
-const actions = new WorkspaceSectionMainActions();
+const actions = new WorkspaceSectionDashboardActions();
 const container = ref<HTMLElement>(null as HTMLElement);
 const widgetStore = useWidgetStore();
 const {widgetClassList, gridWidth, widgetSizeMode} = storeToRefs(widgetStore);
@@ -183,7 +183,7 @@ function clearScrollInterval(id: number) {
 </script>
 
 <style lang="scss">
-.main-section-wrapper {
+.section-body-wrapper {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -195,11 +195,7 @@ function clearScrollInterval(id: number) {
     display: grid;
     grid-template-columns: repeat(v-bind(gridWidth), v-bind(widgetWidth));
     grid-gap: var(--grid-gap);
-    width: fit-content;
-    height: fit-content;
-    padding: 30px;
-    max-width: 100%;
-    max-height: 100%;
+    padding: 0 10px 30px 10px;
     overflow-y: auto;
     overflow-x: auto;
 
@@ -220,7 +216,7 @@ function clearScrollInterval(id: number) {
     }
   }
 
-  .widget-panel-buttons {
+  .widget-buttons-panel {
     position: absolute;
     bottom: 40px;
     right: 20px;

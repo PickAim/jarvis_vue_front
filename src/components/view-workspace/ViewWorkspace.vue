@@ -1,10 +1,8 @@
 <template>
   <div class="workspace-wrapper">
     <ViewWorkspaceHeader/>
-    <div class="middle-wrapper">
-      <div class="section-wrapper">
-        <RouterView/>
-      </div>
+    <div class="section-wrapper">
+      <RouterView/>
     </div>
   </div>
 </template>
@@ -19,24 +17,17 @@ viewMain.initWorkspacesSections();
 </script>
 
 <style scoped lang="scss">
-.workspace-wrapper{
+.workspace-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
 
-  .middle-wrapper{
-    display: flex;
-    flex-direction: row;
-    flex: 1 0 0;
-    align-items: stretch;
+  .section-wrapper {
+    flex: 1 0;
     overflow: hidden;
-
-    .section-wrapper{
-      flex: 1 0;
-      width: 100px;
-    }
   }
 }
 </style>

@@ -1,21 +1,23 @@
 <template>
   <header class="workspace-header-wrapper">
-    <div class="logo" @click="$router.push('/workspace')">
+    <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
       <img src="/src/assets/jarvis_icon_big.png" alt="">
     </div>
-    <div class="menu-wrapper">
+    <div class="menu-wrapper"
+         @mouseenter="onMouseEnter"
+         @mouseleave="onMouseLeave">
       <div class="menu-grid title-list">
         <div class="title menu-title" v-for="menu in menus" :key="menu.title">
           <div class="hover-effect-box"/>
           {{ menu.title }}
         </div>
       </div>
-      <div class="menu-grid menu-items-grid">
+      <div class="menu-grid menu-items-grid" :class="{isShown: isOpen}">
         <div class="title menu-item"
              v-for="menuItem in menuItems"
              :key="menuItem.item.title"
              :style="{gridRow: menuItem.row, gridColumn: menuItem.column}"
-             @click="$router.push(menuItem.item.link)">
+             @click="onMenuButtonClicked(menuItem)">
           <div class="hover-effect-box"/>
           {{ menuItem.item.title }}
         </div>
@@ -25,42 +27,63 @@
 </template>
 
 <script setup lang="ts">
-const menus: { title: string, menuItems: { title: string, link: string }[] }[] = [
+import {SectionInfoType, sections} from "@/components/view-workspace/workspaceSections";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+const isOpen = ref(false);
+
+const menus: { title: string, menuItems: SectionInfoType[] }[] = [
   {
     title: "Внешняя аналитика",
     menuItems: [
-      {title: "Анализ ниш", link: "/workspace/niche-analyze"},
-      {title: "Анализ категорий", link: "/workspace/category-analyze"},
-      {title: "География целевой аудитории", link: "/workspace/auditory-geography"},
-      {title: "Сегмнетарный анализ", link: "/workspace/segments-analyze"},
+      sections.nicheAnalyze,
+      sections.categoryAnalyze,
+      sections.auditoryGeography,
+      sections.segmentsAnalyze,
     ]
   },
   {
     title: "Внутренняя аналитика",
     menuItems: [
-      {title: "Анализ остатков", link: "/workspace/remains-analyze"},
-      {title: "Ассортиментная матрица", link: "/workspace/assort-matrix"},
-      {title: "География продаж магазина", link: "/workspace/sales-geography"},
+      sections.remainsAnalyze,
+      sections.assortMatrix,
+      sections.salesGeography,
     ]
   },
   {
     title: "Финансы",
     menuItems: [
-      {title: "Калькулятор unit-экономики", link: "/workspace/unit-economy"},
-      {title: "Финансовое здоровье магазина", link: "/workspace/financial-health"},
+      sections.unitEconomy,
+      sections.financialHealth,
     ]
   }
 ]
 
 const gridColumns = menus.length;
 
+type SectionButtonInfoType = { item: SectionInfoType, row: number, column: number };
 const menuItems = menus.reduce(
-    (accum: { item: { title: string, link: string }, row: number, column: number }[], menu, menuInd) => {
+    (accum: SectionButtonInfoType[], menu, menuInd) => {
       menu.menuItems.forEach((menuItem, menuItemInd) => {
         accum.push({item: menuItem, column: menuInd + 1, row: menuItemInd + 1});
       });
       return accum;
     }, []);
+
+function onMouseEnter() {
+  isOpen.value = true;
+}
+
+function onMouseLeave() {
+  isOpen.value = false;
+}
+
+function onMenuButtonClicked(menuItem: SectionButtonInfoType) {
+  router.push(menuItem.item.link);
+  isOpen.value = false;
+}
 
 </script>
 
@@ -85,6 +108,7 @@ $hover-effect-width: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex: 0 0 auto;
     height: 85%;
     cursor: pointer;
 
@@ -127,7 +151,6 @@ $hover-effect-width: 30px;
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(v-bind(gridColumns), $menu-item-width);
-      //grid-gap: 5px;
       border-right: 1px solid white;
     }
 
@@ -142,11 +165,10 @@ $hover-effect-width: 30px;
       transform: translateY(-100%);
       position: absolute;
       background: #000;
-      //padding-top: 10px;
       top: 100%;
       border-bottom: 1px solid white;
       border-top: 1px solid white;
-      transition: transform 0.1s;
+      transition: transform 0.1s cubic-bezier(0.620, 0.145, 0.340, 0.905);
       z-index: 10;
 
       .menu-item {
@@ -156,10 +178,9 @@ $hover-effect-width: 30px;
           border-left-width: $hover-effect-width;
         }
       }
-    }
 
-    &:hover {
-      .menu-items-grid {
+      &.isShown {
+        transition-duration: 0.3s;
         transform: translateY(0%);
       }
     }

@@ -1,7 +1,7 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import type {WidgetName, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
 
-export class WorkspaceSectionMainActions {
+export class WorkspaceSectionDashboardActions {
     overlayState;
 
     constructor() {
