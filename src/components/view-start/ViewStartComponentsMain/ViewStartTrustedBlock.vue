@@ -80,9 +80,11 @@ $tag-width: 1150px;
                 .advantages-image {
                     display: flex;
                     flex-direction: column;
-
+                    img{
+                        width: 290px;
+                        height: 290px;
+                    }
                 }
-
             }
 
             .advantages-description {
@@ -112,10 +114,8 @@ $tag-width: 1150px;
 @media (max-width: $tag-width) {
     .trusted-block {
         margin: 0px;
-
         .trust-wrapper {
-
-
+            margin: 0px;
             .paragraph-about-trust {
                 display: flex;
                 flex-direction: column;
@@ -130,7 +130,7 @@ $tag-width: 1150px;
             .line-block {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-
+                margin: 50px 0px 0px 0px;
                 .advantages {
                     display: flex;
                     flex-direction: column;
@@ -154,7 +154,7 @@ $tag-width: 1150px;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        padding: 0px;
+                        padding: 0px 50px;
                         font-weight: 700;
                         font-size: 13px;
                         line-height: 16px;

@@ -86,7 +86,7 @@ $tag-width: 1150px;
 
 @media (max-width: $tag-width) {
     .text-menu-wrapper {
-        margin: 50px 20px;
+        margin: 40px 20px;
 
         .questions {
 

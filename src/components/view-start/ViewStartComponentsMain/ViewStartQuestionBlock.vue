@@ -9,7 +9,7 @@
             </button>
         </div>
     </div>
-    <div class="test" :class="{ active: isActive }">
+    <div class="description" :class="{ active: isActive }">
         <h1>
             <slot name="description">Здесь будет ответ на вопрос</slot>
         </h1>
@@ -54,7 +54,7 @@ $tag-width: 1150px;
     }
 }
 
-.test {
+.description {
     display: none;
     padding: 20px;
     margin-bottom: 30px;
@@ -76,7 +76,26 @@ $tag-width: 1150px;
             line-height: 14.63px;
             text-align: start;
         }
-
-        .arrow-link {}
+        .arrow-link {
+        .button-link{
+            img {
+                width: 35px;
+                height: 20px;
+            }
+        }
     }
+    }
+    .description {
+    display: none;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 29px;
+    color: #FFFFFF;
+    text-align: start;
+    &.active{
+        display: flex;
+    }
+}
 }</style>

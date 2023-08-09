@@ -95,9 +95,10 @@ $tag-width: 1150px;
       border-radius: 24px;
       padding: 10px;
 
-      h1 {
-        margin: 20px;
-      }
+      img{
+          height: 300px;
+          width: 370px;
+        }
 
       .board-info {
         display: flex;
@@ -163,7 +164,10 @@ $tag-width: 1150px;
       .tariff {
         overflow: hidden;
 
-        h1 {}
+        img{
+          height: 350px;
+          width: 350px;
+        }
 
         .board-info {
           line-height: 24px;
@@ -175,11 +179,12 @@ $tag-width: 1150px;
           }
         }
 
-        &.second-tariff {}
+        &.second-tariff {
+          
+        }
 
         &.first-tariff,
         &.third-tariff {
-          margin-block: 20px;
         }
 
         .simple-button-try {

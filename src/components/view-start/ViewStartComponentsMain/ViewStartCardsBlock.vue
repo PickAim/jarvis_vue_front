@@ -36,7 +36,7 @@
                         <h1>Процесс работы с финансовыми <br>отчетами слишком трудоемкий</h1>
                         <div class="card-items">
                             <div class="card-items-line">
-                                <img src="src\assets\Cards-Block-Lil-Arrow.png" alt="">
+                                <img src="src\assets\Cards-Block-Black-Lil-Line.png" alt="">
                             </div>
                             <div class="card-items-img">
                                 <img src="src\assets\Cards-block-3.png" alt="">
@@ -87,6 +87,7 @@ $tag-width: 1150px;
     display: flex;
     flex-direction: column;
     gap: 50px;
+
     h1 {
         font-weight: 700;
         font-size: 48px;
@@ -129,8 +130,8 @@ $tag-width: 1150px;
         }
 
         .card-items-img {
-         height: 214px;
-         width: 214px;
+            height: 214px;
+            width: 214px;
         }
     }
 }
@@ -148,35 +149,35 @@ $tag-width: 1150px;
         color: rgba(255, 255, 255, 1);
         background-color: rgba(112, 38, 235, 1);
         border-radius: 25px;
-    
+
         h1 {
             font-weight: 700;
             font-size: 15px;
             line-height: 18px;
             margin: 54px 14px;
         }
-    
+
         .card-items {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-    
+
             .card-items-line {
                 display: flex;
                 flex-direction: column;
                 justify-content: end;
                 margin: 0px 14px 40px 14px;
             }
-    
+
             .card-items-img {
-                img{
+                img {
                     height: 214px;
                     width: 214px;
                 }
             }
         }
     }
-    
+
     .block-with-sign-right {
         display: flex;
         flex-direction: column;
@@ -184,28 +185,28 @@ $tag-width: 1150px;
         color: rgba(0, 0, 0, 1);
         background-color: rgba(183, 255, 68, 1);
         border-radius: 25px;
-    
+
         h1 {
             font-weight: 700;
             font-size: 15px;
             line-height: 18px;
             margin: 54px 14px;
         }
-    
+
         .card-items {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-    
+
             .card-items-line {
                 display: flex;
                 flex-direction: column;
                 justify-content: end;
                 margin: 0px 14px 40px 14px;
             }
-    
+
             .card-items-img {
-                img{
+                img {
                     height: 214px;
                     width: 214px;
                 }
@@ -232,7 +233,8 @@ $tag-width: 1150px;
             line-height: 59px;
             text-align: center;
         }
-        img{
+
+        img {
             width: 0px;
             height: 0px;
         }
@@ -265,7 +267,10 @@ $tag-width: 1150px;
             .card-items-img {
                 display: flex;
                 flex-direction: column;
-                img{
+                align-items: flex-end;
+                justify-content: flex-end;
+
+                img {
                     width: 117px;
                     height: 117px;
                 }
@@ -273,25 +278,74 @@ $tag-width: 1150px;
         }
     }
 
-    .block-with-sign {
-        h1 {
-            font-weight: 700;
-            font-size: 9px;
-            line-height: 11px;
-            margin: 25px 15px;
-        }
-
-        .card-items {
+    .bottom-cards {
+        .block-with-sign {
             display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
+            flex-direction: column;
+            justify-content: space-between;
+            color: rgba(0, 0, 0, 1);
+            border-radius: 25px;
 
-            .card-items-line {
-                display: none;
+            h1 {
+                font-weight: 700;
+                font-size: 9px;
+                line-height: 11px;
+                margin: 25px 15px;
             }
 
-            .card-items-img {
-                margin: 10px 20px;
+            .card-items {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-end;
+
+                .card-items-line {
+                    display: none;
+                }
+
+                .card-items-img {
+
+                    img {
+                        margin: 0px;
+                        height: 117px;
+                        width: 117px;
+                    }
+                }
+            }
+        }
+
+        .block-with-sign-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: rgba(0, 0, 0, 1);
+            border-radius: 25px;
+
+            h1 {
+                font-weight: 700;
+                font-size: 9px;
+                line-height: 11px;
+                margin: 25px 15px;
+            }
+
+            .card-items {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-end;
+
+                .card-items-line {
+                    display: none;
+                }
+
+                .card-items-img {
+
+                    img {
+                        margin: 0px;
+                        height: 117px;
+                        width: 117px;
+                    }
+                }
             }
         }
     }
