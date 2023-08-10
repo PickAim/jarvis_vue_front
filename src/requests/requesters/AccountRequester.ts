@@ -3,18 +3,22 @@ import type {LoginData, RegData, ResponseData, TokenData} from "@/types/DataType
 import {ResultCode} from "@/requests/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import {Configs} from "@/Configs";
+import {useAuthStore} from "@/stores/authStore";
 
-export default class AccountRequester extends Requester{
-    constructor(private authStore: IAuthStore) {
+export default class AccountRequester extends Requester {
+    private authStore: IAuthStore;
+
+    constructor() {
         super();
+        this.authStore = useAuthStore();
     }
 
-    async loginPassword(loginData: LoginData): Promise<ResponseData<object>>{
+    async loginPassword(loginData: LoginData): Promise<ResponseData<object>> {
         const response = await this.requestHandler.makeRequest<TokenData>({
             url: "/auth/",
             body: loginData,
         });
-        if(response.code == ResultCode.OK && response.result !== undefined){
+        if (response.code == ResultCode.OK && response.result !== undefined) {
             const tokens = response.result;
             this.authStore.setTokens(tokens);
         }

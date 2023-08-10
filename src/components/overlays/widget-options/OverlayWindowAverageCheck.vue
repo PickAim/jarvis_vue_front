@@ -13,7 +13,7 @@
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import {reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import type {WidgetOptions} from "@/types/WidgetTypes";
 import _ from "lodash";
 type widgetName = "averageCheck";

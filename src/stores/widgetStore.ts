@@ -1,16 +1,18 @@
 import {defineStore} from 'pinia'
 import type {WidgetName, WidgetOptions, WidgetSaveInfo} from "@/types/WidgetTypes";
-import type {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import type {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import {useLocalStorage} from "@vueuse/core";
 import {ref} from "vue";
-import {AverageCheckWidgetClass} from "@/component-classes/widgets/AverageCheckWidgetClass";
-import {LostRevenueWidgetClass} from "@/component-classes/widgets/LostRevenueWidgetClass";
-import {NicheDistWidgetClass} from "@/component-classes/widgets/NicheDistWidgetClass";
-import {OrdersAndRedemptionsWidgetClass} from "@/component-classes/widgets/OrdersAndRedemptionsWidgetClass";
-import {RemainsWidgetClass} from "@/component-classes/widgets/RemainsWidgetClass";
-import {StoreProfitabilityWidgetClass} from "@/component-classes/widgets/StoreProfitabilityWidgetClass";
-import {TurnoverWidgetClass} from "@/component-classes/widgets/TurnoverWidgetClass";
-import {UnitEconWidgetClass} from "@/component-classes/widgets/UnitEconWidgetClass";
+import {AverageCheckWidgetClass} from "@/component-actions/view-workspace/widgets/AverageCheckWidgetClass";
+import {LostRevenueWidgetClass} from "@/component-actions/view-workspace/widgets/LostRevenueWidgetClass";
+import {NicheDistWidgetClass} from "@/component-actions/view-workspace/widgets/NicheDistWidgetClass";
+import {
+    OrdersAndRedemptionsWidgetClass
+} from "@/component-actions/view-workspace/widgets/OrdersAndRedemptionsWidgetClass";
+import {RemainsWidgetClass} from "@/component-actions/view-workspace/widgets/RemainsWidgetClass";
+import {StoreProfitabilityWidgetClass} from "@/component-actions/view-workspace/widgets/StoreProfitabilityWidgetClass";
+import {TurnoverWidgetClass} from "@/component-actions/view-workspace/widgets/TurnoverWidgetClass";
+import {UnitEconWidgetClass} from "@/component-actions/view-workspace/widgets/UnitEconWidgetClass";
 
 function getWidgetClassInstance<N extends WidgetName>(config: WidgetClass<N>["config"]) {
     switch (config.widgetName) {

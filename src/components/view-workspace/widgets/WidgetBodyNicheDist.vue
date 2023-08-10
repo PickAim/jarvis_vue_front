@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 
 defineProps<{
   options: WidgetClass<"averageCheck">,

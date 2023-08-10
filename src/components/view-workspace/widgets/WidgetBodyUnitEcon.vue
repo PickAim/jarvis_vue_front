@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
-import {UnitEconWidgetClass} from "@/component-classes/widgets/UnitEconWidgetClass";
+import {UnitEconWidgetClass} from "@/component-actions/view-workspace/widgets/UnitEconWidgetClass";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 
 const props = defineProps<{
