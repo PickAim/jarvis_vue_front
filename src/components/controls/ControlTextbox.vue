@@ -57,9 +57,9 @@ defineEmits(['update:modelValue'])
 
     .placeholder{
       position: absolute;
-      top: 0;
-      left: $left-padding+5;
-      font-size: 28px;
+      top: 10px;
+      left: $left-padding+2;
+      font-size: 20px;
       width: fit-content;
       pointer-events: none;
       transition: .1s;
@@ -77,11 +77,13 @@ defineEmits(['update:modelValue'])
       box-sizing: border-box;
       transition: border-width 0.1s linear, border-color 0.1s linear;
 
-      &:focus{
+      &:focus {
         border-color: #111;
       }
-      &:focus+.placeholder, &:not(:placeholder-shown)+.placeholder{
+
+      &:focus + .placeholder, &:not(:placeholder-shown) + .placeholder {
         font-size: 13px;
+        top: 0;
       }
     }
   }

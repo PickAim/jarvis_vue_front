@@ -135,3 +135,8 @@ export type AllMarketplacesResultData = { [marketplaceID: number]: string }
 export type AllNichesResultData = { [nicheID: number]: string }
 
 export type AllCategoriesResultData = { [categoryID: number]: string }
+
+export type ProductData = {
+    productID: number;
+    name: string;
+}

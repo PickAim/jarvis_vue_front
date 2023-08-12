@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
-import ViewWorkspaceSection from "@/components/view-workspace/ViewWorkspaceSection.vue";
+import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {computed, ref} from "vue";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";

@@ -17,22 +17,15 @@ withDefaults(defineProps<{
 
 <style scoped lang="scss">
 .button-wrapper{
-  width: 200px;
-  height: 70px;
+  color: black;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-button{
+button {
   width: 100%;
-  height: 60px;
   border: 2px solid black;
   background-color: white;
- &.enabled {
-    &:hover {
-      border-width: 3px;
-    }
-    &:active {
-      border-width: 2px;
-    }
-  }
+  padding: 10px 20px;
 }
 </style>

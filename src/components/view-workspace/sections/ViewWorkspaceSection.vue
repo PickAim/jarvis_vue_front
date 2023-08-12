@@ -33,7 +33,6 @@
     border-color: white;
     border-bottom-width: 2px;
     //border-bottom-right-radius: 15px;
-    margin-bottom: 20px;
     //margin-top: 10px;
     margin-left: 20px;
   }
@@ -42,6 +41,7 @@
     flex: 1 0;
     height: 100%;
     overflow: hidden;
+    margin-top: 10px;
   }
 }
 </style>

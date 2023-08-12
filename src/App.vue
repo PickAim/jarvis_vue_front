@@ -15,6 +15,5 @@ import {storeToRefs} from "pinia";
 const {isLoading, isHidden} = storeToRefs(useRequestStore());
 </script>
 
-<style scoped>
-
+<style>
 </style>
