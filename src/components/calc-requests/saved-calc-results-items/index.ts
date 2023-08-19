@@ -1,8 +1,9 @@
-import {default as unitEcon} from "./SavedCalcRequestItemBodyUnitEcon.vue";
-import {default as nicheDist} from "./SavedCalcRequestItemBodyNicheDist.vue";
-import type {CalcRequestName} from "@/types/CalcRequestsTypes";
+import {default as unitEcon} from "./SavedItemUnitEcon.vue";
+import {default as nicheDist} from "./SavedItemNicheDist.vue";
+import type {SavableRequestName} from "@/types/RequestTypes";
+import type {Component} from "vue";
 
-export const savedRequestItems: { [ind in CalcRequestName]: any } = {
+export const savedRequestItems: { [ind in SavableRequestName]: Component } = {
     unitEcon,
     nicheDist
 }

@@ -7,10 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
-import {OverlayWidgetSettingsActions} from "@/component-classes/overlays-actions/OverlayWidgetOptionsActions";
+import {OverlayWidgetSettingsActions} from "@/component-actions/overlays-actions/OverlayWidgetOptionsActions";
 import type {WidgetName, WidgetOptions} from "@/types/WidgetTypes";
 import {widgetOptionsOverlays} from "@/components/overlays/widget-options";
 

@@ -17,18 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import AccountRequestActions from "@/requests/request-actions/AccountRequestActions";
-import type {LoginData, RegData, ResponseData} from "@/types/Objects";
+import AccountRequester from "@/requests/requesters/AccountRequester";
+import type {LoginData, RegData, ResponseData} from "@/types/DataTypes";
 import {ref} from "vue";
-import {ResultCode} from "@/types/ResultCode";
+import {ResultCode} from "@/requests/ResultCode";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {useAuthStore} from "@/stores/authStore";
 
-const rightRegData: RegData = {email: "k.buiko04@mail.ru", password: "qwe123@#$QWE", phone: "123123123123"}
+const rightRegData: RegData = {email: "k.buiko20@mail.ru", password: "qwe123@#$QWE", phone: "89087428483"}
 const rightLoginData: LoginData = {login: rightRegData.email, password: rightRegData.password}
-const wrongRegData: RegData = {email: "k.buiko04@mail.ru", phone: "79137428483", password: "qwe123"}
+const wrongRegData: RegData = {email: "k.buiko05@mail.ru", phone: "79137428483", password: "qwe123"}
 
-const accountHandler = new AccountRequestActions(useAuthStore());
+const accountHandler = new AccountRequester(useAuthStore());
 let requestResult = ref("0");
 let isLoading = ref(false);
 

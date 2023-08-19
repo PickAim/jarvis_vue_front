@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import {computed, defineProps} from "vue";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
+import {computed} from "vue";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
 
 const props = defineProps<{
   widgetSize: number

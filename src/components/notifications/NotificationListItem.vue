@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from "vue";
 import type {Notification} from "@/stores/notificationsStore";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 
@@ -46,25 +45,27 @@ function mouseLeaveFunc(){
 </script>
 
 <style scoped lang="scss">
-.notification-list-item-wrapper{
+.notification-list-item-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: calc(80px + max(0px, 300px - 50vw));
   background-color: white;
   border: 1px solid black;
+  color: black;
   overflow-y: hidden;
   margin-block: 5px;
   opacity: 1;
   pointer-events: all;
 
-  .type-icon{
+  .type-icon {
     width: 20px;
     height: 100%;
   }
-  main{
+
+  main {
     margin-left: 20px;
-    flex-grow: 1;
+    flex: 1 0;
     text-align: left;
 
     .header-wrapper {
@@ -73,7 +74,8 @@ function mouseLeaveFunc(){
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      .hide-button{
+
+      .hide-button {
         width: 20px;
         height: 20px;
         background-color: black;

@@ -1,61 +1,47 @@
-import AbstractRequestActions from "@/requests/request-actions/AbstractRequestActions";
-import type {LoginData, RegData, ResponseData, TokenData} from "@/types/Objects";
-import {ResultCode} from "@/types/ResultCode";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
-import {Configs} from "@/Configs";
+import AccountRequester from "@/requests/requesters/AccountRequester";
+import type {LoginData, RegData, ResponseData} from "@/types/DataTypes";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
-export default class AccountRequestActions extends AbstractRequestActions{
-    constructor(private authStore: IAuthStore) {
-        super(authStore);
+export class AccountRequestActions {
+    accountRequester;
+
+    constructor() {
+        this.accountRequester = new AccountRequester();
     }
 
-    async loginPassword(loginData: LoginData): Promise<ResponseData<object>>{
-        const response = await this.requestHandler.makeRequest<TokenData>({
-            url: "/auth/",
-            method: "POST",
-            body: loginData,
-        });
-        if(response.code == ResultCode.OK && response.result !== undefined){
-            const tokens = response.result;
-            this.authStore.setTokens(tokens);
-        }
+    async loginPassword(loginData: LoginData): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.loginPassword(loginData);
+        ErrorHandler.handle(response.code);
         return response;
     }
 
-    async loginToken(): Promise<ResponseData<object>>{
-        return await this.requestHandler.makeRequest({
-            url: Configs.AccessRequestPrefix + "/auth/",
-            method: "GET",
-        });
+    async loginToken(): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.loginToken();
+        ErrorHandler.handle(response.code);
+        return response;
     }
 
-    async registration(regData: RegData): Promise<ResponseData<object>>{
-        return await this.requestHandler.makeRequest({
-            url: "/reg/",
-            method: "POST",
-            body: regData,
-        });
+    async registration(regData: RegData): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.registration(regData);
+        ErrorHandler.handle(response.code);
+        return response;
     }
 
-    async passwordChange(passwords: {oldPassword: string, newPassword: string}): Promise<ResponseData<object>>{
-        return await this.requestHandler.makeRequest({
-            url: "/",
-            method: "POST",
-            body: passwords,
-        });
+    async passwordChange(passwords: { oldPassword: string, newPassword: string }): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.passwordChange(passwords);
+        ErrorHandler.handle(response.code);
+        return response;
     }
 
-    async deleteAccount(): Promise<ResponseData<object>>{
-        this.authStore.setTokens({access_token: "", update_token: ""});
-        return await this.requestHandler.makeRequest({
-            url: "",
-        });
+    async deleteAccount(): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.deleteAccount();
+        ErrorHandler.handle(response.code);
+        return response;
     }
 
-    async logout(): Promise<ResponseData<object>>{
-        this.authStore.setTokens({access_token: "", update_token: ""});
-        return await this.requestHandler.makeRequest({
-            url: "/access/logout/",
-        });
+    async logout(): Promise<ResponseData<object>> {
+        const response = await this.accountRequester.logout();
+        ErrorHandler.handle(response.code);
+        return response;
     }
 }

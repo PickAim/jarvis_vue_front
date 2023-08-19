@@ -3,11 +3,16 @@
     <main>
       <header>Логин</header>
       <div class="input-block">
-        <ControlTextbox placeholder="Логин" input-type="text" v-model="loginInput" />
-        <ControlTextbox placeholder="Пароль" input-type="password" v-model="passwordInput" />
+        <ControlTextbox placeholder="Логин"
+                        input-type="text"
+                        v-model="loginInput"/>
+        <ControlTextbox placeholder="Пароль"
+                        input-type="password"
+                        v-model="passwordInput"/>
       </div>
-      <ControlButton class="submit" @click="actions.login({ login: 'loginInput', password: passwordInput })">Подтвердить
-      </ControlButton>
+      <ControlButton class="submit"
+                     @click="actions.login({login: 'loginInput', password: passwordInput})"
+      >Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
 </template>
@@ -16,9 +21,8 @@
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-
-import { ref } from "vue";
-import { OverlayLoginActions } from "@/component-classes/overlays-actions/OverlayLoginActions";
+import {ref} from "vue";
+import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";
 
 const loginInput = ref("")
 const passwordInput = ref("")

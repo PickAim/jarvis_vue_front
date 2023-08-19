@@ -1,24 +1,38 @@
 import {defineStore} from "pinia";
-import type IAuthStore from "@/requests/request-actions/interfaces/IAuthStore";
-import type {TokenData} from "@/types/Objects";
-import type {ResultCode} from "@/types/ResultCode";
+import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
+import type {TokenData} from "@/types/DataTypes";
+import {useLocalStorage} from "@vueuse/core";
 
-export const useAuthStore = defineStore<"authStore",any,any, IAuthStore>("authStore", {
-    actions:{
-        // TODO: add token storage realization
-        getTokens(): TokenData {
-            return {} as TokenData;
+export const useAuthStore = defineStore<any, any, any, IAuthStore>("authStore", {
+    state: () => ({
+        access_token: useLocalStorage<string | undefined>("accessToken", undefined),
+        imprint_token: useLocalStorage<string | undefined>("imprintToken", undefined),
+        update_token: useLocalStorage<string | undefined>("updateToken", undefined)
+    }),
+    actions: {
+        getTokens(): { [ind in keyof TokenData]: string | undefined } {
+            return {
+                access_token: this.access_token,
+                imprint_token: this.imprint_token,
+                update_token: this.update_token
+            };
         },
-        setAccessToken(token: string): ResultCode {
-            return {} as ResultCode;
+        setAccessToken(token: string | undefined) {
+            this.access_token = token;
         },
-        setImprint(key: string | undefined): ResultCode {
-            return {} as ResultCode;
+        setImprint(token: string | undefined) {
+            this.imprint_token = token;
         },
-        setUpdateToken(token: string): ResultCode {
-            return {} as ResultCode;
+        setUpdateToken(token: string | undefined) {
+            this.update_token = token;
         },
-        setTokens(token: TokenData) {
+        setTokens(token: TokenData | undefined) {
+            if (!token) {
+                this.setAccessToken(undefined);
+                this.setImprint(undefined);
+                this.setUpdateToken(undefined);
+                return;
+            }
             this.setAccessToken(token.access_token);
             this.setImprint(token.imprint_token);
             this.setUpdateToken(token.update_token);

@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed, defineProps} from "vue";
+import {computed} from "vue";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
-import {UnitEconWidgetClass} from "@/component-classes/widgets/UnitEconWidgetClass";
+import {UnitEconWidgetClass} from "@/component-actions/view-workspace/widgets/UnitEconWidgetClass";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 
 const props = defineProps<{
@@ -21,7 +21,7 @@ const props = defineProps<{
   widgetSize: number
 }>();
 
-const chartResult = computed(() => props.options.request ? [
+const chartResult = computed<[number|undefined, string][] | undefined>(() => props.options.request ? [
   [props.options.request.result.logistic_price, "Логистики"],
   [props.options.request.result.margin, "Маржа"],
   [props.options.request.result.marketplace_commission, "Комиссия маркетплейса"],
@@ -30,8 +30,7 @@ const chartResult = computed(() => props.options.request ? [
   [props.options.request.result.storage_price, "Хранение"]
 ] : undefined);
 
-const chartTitle = computed(() => `Рекомендуемая цена:
-${chartResult.value?.reduce((a, v) => a + (typeof (v[0]) == "number" ? v[0] : Number.parseInt(v[0] ?? "0")), 0)}`);
+const chartTitle = computed(() => `Рекомендуемая цена: `);
 </script>
 
 <style scoped lang="scss">

@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { ViewStartActions } from "@/component-classes/ViewStartActions";
 import { useRouter } from "vue-router";
 const actions = new ViewStartActions();
@@ -56,7 +55,7 @@ header {
 @media (max-width: $tag-width) {
   header {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 
     .buttons-wrapper {
       display: none;

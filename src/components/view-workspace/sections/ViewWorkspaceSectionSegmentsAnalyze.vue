@@ -1,0 +1,15 @@
+<template>
+  <ViewWorkspaceSection>
+    <template v-slot:header>{{ sections.segmentsAnalyze.title }}</template>
+    <div>
+    </div>
+  </ViewWorkspaceSection>
+</template>
+
+<script setup lang="ts">
+import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
+import {sections} from "@/components/view-workspace/workspaceSections";
+</script>
+
+<style scoped lang="scss">
+</style>

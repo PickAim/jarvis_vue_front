@@ -12,12 +12,9 @@
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {OverlayWidgetSettingsActions} from "@/component-classes/overlays-actions/OverlayWidgetSettingsActions";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {storeToRefs} from "pinia";
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import {computed} from "vue";
-import type {Widget} from "@/types/WidgetTypes";
 
 const widgetStore = useWidgetStore();
 const {overlayOptions} = storeToRefs(useOverlayStateStore());
