@@ -44,9 +44,11 @@ function onRequestSelect(ID) {
 
 function onSet() {
   if (!settingSelected.value) {
-    document.querySelector('#unit-economy-parameters').scrollIntoView({
-      behavior: "smooth"
-    })
+    setTimeout(() => {
+      document.querySelector('#unit-economy-parameters').scrollIntoView({
+        behavior: "smooth"
+      })
+    }, 0);
   }
   settingSelected.value = true;
 }
