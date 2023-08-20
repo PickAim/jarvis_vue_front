@@ -1,7 +1,7 @@
 import type {RouteRecordRaw} from "vue-router";
 import ViewStart from "../components/view-start/ViewStart.vue";
 import ViewWorkspace from "../components/view-workspace/ViewWorkspace.vue";
-import ViewTariffs from "../views/ViewTariffs.vue" ;
+import ViewTariffs from "@/components/view-start/ViewTariffs.vue" ;
 import {workspaceRouter} from "@/routers/workspaceRouter";
 
 export const viewRoutes: RouteRecordRaw[] = [

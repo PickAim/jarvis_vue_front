@@ -11,7 +11,7 @@
                         v-model="passwordInput"/>
       </div>
       <ControlButton class="submit"
-                     @click="actions.login({login: 'loginInput', password: passwordInput})"
+                     @click="onLoginClick"
       >Подтвердить</ControlButton>
     </main>
   </OverlayTemplateDecorated>
@@ -23,10 +23,23 @@ import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {ref} from "vue";
 import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";
+import {ResultCode} from "@/requests/ResultCode";
+import {useRouter} from "vue-router";
+import {useOverlayStateStore} from "@/stores/overlayStore";
 
-const loginInput = ref("")
-const passwordInput = ref("")
+const loginInput = ref("+11111111111");
+const passwordInput = ref("Apassword123!");
 const actions = new OverlayLoginActions();
+const router = useRouter();
+
+function onLoginClick() {
+  actions.login({login: loginInput.value, password: passwordInput.value}).then((resp) => {
+    if (resp.code === ResultCode.OK) {
+      router.replace('/workspace');
+      useOverlayStateStore().closeOverlay();
+    }
+  });
+}
 </script>
 
 <style scoped lang="scss">

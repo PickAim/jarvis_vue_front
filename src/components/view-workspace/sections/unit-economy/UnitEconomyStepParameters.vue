@@ -5,14 +5,22 @@ import ControlTextbox from "@/components/controls/ControlTextbox.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import {ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
+import type {UnitEconomyRequestData} from "@/types/DataTypes";
 
 const props = defineProps<{
-  shown: boolean
+  shown: boolean,
+  parameters: UnitEconomyRequestData
 }>();
+
+const emits = defineEmits<{
+  <A extends keyof UnitEconomyRequestData>(e: "parameterChanged", key: A, value: UnitEconomyRequestData[A]): void,
+  (e: "calculate"): void,
+
+}>()
 
 type InputInfoType =
     {
-      name: string,
+      name: keyof UnitEconomyRequestData,
       value?: string | Ref<string | number>,
       onChange?: (value: string) => void
     }
@@ -49,6 +57,8 @@ const checkBox2 = ref(false);
     <h2>Шаг 2. Параметры</h2>
     <div class="input-wrapper" v-for="input in parameters" :key="input.name">
       <ControlTextbox v-if="input.type === 'input'"
+                      :model-value="props.parameters[input.name]"
+                      @update:model-value="(value) => emits('parameterChanged', input.name, value)"
                       :placeholder="input.placeholder"
                       :input-type="input.inputType"/>
     </div>
@@ -57,7 +67,7 @@ const checkBox2 = ref(false);
         <div class="parameters-settings-label">Дополнительно рассчитать:</div>
         <ControlCheckBox v-model="checkBox1">Рассчитать стоимость транзита</ControlCheckBox>
         <ControlCheckBox v-model="checkBox2">Рассчитать стоимость хранения</ControlCheckBox>
-        <ControlButton class="calculate-button">Рассчитать</ControlButton>
+        <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
       </div>
     </div>
   </div>

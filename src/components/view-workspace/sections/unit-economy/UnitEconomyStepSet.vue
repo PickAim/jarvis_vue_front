@@ -20,7 +20,8 @@ const emit = defineEmits<{
     <div class="step-body">
       <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
       <ProductsList class="select-product"
-                    :products-list="props.products" @select-product="(ID) => emit('select-product', ID)"/>
+                    :products="props.products"
+                    @select-product="(ID) => emit('select-product', ID)"/>
       <span class="select-request-label">или один из своих сохранённых запросов:</span>
       <select class="select-request" name="" id="" @change="(e) => emit('select-request', e)">
         <option value="">1</option>

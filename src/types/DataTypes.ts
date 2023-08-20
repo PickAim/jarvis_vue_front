@@ -71,7 +71,7 @@ export class UnitEconomyRequestData implements NicheRequestData {
     pack = NaN; // Need
     niche = ""; // Need
     category_id = 0; // Need
-    marketplace_id = 0;
+    marketplace_id = 2;
     transit_count? = NaN;
     transit_price? = NaN;
     market_place_transit_price? = NaN;
@@ -136,7 +136,21 @@ export type AllNichesResultData = { [nicheID: number]: string }
 
 export type AllCategoriesResultData = { [categoryID: number]: string }
 
-export type ProductData = {
-    productID: number;
+export type ResultProductData = {
+    global_id: number;
     name: string;
+    category: string;
+    niche: string;
+    cost: number;
+    rating: number;
+    seller: string;
+    brand: string;
 }
+
+export type ProductData = ResultProductData &
+    {
+        productID: string,
+        marketplaceID: string
+    }
+
+export type AllProductsResultData = { [marketplaceID: string]: { [productID: string]: ResultProductData } }

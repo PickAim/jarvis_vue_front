@@ -105,9 +105,12 @@ $tag-width: 1150px;
     }
 
     .button-try {
-        border: 1px solid #B7FF44;
-        border-radius: 12px;
-        padding: 20px 50px;
+      border: 1px solid #B7FF44;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 23px;
+      line-height: 28px;
+      padding: 15px;
     }
 }
 

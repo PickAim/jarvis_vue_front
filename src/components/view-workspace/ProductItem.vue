@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import type {ProductData} from "@/types/DataTypes";
+import type {ResultProductData} from "@/types/DataTypes";
 
 const props = defineProps<{
-  productItem: ProductData
+  productItem: ResultProductData
 }>();
 
 const emit = defineEmits<{
@@ -34,7 +34,11 @@ function onMouseLeave() {
        @mousemove="onMouseMove"
        @mouseleave="onMouseLeave">
     <div class="product" @click="emit('select')">
-      <div class="product-icon"/>
+      <div class="product-info">
+        <div class="cost-info info-text">Стоимость: {{ props.productItem.cost / 100 }} ₽</div>
+        <div class="category-info info-text">Категория: {{ props.productItem.category }}</div>
+        <div class="niche-info info-text">Ниша: {{ props.productItem.niche }}</div>
+      </div>
       <div class="product-name">{{ props.productItem.name }}</div>
     </div>
   </div>
@@ -44,10 +48,12 @@ function onMouseLeave() {
 .product-effect-container {
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
   width: 180px;
   perspective: 250px;
   padding: 10px 5px;
   overflow: visible;
+  user-select: none;
 
   &.selected {
     .product {
@@ -70,18 +76,29 @@ function onMouseLeave() {
   transform: rotateY(v-bind(xDegrees)) rotateX(v-bind(yDegrees));
   transition: transform 1s cubic-bezier(0, 0.35, 0.14, 0.99), border-color 0.3s;
 
-  .product-icon {
+  .product-info {
     flex: 1 0;
-    background: white;
+    background: black;
+    border-bottom: 1px solid white;
+    padding-top: 5px;
+
+    .info-text {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-inline: 15px;
+      font-size: 12px;
+    }
   }
 
   .product-name {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    user-select: none;
-    font-size: 12px;
     width: 100%;
+    font-size: 12px;
+    padding: 5px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &:hover {

@@ -70,7 +70,7 @@ $tag-width: 1150px;
       h1 {
         font-weight: 600;
         font-size: 3vw;
-        line-height: 1.5em;
+        line-height: 1.3em;
         text-align: center;
       }
     }
@@ -80,13 +80,13 @@ $tag-width: 1150px;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 45px;
+      gap: 20px;
       position: absolute;
       bottom: 30px;
 
       h1 {
         font-weight: 200;
-        font-size: 2vw;
+        font-size: 25px;
         line-height: 1em;
       }
 
@@ -146,6 +146,7 @@ $tag-width: 1150px;
         background:none;
         backdrop-filter: none;
         padding: 10vh;
+
         h1 {
           text-align: start;
           font-weight: 700;
@@ -160,12 +161,12 @@ $tag-width: 1150px;
         flex-direction: column;
         justify-content: flex-start;
         position: relative;
-        justify-content: flex-start;
         align-items: flex-start;
-        padding: 10vh;
-        gap: 0px;
+        //padding: 10vh;
+        gap: 0;
+
         h1 {
-          text-align: start;         
+          text-align: start;
           font-weight: 300;
           font-size: 3vw;
           line-height: 2.5vw;

@@ -14,11 +14,11 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     isWarehouseOn = false;
     isTransitOn = false;
 
-    requestTransitKeys: (keyof RequestType)[] = ["market_place_transit_price", "transit_count", "transit_price"];
-    requestWarehouseKeys: (keyof RequestType)[] = ["warehouse_name"];
+    private requestTransitKeys: (keyof RequestType)[] = ["market_place_transit_price", "transit_count", "transit_price"];
+    private requestWarehouseKeys: (keyof RequestType)[] = ["warehouse_name"];
 
-    resultTransitKeys: (keyof ResultType)[] = ["transit_profit", "transit_margin", "marketplace_commission"];
-    resultWarehouseKeys: (keyof ResultType)[] = ["storage_price"];
+    private resultTransitKeys: (keyof ResultType)[] = ["transit_profit", "transit_margin", "marketplace_commission"];
+    private resultWarehouseKeys: (keyof ResultType)[] = ["storage_price"];
 
     constructor() {
         super(new UnitEconomyActions(), "Запрос UNIT экономики");

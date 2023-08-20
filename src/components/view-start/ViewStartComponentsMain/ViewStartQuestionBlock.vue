@@ -47,7 +47,6 @@ $tag-width: 1150px;
     .arrow-link {
         .button-link{
             img {
-                width: 70px;
                 height: 40px;
             }
         }

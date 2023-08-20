@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import ProductsItem from "@/components/view-workspace/ProductsItem.vue";
+import ProductItem from "@/components/view-workspace/ProductItem.vue";
 import {ref} from "vue";
-import type {ProductData} from "@/types/DataTypes";
+import {ProductData} from "@/types/DataTypes";
 
 const props = defineProps<{
-  productsList: ProductData[]
+  products: ProductData[]
 }>();
 
 const emit = defineEmits<{
   (e: "select-product", ID): void
 }>()
 
-const selectedProductID = ref(0);
+const selectedProductID = ref("0");
 
-function onProductSelect(id: number) {
+function onProductSelect(id: string) {
   selectedProductID.value = id;
   emit("select-product", id);
 }
@@ -22,11 +22,11 @@ function onProductSelect(id: number) {
 
 <template>
   <div class="product-list">
-    <ProductsItem v-for="product in props.productsList"
-                  :class="{selected: selectedProductID === product.productID}"
-                  :key="product"
-                  :product-item="product"
-                  @select="onProductSelect(product.productID)"/>
+    <ProductItem v-for="product in props.products"
+                 :class="{selected: selectedProductID === product.productID}"
+                 :key="product.productID"
+                 :product-item="product"
+                 @select="onProductSelect(product.productID)"/>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ function onProductSelect(id: number) {
 .product-list {
   display: flex;
   flex-direction: row;
-  height: 150px;
+  height: 190px;
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;

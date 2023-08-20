@@ -15,6 +15,6 @@ export class OverlayLoginActions extends OverlayActions {
 
     async login(data: LoginData) {
         // TODO: add data validation
-        await this.accountRequestActions.loginPassword(data);
+        return await this.accountRequestActions.loginPassword(data);
     }
 }
