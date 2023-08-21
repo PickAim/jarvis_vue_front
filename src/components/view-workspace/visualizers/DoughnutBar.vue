@@ -76,6 +76,9 @@ const chartOptions = computed<ChartOptions>(() => ({
   plugins: {
     legend: {
       labels: {
+        font: {
+          size: 15
+        },
         color: 'white'
       },
       display: true,
@@ -84,7 +87,7 @@ const chartOptions = computed<ChartOptions>(() => ({
     title: {
       color: 'white',
       font: {
-        size: 14
+        size: 20
       },
       display: true,
       text: props.title

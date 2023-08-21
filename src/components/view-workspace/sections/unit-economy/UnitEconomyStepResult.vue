@@ -11,8 +11,8 @@ const props = defineProps<{
 
 const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
   margin: "Маржа",
-  logistic_price: "Логистики",
-  pack_cost: "Стоиомсть упаковки",
+  logistic_price: "Стоимость логистики",
+  pack_cost: "Стоимость упаковки",
   product_cost: "Себестоимость",
   storage_price: "Хранение",
   marketplace_commission: "Комиссия маркетплейса",
@@ -26,6 +26,7 @@ const chartResult = computed(() => {
   const result = [];
   if (!props.resultData) return result;
   Object.keys(props.resultData).forEach((key) => {
+    if (["transit_margin", "transit_profit"].includes(key)) return;
     const value = props.resultData && props.resultData[key];
     if (value !== undefined) {
       const title = chartKeyToTitle[key];

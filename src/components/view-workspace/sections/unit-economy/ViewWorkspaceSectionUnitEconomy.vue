@@ -9,7 +9,9 @@
         <UnitEconomyStepParameters :shown="settingSelected"
                                    :parameters="calculator.request"
                                    @parameter-changed="onParameterChanged"
-                                   @calculate="onCalculate"/>
+                                   @calculate="onCalculate"
+                                   v-model:is-calculate-transit="calculator.isTransitOn"
+                                   v-model:is-calculate-warehouse="calculator.isWarehouseOn"/>
         <UnitEconomyStepResult :shown="calculated && !!calculator.result"
                                :result-data="calculator.result"/>
       </div>
@@ -36,16 +38,7 @@ const calculator = reactive(new UnitEconomyCalculator());
 actions.initSection();
 
 const settingSelected = ref(false);
-const calculated = ref(true);
-
-calculator.result = {
-  "product_cost": 123,
-  "pack_cost": 123,
-  "logistic_price": 0,
-  "margin": 255.65,
-  "recommended_price": 501.65,
-  "roi": 0
-};
+const calculated = ref(false);
 
 const requestedProducts: AllProductsResultData =
     {
@@ -191,6 +184,7 @@ function onCalculate() {
 
   .steps-wrapper {
     width: 100%;
+    padding-bottom: 50px;
     max-width: 1280px;
   }
 }

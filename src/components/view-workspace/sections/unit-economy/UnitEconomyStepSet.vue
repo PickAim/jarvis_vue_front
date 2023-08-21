@@ -40,7 +40,7 @@ const emit = defineEmits<{
   }
 
   .select-product {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 
   .select-request-label {

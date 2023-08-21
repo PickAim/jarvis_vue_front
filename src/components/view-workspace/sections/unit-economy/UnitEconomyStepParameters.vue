@@ -12,12 +12,15 @@ import {niches} from "@/nichesData";
 const props = defineProps<{
   shown: boolean,
   parameters: UnitEconomyRequestData,
-
+  isCalculateWarehouse: boolean,
+  isCalculateTransit: boolean
 }>();
 
 const emits = defineEmits<{
   <A extends keyof UnitEconomyRequestData>(e: "parameterChanged", key: A, value: UnitEconomyRequestData[A]): void,
   (e: "calculate"): void,
+  (e: "update:isCalculateWarehouse", value): void,
+  (e: "update:isCalculateTransit", value): void,
 }>()
 
 type InputInfoType =
@@ -66,7 +69,7 @@ const nicheValue = computed<string>(() => {
   return nicheValue;
 })
 
-const parameters: ParametersType = reactive([
+const baseParameters: ParametersType = reactive([
   {
     name: "marketplace_id", type: "select", placeholder: "Маркетплейс", options: [
       {name: "Wildberries", value: "2"},
@@ -80,9 +83,26 @@ const parameters: ParametersType = reactive([
   },
   {name: "buy", type: "input", placeholder: "Себестоимость", inputType: "number"},
   {name: "pack", type: "input", placeholder: "Стоимость упаковки", inputType: "number"},
+])
+
+const transitParameters = reactive([
   {name: "transit_count", type: "input", placeholder: "Число товаров", inputType: "number"},
   {name: "transit_price", type: "input", placeholder: "Стоимость транзита", inputType: "number"},
+  {
+    name: "market_place_transit_price", type: "input", placeholder: "Стоимость транзита маркетплейса",
+    inputType: "number"
+  },
 ])
+
+const warehouseParameters = reactive([
+  {name: "warehouse_name", type: "input", placeholder: "Расположение склада", inputType: "text"},
+])
+
+const parameters = computed(() => [
+  ...baseParameters,
+  ...(props.isCalculateTransit ? transitParameters : []),
+  ...(props.isCalculateWarehouse ? warehouseParameters : [])
+]);
 
 function onCategoryChange(value) {
   emits('parameterChanged', 'niche', "");
@@ -127,8 +147,14 @@ const checkBox2 = ref(false);
     <div class="parameters-settings-wrapper">
       <div class="parameters-settings">
         <div class="parameters-settings-label">Дополнительно рассчитать:</div>
-        <ControlCheckBox v-model="checkBox1">Рассчитать стоимость транзита</ControlCheckBox>
-        <ControlCheckBox v-model="checkBox2">Рассчитать стоимость хранения</ControlCheckBox>
+        <ControlCheckBox :model-value="isCalculateTransit"
+                         @update:model-value="(value) => emits('update:isCalculateTransit', value)">
+          Рассчитать стоимость транзита
+        </ControlCheckBox>
+        <ControlCheckBox :model-value="isCalculateWarehouse"
+                         @update:model-value="(value) => emits('update:isCalculateWarehouse', value)">Рассчитать
+          стоимость хранения
+        </ControlCheckBox>
         <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
       </div>
     </div>
@@ -193,6 +219,7 @@ const checkBox2 = ref(false);
   &.active {
     height: auto;
     visibility: visible;
+    overflow: visible;
     opacity: 1;
 
     .inputs-wrapper {
