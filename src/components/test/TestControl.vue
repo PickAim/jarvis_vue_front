@@ -1,7 +1,7 @@
 <template>
   <div>
     <input class="error-checkbox" type="checkbox" v-model="inputError">
-    <ControlTextbox
+    <ControlTextInput
         class="textbox"
         placeholder="Логин"
         error-text="Error"
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 const textValue = ref("");
 const inputError = ref(true);
 </script>

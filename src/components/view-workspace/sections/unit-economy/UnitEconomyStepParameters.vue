@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import "./unit-economy-step-style.scss";
 import type {Ref} from "vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
-import {ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import ControlSelect from "@/components/controls/ControlSelect.vue";
+import {niches} from "@/nichesData";
 
 const props = defineProps<{
   shown: boolean,
-  parameters: UnitEconomyRequestData
+  parameters: UnitEconomyRequestData,
+
 }>();
 
 const emits = defineEmits<{
   <A extends keyof UnitEconomyRequestData>(e: "parameterChanged", key: A, value: UnitEconomyRequestData[A]): void,
   (e: "calculate"): void,
-
 }>()
 
 type InputInfoType =
@@ -31,21 +33,69 @@ type InputTextInfoType = InputInfoType &
     });
 type InputSelectInfoType = InputInfoType &
     ({ type: "select" } & {
-      options: string[]
-      startValue: string
+      options: { name: string, value: string }[]
+      placeholder?: string,
+      selectValue?: string
     });
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType)[];
 
-const parameters: ParametersType = [
+type OptionsType = { name: string, value: string };
+
+const categoryOptions: OptionsType[] = Object.keys(niches).reduce(
+    (accum, val, ind) => {
+      accum.push({name: val, value: ind + 2})
+      return accum;
+    }, []);
+
+const nicheOptions = computed<OptionsType[]>(() => {
+  const nichesArray = niches[categoryOptions.find((option) => option.value == props.parameters.category_id)?.name];
+  if (!nichesArray) return [];
+  return nichesArray.reduce(
+      (accum, val, ind) => {
+        accum.push({name: val, value: ind + 2})
+        return accum;
+      }, []);
+});
+
+const nicheValue = computed<string>(() => {
+  console.log(props.parameters);
+  const nicheValue = nicheOptions.value.find(
+      (niche) => niche.name.toLowerCase() == props.parameters.niche.toLowerCase())?.value || "";
+  console.log("bla", categoryOptions, nicheValue);
+  return nicheValue;
+})
+
+const parameters: ParametersType = reactive([
+  {
+    name: "marketplace_id", type: "select", placeholder: "Маркетплейс", options: [
+      {name: "Wildberries", value: "2"},
+      {name: "OZON", value: "3"},
+    ]
+  },
+  {name: "category_id", type: "select", placeholder: "Категория", options: categoryOptions, onChange: onCategoryChange},
+  {
+    name: "niche", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
+    selectValue: nicheValue
+  },
   {name: "buy", type: "input", placeholder: "Себестоимость", inputType: "number"},
   {name: "pack", type: "input", placeholder: "Стоимость упаковки", inputType: "number"},
-  {name: "niche", type: "input", placeholder: "Ниша продукта (тут подсказки)", inputType: "text"},
-  {name: "category_id", type: "input", placeholder: "Категория продукта (тут подсказки)", inputType: "text"},
-  {name: "marketplace_id", type: "input", placeholder: "Маркетплейс (тут select)", inputType: "text"},
   {name: "transit_count", type: "input", placeholder: "Число товаров", inputType: "number"},
   {name: "transit_price", type: "input", placeholder: "Стоимость транзита", inputType: "number"},
-]
+])
+
+function onCategoryChange(value) {
+  emits('parameterChanged', 'niche', "");
+  defaultOnChange('category_id', value);
+}
+
+function onNicheChange(value) {
+  emits('parameterChanged', 'niche', nicheOptions.value.find((niche) => niche.value == value)?.name || "");
+}
+
+function defaultOnChange(parameter: keyof UnitEconomyRequestData, value) {
+  emits('parameterChanged', parameter, value);
+}
 
 const checkBox1 = ref(false);
 const checkBox2 = ref(false);
@@ -55,12 +105,24 @@ const checkBox2 = ref(false);
 <template>
   <div id="unit-economy-parameters" class="unit-economy-step" :class="{active: props.shown}">
     <h2>Шаг 2. Параметры</h2>
-    <div class="input-wrapper" v-for="input in parameters" :key="input.name">
-      <ControlTextbox v-if="input.type === 'input'"
-                      :model-value="props.parameters[input.name]"
-                      @update:model-value="(value) => emits('parameterChanged', input.name, value)"
-                      :placeholder="input.placeholder"
-                      :input-type="input.inputType"/>
+    <div class="inputs-wrapper">
+      <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
+        <ControlTextInput v-if="input.type === 'input'"
+                          :model-value="props.parameters[input.name]"
+                          @update:model-value="(value) => {
+                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                          }"
+                          :placeholder="input.placeholder"
+                          :input-type="input.inputType"/>
+        <ControlSelect v-if="input.type === 'select'"
+                       :selected-value="input.selectValue || props.parameters[input.name]"
+                       @update:selected-value="(value) => {
+                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                       }"
+                       :placeholder="input.placeholder"
+                       :options="input.options"
+        />
+      </div>
     </div>
     <div class="parameters-settings-wrapper">
       <div class="parameters-settings">
@@ -79,13 +141,22 @@ const checkBox2 = ref(false);
   visibility: hidden;
   height: 0;
   opacity: 0;
+  overflow: hidden;
   transition: all 0.3s;
 
-  .input-wrapper {
-    width: 400px;
+  .inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
+    margin-block: 20px;
+    gap: 15px;
+
+    .input-item-wrapper {
+      flex: 0 0 auto;
+    }
   }
 
   .parameters-settings-wrapper {
@@ -113,6 +184,7 @@ const checkBox2 = ref(false);
       }
 
       .calculate-button {
+        width: 100%;
         margin-top: 10px;
       }
     }
@@ -123,7 +195,7 @@ const checkBox2 = ref(false);
     visibility: visible;
     opacity: 1;
 
-    .input-wrapper {
+    .inputs-wrapper {
       opacity: 1;
       transform: translateY(0px);
     }

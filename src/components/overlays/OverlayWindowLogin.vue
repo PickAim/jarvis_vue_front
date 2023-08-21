@@ -3,12 +3,12 @@
     <main>
       <header>Логин</header>
       <div class="input-block">
-        <ControlTextbox placeholder="Логин"
-                        input-type="text"
-                        v-model="loginInput"/>
-        <ControlTextbox placeholder="Пароль"
-                        input-type="password"
-                        v-model="passwordInput"/>
+        <ControlTextInput placeholder="Логин"
+                          input-type="text"
+                          v-model="loginInput"/>
+        <ControlTextInput placeholder="Пароль"
+                          input-type="password"
+                          v-model="passwordInput"/>
       </div>
       <ControlButton class="submit"
                      @click="onLoginClick"
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import {ref} from "vue";
 import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";

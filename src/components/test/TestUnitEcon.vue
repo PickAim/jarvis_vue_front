@@ -16,35 +16,35 @@
                        class="button">Создать новый на основе этого
         </ControlButton>
       </div>
-      <ControlTextbox placeholder="Название запроса"
-                      input-type="text"
-                      v-model="calculator.info.name"/>
-      <ControlTextbox placeholder="Название ниши"
-                      input-type="text"
-                      v-model="calculator.request.niche"/>
-      <ControlTextbox placeholder="Себестоимость товара"
-                      input-type="number"
-                      v-model="calculator.request.buy"/>
-      <ControlTextbox placeholder="Стоимость упаковки"
-                      input-type="number"
-                      v-model="calculator.request.pack"/>
+      <ControlTextInput placeholder="Название запроса"
+                        input-type="text"
+                        v-model="calculator.info.name"/>
+      <ControlTextInput placeholder="Название ниши"
+                        input-type="text"
+                        v-model="calculator.request.niche"/>
+      <ControlTextInput placeholder="Себестоимость товара"
+                        input-type="number"
+                        v-model="calculator.request.buy"/>
+      <ControlTextInput placeholder="Стоимость упаковки"
+                        input-type="number"
+                        v-model="calculator.request.pack"/>
       <ControlCheckBox v-model="calculator.isTransitOn">Рассчитать транзит</ControlCheckBox>
       <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitOn}">
-        <ControlTextbox placeholder="Стоимость транзита маркетплейса"
-                        input-type="number"
-                        v-model="calculator.request.market_place_transit_price"/>
-        <ControlTextbox placeholder="Стоимость транзита"
-                        input-type="number"
-                        v-model="calculator.request.transit_price"/>
-        <ControlTextbox placeholder="Число товаров"
-                        input-type="number"
-                        v-model="calculator.request.transit_count"/>
+        <ControlTextInput placeholder="Стоимость транзита маркетплейса"
+                          input-type="number"
+                          v-model="calculator.request.market_place_transit_price"/>
+        <ControlTextInput placeholder="Стоимость транзита"
+                          input-type="number"
+                          v-model="calculator.request.transit_price"/>
+        <ControlTextInput placeholder="Число товаров"
+                          input-type="number"
+                          v-model="calculator.request.transit_count"/>
       </div>
       <ControlCheckBox v-model="calculator.isWarehouseOn">Указать склад</ControlCheckBox>
       <div class="warehouse-input-wrapper" :class="{active: calculator.isWarehouseOn}">
-        <ControlTextbox placeholder="Наименование склада"
-                        input-type="text"
-                        v-model="calculator.request.warehouse_name"/>
+        <ControlTextInput placeholder="Наименование склада"
+                          input-type="text"
+                          v-model="calculator.request.warehouse_name"/>
       </div>
     </div>
     <div class="saved-requests-wrapper">
@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";

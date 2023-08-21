@@ -3,10 +3,10 @@
     <main>
       <header>Регистрация</header>
       <div class="input-block">
-        <ControlTextbox placeholder="Почта" input-type="email" v-model="emailInput" />
-        <ControlTextbox placeholder="Телефон" input-type="text" v-model="phoneInput" />
-        <ControlTextbox placeholder="Пароль" input-type="password" v-model="passwordInput" />
-        <ControlTextbox placeholder="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput" />
+        <ControlTextInput placeholder="Почта" input-type="email" v-model="emailInput"/>
+        <ControlTextInput placeholder="Телефон" input-type="text" v-model="phoneInput"/>
+        <ControlTextInput placeholder="Пароль" input-type="password" v-model="passwordInput"/>
+        <ControlTextInput placeholder="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
       </div>
       <ControlButton class="submit" :disabled="passwordInput !== passwordRepeatInput"
         @click="actions.registration({ phone: phoneInput, email: emailInput, password: passwordInput })">Подтвердить
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 
 import {ref} from "vue";

@@ -1,13 +1,13 @@
 <template>
-  <div class="textbox-wrapper">
-    <span :class="{active: error}" class="error-text">{{errorText}}</span>
+  <div class="text-input-wrapper">
+    <!--    <span :class="{active: error}" class="error-text">{{errorText}}</span>-->
     <div class="input-block">
       <input
           :type="inputType"
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
           placeholder=" "/>
-      <label class="placeholder">{{placeholder}}</label>
+      <label class="placeholder">{{ placeholder }}</label>
     </div>
   </div>
 </template>
@@ -29,13 +29,13 @@ defineEmits(['update:modelValue'])
 
 <style scoped lang="scss">
 
-.textbox-wrapper{
+.text-input-wrapper {
   height: fit-content;
   display: block;
   margin: 0;
   $left-padding: 12px;
 
-  .error-text{
+  .error-text {
     font-size: 17px;
     color: crimson;
     font-style: italic;
@@ -65,20 +65,20 @@ defineEmits(['update:modelValue'])
       transition: .1s;
       color: #555;
     }
-    input{
+    input {
       font-size: 18px;
       padding: 10px 0 0 $left-padding;
       height: 100%;
       width: 100%;
       bottom: 0;
-      border-bottom: 1px solid rgba(183, 255, 68, 1);
+      border-bottom: 1px solid rgba(183, 255, 68, 0.2);
       background-color: transparent;
       outline: none;
       box-sizing: border-box;
       transition: border-width 0.1s linear, border-color 0.1s linear;
 
       &:focus {
-        border-color: #111;
+        border-bottom: 1px solid rgba(183, 255, 68, 1);
       }
 
       &:focus + .placeholder, &:not(:placeholder-shown) + .placeholder {

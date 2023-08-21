@@ -6,10 +6,12 @@
         <UnitEconomyStepSet :products="products"
                             @select-product="onProductSelect"
                             @select-request="onRequestSelect"/>
-        <UnitEconomyStepParameters :shown="settingSelected" :parameters="calculator.request"
-                                   @parameter-changed="(key, value) => calculator.request[key] = value"
-                                   @calculate="calculator.calculate()"/>
-        <UnitEconomyStepResult :result-data="calculator.result"/>
+        <UnitEconomyStepParameters :shown="settingSelected"
+                                   :parameters="calculator.request"
+                                   @parameter-changed="onParameterChanged"
+                                   @calculate="onCalculate"/>
+        <UnitEconomyStepResult :shown="calculated && !!calculator.result"
+                               :result-data="calculator.result"/>
       </div>
     </div>
   </ViewWorkspaceSection>
@@ -34,6 +36,16 @@ const calculator = reactive(new UnitEconomyCalculator());
 actions.initSection();
 
 const settingSelected = ref(false);
+const calculated = ref(true);
+
+calculator.result = {
+  "product_cost": 123,
+  "pack_cost": 123,
+  "logistic_price": 0,
+  "margin": 255.65,
+  "recommended_price": 501.65,
+  "roi": 0
+};
 
 const requestedProducts: AllProductsResultData =
     {
@@ -128,6 +140,10 @@ Object.keys(requestedProducts).forEach((marketplaceID) => {
   })
 })
 
+function onParameterChanged(key, value) {
+  calculator.request[key] = value;
+}
+
 function onProductSelect(ID) {
   const product = products.find((product) => product.productID === ID);
   if (!product) return;
@@ -142,6 +158,7 @@ function onRequestSelect(ID) {
 }
 
 function onSet() {
+  calculated.value = false;
   if (!settingSelected.value) {
     setTimeout(() => {
       document.querySelector('#unit-economy-parameters').scrollIntoView({
@@ -152,6 +169,17 @@ function onSet() {
   settingSelected.value = true;
 }
 
+function onCalculate() {
+  calculator.calculate().then(() => {
+    if (!calculator.result) return;
+    calculated.value = true;
+    setTimeout(() => {
+      document.querySelector('#unit-economy-result').scrollIntoView({
+        behavior: "smooth"
+      })
+    }, 0);
+  });
+}
 </script>
 
 <style scoped lang="scss">

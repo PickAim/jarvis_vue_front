@@ -2,6 +2,7 @@
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
 import {ProductData} from "@/types/DataTypes";
 import "./unit-economy-step-style.scss";
+import ControlSelect from "@/components/controls/ControlSelect.vue";
 
 const props = defineProps<{
   products: ProductData[]
@@ -23,11 +24,11 @@ const emit = defineEmits<{
                     :products="props.products"
                     @select-product="(ID) => emit('select-product', ID)"/>
       <span class="select-request-label">или один из своих сохранённых запросов:</span>
-      <select class="select-request" name="" id="" @change="(e) => emit('select-request', e)">
-        <option value="">1</option>
-        <option value="">2</option>
-        <option value="">3</option>
-      </select>
+      <ControlSelect :options="[
+          {name: 'Запрос на расчёт пижам 1', value: '1'},
+          {name: 'Запрос на расчёт пижам 2', value: '2'},
+          {name: 'Запрос на расчёт пижам 3', value: '3'},
+      ]" :selected-value="1"/>
     </div>
   </div>
 </template>

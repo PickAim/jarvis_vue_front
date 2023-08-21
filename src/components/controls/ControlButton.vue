@@ -26,18 +26,18 @@ withDefaults(defineProps<{
 button {
   width: 100%;
   background-color: transparent;
-  border: 1px solid #B7FF44;
+  border: 2px solid #557720;
   border-radius: 11px;
   color: #FFFFFF;
   padding: 14px 49px;
 
   &.enabled {
     &:hover {
-      border-width: 3px;
+      border-color: #B7FF44;
     }
 
     &:active {
-      border-width: 2px;
+      border-color: #d2ff8d;
     }
   }
 }
