@@ -9,6 +9,7 @@ import type {
 import {Configs} from "@/Configs";
 
 import type {ICalculateRequester} from "@/types/RequestTypes";
+import type {GreenZoneRequestData, GreenZoneResultData} from "@/types/DataTypes";
 
 export class CalculateRequester<Q, R> extends Requester
     implements ICalculateRequester<Q, R> {
@@ -42,5 +43,12 @@ export class NicheCharacteristicsRequester
     extends CalculateRequester<NicheCharacteristicsRequestData, NicheCharacteristicsResultData> {
     constructor() {
         super("/niche-characteristics");
+    }
+}
+
+export class GreenZoneRequester
+    extends CalculateRequester<GreenZoneRequestData, GreenZoneResultData> {
+    constructor() {
+        super("/green-trade-zone");
     }
 }

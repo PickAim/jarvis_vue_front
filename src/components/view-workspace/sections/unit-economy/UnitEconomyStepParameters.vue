@@ -3,9 +3,9 @@ import "./unit-economy-step-style.scss";
 import type {Ref} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
-import {computed, reactive, ref} from "vue";
+import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {OptionsType, UnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {niches} from "@/nichesData";
 
@@ -42,8 +42,6 @@ type InputSelectInfoType = InputInfoType &
     });
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType)[];
-
-type OptionsType = { name: string, value: string };
 
 const categoryOptions: OptionsType[] = Object.keys(niches).reduce(
     (accum, val, ind) => {
@@ -116,9 +114,6 @@ function onNicheChange(value) {
 function defaultOnChange(parameter: keyof UnitEconomyRequestData, value) {
   emits('parameterChanged', parameter, value);
 }
-
-const checkBox1 = ref(false);
-const checkBox2 = ref(false);
 
 </script>
 
