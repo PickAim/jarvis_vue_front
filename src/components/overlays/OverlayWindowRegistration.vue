@@ -2,7 +2,7 @@
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Регистрация</header>
-      <div class="input-block">
+      <div class="input-wrapper">
         <ControlTextInput placeholder="Почта" input-type="email" v-model="emailInput"/>
         <ControlTextInput placeholder="Телефон" input-type="text" v-model="phoneInput"/>
         <ControlTextInput placeholder="Пароль" input-type="password" v-model="passwordInput"/>
@@ -55,7 +55,7 @@ main {
     color: #FFFFFF;
   }
 
-  .input-block {
+  .input-wrapper {
     width: 100%;
   }
 

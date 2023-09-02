@@ -2,7 +2,7 @@
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Логин</header>
-      <div class="input-block">
+      <div class="input-wrapper">
         <ControlTextInput placeholder="Логин"
                           input-type="text"
                           v-model="loginInput"/>
@@ -64,7 +64,7 @@ main {
     color: #FFFFFF;
   }
 
-  .input-block {
+  .input-wrapper {
     color: white;
     width: 100%;
   }

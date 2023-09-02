@@ -2,7 +2,7 @@
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Настройка панели виджетов</header>
-      <div class="input-block">
+      <div class="input-wrapper">
       </div>
       <ControlButton class="submit">Подтвердить</ControlButton>
     </main>
@@ -30,7 +30,7 @@ main{
     font-size: 30px;
   }
 
-  .input-block{
+  .input-wrapper {
     width: 300px;
   }
 
