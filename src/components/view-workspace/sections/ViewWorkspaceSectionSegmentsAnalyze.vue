@@ -187,6 +187,7 @@ async function onCalculate() {
         .segments-result-interpretation {
           display: flex;
           flex-direction: column;
+          gap: 15px;
           flex: 1 0;
 
           .recommendation-label {
