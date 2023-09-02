@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
-import {ProductData} from "@/types/DataTypes";
+import {ProductData, UnitEconomyRequestData, UnitEconomyResultData} from "@/types/DataTypes";
 import "./unit-economy-step-style.scss";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
+import type {CalculateRequestData} from "@/types/RequestTypes";
 
 const props = defineProps<{
-  products: ProductData[]
+  products?: ProductData[],
+  requests?: CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData>[]
 }>();
 
 const emit = defineEmits<{
@@ -20,7 +22,8 @@ const emit = defineEmits<{
     <h2>Шаг 1. Надстройка</h2>
     <div class="step-body">
       <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
-      <ProductsList class="select-product"
+      <ProductsList v-if="props.products"
+                    class="select-product"
                     :products="props.products"
                     @select-product="(ID) => emit('select-product', ID)"/>
       <span class="select-request-label">или один из своих сохранённых запросов:</span>

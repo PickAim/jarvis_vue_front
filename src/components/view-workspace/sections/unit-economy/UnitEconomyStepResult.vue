@@ -2,12 +2,24 @@
 import "./unit-economy-step-style.scss";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
-import {computed} from "vue";
+import {computed, ref} from "vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
+import ControlButton from "@/components/controls/ControlButton.vue";
 
 const props = defineProps<{
   shown: boolean,
+  saveName: string,
   resultData: UnitEconomyResultData | undefined
 }>();
+
+const emits = defineEmits<{
+  (e: "saveRequest", name: string): void
+}>();
+
+const requestName = ref("");
+const requestNamePlaceholder = computed(() => `${props.saveName}, ${
+    (new Date()).toLocaleDateString('ru-RU', {day: "2-digit", month: "short"})
+}`);
 
 const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
   margin: "Маржа",
@@ -49,6 +61,10 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
                    :data-and-labels="chartResult"
                    :title="chartTitle" v-if="chartResult.length >= 0"/>
     </div>
+    <div class="save-wrapper">
+      <ControlTextInput v-model="requestName" :placeholder="requestNamePlaceholder"/>
+      <ControlButton class="save-button" @click="emits">Сохранить запрос</ControlButton>
+    </div>
   </div>
 </template>
 
@@ -74,6 +90,11 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
     .result-chart {
       height: 100%;
     }
+  }
+
+  .save-wrapper {
+    display: flex;
+    flex-direction: row;
   }
 
   &.active {
