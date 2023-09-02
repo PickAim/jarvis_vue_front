@@ -13,18 +13,27 @@ const emits = defineEmits<{
   (e: "update:selectedValue", value): void
 }>();
 
-const isSelectListOpen = ref(false);
+const isSelectFocused = ref(false);
+
+function onFocusIn() {
+  isSelectFocused.value = true;
+}
+
+function onFocusOut() {
+  isSelectFocused.value = false;
+}
 
 function onSelect(value) {
-  isSelectListOpen.value = false;
+  isSelectFocused.value = false;
   emits('update:selectedValue', value);
 }
 
 </script>
 
 <template>
-  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectListOpen}">
-    <button class="select-button" @click="isSelectListOpen = !isSelectListOpen">
+  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectFocused}"
+       @focusin="onFocusIn" @focusout="onFocusOut">
+    <button class="select-button">
       <div class="selected-item">
         {{ props.options.find((option) => option.value == props.selectedValue)?.name || props.placeholder }}
       </div>
