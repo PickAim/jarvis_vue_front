@@ -1,7 +1,7 @@
 <template>
   <div class="text-input-wrapper">
     <!--    <span :class="{active: error}" class="error-text">{{errorText}}</span>-->
-    <div class="input-block">
+    <div class="input-wrapper">
       <input
           :type="inputType"
           :value="modelValue"
@@ -18,7 +18,8 @@ withDefaults(defineProps<{
   placeholder: string,
   errorText?: string,
   modelValue?: string | number,
-  error?: boolean}>(), {
+  error?: boolean
+}>(), {
   inputType: "text",
   errorText: "",
   error: false
@@ -44,27 +45,29 @@ defineEmits(['update:modelValue'])
     margin-left: 5px;
     visibility: hidden;
 
-    &.active{
+    &.active {
       visibility: visible;
     }
   }
-  .input-block{
+
+  .input-wrapper {
     position: relative;
     height: 50px;
-    margin-top: 2px;
     width: 100%;
     box-sizing: border-box;
 
-    .placeholder{
+    .placeholder {
       position: absolute;
       top: 10px;
       left: $left-padding+2;
       font-size: 20px;
+      line-height: 1em;
       width: fit-content;
       pointer-events: none;
       transition: .1s;
       color: #555;
     }
+
     input {
       font-size: 18px;
       padding: 10px 0 0 $left-padding;
