@@ -27,7 +27,6 @@ const id = ref("");
 
 onMounted(() => {
   id.value = "checkbox-input-" + Math.random().toString();
-  console.log(id.value);
 });
 </script>
 

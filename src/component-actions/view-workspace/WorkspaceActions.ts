@@ -7,7 +7,6 @@ export class WorkspaceActions {
     async initSection() {
         this.isPageLoading = true;
         const response = await (new AccountRequestActions()).loginToken();
-        console.log(response);
         this.isPageLoading = response.code !== ResultCode.OK;
     }
 }

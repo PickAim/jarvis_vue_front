@@ -1,8 +1,6 @@
 // Decorator
 // export function requestMethod(originalMethod: any, _context: any) {
-//     console.log("decorator init");
 //     async function replacementMethod(this: { isBusy: boolean }, ...args: any[]) {
-//         console.log("run");
 //         if (this.isBusy) return;
 //         this.isBusy = true;
 //         const result = await originalMethod.call(this, ...args);
@@ -13,7 +11,7 @@
 // }
 
 export function checkAndConvert<T extends Record<string, any>> (pattern: T, data: T): T | string {
-    Object.keys(pattern).forEach(key => {
+    for (const key in pattern) {
         if (!(key in data)) return key;
         if (typeof pattern[key] === "number") {
             const parsed = parseFloat(data[key]);
@@ -33,7 +31,7 @@ export function checkAndConvert<T extends Record<string, any>> (pattern: T, data
             return key
         }
         // TODO: add deep validation (object in object)
-    });
+    }
     return pattern;
 }
 

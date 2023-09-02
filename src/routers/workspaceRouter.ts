@@ -44,5 +44,3 @@ export const workspaceRouter: RouteRecordRaw[] =
             component
         })
     });
-
-console.log(workspaceRouter)

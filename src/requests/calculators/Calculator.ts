@@ -13,7 +13,6 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
     abstract initDefault(): void;
 
     async calculate() {
-        console.log(this.request);
         if (this.isBusy) return;
         this.isBusy = true;
         this.result = undefined;

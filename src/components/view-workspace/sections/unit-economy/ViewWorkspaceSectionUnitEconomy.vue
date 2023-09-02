@@ -10,8 +10,8 @@
                                    :parameters="calculator.request"
                                    @parameter-changed="onParameterChanged"
                                    @calculate="onCalculate"
-                                   v-model:is-calculate-transit="calculator.isTransitOn"
-                                   v-model:is-calculate-warehouse="calculator.isWarehouseOn"/>
+                                   v-model:is-calculate-transit-cost="calculator.isTransitCostOn"
+                                   v-model:is-calculate-transit="calculator.isTransitOn"/>
         <UnitEconomyStepResult :shown="calculated && !!calculator.result"
                                :result-data="calculator.result"/>
       </div>
@@ -146,7 +146,7 @@ function onProductSelect(ID) {
   onSet();
 }
 
-function onRequestSelect(ID) {
+function onRequestSelect() {
   onSet();
 }
 
@@ -184,7 +184,6 @@ function onCalculate() {
 
   .steps-wrapper {
     width: 100%;
-    padding-bottom: 50px;
     max-width: 1280px;
   }
 }

@@ -5,8 +5,6 @@ import {ResultDescription} from "@/requests/ResultDescription";
 export class ErrorHandler {
     static handle(code: ResultCode) {
         const notificator = useNotificationsStore();
-        console.log(code);
-
         switch (code) {
             case ResultCode.OK:
                 break;
@@ -16,7 +14,6 @@ export class ErrorHandler {
                 window.location.replace(window.location.protocol + "//" + window.location.host);
                 break;
             default:
-                console.log(`ERROR ${code}`)
                 notificator.addErrorNotification(ResultDescription[code]);
         }
     }

@@ -6,6 +6,7 @@ import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
 import type {UnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyRequestData} from "@/types/DataTypes";
+import {useNotificationsStore} from "@/stores/notificationsStore";
 
 type RequestType = UnitEconomyRequestData;
 type ResultType = UnitEconomyResultData;
@@ -36,7 +37,8 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
             removeKeys(pattern, this.requestWarehouseKeys);
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
-            console.log(requestOrKey);
+            useNotificationsStore().addErrorNotification(["Ошибка", `Ошибка в поле ${requestOrKey}`]);
+            // TODO: add error key handling
         } else {
             return requestOrKey;
         }

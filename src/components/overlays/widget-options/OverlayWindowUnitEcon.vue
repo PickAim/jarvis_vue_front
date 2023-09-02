@@ -36,7 +36,6 @@ const widgetOptions = reactive<WidgetOptions[widgetName]>({
 });
 
 function onSubmitClick() {
-  console.log(widgetOptions);
   emit('submit', _.cloneDeep(widgetOptions));
 }
 </script>

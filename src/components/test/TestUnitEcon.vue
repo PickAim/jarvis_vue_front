@@ -28,8 +28,8 @@
       <ControlTextInput placeholder="Стоимость упаковки"
                         input-type="number"
                         v-model="calculator.request.pack"/>
-      <ControlCheckBox v-model="calculator.isTransitOn">Рассчитать транзит</ControlCheckBox>
-      <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitOn}">
+      <ControlCheckBox v-model="calculator.isTransitCostOn">Рассчитать транзит</ControlCheckBox>
+      <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitCostOn}">
         <ControlTextInput placeholder="Стоимость транзита маркетплейса"
                           input-type="number"
                           v-model="calculator.request.market_place_transit_price"/>
@@ -40,8 +40,8 @@
                           input-type="number"
                           v-model="calculator.request.transit_count"/>
       </div>
-      <ControlCheckBox v-model="calculator.isWarehouseOn">Указать склад</ControlCheckBox>
-      <div class="warehouse-input-wrapper" :class="{active: calculator.isWarehouseOn}">
+      <ControlCheckBox v-model="calculator.isTransitOn">Указать склад</ControlCheckBox>
+      <div class="warehouse-input-wrapper" :class="{active: calculator.isTransitOn}">
         <ControlTextInput placeholder="Наименование склада"
                           input-type="text"
                           v-model="calculator.request.warehouse_name"/>
@@ -71,8 +71,6 @@ import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculato
 import SavedItemsList from "@/components/calc-requests/SavedItemsList.vue";
 
 const calculator = reactive(new UnitEconomyCalculator());
-
-console.log("UNIT ECON TEST");
 
 const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
   margin: "Маржа",
@@ -116,7 +114,6 @@ function newClickHandler() {
 }
 
 async function getAllClickHandler() {
-  console.log("get all")
   await calculator.loadAll();
 }
 

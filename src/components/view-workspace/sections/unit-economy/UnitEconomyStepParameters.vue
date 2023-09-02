@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import "./unit-economy-step-style.scss";
 import type {Ref} from "vue";
+import {computed, reactive} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
-import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import type {OptionsType, UnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
@@ -12,36 +12,36 @@ import {niches} from "@/nichesData";
 const props = defineProps<{
   shown: boolean,
   parameters: UnitEconomyRequestData,
-  isCalculateWarehouse: boolean,
-  isCalculateTransit: boolean
+  isCalculateTransit: boolean,
+  isCalculateTransitCost: boolean
 }>();
 
 const emits = defineEmits<{
   <A extends keyof UnitEconomyRequestData>(e: "parameterChanged", key: A, value: UnitEconomyRequestData[A]): void,
   (e: "calculate"): void,
-  (e: "update:isCalculateWarehouse", value): void,
   (e: "update:isCalculateTransit", value): void,
+  (e: "update:isCalculateTransitCost", value): void,
 }>()
 
-type InputInfoType =
+type InputInfoType<VType> =
     {
-      name: keyof UnitEconomyRequestData,
-      value?: string | Ref<string | number>,
-      onChange?: (value: string) => void
+      name?: keyof UnitEconomyRequestData,
+      value?: VType | Ref<VType>,
+      onChange?: (value: VType) => void,
+      placeholder?: string
     }
-type InputTextInfoType = InputInfoType &
+type InputTextInfoType = InputInfoType<string> &
     ({ type: "input" } & {
       inputType: "text" | "number" | "password"
-      placeholder: string,
     });
-type InputSelectInfoType = InputInfoType &
+type InputSelectInfoType = InputInfoType<string> &
     ({ type: "select" } & {
       options: { name: string, value: string }[]
-      placeholder?: string,
-      selectValue?: string
     });
+type InputCheckInfoType = InputInfoType<boolean> &
+    ({ type: "check" });
 type ParametersType =
-    (InputTextInfoType | InputSelectInfoType)[];
+    (InputTextInfoType | InputSelectInfoType | InputCheckInfoType)[];
 
 const categoryOptions: OptionsType[] = Object.keys(niches).reduce(
     (accum, val, ind) => {
@@ -60,11 +60,8 @@ const nicheOptions = computed<OptionsType[]>(() => {
 });
 
 const nicheValue = computed<string>(() => {
-  console.log(props.parameters);
-  const nicheValue = nicheOptions.value.find(
+  return nicheOptions.value.find(
       (niche) => niche.name.toLowerCase() == props.parameters.niche.toLowerCase())?.value || "";
-  console.log("bla", categoryOptions, nicheValue);
-  return nicheValue;
 })
 
 const baseParameters: ParametersType = reactive([
@@ -77,29 +74,38 @@ const baseParameters: ParametersType = reactive([
   {name: "category_id", type: "select", placeholder: "Категория", options: categoryOptions, onChange: onCategoryChange},
   {
     name: "niche", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
-    selectValue: nicheValue
+    value: nicheValue
   },
   {name: "buy", type: "input", placeholder: "Себестоимость", inputType: "number"},
   {name: "pack", type: "input", placeholder: "Стоимость упаковки", inputType: "number"},
+  {
+    type: "check", value: computed(() => props.isCalculateTransitCost),
+    placeholder: "Рассчитать стоимость транзита",
+    onChange: onTransitCostCheckChanged
+  }
 ])
 
-const transitParameters = reactive([
-  {name: "transit_count", type: "input", placeholder: "Число товаров", inputType: "number"},
-  {name: "transit_price", type: "input", placeholder: "Стоимость транзита", inputType: "number"},
+const transitCostParameters = reactive([
+  {name: "transit_count", type: "input", placeholder: "Количество штук в партии", inputType: "number"},
+  {name: "transit_price", type: "input", placeholder: "Стоимость логистики партии", inputType: "number"},
   {
     name: "market_place_transit_price", type: "input", placeholder: "Стоимость транзита маркетплейса",
     inputType: "number"
   },
+  {
+    type: "check", value: computed(() => props.isCalculateTransit), placeholder: "Транзитная поставка",
+    onChange: onTransitCheckChanged
+  }
 ])
 
-const warehouseParameters = reactive([
+const transitParameters = reactive([
   {name: "warehouse_name", type: "input", placeholder: "Расположение склада", inputType: "text"},
 ])
 
 const parameters = computed(() => [
   ...baseParameters,
-  ...(props.isCalculateTransit ? transitParameters : []),
-  ...(props.isCalculateWarehouse ? warehouseParameters : [])
+  ...(props.isCalculateTransitCost ? transitCostParameters : []),
+  ...(props.isCalculateTransit ? transitParameters : [])
 ]);
 
 function onCategoryChange(value) {
@@ -111,8 +117,21 @@ function onNicheChange(value) {
   emits('parameterChanged', 'niche', nicheOptions.value.find((niche) => niche.value == value)?.name || "");
 }
 
-function defaultOnChange(parameter: keyof UnitEconomyRequestData, value) {
-  emits('parameterChanged', parameter, value);
+function onTransitCostCheckChanged(value) {
+  if (value === false) {
+    onTransitCheckChanged(false);
+  }
+  emits('update:isCalculateTransitCost', value);
+}
+
+function onTransitCheckChanged(value) {
+  emits('update:isCalculateTransit', value);
+}
+
+function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, value) {
+  if (parameter !== undefined) {
+    emits('parameterChanged', parameter, value);
+  }
 }
 
 </script>
@@ -130,29 +149,22 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData, value) {
                           :placeholder="input.placeholder"
                           :input-type="input.inputType"/>
         <ControlSelect v-if="input.type === 'select'"
-                       :selected-value="input.selectValue || props.parameters[input.name]"
+                       :selected-value="input.value || props.parameters[input.name]"
                        @update:selected-value="(value) => {
                             input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                        }"
                        :placeholder="input.placeholder"
-                       :options="input.options"
-        />
+                       :options="input.options"/>
+        <ControlCheckBox v-if="input.type === 'check'"
+                         :model-value="input.value || props.parameters[input.name]"
+                         @update:model-value="(value) => {
+                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                          }">
+          {{ input.placeholder }}
+        </ControlCheckBox>
       </div>
     </div>
-    <div class="parameters-settings-wrapper">
-      <div class="parameters-settings">
-        <div class="parameters-settings-label">Дополнительно рассчитать:</div>
-        <ControlCheckBox :model-value="isCalculateTransit"
-                         @update:model-value="(value) => emits('update:isCalculateTransit', value)">
-          Рассчитать стоимость транзита
-        </ControlCheckBox>
-        <ControlCheckBox :model-value="isCalculateWarehouse"
-                         @update:model-value="(value) => emits('update:isCalculateWarehouse', value)">Рассчитать
-          стоимость хранения
-        </ControlCheckBox>
-        <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
-      </div>
-    </div>
+    <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
   </div>
 </template>
 
@@ -172,7 +184,7 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData, value) {
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
-    margin-block: 20px;
+    margin: 10px 0 50px 0;
     gap: 15px;
 
     .input-item-wrapper {

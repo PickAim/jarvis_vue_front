@@ -118,7 +118,6 @@ const nicheOptions = computed<OptionsType[]>(() => {
 const chartData = computed<[number, number][]>(() => {
   const segments = analyzeResult.value?.freq;
   if (!segments) return [];
-  console.log(segments);
   return segments.x.map((segment, ind) => {
     return [segment, segments.y[ind]];
   });

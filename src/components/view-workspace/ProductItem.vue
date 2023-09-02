@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const xDegrees = ref('0deg');
 const yDegrees = ref('0deg');
-const maxAngle = -30;
+const maxAngle = -17;
 
 function onMouseMove(e: MouseEvent) {
   const currentTarget = (e.currentTarget as HTMLElement).getBoundingClientRect();
