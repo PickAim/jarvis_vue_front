@@ -7,7 +7,7 @@
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
           placeholder=" "/>
-      <label class="placeholder">{{ placeholder }}</label>
+      <label class="title">{{ title }}</label>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
   inputType?: "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" | "submit" | "tel" | "text" | "time" | "url" | "week",
-  placeholder: string,
+  title: string,
   errorText?: string,
   modelValue?: string | number,
   error?: boolean
@@ -56,16 +56,19 @@ defineEmits(['update:modelValue'])
     width: 100%;
     box-sizing: border-box;
 
-    .placeholder {
+    .title {
       position: absolute;
       top: 10px;
-      left: $left-padding+2;
+      left: $left-padding;
       font-size: 20px;
       line-height: 1em;
-      width: fit-content;
+      width: calc(100% - $left-padding);
       pointer-events: none;
       transition: .1s;
-      color: #555;
+      color: #999;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     input {
@@ -84,7 +87,7 @@ defineEmits(['update:modelValue'])
         border-bottom: 1px solid rgba(183, 255, 68, 1);
       }
 
-      &:focus + .placeholder, &:not(:placeholder-shown) + .placeholder {
+      &:focus + .title, &:not(:placeholder-shown) + .title {
         font-size: 13px;
         top: 0;
       }

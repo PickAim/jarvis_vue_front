@@ -23,7 +23,7 @@
     <ControlButton @click="hideAllNotifications()">Очистить</ControlButton>
     <ControlTextInput class="duration-input"
                       input-type="number"
-                      placeholder="Длительность"
+                      title="Длительность"
                       v-model="defaultDuration"/>
   </div>
 </template>

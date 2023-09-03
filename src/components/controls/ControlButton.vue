@@ -17,12 +17,13 @@ withDefaults(defineProps<{
 
 <style scoped lang="scss">
 .button-wrapper {
-  width: 200px;
-  height: 40px;
+  min-width: 200px;
+  min-height: 40px;
   color: #000;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: #B7FF44;
+  padding: 5px 40px;
   font-family: Montserrat, sans-serif;
   font-weight: 700;
   font-size: 20px;

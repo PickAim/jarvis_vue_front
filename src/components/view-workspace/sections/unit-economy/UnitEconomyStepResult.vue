@@ -16,10 +16,10 @@ const emits = defineEmits<{
   (e: "saveRequest", name: string): void
 }>();
 
-const requestName = ref("");
 const requestNamePlaceholder = computed(() => `${props.saveName}, ${
     (new Date()).toLocaleDateString('ru-RU', {day: "2-digit", month: "short"})
 }`);
+const requestName = ref(requestNamePlaceholder);
 
 const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
   margin: "Маржа",
@@ -62,8 +62,13 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
                    :title="chartTitle" v-if="chartResult.length >= 0"/>
     </div>
     <div class="save-wrapper">
-      <ControlTextInput v-model="requestName" :placeholder="requestNamePlaceholder"/>
-      <ControlButton class="save-button" @click="emits">Сохранить запрос</ControlButton>
+      <ControlTextInput class="save-name-input"
+                        v-model="requestName"
+                        title="Имя сохранения"/>
+      <ControlButton class="save-button"
+                     @click="emits">
+        Сохранить запрос
+      </ControlButton>
     </div>
   </div>
 </template>
@@ -95,6 +100,17 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
   .save-wrapper {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    max-width: 900px;
+    margin-top: 50px;
+
+    .save-name-input {
+      flex: 1 0;
+    }
+
+    .save-button {
+      margin-left: 30px;
+    }
   }
 
   &.active {

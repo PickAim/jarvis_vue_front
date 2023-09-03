@@ -13,10 +13,11 @@ import ViewWorkspaceHeader from "@/components/view-workspace/ViewWorkspaceHeader
 import {WorkspaceActions} from "@/component-actions/view-workspace/WorkspaceActions";
 import {reactive} from "vue";
 import ComponentPreloader from "@/components/generals/ComponentPreloader.vue";
+import {useRequestStore} from "@/stores/requestStore";
 
 const actions = reactive(new WorkspaceActions());
 
-// useRequestStore().executeInBackground(() => actions.initSection())
+useRequestStore().executeInBackground(() => actions.initSection())
 
 </script>
 

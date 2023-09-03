@@ -3,10 +3,10 @@
     <main>
       <header>Логин</header>
       <div class="input-wrapper">
-        <ControlTextInput placeholder="Логин"
+        <ControlTextInput title="Логин"
                           input-type="text"
                           v-model="loginInput"/>
-        <ControlTextInput placeholder="Пароль"
+        <ControlTextInput title="Пароль"
                           input-type="password"
                           v-model="passwordInput"/>
       </div>

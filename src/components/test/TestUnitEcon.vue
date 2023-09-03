@@ -16,33 +16,33 @@
                        class="button">Создать новый на основе этого
         </ControlButton>
       </div>
-      <ControlTextInput placeholder="Название запроса"
+      <ControlTextInput title="Название запроса"
                         input-type="text"
                         v-model="calculator.info.name"/>
-      <ControlTextInput placeholder="Название ниши"
+      <ControlTextInput title="Название ниши"
                         input-type="text"
                         v-model="calculator.request.niche"/>
-      <ControlTextInput placeholder="Себестоимость товара"
+      <ControlTextInput title="Себестоимость товара"
                         input-type="number"
                         v-model="calculator.request.buy"/>
-      <ControlTextInput placeholder="Стоимость упаковки"
+      <ControlTextInput title="Стоимость упаковки"
                         input-type="number"
                         v-model="calculator.request.pack"/>
       <ControlCheckBox v-model="calculator.isTransitCostOn">Рассчитать транзит</ControlCheckBox>
       <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitCostOn}">
-        <ControlTextInput placeholder="Стоимость транзита маркетплейса"
+        <ControlTextInput title="Стоимость транзита маркетплейса"
                           input-type="number"
                           v-model="calculator.request.market_place_transit_price"/>
-        <ControlTextInput placeholder="Стоимость транзита"
+        <ControlTextInput title="Стоимость транзита"
                           input-type="number"
                           v-model="calculator.request.transit_price"/>
-        <ControlTextInput placeholder="Число товаров"
+        <ControlTextInput title="Число товаров"
                           input-type="number"
                           v-model="calculator.request.transit_count"/>
       </div>
       <ControlCheckBox v-model="calculator.isTransitOn">Указать склад</ControlCheckBox>
       <div class="warehouse-input-wrapper" :class="{active: calculator.isTransitOn}">
-        <ControlTextInput placeholder="Наименование склада"
+        <ControlTextInput title="Наименование склада"
                           input-type="text"
                           v-model="calculator.request.warehouse_name"/>
       </div>

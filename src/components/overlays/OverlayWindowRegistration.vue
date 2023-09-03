@@ -3,10 +3,10 @@
     <main>
       <header>Регистрация</header>
       <div class="input-wrapper">
-        <ControlTextInput placeholder="Почта" input-type="email" v-model="emailInput"/>
-        <ControlTextInput placeholder="Телефон" input-type="text" v-model="phoneInput"/>
-        <ControlTextInput placeholder="Пароль" input-type="password" v-model="passwordInput"/>
-        <ControlTextInput placeholder="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
+        <ControlTextInput title="Почта" input-type="email" v-model="emailInput"/>
+        <ControlTextInput title="Телефон" input-type="text" v-model="phoneInput"/>
+        <ControlTextInput title="Пароль" input-type="password" v-model="passwordInput"/>
+        <ControlTextInput title="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
       </div>
       <ControlButton class="submit" :disabled="passwordInput !== passwordRepeatInput"
         @click="actions.registration({ phone: phoneInput, email: emailInput, password: passwordInput })">Подтвердить

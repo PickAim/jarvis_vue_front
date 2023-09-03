@@ -3,7 +3,7 @@
     <input class="error-checkbox" type="checkbox" v-model="inputError">
     <ControlTextInput
         class="textbox"
-        placeholder="Логин"
+        title="Логин"
         error-text="Error"
         v-model="textValue"
         :error="inputError"

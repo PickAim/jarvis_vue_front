@@ -1,6 +1,6 @@
 <template>
   <div class="overlay-body-average-check">
-    <ControlTextInput placeholder="Текст"
+    <ControlTextInput title="Текст"
                       :modelValue="options.config.options.inputText"
                       @update:model-value="v => widgetOptions.inputText = v"/>
     <ControlButton class="submit-button" @click="onSubmitClick">

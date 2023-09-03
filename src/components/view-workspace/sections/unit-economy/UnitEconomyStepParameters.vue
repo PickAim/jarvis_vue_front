@@ -32,7 +32,8 @@ type InputInfoType<VType> =
     }
 type InputTextInfoType = InputInfoType<string> &
     ({ type: "input" } & {
-      inputType: "text" | "number" | "password"
+      inputType: "text" | "number" | "password",
+      title: string
     });
 type InputSelectInfoType = InputInfoType<string> &
     ({ type: "select" } & {
@@ -76,8 +77,8 @@ const baseParameters: ParametersType = reactive([
     name: "niche", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
     value: nicheValue
   },
-  {name: "buy", type: "input", placeholder: "Себестоимость", inputType: "number"},
-  {name: "pack", type: "input", placeholder: "Стоимость упаковки", inputType: "number"},
+  {name: "buy", type: "input", title: "Себестоимость", inputType: "number"},
+  {name: "pack", type: "input", title: "Стоимость упаковки", inputType: "number"},
   {
     type: "check", value: computed(() => props.isCalculateTransitCost),
     placeholder: "Рассчитать стоимость транзита",
@@ -85,11 +86,11 @@ const baseParameters: ParametersType = reactive([
   }
 ])
 
-const transitCostParameters = reactive([
-  {name: "transit_count", type: "input", placeholder: "Количество штук в партии", inputType: "number"},
-  {name: "transit_price", type: "input", placeholder: "Стоимость логистики партии", inputType: "number"},
+const transitCostParameters: ParametersType = reactive([
+  {name: "transit_count", type: "input", title: "Количество штук в партии", inputType: "number"},
+  {name: "transit_price", type: "input", title: "Стоимость логистики партии", inputType: "number"},
   {
-    name: "market_place_transit_price", type: "input", placeholder: "Стоимость транзита маркетплейса",
+    name: "market_place_transit_price", type: "input", title: "Стоимость транзита маркетплейса",
     inputType: "number"
   },
   {
@@ -98,8 +99,8 @@ const transitCostParameters = reactive([
   }
 ])
 
-const transitParameters = reactive([
-  {name: "warehouse_name", type: "input", placeholder: "Расположение склада", inputType: "text"},
+const transitParameters: ParametersType = reactive([
+  {name: "warehouse_name", type: "input", title: "Расположение склада", inputType: "text"},
 ])
 
 const parameters = computed(() => [
@@ -146,7 +147,7 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, va
                           @update:model-value="(value) => {
                             input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                           }"
-                          :placeholder="input.placeholder"
+                          :title="input.title"
                           :input-type="input.inputType"/>
         <ControlSelect v-if="input.type === 'select'"
                        :selected-value="input.value || props.parameters[input.name]"
@@ -192,35 +193,9 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, va
     }
   }
 
-  .parameters-settings-wrapper {
-    position: absolute;
-    width: 300px;
-    height: 95%;
-    right: 5px;
-    top: 10px;
-
-    .parameters-settings {
-      position: sticky;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      top: 0;
-      left: 0;
-      gap: 5px;
-      width: 100%;
-      border: 2px solid white;
-      padding: 10px 20px;
-      border-radius: 15px;
-
-      .parameters-settings-label {
-        margin-bottom: 5px;
-      }
-
-      .calculate-button {
-        width: 100%;
-        margin-top: 10px;
-      }
-    }
+  .calculate-button {
+    flex: 0 0;
+    width: 250px;
   }
 
   &.active {
