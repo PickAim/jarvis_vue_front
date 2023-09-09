@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import type {SelectOptionType} from "@/types/DataTypes";
 
 const props = withDefaults(defineProps<{
-  options: { name: string, value: string }[],
+  options: SelectOptionType[],
   selectedValue?: number | string,
   placeholder?: string
 }>(), {

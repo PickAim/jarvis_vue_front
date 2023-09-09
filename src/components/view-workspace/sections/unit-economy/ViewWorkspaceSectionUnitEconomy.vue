@@ -14,7 +14,8 @@
                                    v-model:is-calculate-transit="calculator.isTransitOn"/>
         <UnitEconomyStepResult :shown="calculated && !!calculator.result"
                                :result-data="calculator.result"
-                               :save-name="saveName"/>
+                               :save-name="saveName"
+                               @save-request="onSaveRequest"/>
       </div>
     </div>
   </ViewWorkspaceSection>
@@ -101,6 +102,10 @@ function onCalculate() {
       })
     }, 0);
   });
+}
+
+function onSaveRequest(name: string) {
+  calculator.saveRequest(name);
 }
 </script>
 

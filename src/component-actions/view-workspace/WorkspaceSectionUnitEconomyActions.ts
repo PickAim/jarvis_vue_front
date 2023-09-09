@@ -14,7 +14,9 @@ export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions 
     }
 
     protected async prepareSectionData() {
-        this.requests = (await (new UnitEconomyActions()).loadAll()).result;
+        const unitEconomyActions = new UnitEconomyActions();
+        await unitEconomyActions.loadAll();
+        this.requests = unitEconomyActions.getAll();
         this.products = (await (new AllProductsActions()).getUserInfo()).result;
         console.log(this.products);
     }

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
-import {ProductData, UnitEconomyRequestData, UnitEconomyResultData} from "@/types/DataTypes";
+import {ProductData, SelectOptionType, UnitEconomyRequestData, UnitEconomyResultData} from "@/types/DataTypes";
 import "./unit-economy-step-style.scss";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import type {CalculateRequestData} from "@/types/RequestTypes";
+import {computed} from "vue";
 
 const props = defineProps<{
   products?: ProductData[],
@@ -14,6 +15,15 @@ const emit = defineEmits<{
   (e: "select-product", ID): void,
   (e: "select-request", ID): void
 }>()
+
+const requests = computed<SelectOptionType[] | undefined>(() => {
+  return props.requests?.map<SelectOptionType>((v, ind) => {
+    return {
+      name: v.info.name,
+      value: ind.toString()
+    }
+  })
+})
 
 </script>
 
@@ -26,12 +36,10 @@ const emit = defineEmits<{
                     class="select-product"
                     :products="props.products"
                     @select-product="(ID) => emit('select-product', ID)"/>
-      <span class="select-request-label">или один из своих сохранённых запросов:</span>
-      <ControlSelect :options="[
-          {name: 'Запрос на расчёт пижам 1', value: '1'},
-          {name: 'Запрос на расчёт пижам 2', value: '2'},
-          {name: 'Запрос на расчёт пижам 3', value: '3'},
-      ]" :selected-value="1"/>
+      <div v-if="requests && requests.length > 0">
+        <span class="select-request-label">или один из своих сохранённых запросов:</span>
+        <ControlSelect :options="requests" :selected-value="1"/>
+      </div>
     </div>
   </div>
 </template>

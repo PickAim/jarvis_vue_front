@@ -5,7 +5,7 @@ import {computed, reactive} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import type {OptionsType, UnitEconomyRequestData} from "@/types/DataTypes";
+import type {SelectOptionType, UnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {niches} from "@/nichesData";
 
@@ -44,13 +44,13 @@ type InputCheckInfoType = InputInfoType<boolean> &
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType | InputCheckInfoType)[];
 
-const categoryOptions: OptionsType[] = Object.keys(niches).reduce(
+const categoryOptions: SelectOptionType[] = Object.keys(niches).reduce(
     (accum, val, ind) => {
       accum.push({name: val, value: ind + 2})
       return accum;
     }, []);
 
-const nicheOptions = computed<OptionsType[]>(() => {
+const nicheOptions = computed<SelectOptionType[]>(() => {
   const nichesArray = niches[categoryOptions.find((option) => option.value == props.parameters.category_id)?.name];
   if (!nichesArray) return [];
   return nichesArray.reduce(

@@ -182,4 +182,4 @@ export type GreenZoneResultData = {
     }
 }
 
-export type OptionsType = { name: string, value: string };
+export type SelectOptionType = { name: string, value: string };

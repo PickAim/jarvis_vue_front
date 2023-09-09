@@ -66,7 +66,7 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
                         v-model="requestName"
                         title="Имя сохранения"/>
       <ControlButton class="save-button"
-                     @click="emits">
+                     @click="emits('saveRequest', requestName)">
         Сохранить запрос
       </ControlButton>
     </div>
