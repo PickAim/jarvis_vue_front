@@ -1,3 +1,6 @@
+<script setup lang="ts">
+
+</script>
 <template>
   <div class="section-container">
     <h1>
@@ -8,11 +11,6 @@
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
 <style scoped lang="scss">
 .section-container {
   display: flex;

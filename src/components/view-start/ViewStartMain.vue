@@ -1,17 +1,3 @@
-<template>
-  <main>
-    <ViewStartStartBlock />
-    <ViewStartCardsBlock />
-    <ViewStartAboutJarvis />
-    <ViewStartTariffs />
-    <ViewStartTrustedBlock />
-    <ViewStartComponentSlot />
-    <ViewStartFormBlock />
-    <!--<ViewStartTraiffLinkBlock />-->
-    <!--<ViewStartHeaderOverlay/>-->
-    <!--use on mobile version screen -->
-  </main>
-</template>
 <script setup lang="ts">
 import ViewStartStartBlock from "./ViewStartComponentsMain/ViewStartStartBlock.vue";
 import ViewStartCardsBlock from "./ViewStartComponentsMain/ViewStartCardsBlock.vue";
@@ -21,6 +7,22 @@ import ViewStartTrustedBlock from "./ViewStartComponentsMain/ViewStartTrustedBlo
 import ViewStartComponentSlot from "./ViewStartComponentsMain/ViewStartComponentSlot.vue";
 import ViewStartFormBlock from "./ViewStartComponentsMain/ViewStartFormBlock.vue";
 </script>
+
+<template>
+  <main>
+    <ViewStartStartBlock/>
+    <ViewStartCardsBlock/>
+    <ViewStartAboutJarvis/>
+    <ViewStartTariffs/>
+    <ViewStartTrustedBlock/>
+    <ViewStartComponentSlot/>
+    <ViewStartFormBlock/>
+    <!--<ViewStartTraiffLinkBlock />-->
+    <!--<ViewStartHeaderOverlay/>-->
+    <!--use on mobile version screen -->
+  </main>
+</template>
+
 <style scoped lang="scss">
 main {
   width: 100%;

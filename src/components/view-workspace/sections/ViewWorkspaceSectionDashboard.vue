@@ -1,42 +1,3 @@
-<template>
-  <ViewWorkspaceSection :style="{'--widgetSizeMode': widgetSizeMode}">
-    <template v-slot:header>Главная страница</template>
-    <div class="section-body-wrapper">
-      <!--      <div class="size-select">-->
-      <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
-      <!--      </div>-->
-      <div class="widget-buttons-panel">
-        <ControlButtonRound class="widget-panel-settings-button"
-                            @click="actions.openWidgetPanelSettingsOverlay()">SET
-        </ControlButtonRound>
-        <ControlButtonRound class="widget-add-button"
-                            @click="actions.openWidgetAddOverlay()">ADD
-        </ControlButtonRound>
-      </div>
-      <div class="widget-panel"
-           :class="{scrollable: isCtrl}"
-           @mousedown="onPanelMouseDown"
-           @mousemove="(e) => {onPanelMouseMove(e)}"
-           @mouseup="onPanelMouseUp"
-           @mouseleave="onPanelMouseLeave"
-           ref="container">
-        <WidgetContainer v-for="(w, ind) in widgetClassList"
-                         :key="ind"
-                         :options="w"
-                         :grid-width="gridWidth"
-                         :widget-size="widgetSizeMode"
-                         :is-other-moving="isWidgetMoving"
-                         @mouse-enter="onWidgetMouseEnter(ind)"
-                         @mouse-leave="onWidgetMouseLeave(ind)"
-                         @move-start="onWidgetMoveStart(ind)"
-                         @move-stop="onWidgetMoveStop(ind)"
-                         @close="widgetStore.deleteWidget(ind)"
-                         @edit="onEditClick(w)"/>
-      </div>
-    </div>
-  </ViewWorkspaceSection>
-</template>
-
 <script setup lang="ts">
 import WidgetContainer
   from "@/components/view-workspace/widgets/WidgetContainer.vue";
@@ -183,6 +144,45 @@ function clearScrollInterval(id: number) {
   scrollTimerHandlersArray[id] = -1;
 }
 </script>
+
+<template>
+  <ViewWorkspaceSection :style="{'--widgetSizeMode': widgetSizeMode}">
+    <template v-slot:header>Главная страница</template>
+    <div class="section-body-wrapper">
+      <!--      <div class="size-select">-->
+      <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
+      <!--      </div>-->
+      <div class="widget-buttons-panel">
+        <ControlButtonRound class="widget-panel-settings-button"
+                            @click="actions.openWidgetPanelSettingsOverlay()">SET
+        </ControlButtonRound>
+        <ControlButtonRound class="widget-add-button"
+                            @click="actions.openWidgetAddOverlay()">ADD
+        </ControlButtonRound>
+      </div>
+      <div class="widget-panel"
+           :class="{scrollable: isCtrl}"
+           @mousedown="onPanelMouseDown"
+           @mousemove="(e) => {onPanelMouseMove(e)}"
+           @mouseup="onPanelMouseUp"
+           @mouseleave="onPanelMouseLeave"
+           ref="container">
+        <WidgetContainer v-for="(w, ind) in widgetClassList"
+                         :key="ind"
+                         :options="w"
+                         :grid-width="gridWidth"
+                         :widget-size="widgetSizeMode"
+                         :is-other-moving="isWidgetMoving"
+                         @mouse-enter="onWidgetMouseEnter(ind)"
+                         @mouse-leave="onWidgetMouseLeave(ind)"
+                         @move-start="onWidgetMoveStart(ind)"
+                         @move-stop="onWidgetMoveStop(ind)"
+                         @close="widgetStore.deleteWidget(ind)"
+                         @edit="onEditClick(w)"/>
+      </div>
+    </div>
+  </ViewWorkspaceSection>
+</template>
 
 <style lang="scss">
 .section-body-wrapper {

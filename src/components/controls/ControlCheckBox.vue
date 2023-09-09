@@ -1,19 +1,3 @@
-<template>
-  <div class="checkbox-wrapper">
-    <input :id="id"
-           class="checkbox-input"
-           type="checkbox"
-           :checked="modelValue"
-           @change="emits('update:modelValue', $event.target.checked)"/>
-    <label class="checkbox-label" :for="id">
-      <div class="checkbox-mark" :class="{active: modelValue}"/>
-      <div class="checkbox-text">
-        <slot/>
-      </div>
-    </label>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 
@@ -29,6 +13,22 @@ onMounted(() => {
   id.value = "checkbox-input-" + Math.random().toString();
 });
 </script>
+
+<template>
+  <div class="checkbox-wrapper">
+    <input :id="id"
+           class="checkbox-input"
+           type="checkbox"
+           :checked="modelValue"
+           @change="emits('update:modelValue', $event.target.checked)"/>
+    <label class="checkbox-label" :for="id">
+      <div class="checkbox-mark" :class="{active: modelValue}"/>
+      <div class="checkbox-text">
+        <slot/>
+      </div>
+    </label>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .checkbox-wrapper {

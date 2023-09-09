@@ -1,15 +1,3 @@
-<template>
-  <WidgetBodyContainer :widget-size="widgetSize">
-    <div class="title">UNIT экономика</div>
-    <div class="calc-result-wrapper">
-      <DoughnutBar v-if="chartResult && chartResult[0][0] >= 0"
-                   class="result-chart"
-                   :data-and-labels="chartResult"
-                   :title="chartTitle"/>
-    </div>
-  </WidgetBodyContainer>
-</template>
-
 <script setup lang="ts">
 import {computed} from "vue";
 import WidgetBodyContainer from "@/components/view-workspace/widgets/WidgetBodyContainer.vue";
@@ -21,7 +9,7 @@ const props = defineProps<{
   widgetSize: number
 }>();
 
-const chartResult = computed<[number|undefined, string][] | undefined>(() => props.options.request ? [
+const chartResult = computed<[number | undefined, string][] | undefined>(() => props.options.request ? [
   [props.options.request.result.logistic_price, "Логистики"],
   [props.options.request.result.margin, "Маржа"],
   [props.options.request.result.marketplace_commission, "Комиссия маркетплейса"],
@@ -32,6 +20,18 @@ const chartResult = computed<[number|undefined, string][] | undefined>(() => pro
 
 const chartTitle = computed(() => `Рекомендуемая цена: `);
 </script>
+
+<template>
+  <WidgetBodyContainer :widget-size="widgetSize">
+    <div class="title">UNIT экономика</div>
+    <div class="calc-result-wrapper">
+      <DoughnutBar v-if="chartResult && chartResult[0][0] >= 0"
+                   class="result-chart"
+                   :data-and-labels="chartResult"
+                   :title="chartTitle"/>
+    </div>
+  </WidgetBodyContainer>
+</template>
 
 <style scoped lang="scss">
 .calc-result-wrapper {

@@ -1,14 +1,3 @@
-<template>
-  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
-    <main>
-      <header>Настройка виджета цен ниши {{saveResultID}}</header>
-      <div class="input-wrapper">
-      </div>
-      <ControlButton class="submit">Подтвердить</ControlButton>
-    </main>
-  </OverlayTemplateDecorated>
-</template>
-
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
@@ -25,25 +14,36 @@ const {overlayOptions} = storeToRefs(useOverlayStateStore());
 const {widgetList} = storeToRefs(widgetStore)
 
 const saveResultID = computed(() => {
-  if(!overlayOptions.value) return "";
+  if (!overlayOptions.value) return "";
   const settings = (widgetList.value[overlayOptions.value.index] as Widget<"nicheDist">).options;
-  if(!settings) return "";
+  if (!settings) return "";
   return settings.saveResultID;
 })
 </script>
 
+<template>
+  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
+    <main>
+      <header>Настройка виджета цен ниши {{ saveResultID }}</header>
+      <div class="input-wrapper">
+      </div>
+      <ControlButton class="submit">Подтвердить</ControlButton>
+    </main>
+  </OverlayTemplateDecorated>
+</template>
+
 <style scoped lang="scss">
-.overlay-window-wrapper{
-  width:450px;
+.overlay-window-wrapper {
+  width: 450px;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
 
-  header{
+  header {
     font-size: 30px;
   }
 
@@ -51,7 +51,7 @@ main{
     width: 300px;
   }
 
-  .submit{
+  .submit {
     font-size: 22px;
     margin-top: 30px;
     height: 50px;

@@ -1,9 +1,3 @@
-<template>
-  <div class="logo_rotating" ref="logo">
-    <div class="logo"/>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 
@@ -15,6 +9,12 @@ onMounted(() => {
 });
 
 </script>
+
+<template>
+  <div class="logo_rotating" ref="logo">
+    <div class="logo"/>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @keyframes logoRounding {

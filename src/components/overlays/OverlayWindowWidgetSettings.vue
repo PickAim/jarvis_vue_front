@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
+import ControlButton from "@/components/controls/ControlButton.vue";
+
+</script>
+
 <template>
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
@@ -9,24 +15,18 @@
   </OverlayTemplateDecorated>
 </template>
 
-<script setup lang="ts">
-import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
-import ControlButton from "@/components/controls/ControlButton.vue";
-
-</script>
-
 <style scoped lang="scss">
-.overlay-window-wrapper{
-  width:450px;
+.overlay-window-wrapper {
+  width: 450px;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
 
-  header{
+  header {
     font-size: 30px;
   }
 
@@ -34,7 +34,7 @@ main{
     width: 300px;
   }
 
-  .submit{
+  .submit {
     font-size: 22px;
     margin-top: 30px;
     height: 50px;

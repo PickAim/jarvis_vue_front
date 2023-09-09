@@ -1,11 +1,3 @@
-<template>
-  <OverlayTemplateDecorated class="overlay-window-widget-options" header-text="Изменение виджета">
-    <component :is="widgetOptionsOverlays[options.config.widgetName]"
-               @submit="onSubmitClick"
-               :options="options"/>
-  </OverlayTemplateDecorated>
-</template>
-
 <script setup lang="ts">
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
@@ -24,6 +16,14 @@ function onSubmitClick<N extends WidgetName>(options: WidgetOptions[N]) {
 // TODO: CHANGE PROPS OPTIONS TYPE, MOVE ALL AND ADD DYNAMIC COMPONENT!
 const actions = new OverlayWidgetSettingsActions();
 </script>
+
+<template>
+  <OverlayTemplateDecorated class="overlay-window-widget-options" header-text="Изменение виджета">
+    <component :is="widgetOptionsOverlays[options.config.widgetName]"
+               @submit="onSubmitClick"
+               :options="options"/>
+  </OverlayTemplateDecorated>
+</template>
 
 <style scoped lang="scss">
 .overlay-window-widget-options {

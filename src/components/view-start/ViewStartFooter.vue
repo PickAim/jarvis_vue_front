@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <footer>
     <div class="footer-wrapper">
@@ -7,10 +11,6 @@
     </div>
   </footer>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style scoped lang="scss">
 $tag-width: 1150px;

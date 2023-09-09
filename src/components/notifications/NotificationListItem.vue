@@ -1,22 +1,3 @@
-<template>
-  <div class="notification-list-item-wrapper"
-       @mouseenter="mouseEnterFunc"
-       @mouseleave="mouseLeaveFunc">
-    <div class="type-icon"
-         :style="{backgroundColor: typeToColor[note.type]}"/>
-    <div class="vertical-separator"/>
-    <main>
-      <div class="header-wrapper">
-        <div class="header-text">{{note.header}}</div>
-        <button class="hide-button"
-                @click="hideNotification(note.id)"/>
-      </div>
-      <div class="horizontal-separator"/>
-      <div class="body-text">{{note.body}}</div>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
 import type {Notification} from "@/stores/notificationsStore";
 import {useNotificationsStore} from "@/stores/notificationsStore";
@@ -35,14 +16,33 @@ const typeToColor = {
   'success': '#8F3'
 }
 
-function mouseEnterFunc(){
+function mouseEnterFunc() {
   showNotification(props.note.id);
 }
 
-function mouseLeaveFunc(){
+function mouseLeaveFunc() {
   startNotificationTimer(props.note.id);
 }
 </script>
+
+<template>
+  <div class="notification-list-item-wrapper"
+       @mouseenter="mouseEnterFunc"
+       @mouseleave="mouseLeaveFunc">
+    <div class="type-icon"
+         :style="{backgroundColor: typeToColor[note.type]}"/>
+    <div class="vertical-separator"/>
+    <main>
+      <div class="header-wrapper">
+        <div class="header-text">{{ note.header }}</div>
+        <button class="hide-button"
+                @click="hideNotification(note.id)"/>
+      </div>
+      <div class="horizontal-separator"/>
+      <div class="body-text">{{ note.body }}</div>
+    </main>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .notification-list-item-wrapper {
@@ -85,13 +85,13 @@ function mouseLeaveFunc(){
   }
 }
 
-.vertical-separator{
+.vertical-separator {
   height: 100%;
   width: 1px;
   background-color: black;
 }
 
-.horizontal-separator{
+.horizontal-separator {
   height: 1px;
   width: 100%;
   background-color: black;

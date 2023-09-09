@@ -1,10 +1,3 @@
-<template>
-  <RequestPreloader :is-loading="isLoading && !isHidden"/>
-  <NotificationList/>
-  <OverlayContainer/>
-  <RouterView/>
-</template>
-
 <script setup lang="ts">
 import NotificationList from "@/components/notifications/NotificationList.vue";
 import OverlayContainer from "@/components/overlays/OverlayContainer.vue";
@@ -15,6 +8,13 @@ import "@/assets/main.css";
 
 const {isLoading, isHidden} = storeToRefs(useRequestStore());
 </script>
+
+<template>
+  <RequestPreloader :is-loading="isLoading && !isHidden"/>
+  <NotificationList/>
+  <OverlayContainer/>
+  <RouterView/>
+</template>
 
 <style>
 </style>

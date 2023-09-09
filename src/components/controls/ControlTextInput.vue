@@ -1,17 +1,3 @@
-<template>
-  <div class="text-input-wrapper">
-    <!--    <span :class="{active: error}" class="error-text">{{errorText}}</span>-->
-    <div class="input-wrapper">
-      <input
-          :type="inputType"
-          :value="modelValue"
-          @input="$emit('update:modelValue', $event.target.value)"
-          placeholder=" "/>
-      <label class="title">{{ title }}</label>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 withDefaults(defineProps<{
   inputType?: "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" | "submit" | "tel" | "text" | "time" | "url" | "week",
@@ -27,6 +13,20 @@ withDefaults(defineProps<{
 defineEmits(['update:modelValue'])
 
 </script>
+
+<template>
+  <div class="text-input-wrapper">
+    <!--    <span :class="{active: error}" class="error-text">{{errorText}}</span>-->
+    <div class="input-wrapper">
+      <input
+          :type="inputType"
+          :value="modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
+          placeholder=" "/>
+      <label class="title">{{ title }}</label>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 

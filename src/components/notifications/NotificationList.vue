@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import NotificationListItem from "@/components/notifications/NotificationListItem.vue";
+import {useNotificationsStore} from "@/stores/notificationsStore";
+import {storeToRefs} from "pinia";
+
+const notificationsStore = useNotificationsStore()
+const {activeNotificationsList} = storeToRefs(notificationsStore);
+const {hideAllNotifications} = notificationsStore;
+
+</script>
+
 <template>
   <div class="notification-list-wrapper"
        @click="noteLog">
@@ -14,19 +25,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import NotificationListItem from "@/components/notifications/NotificationListItem.vue";
-import {useNotificationsStore} from "@/stores/notificationsStore";
-import {storeToRefs} from "pinia";
-
-const notificationsStore = useNotificationsStore()
-const {activeNotificationsList} = storeToRefs(notificationsStore);
-const {hideAllNotifications} = notificationsStore;
-
-</script>
-
 <style scoped lang="scss">
-.notification-list-wrapper{
+.notification-list-wrapper {
   position: absolute;
   display: inline-flex;
   align-content: center;
@@ -43,7 +43,7 @@ const {hideAllNotifications} = notificationsStore;
   pointer-events: none;
 }
 
-.clear-button{
+.clear-button {
   width: 50px;
   height: 50px;
   margin-right: 10px;
@@ -54,22 +54,22 @@ const {hideAllNotifications} = notificationsStore;
   background-color: #FFF;
   transition: opacity 0.3s ease;
 
-  &.active{
+  &.active {
     pointer-events: all;
     opacity: 1;
   }
 
-  &:hover{
+  &:hover {
     border-width: 3px;
   }
 
-  &:active{
+  &:active {
     border-width: 1px;
   }
 
 }
 
-.list{
+.list {
   width: 600px;
   height: 100%;
   display: block;
@@ -79,6 +79,7 @@ const {hideAllNotifications} = notificationsStore;
 .list-leave-active {
   transition: all 0.3s ease;
 }
+
 .list-enter-from,
 .list-leave-to {
   height: 0;

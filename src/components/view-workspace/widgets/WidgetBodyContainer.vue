@@ -1,9 +1,3 @@
-<template>
-  <div class="widget-body-wrapper">
-    <slot></slot>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {computed} from "vue";
 import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
@@ -15,6 +9,12 @@ const props = defineProps<{
 const widgetWidth = computed(() => widgetBodyWidth(props.widgetSize) + 'px');
 const widgetHeight = computed(() => widgetBodyHeight(props.widgetSize) + 'px');
 </script>
+
+<template>
+  <div class="widget-body-wrapper">
+    <slot></slot>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .widget-body-wrapper {

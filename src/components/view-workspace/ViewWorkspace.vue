@@ -1,13 +1,3 @@
-<template>
-  <div class="workspace-wrapper">
-    <ComponentPreloader :is-loading="actions.isPageLoading"/>
-    <ViewWorkspaceHeader/>
-    <div class="section-wrapper" v-if="!actions.isPageLoading">
-      <RouterView/>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import ViewWorkspaceHeader from "@/components/view-workspace/ViewWorkspaceHeader.vue";
 import {WorkspaceActions} from "@/component-actions/view-workspace/WorkspaceActions";
@@ -20,6 +10,16 @@ const actions = reactive(new WorkspaceActions());
 useRequestStore().executeInBackground(() => actions.initSection())
 
 </script>
+
+<template>
+  <div class="workspace-wrapper">
+    <ComponentPreloader :is-loading="actions.isPageLoading"/>
+    <ViewWorkspaceHeader/>
+    <div class="section-wrapper" v-if="!actions.isPageLoading">
+      <RouterView/>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .workspace-wrapper {

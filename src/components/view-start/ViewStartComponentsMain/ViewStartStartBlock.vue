@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <div class="view-start-block">
     <div class="start-main">
@@ -18,11 +22,7 @@
     </div>
   </div>
 </template>
-  
-<script setup lang="ts">
 
-</script>
-  
 <style scoped lang="scss">
 $tag-width: 1150px;
 
@@ -143,7 +143,7 @@ $tag-width: 1150px;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        background:none;
+        background: none;
         backdrop-filter: none;
         padding: 10vh;
 

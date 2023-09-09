@@ -1,22 +1,3 @@
-<template>
-  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
-    <main>
-      <header>Логин</header>
-      <div class="input-wrapper">
-        <ControlTextInput title="Логин"
-                          input-type="text"
-                          v-model="loginInput"/>
-        <ControlTextInput title="Пароль"
-                          input-type="password"
-                          v-model="passwordInput"/>
-      </div>
-      <ControlButton class="submit"
-                     @click="onLoginClick"
-      >Подтвердить</ControlButton>
-    </main>
-  </OverlayTemplateDecorated>
-</template>
-
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
@@ -41,6 +22,26 @@ function onLoginClick() {
   });
 }
 </script>
+
+<template>
+  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
+    <main>
+      <header>Логин</header>
+      <div class="input-wrapper">
+        <ControlTextInput title="Логин"
+                          input-type="text"
+                          v-model="loginInput"/>
+        <ControlTextInput title="Пароль"
+                          input-type="password"
+                          v-model="passwordInput"/>
+      </div>
+      <ControlButton class="submit"
+                     @click="onLoginClick"
+      >Подтвердить
+      </ControlButton>
+    </main>
+  </OverlayTemplateDecorated>
+</template>
 
 <style scoped lang="scss">
 .overlay-window-wrapper {

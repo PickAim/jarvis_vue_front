@@ -1,11 +1,3 @@
-<template>
-  <div class="button-wrapper">
-    <button @click="(e) => $emit('click', e)" :disabled="disabled" :class="{enabled: !disabled}">
-      <slot></slot>
-    </button>
-  </div>
-</template>
-
 <script setup lang="ts">
 defineEmits(['click'])
 withDefaults(defineProps<{
@@ -15,14 +7,22 @@ withDefaults(defineProps<{
 })
 </script>
 
+<template>
+  <div class="button-wrapper">
+    <button @click="(e) => $emit('click', e)" :disabled="disabled" :class="{enabled: !disabled}">
+      <slot></slot>
+    </button>
+  </div>
+</template>
+
 <style scoped lang="scss">
-.button-wrapper{
+.button-wrapper {
   width: 100px;
   height: 100px;
   border-radius: 999px;
 }
 
-button{
+button {
   display: block;
   width: 100%;
   height: 100%;
@@ -34,6 +34,7 @@ button{
     &:hover {
       border-width: 3px;
     }
+
     &:active {
       border-width: 2px;
     }

@@ -1,16 +1,3 @@
-<template>
-  <div class="overlay-body-average-check">
-    <select v-model="widgetOptions.saveResultID">
-    <option v-for="r in requests" :key="r.info.id" :value="r.info.id">
-      {{r.info.name}}
-    </option>
-    </select>
-    <ControlButton class="submit-button" @click="onSubmitClick">
-      Подтвердить
-    </ControlButton>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
@@ -39,6 +26,19 @@ function onSubmitClick() {
   emit('submit', _.cloneDeep(widgetOptions));
 }
 </script>
+
+<template>
+  <div class="overlay-body-average-check">
+    <select v-model="widgetOptions.saveResultID">
+      <option v-for="r in requests" :key="r.info.id" :value="r.info.id">
+        {{ r.info.name }}
+      </option>
+    </select>
+    <ControlButton class="submit-button" @click="onSubmitClick">
+      Подтвердить
+    </ControlButton>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .overlay-body-average-check {

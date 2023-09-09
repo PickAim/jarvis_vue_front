@@ -1,11 +1,5 @@
-<template>
-  <button class="button-wrapper" @click="(e) => $emit('click', e)" :disabled="disabled" :class="{ enabled: !disabled }">
-    <slot></slot>
-  </button>
-</template>
-
 <script setup lang="ts">
-import { defineEmits, defineProps, withDefaults } from "vue";
+import {defineEmits, defineProps, withDefaults} from "vue";
 
 defineEmits(['click'])
 withDefaults(defineProps<{
@@ -14,6 +8,12 @@ withDefaults(defineProps<{
   disabled: false
 })
 </script>
+
+<template>
+  <button class="button-wrapper" @click="(e) => $emit('click', e)" :disabled="disabled" :class="{ enabled: !disabled }">
+    <slot></slot>
+  </button>
+</template>
 
 <style scoped lang="scss">
 .button-wrapper {

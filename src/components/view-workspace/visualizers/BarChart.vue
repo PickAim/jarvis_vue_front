@@ -1,12 +1,3 @@
-<template>
-  <div class="bar-chart-wrapper">
-    <Bar
-        :options="chartOptions"
-        :data="chartData"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 import {computed, reactive} from 'vue';
 import {Bar} from 'vue-chartjs'
@@ -116,6 +107,15 @@ const chartOptions = reactive<ChartOptions>({
 });
 
 </script>
+
+<template>
+  <div class="bar-chart-wrapper">
+    <Bar
+        :options="chartOptions"
+        :data="chartData"
+    />
+  </div>
+</template>
 
 <style scoped lang="scss">
 .bar-chart-wrapper {

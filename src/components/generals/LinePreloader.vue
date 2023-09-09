@@ -1,8 +1,3 @@
-<template>
-  <div :class="{active: isLoading}" class="preloader" ref="preloader">
-  </div>
-</template>
-
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 
@@ -14,6 +9,11 @@ onMounted(() => {
   gradientDegrees.value = (Math.atan(preloader.value.clientWidth / 2 / preloader.value.clientHeight) * 180 / Math.PI + 90) + "deg";
 });
 </script>
+
+<template>
+  <div :class="{active: isLoading}" class="preloader" ref="preloader">
+  </div>
+</template>
 
 <style scoped lang="scss">
 .preloader {

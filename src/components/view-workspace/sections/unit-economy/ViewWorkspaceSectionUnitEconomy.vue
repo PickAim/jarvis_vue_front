@@ -1,26 +1,3 @@
-<template>
-  <ViewWorkspaceSection>
-    <template v-slot:header>{{ sections.unitEconomy.title }}</template>
-    <div class="section-body-wrapper">
-      <div class="steps-wrapper">
-        <UnitEconomyStepSet :products="products" :requests="actions.requests"
-                            @select-product="onProductSelect"
-                            @select-request="onRequestSelect"/>
-        <UnitEconomyStepParameters :shown="settingSelected"
-                                   :parameters="calculator.request"
-                                   @parameter-changed="onParameterChanged"
-                                   @calculate="onCalculate"
-                                   v-model:is-calculate-transit-cost="calculator.isTransitCostOn"
-                                   v-model:is-calculate-transit="calculator.isTransitOn"/>
-        <UnitEconomyStepResult :shown="calculated && !!calculator.result"
-                               :result-data="calculator.result"
-                               :save-name="saveName"
-                               @save-request="onSaveRequest"/>
-      </div>
-    </div>
-  </ViewWorkspaceSection>
-</template>
-
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {sections} from "@/components/view-workspace/workspaceSections";
@@ -108,6 +85,29 @@ function onSaveRequest(name: string) {
   calculator.saveRequest(name);
 }
 </script>
+
+<template>
+  <ViewWorkspaceSection>
+    <template v-slot:header>{{ sections.unitEconomy.title }}</template>
+    <div class="section-body-wrapper">
+      <div class="steps-wrapper">
+        <UnitEconomyStepSet :products="products" :requests="actions.requests"
+                            @select-product="onProductSelect"
+                            @select-request="onRequestSelect"/>
+        <UnitEconomyStepParameters :shown="settingSelected"
+                                   :parameters="calculator.request"
+                                   @parameter-changed="onParameterChanged"
+                                   @calculate="onCalculate"
+                                   v-model:is-calculate-transit-cost="calculator.isTransitCostOn"
+                                   v-model:is-calculate-transit="calculator.isTransitOn"/>
+        <UnitEconomyStepResult :shown="calculated && !!calculator.result"
+                               :result-data="calculator.result"
+                               :save-name="saveName"
+                               @save-request="onSaveRequest"/>
+      </div>
+    </div>
+  </ViewWorkspaceSection>
+</template>
 
 <style scoped lang="scss">
 .section-body-wrapper {

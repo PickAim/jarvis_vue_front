@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import OverlayTemplate from "@/components/overlays/OverlayTemplate.vue";
+
+defineProps<{
+  headerText: string
+}>()
+</script>
+
 <template>
   <div class="overlay-menu-wrapper">
     <OverlayTemplate :header-text="headerText">
@@ -7,14 +15,6 @@
   </div>
   <!--  TODO: make decoration-->
 </template>
-
-<script setup lang="ts">
-import OverlayTemplate from "@/components/overlays/OverlayTemplate.vue";
-
-defineProps<{
-  headerText: string
-}>()
-</script>
 
 <style scoped>
 

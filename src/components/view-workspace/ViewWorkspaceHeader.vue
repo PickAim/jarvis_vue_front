@@ -1,31 +1,3 @@
-<template>
-  <header class="workspace-header-wrapper">
-    <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
-      <img src="/src/assets/jarvis_icon_big.png" alt="">
-    </div>
-    <div class="menu-wrapper"
-         @mouseenter="onMouseEnter"
-         @mouseleave="onMouseLeave">
-      <div class="menu-grid title-list">
-        <div class="title menu-title" v-for="menu in menus" :key="menu.title">
-          <div class="hover-effect-box"/>
-          {{ menu.title }}
-        </div>
-      </div>
-      <div class="menu-grid menu-items-grid" :class="{isShown: isOpen}">
-        <div class="title menu-item"
-             v-for="menuItem in menuItems"
-             :key="menuItem.item.title"
-             :style="{gridRow: menuItem.row, gridColumn: menuItem.column}"
-             @click="onMenuButtonClicked(menuItem)">
-          <div class="hover-effect-box"/>
-          {{ menuItem.item.title }}
-        </div>
-      </div>
-    </div>
-  </header>
-</template>
-
 <script setup lang="ts">
 import {SectionInfoType, sections} from "@/components/view-workspace/workspaceSections";
 import {ref} from "vue";
@@ -86,6 +58,34 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType) {
 }
 
 </script>
+
+<template>
+  <header class="workspace-header-wrapper">
+    <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
+      <img src="/src/assets/jarvis_icon_big.png" alt="">
+    </div>
+    <div class="menu-wrapper"
+         @mouseenter="onMouseEnter"
+         @mouseleave="onMouseLeave">
+      <div class="menu-grid title-list">
+        <div class="title menu-title" v-for="menu in menus" :key="menu.title">
+          <div class="hover-effect-box"/>
+          {{ menu.title }}
+        </div>
+      </div>
+      <div class="menu-grid menu-items-grid" :class="{isShown: isOpen}">
+        <div class="title menu-item"
+             v-for="menuItem in menuItems"
+             :key="menuItem.item.title"
+             :style="{gridRow: menuItem.row, gridColumn: menuItem.column}"
+             @click="onMenuButtonClicked(menuItem)">
+          <div class="hover-effect-box"/>
+          {{ menuItem.item.title }}
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
 
 <style scoped lang="scss">
 $header-height: 70px;

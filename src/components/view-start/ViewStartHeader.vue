@@ -1,10 +1,18 @@
+<script setup lang="ts">
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
+import {useRouter} from "vue-router";
+
+const actions = new ViewStartActions();
+const router = useRouter();
+</script>
+
 <template>
   <header>
     <div class="buttons-wrapper">
       <button class="about-product">О продукте</button>
       <button class="tariffs" @click="router.push('ViewTariffs')">Тарифы</button>
       <button class="question">Вопросы</button>
-<!--      <button class="login-button" @click="router.push('workspace')">На работу</button>-->
+      <!--      <button class="login-button" @click="router.push('workspace')">На работу</button>-->
       <button class="login-button" @click="actions.openLoginOverlay()">Вход</button>
       <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
     </div>
@@ -13,14 +21,6 @@
     </button>
   </header>
 </template>
-
-<script setup lang="ts">
-import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
-import {useRouter} from "vue-router";
-
-const actions = new ViewStartActions();
-const router = useRouter();
-</script>
 
 <style scoped lang="scss">
 $tag-width: 1150px;

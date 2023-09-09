@@ -1,14 +1,14 @@
-<template>
-  <div :class="{active: isLoading}" class="preloader">
-    <LogoRotating/>
-  </div>
-</template>
-
 <script setup lang="ts">
 import LogoRotating from "@/components/icon/LogoRotating.vue";
 
 defineProps<{ isLoading: boolean }>()
 </script>
+
+<template>
+  <div :class="{active: isLoading}" class="preloader">
+    <LogoRotating/>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .preloader {

@@ -1,11 +1,3 @@
-<template>
-  <div class="doughnut-chart-wrapper">
-    <Doughnut id="doughnut-chart-id"
-              :options="chartOptions"
-              :data="chartData"/>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {computed} from "vue";
 import {Doughnut} from "vue-chartjs"
@@ -24,11 +16,11 @@ import {
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale)
 
 const props = defineProps<{
-  dataAndLabels: [number|undefined, string][],
+  dataAndLabels: [number | undefined, string][],
   title: string
 }>()
 
-const data = computed(() => props.dataAndLabels?.reduce<(number|undefined)[]>((acc, dal) => {
+const data = computed(() => props.dataAndLabels?.reduce<(number | undefined)[]>((acc, dal) => {
   // if(dal[0] <= 0) return acc;
   acc.push(dal[0]);
   return acc;
@@ -95,6 +87,14 @@ const chartOptions = computed<ChartOptions>(() => ({
   }
 }));
 </script>
+
+<template>
+  <div class="doughnut-chart-wrapper">
+    <Doughnut id="doughnut-chart-id"
+              :options="chartOptions"
+              :data="chartData"/>
+  </div>
+</template>
 
 <style scoped lang="scss">
 

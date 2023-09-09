@@ -1,11 +1,3 @@
-<template>
-  <div class="workspace-header-wrapper">
-    <ViewStartHeader class="header"/>
-    <ViewStartMain class="main"/>
-    <ViewStartFooter class="footer"/>
-  </div>
-</template>
-
 <script setup lang="ts">
 import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
 import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
@@ -19,6 +11,14 @@ window.addEventListener('keydown', (e) => {
   }
 });
 </script>
+
+<template>
+  <div class="workspace-header-wrapper">
+    <ViewStartHeader class="header"/>
+    <ViewStartMain class="main"/>
+    <ViewStartFooter class="footer"/>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .workspace-header-wrapper {

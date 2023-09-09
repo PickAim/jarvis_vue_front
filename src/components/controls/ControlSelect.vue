@@ -1,3 +1,27 @@
+<template>
+  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectFocused}"
+       @focusin="onFocusIn" @focusout="onFocusOut">
+    <button class="select-button">
+      <div class="selected-item">
+        {{ props.options.find((option) => option.value == props.selectedValue)?.name || props.placeholder }}
+      </div>
+      <div class="select-icon">
+        <svg class="arrow"
+             width="60%"
+             height="60%"
+             viewBox="0 0 2 1">
+          <path stroke="white" stroke-width="0.13px" d="m 0 0 l 1 1 l 1 -1 l -0.2 0 l -0.8 0.8 l -0.8 -0.8 l -0.2 0"/>
+        </svg>
+      </div>
+    </button>
+    <div class="select-list">
+      <button class="select-item" v-for="(option, ind) in props.options" :key="ind" @click="onSelect(option.value)">
+        {{ option.name }}
+      </button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import {ref} from "vue";
 import type {SelectOptionType} from "@/types/DataTypes";
@@ -30,30 +54,6 @@ function onSelect(value) {
 }
 
 </script>
-
-<template>
-  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectFocused}"
-       @focusin="onFocusIn" @focusout="onFocusOut">
-    <button class="select-button">
-      <div class="selected-item">
-        {{ props.options.find((option) => option.value == props.selectedValue)?.name || props.placeholder }}
-      </div>
-      <div class="select-icon">
-        <svg class="arrow"
-             width="60%"
-             height="60%"
-             viewBox="0 0 2 1">
-          <path stroke="white" stroke-width="0.13px" d="m 0 0 l 1 1 l 1 -1 l -0.2 0 l -0.8 0.8 l -0.8 -0.8 l -0.2 0"/>
-        </svg>
-      </div>
-    </button>
-    <div class="select-list">
-      <button class="select-item" v-for="(option, ind) in props.options" :key="ind" @click="onSelect(option.value)">
-        {{ option.name }}
-      </button>
-    </div>
-  </div>
-</template>
 
 <style scoped lang="scss">
 $select-height: 40px;

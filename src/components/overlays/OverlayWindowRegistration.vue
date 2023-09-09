@@ -1,20 +1,3 @@
-<template>
-  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
-    <main>
-      <header>Регистрация</header>
-      <div class="input-wrapper">
-        <ControlTextInput title="Почта" input-type="email" v-model="emailInput"/>
-        <ControlTextInput title="Телефон" input-type="text" v-model="phoneInput"/>
-        <ControlTextInput title="Пароль" input-type="password" v-model="passwordInput"/>
-        <ControlTextInput title="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
-      </div>
-      <ControlButton class="submit" :disabled="passwordInput !== passwordRepeatInput"
-        @click="actions.registration({ phone: phoneInput, email: emailInput, password: passwordInput })">Подтвердить
-      </ControlButton>
-    </main>
-  </OverlayTemplateDecorated>
-</template>
-
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
@@ -29,6 +12,24 @@ const passwordInput = ref("")
 const passwordRepeatInput = ref("")
 const actions = new OverlayRegistrationActions()
 </script>
+
+<template>
+  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
+    <main>
+      <header>Регистрация</header>
+      <div class="input-wrapper">
+        <ControlTextInput title="Почта" input-type="email" v-model="emailInput"/>
+        <ControlTextInput title="Телефон" input-type="text" v-model="phoneInput"/>
+        <ControlTextInput title="Пароль" input-type="password" v-model="passwordInput"/>
+        <ControlTextInput title="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
+      </div>
+      <ControlButton class="submit" :disabled="passwordInput !== passwordRepeatInput"
+                     @click="actions.registration({ phone: phoneInput, email: emailInput, password: passwordInput })">
+        Подтвердить
+      </ControlButton>
+    </main>
+  </OverlayTemplateDecorated>
+</template>
 
 <style scoped lang="scss">
 .overlay-window-wrapper {

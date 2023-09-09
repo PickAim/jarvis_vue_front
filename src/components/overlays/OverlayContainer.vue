@@ -1,12 +1,3 @@
-<template>
-  <div class="overlay-container-wrapper" :class="{active: isOpen}">
-    <div class="background-wrapper" @click="backgroundClick">
-      <component :is="overlays[overlayName]"
-                 :options="overlayState.overlayOptions"/>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {overlays} from "@/components/overlays/index"
 import {useOverlayStateStore} from "@/stores/overlayStore";
@@ -21,11 +12,20 @@ const {overlayName, isOpen} = storeToRefs(overlayState)
 //   })
 // }, {})
 
-function backgroundClick(e: Event){
-  if(e.target === e.currentTarget) overlayState.closeOverlay();
+function backgroundClick(e: Event) {
+  if (e.target === e.currentTarget) overlayState.closeOverlay();
 }
 
 </script>
+
+<template>
+  <div class="overlay-container-wrapper" :class="{active: isOpen}">
+    <div class="background-wrapper" @click="backgroundClick">
+      <component :is="overlays[overlayName]"
+                 :options="overlayState.overlayOptions"/>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .overlay-container-wrapper {
@@ -37,24 +37,24 @@ function backgroundClick(e: Event){
   z-index: 100;
   position: fixed;
 
-  .background-wrapper{
+  .background-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     transition: all 0.6s;
     clip-path: circle(0% at 105% -5%);
   }
 }
 
-.overlay-container-wrapper.active{
+.overlay-container-wrapper.active {
   pointer-events: all;
 
-  .background-wrapper{
+  .background-wrapper {
     clip-path: circle(100%);
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 </style>

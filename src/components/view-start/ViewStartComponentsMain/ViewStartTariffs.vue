@@ -1,3 +1,7 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
   <div class="view-tariffs-block">
     <div class="tariffs-name">
@@ -39,10 +43,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
 
 <style scoped lang="scss">
 $tag-width: 1150px;
@@ -95,10 +95,10 @@ $tag-width: 1150px;
       border-radius: 24px;
       padding: 10px;
 
-      img{
-          height: 300px;
-          width: 370px;
-        }
+      img {
+        height: 300px;
+        width: 370px;
+      }
 
       .board-info {
         display: flex;
@@ -164,7 +164,7 @@ $tag-width: 1150px;
       .tariff {
         overflow: hidden;
 
-        img{
+        img {
           height: 350px;
           width: 350px;
         }
@@ -180,7 +180,7 @@ $tag-width: 1150px;
         }
 
         &.second-tariff {
-          
+
         }
 
         &.first-tariff,

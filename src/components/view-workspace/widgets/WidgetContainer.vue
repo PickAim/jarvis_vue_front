@@ -1,30 +1,3 @@
-<template>
-  <div class="widget-place"
-       :class="{move: isMoving, otherMove: isOtherMoving}"
-       :style="gridStyle"
-       @mouseover="(e) => emit('mouseEnter', e)"
-       @mouseleave="(e) => emit('mouseLeave', e)">
-  </div>
-  <div class="widget"
-       :class="{translated: options.targetIndex !== -1, move: isMoving, otherMove: isOtherMoving}"
-       :style="gridStyle"
-       @mousedown="movingStart"
-       @dragstart="()=>{return false;}">
-    <header>
-      <div class="move-button">M</div>
-      <div class="right-buttons-wrapper">
-        <ControlButtonRound class="edit-button" @click="emit('edit')">E</ControlButtonRound>
-        <ControlButtonRound class="close-button" @click="emit('close')">C</ControlButtonRound>
-      </div>
-    </header>
-    <main>
-      <component :is="widgets[options.config.widgetName]"
-                 :options="options"
-                 :widgetSize="widgetSize"/>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {computed, ref} from "vue";
 import {widgets} from "@/components/view-workspace/widgets/index";
@@ -96,7 +69,7 @@ function movingStop(){
 }
 
 function mouseMove(e: MouseEvent){
-  if(!isMoving.value) return;
+  if (!isMoving.value) return;
   topPosition.value = e.pageY - startOffset.value[1];
   leftPosition.value = e.pageX - startOffset.value[0];
 }
@@ -105,6 +78,33 @@ document.addEventListener('mousemove', mouseMove);
 
 
 </script>
+
+<template>
+  <div class="widget-place"
+       :class="{move: isMoving, otherMove: isOtherMoving}"
+       :style="gridStyle"
+       @mouseover="(e) => emit('mouseEnter', e)"
+       @mouseleave="(e) => emit('mouseLeave', e)">
+  </div>
+  <div class="widget"
+       :class="{translated: options.targetIndex !== -1, move: isMoving, otherMove: isOtherMoving}"
+       :style="gridStyle"
+       @mousedown="movingStart"
+       @dragstart="()=>{return false;}">
+    <header>
+      <div class="move-button">M</div>
+      <div class="right-buttons-wrapper">
+        <ControlButtonRound class="edit-button" @click="emit('edit')">E</ControlButtonRound>
+        <ControlButtonRound class="close-button" @click="emit('close')">C</ControlButtonRound>
+      </div>
+    </header>
+    <main>
+      <component :is="widgets[options.config.widgetName]"
+                 :options="options"
+                 :widgetSize="widgetSize"/>
+    </main>
+  </div>
+</template>
 
 <style scoped lang="scss">
 $headerHeight: 40px;

@@ -1,17 +1,3 @@
-<template>
-  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="Добавление виджета">
-    <main>
-      <div class="widget" v-for="w in mainSectionWidgets" :key="w">
-        <div class="widget-overlay">
-          <ControlButtonRoundWhite class="add-button" @click="onAddClick(w)">ADD</ControlButtonRoundWhite>
-          <ControlButtonRoundWhite class="help-button">HELP</ControlButtonRoundWhite>
-        </div>
-        <component :is="widgets[w]" :widget-size="1" :options="{settings: {nicheName: 'wwewe'}}"/>
-      </div>
-    </main>
-  </OverlayTemplateDecorated>
-</template>
-
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import {widgets} from "@/components/view-workspace/widgets";
@@ -37,6 +23,20 @@ function onAddClick(name: WidgetName) {
 }
 
 </script>
+
+<template>
+  <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="Добавление виджета">
+    <main>
+      <div class="widget" v-for="w in mainSectionWidgets" :key="w">
+        <div class="widget-overlay">
+          <ControlButtonRoundWhite class="add-button" @click="onAddClick(w)">ADD</ControlButtonRoundWhite>
+          <ControlButtonRoundWhite class="help-button">HELP</ControlButtonRoundWhite>
+        </div>
+        <component :is="widgets[w]" :widget-size="1" :options="{settings: {nicheName: 'wwewe'}}"/>
+      </div>
+    </main>
+  </OverlayTemplateDecorated>
+</template>
 
 <style scoped lang="scss">
 .overlay-window-wrapper {
