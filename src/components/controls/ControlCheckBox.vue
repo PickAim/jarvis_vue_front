@@ -1,5 +1,5 @@
 <template>
-  <div class="checkbox-wrapper" >
+  <div class="checkbox-wrapper">
     <input :id="id"
            class="checkbox-input"
            type="checkbox"
@@ -17,10 +17,12 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 
-defineProps<{ modelValue?: boolean }>()
+withDefaults(defineProps<{ modelValue?: boolean }>(),
+    {
+      modelValue: false
+    });
 
 const emits = defineEmits(['update:modelValue'])
-const buttonStatus = ref(false);
 const id = ref("");
 
 onMounted(() => {
@@ -29,17 +31,17 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.checkbox-wrapper{
+.checkbox-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   user-select: none;
 
-  *{
+  * {
     cursor: pointer;
   }
 
-  .checkbox-input{
+  .checkbox-input {
     display: none;
   }
 
@@ -61,11 +63,11 @@ onMounted(() => {
     }
 
     .checkbox-text {
-      font-size: 18px;
+      font-size: 16px;
       margin-left: 5px;
     }
 
-    &:hover{
+    &:hover {
       .checkbox-mark {
         border-color: #000;
       }

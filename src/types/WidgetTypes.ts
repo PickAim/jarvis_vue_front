@@ -1,4 +1,4 @@
-import type {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import type {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 
 export type WidgetSaveInfo<O extends WidgetName = WidgetName> = {
     gridIndex: number,

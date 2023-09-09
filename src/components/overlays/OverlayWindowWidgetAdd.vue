@@ -56,7 +56,7 @@ main {
     font-size: 30px;
   }
 
-  .input-block {
+  .input-wrapper {
     width: 300px;
   }
 

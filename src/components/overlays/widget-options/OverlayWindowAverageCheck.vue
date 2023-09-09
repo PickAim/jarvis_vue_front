@@ -1,8 +1,8 @@
 <template>
   <div class="overlay-body-average-check">
-    <ControlTextbox placeholder="Текст"
-                    :modelValue="options.config.options.inputText"
-                    @update:model-value="v => widgetOptions.inputText = v"/>
+    <ControlTextInput title="Текст"
+                      :modelValue="options.config.options.inputText"
+                      @update:model-value="v => widgetOptions.inputText = v"/>
     <ControlButton class="submit-button" @click="onSubmitClick">
       Подтвердить
     </ControlButton>
@@ -10,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import {reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import type {WidgetOptions} from "@/types/WidgetTypes";
 import _ from "lodash";
 type widgetName = "averageCheck";

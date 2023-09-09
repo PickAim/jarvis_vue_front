@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import {reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import type {WidgetOptions} from "@/types/WidgetTypes";
 import _ from "lodash";
 import {useUnitEconCalcStore} from "@/stores/CalcStores";
@@ -36,7 +36,6 @@ const widgetOptions = reactive<WidgetOptions[widgetName]>({
 });
 
 function onSubmitClick() {
-  console.log(widgetOptions);
   emit('submit', _.cloneDeep(widgetOptions));
 }
 </script>

@@ -3,6 +3,7 @@ import {ref} from "vue";
 
 export const useRequestStore = defineStore('requestStore', () => {
     const isLoading = ref(false);
+    const isHidden = ref(false);
     const abortController = ref<AbortController | undefined>();
 
     function loadingStart(controller: AbortController) {
@@ -21,10 +22,27 @@ export const useRequestStore = defineStore('requestStore', () => {
     function loadingAbort() {
         if (abortController.value) {
             abortController.value.abort();
-            abortController.value = undefined;
         }
-        isLoading.value = false;
+        loadingStop();
     }
 
-    return {isLoading, abortController, loadingStart, loadingStop, loadingAbort}
+    function hidePreloader() {
+        isHidden.value = true;
+    }
+
+    function showPreloader() {
+        isHidden.value = false;
+    }
+
+    function executeInBackground(fn: () => Promise<void>) {
+        isHidden.value = true;
+        fn().then(() => {
+            isHidden.value = false;
+        });
+    }
+
+    return {
+        isLoading, isHidden, abortController, loadingStart, loadingStop, loadingAbort,
+        hidePreloader, showPreloader, executeInBackground
+    }
 })

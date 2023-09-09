@@ -33,3 +33,5 @@ export class AllNichesRequester extends InfoRequester<undefined, AllNichesResult
         super("/get-all-niches");
     }
 }
+
+

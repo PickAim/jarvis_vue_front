@@ -34,14 +34,14 @@ export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
     }
 }
 
-export class UnitEconomyRequestActions
+export class UnitEconomyRequester
     extends SavableCalculateRequester<UnitEconomyRequestData, UnitEconomyResultData> {
     constructor() {
         super("/unit-econ");
     }
 }
 
-export class NicheDistRequestActions
+export class NicheDistRequester
     extends SavableCalculateRequester<NicheDistRequestData, NicheDistResultData> {
     constructor() {
         super("/niche-frequency");

@@ -19,15 +19,15 @@ defineProps<{isLoading: boolean}>()
   justify-content: center;
   height: 100%;
   width: 100%;
-  top:0;
-  left:0;
-  //z-index: 100;
-  background-color: rgba(0,0,0,0.8);
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 1);
   opacity: 0;
   transition: 0.3s;
   pointer-events: none;
 
-  &.active{
+  &.active {
     pointer-events: all;
     opacity: 1;
   }

@@ -35,14 +35,15 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
         this.isBusy = false;
     }
 
-    async saveRequest() {
+    async saveRequest(name: string) {
         if (this.isBusy) return;
         this.isBusy = true;
-        if (this.result && this.isRequestChanged) {
+        const preparedRequest = this.beforeCalculating();
+        if (preparedRequest && this.result && !this.isRequestChanged) {
             const response = await this.calculateActions.saveRequest({
-                request: this.request,
+                request: preparedRequest,
                 result: this.result,
-                info: this.info
+                info: name ? {name} : this.info
             });
             if (response.code === ResultCode.OK && response.result) {
                 this.info = response.result;

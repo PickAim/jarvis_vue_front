@@ -2,7 +2,7 @@
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Настройка виджета цен ниши {{saveResultID}}</header>
-      <div class="input-block">
+      <div class="input-wrapper">
       </div>
       <ControlButton class="submit">Подтвердить</ControlButton>
     </main>
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import OverlayTemplateDecorated from "@/components/overlays/OverlayTemplateDecorated.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {OverlayWidgetSettingsActions} from "@/component-classes/overlays-actions/OverlayWidgetSettingsActions";
+import {OverlayWidgetSettingsActions} from "@/component-actions/overlays-actions/OverlayWidgetSettingsActions";
 import {useWidgetStore} from "@/stores/widgetStore";
 import {storeToRefs} from "pinia";
 import {useOverlayStateStore} from "@/stores/overlayStore";
@@ -47,7 +47,7 @@ main{
     font-size: 30px;
   }
 
-  .input-block{
+  .input-wrapper {
     width: 300px;
   }
 

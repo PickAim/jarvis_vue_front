@@ -3,7 +3,7 @@
     <span class="header-text">
       <slot/>
     </span>
-    <button class="close-button" @click="closeOverlay()"></button>
+    <button class="close-button" @click="closeOverlay()">○</button>
   </header>
 <!--  TODO: make header-->
 </template>
@@ -35,12 +35,7 @@ header{
   .close-button{
     height: $headerHeight;
     width: $headerHeight;
-    border-color: #444;
-    border-bottom-width: 3px;
-    border-left-width: 3px;
-    border-bottom-left-radius: 20px;
-    background: transparent;
-
+    color: #FFFFFF;
   }
 }
 </style>

@@ -15,6 +15,7 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
     async calculate() {
         if (this.isBusy) return;
         this.isBusy = true;
+        this.result = undefined;
         const request: Q | undefined = this.beforeCalculating();
         if (request) {
             const response = await this.calculateActions.calculate(request as Q);

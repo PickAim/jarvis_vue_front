@@ -1,5 +1,5 @@
 <template>
-  <div class="unit-econ-wrapper">
+  <div class="workspace-header-wrapper">
     <div class="calc-input-wrapper">
       <div class="calc-control-button-wrapper">
         <ControlButton @click="getAllClickHandler"
@@ -16,35 +16,35 @@
                        class="button">Создать новый на основе этого
         </ControlButton>
       </div>
-      <ControlTextbox placeholder="Название запроса"
-                      input-type="text"
-                      v-model="calculator.info.name"/>
-      <ControlTextbox placeholder="Название ниши"
-                      input-type="text"
-                      v-model="calculator.request.niche"/>
-      <ControlTextbox placeholder="Себестоимость товара"
-                      input-type="number"
-                      v-model="calculator.request.buy"/>
-      <ControlTextbox placeholder="Стоимость упаковки"
-                      input-type="number"
-                      v-model="calculator.request.pack"/>
-      <ControlCheckBox v-model="calculator.isTransitOn">Рассчитать транзит</ControlCheckBox>
-      <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitOn}">
-        <ControlTextbox placeholder="Стоимость транзита маркетплейса"
-                        input-type="number"
-                        v-model="calculator.request.market_place_transit_price"/>
-        <ControlTextbox placeholder="Стоимость транзита"
-                        input-type="number"
-                        v-model="calculator.request.transit_price"/>
-        <ControlTextbox placeholder="Число товаров"
-                        input-type="number"
-                        v-model="calculator.request.transit_count"/>
-      </div>
-      <ControlCheckBox v-model="calculator.isWarehouseOn">Указать склад</ControlCheckBox>
-      <div class="warehouse-input-wrapper" :class="{active: calculator.isWarehouseOn}">
-        <ControlTextbox placeholder="Наименование склада"
+      <ControlTextInput title="Название запроса"
                         input-type="text"
-                        v-model="calculator.request.warehouse_name"/>
+                        v-model="calculator.info.name"/>
+      <ControlTextInput title="Название ниши"
+                        input-type="text"
+                        v-model="calculator.request.niche"/>
+      <ControlTextInput title="Себестоимость товара"
+                        input-type="number"
+                        v-model="calculator.request.buy"/>
+      <ControlTextInput title="Стоимость упаковки"
+                        input-type="number"
+                        v-model="calculator.request.pack"/>
+      <ControlCheckBox v-model="calculator.isTransitCostOn">Рассчитать транзит</ControlCheckBox>
+      <div class="transit-calc-input-wrapper" :class="{active: calculator.isTransitCostOn}">
+        <ControlTextInput title="Стоимость транзита маркетплейса"
+                          input-type="number"
+                          v-model="calculator.request.market_place_transit_price"/>
+        <ControlTextInput title="Стоимость транзита"
+                          input-type="number"
+                          v-model="calculator.request.transit_price"/>
+        <ControlTextInput title="Число товаров"
+                          input-type="number"
+                          v-model="calculator.request.transit_count"/>
+      </div>
+      <ControlCheckBox v-model="calculator.isTransitOn">Указать склад</ControlCheckBox>
+      <div class="warehouse-input-wrapper" :class="{active: calculator.isTransitOn}">
+        <ControlTextInput title="Наименование склада"
+                          input-type="text"
+                          v-model="calculator.request.warehouse_name"/>
       </div>
     </div>
     <div class="saved-requests-wrapper">
@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
@@ -71,8 +71,6 @@ import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculato
 import SavedItemsList from "@/components/calc-requests/SavedItemsList.vue";
 
 const calculator = reactive(new UnitEconomyCalculator());
-
-console.log("UNIT ECON TEST");
 
 const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
   margin: "Маржа",
@@ -116,14 +114,13 @@ function newClickHandler() {
 }
 
 async function getAllClickHandler() {
-  console.log("get all")
   await calculator.loadAll();
 }
 
 </script>
 
 <style scoped lang="scss">
-.unit-econ-wrapper {
+.workspace-header-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;

@@ -21,16 +21,16 @@
     type: 'notify'
     })">Добавить нечто</ControlButton>
     <ControlButton @click="hideAllNotifications()">Очистить</ControlButton>
-    <ControlTextbox class="duration-input"
-                    input-type="number"
-                    placeholder="Длительность"
-                    v-model="defaultDuration"/>
+    <ControlTextInput class="duration-input"
+                      input-type="number"
+                      title="Длительность"
+                      v-model="defaultDuration"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import ControlButton from "@/components/controls/ControlButton.vue";
-import ControlTextbox from "@/components/controls/ControlTextbox.vue";
+import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {ref} from "vue";
 import {storeToRefs} from "pinia";

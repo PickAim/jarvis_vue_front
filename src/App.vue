@@ -1,5 +1,5 @@
 <template>
-  <RequestPreloader :is-loading="isRequestLoading"/>
+  <RequestPreloader :is-loading="isLoading && !isHidden"/>
   <NotificationList/>
   <OverlayContainer/>
   <RouterView/>
@@ -11,14 +11,10 @@ import OverlayContainer from "@/components/overlays/OverlayContainer.vue";
 import RequestPreloader from "@/components/generals/RequestPreloader.vue";
 import {useRequestStore} from "@/stores/requestStore";
 import {storeToRefs} from "pinia";
-import {watch} from "vue";
+import "@/assets/main.css";
 
-const isRequestLoading = storeToRefs(useRequestStore()).isLoading;
-watch(isRequestLoading, (v, ov) => {
-  console.log(v, ov);
-})
+const {isLoading, isHidden} = storeToRefs(useRequestStore());
 </script>
 
-<style scoped>
-
+<style>
 </style>

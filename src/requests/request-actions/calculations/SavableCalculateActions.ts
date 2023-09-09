@@ -21,9 +21,8 @@ export abstract class SavableCalculateActions<Q, R>
         const response = await this.requester.deleteRequest(id);
         if (response.code === ResultCode.OK) {
             this.calculateStore.deleteRequest(id);
-        } else {
-            ErrorHandler.handle(response.code);
         }
+        ErrorHandler.handle(response.code);
         return response;
     }
 
@@ -36,9 +35,9 @@ export abstract class SavableCalculateActions<Q, R>
                 info: response.result
             }
             this.calculateStore.saveRequest(savedCalcRequestData);
-            ErrorHandler.handle(response.code);
             return {code: response.code, result: savedCalcRequestData.info};
         }
+        ErrorHandler.handle(response.code);
         return {code: response.code};
     }
 
@@ -48,9 +47,8 @@ export abstract class SavableCalculateActions<Q, R>
             response.result.forEach(r => {
                 this.calculateStore.saveRequest(r);
             });
-        } else if (response.code !== ResultCode.OK) {
-            ErrorHandler.handle(response.code);
         }
+        ErrorHandler.handle(response.code);
         return response;
     }
 

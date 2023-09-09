@@ -71,7 +71,7 @@ export class UnitEconomyRequestData implements NicheRequestData {
     pack = NaN; // Need
     niche = ""; // Need
     category_id = 0; // Need
-    marketplace_id = 0;
+    marketplace_id = 2;
     transit_count? = NaN;
     transit_price? = NaN;
     market_place_transit_price? = NaN;
@@ -135,3 +135,51 @@ export type AllMarketplacesResultData = { [marketplaceID: number]: string }
 export type AllNichesResultData = { [nicheID: number]: string }
 
 export type AllCategoriesResultData = { [categoryID: number]: string }
+
+export type ResultProductData = {
+    global_id: number;
+    name: string;
+    category: string;
+    niche: string;
+    cost: number;
+    rating: number;
+    seller: string;
+    brand: string;
+}
+
+export type ProductData = ResultProductData &
+    {
+        productID: string,
+        marketplaceID: string
+    }
+
+export type AllProductsResultData = { [marketplaceID: string]: { [productID: string]: ResultProductData } }
+
+export type GreenZoneRequestData = {
+    category_id: number,
+    niche: string,
+    marketplace_id: number
+}
+
+export type GreenZoneResultData = {
+    green: {
+        segments: [number, number][],
+        best_segment_idx: number,
+        segment_profits: number[],
+        best_segment_profit_idx: number,
+        mean_segment_profit: number[],
+        best_mean_segment_profit_idx: number,
+        mean_product_profit: number[],
+        best_mean_product_profit_idx: number,
+        segment_product_count: number[],
+        best_segment_product_count_idx: number,
+        segment_product_with_trades_count: number[],
+        best_segment_product_with_trades_count_idx: number,
+    },
+    freq: {
+        x: number[],
+        y: number[]
+    }
+}
+
+export type SelectOptionType = { name: string, value: string };

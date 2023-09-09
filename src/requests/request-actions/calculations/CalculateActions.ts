@@ -16,9 +16,8 @@ export class CalculateActions<Q, R, TRequester extends ICalculateRequester<Q, R>
         const response = await this.requester.calculate(this.prepareRequestData(request));
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
-        } else {
-            ErrorHandler.handle(response.code);
-            return response;
         }
+        ErrorHandler.handle(response.code);
+        return response;
     }
 }

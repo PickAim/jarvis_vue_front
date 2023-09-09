@@ -38,7 +38,6 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
     //     return new Promise((resolve) => {
     //         let watchHandler: WatchStopHandle;
     //         watchHandler = watch(result, ()=>{
-    //             console.log(watchHandler)
     //             watchHandler()
     //             isOpen.value;
     //             resolve(result.value)

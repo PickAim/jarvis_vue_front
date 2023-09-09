@@ -30,8 +30,8 @@ import {computed, ref} from "vue";
 import {widgets} from "@/components/view-workspace/widgets/index";
 import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import type {WidgetName} from "@/types/WidgetTypes";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-classes/WidgetSizeCalculator";
-import {WidgetClass} from "@/component-classes/widgets/WidgetClass";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
+import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 
 const props = defineProps<{
   gridWidth: number,
