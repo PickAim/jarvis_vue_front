@@ -62,7 +62,7 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType) {
 <template>
   <header class="workspace-header-wrapper">
     <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
-      <img src="/src/assets/jarvis_icon_big.png" alt="">
+      <img src="/src/assets/images/jarvis_icon_big.png" alt="">
     </div>
     <div class="menu-wrapper"
          @mouseenter="onMouseEnter"

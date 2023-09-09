@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 
 import App from "@/App.vue";
 import {router} from '@/routers'
-import '@/assets/tailwind.css'
+import '@/assets/styles/tailwind.css'
 //import VueDragscroll from "vue-dragscroll";
 
 const app = createApp(App)

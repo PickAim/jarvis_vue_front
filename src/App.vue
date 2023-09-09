@@ -4,7 +4,7 @@ import OverlayContainer from "@/components/overlays/OverlayContainer.vue";
 import RequestPreloader from "@/components/generals/RequestPreloader.vue";
 import {useRequestStore} from "@/stores/requestStore";
 import {storeToRefs} from "pinia";
-import "@/assets/main.css";
+import "@/assets/styles/main.css";
 
 const {isLoading, isHidden} = storeToRefs(useRequestStore());
 </script>
