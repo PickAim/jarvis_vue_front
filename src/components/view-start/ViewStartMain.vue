@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import ViewStartStartBlock from "./ViewStartComponentsMain/ViewStartStartBlock.vue";
-import ViewStartCardsBlock from "./ViewStartComponentsMain/ViewStartCardsBlock.vue";
+import ViewStartYouHave from "./ViewStartComponentsMain/ViewStartYouHave.vue";
 import ViewStartAboutJarvis from "./ViewStartComponentsMain/ViewStartAboutJarvis.vue";
 import ViewStartTariffs from "./ViewStartComponentsMain/ViewStartTariffs.vue"
-import ViewStartTrustedBlock from "./ViewStartComponentsMain/ViewStartTrustedBlock.vue";
-import ViewStartComponentSlot from "./ViewStartComponentsMain/ViewStartComponentSlot.vue";
+import ViewStartWhyTrust from "./ViewStartComponentsMain/ViewStartWhyTrust.vue";
+import ViewStartQuestions from "./ViewStartComponentsMain/ViewStartQuestions.vue";
 import ViewStartFormBlock from "./ViewStartComponentsMain/ViewStartFormBlock.vue";
 </script>
 
 <template>
   <main>
     <ViewStartStartBlock/>
-    <ViewStartCardsBlock/>
+    <ViewStartYouHave/>
     <ViewStartAboutJarvis/>
     <ViewStartTariffs/>
-    <ViewStartTrustedBlock/>
-    <ViewStartComponentSlot/>
+    <ViewStartWhyTrust/>
+    <ViewStartQuestions/>
     <ViewStartFormBlock/>
     <!--<ViewStartTraiffLinkBlock />-->
     <!--<ViewStartHeaderOverlay/>-->

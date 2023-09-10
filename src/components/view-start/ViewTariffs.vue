@@ -8,9 +8,9 @@ const router = useRouter();
 
 <template>
   <div class="view-start-wrapper">
-    <div class="view-cards-block">
+    <div class="view-you-have">
       <div class="buttons-wrapper">
-        <img src="src\assets\jarvis.png" alt="">
+        <img src="src\assets\images\jarvis.png" alt="">
         <button class="about-product">О продукте</button>
         <button class="tariffs">Тарифы</button>
         <button class="question">Вопросы</button>
@@ -181,7 +181,7 @@ const router = useRouter();
       </div>
       <div class="footer">
         <div class="footer-wrapper">
-          <img src="\src\assets\jarvis.png" alt="">
+          <img src="\src\assets\images\jarvis.png" alt="">
           <a href="">Контакты</a>
           <a href="">Мы в социальных сетях:</a>
         </div>
@@ -203,7 +203,7 @@ $tag-width: 1150px;
   overflow: auto;
   position: relative;
 
-  .view-cards-block {
+  .view-you-have {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -6,7 +6,7 @@
   <div class="view-start-block">
     <div class="start-main">
       <div class="jarvis-logo">
-        <img src="src\assets\jarvis.png" alt="">
+        <img src="src\assets\images\jarvis.png" alt="">
       </div>
       <div class="top-paragraph">
         <h1>

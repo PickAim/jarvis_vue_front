@@ -5,7 +5,7 @@
 <template>
   <footer>
     <div class="footer-wrapper">
-      <img src="\src\assets\jarvis.png" alt="">
+      <img src="\src\assets\images\jarvis.png" alt="">
       <a href="">Контакты</a>
       <a href="">Мы в социальных сетях:</a>
     </div>

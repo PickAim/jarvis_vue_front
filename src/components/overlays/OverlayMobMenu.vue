@@ -11,7 +11,7 @@ const {closeOverlay} = useOverlayStateStore()
   <div class="overlay-window-wrapper">
     <div class="overlay-wrapper">
       <div class="top-items">
-        <img src="src\assets\jarvis.png" alt="Logo">
+        <img src="src\assets\images\jarvis.png" alt="Logo">
         <button class="button-close" @click="closeOverlay()">Закрыть</button>
       </div>
       <div class="link-items">

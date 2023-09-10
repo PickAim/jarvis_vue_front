@@ -6,7 +6,7 @@
   <div class="view-start-header-overlay">
     <div class="overlay-wrapper">
       <div class="top-items">
-        <img src="src\assets\jarvis.png" alt="Logo">
+        <img src="src\assets\images\jarvis.png" alt="Logo">
         <button class="button-close">Закрыть</button>
       </div>
       <div class="link-items">
@@ -66,8 +66,8 @@ $tag-width: 1150px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 0px 4 0px;
-        margin: 20px 0px;
+        padding: 0 4px 0;
+        margin: 20px 0;
         max-width: 280px;
 
         .link {

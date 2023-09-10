@@ -33,9 +33,8 @@ window.addEventListener('keydown', (e) => {
 
   .header {
     position: absolute;
-    z-index: 1;
+    //z-index: 1;
     top: 0;
-
   }
 
   .main {

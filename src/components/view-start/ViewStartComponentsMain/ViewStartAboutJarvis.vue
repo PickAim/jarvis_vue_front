@@ -11,7 +11,7 @@
         <div class="block">
           <div class="left-block">
             <h1>Рекомендательная система</h1>
-            <img src="src\assets\About-Jarvis-1.png" alt="">
+            <img src="src\assets\images\About-Jarvis-1.png" alt="">
           </div>
           <div class="text-info">
             <div class="text-1">Предлагает рекомендации по работе с Вашими продажами: предлагает цену товара,
@@ -28,7 +28,7 @@
         <div class="block">
           <div class="left-block">
             <h1>Внешняя аналитика</h1>
-            <img src="src\assets\About-Jarvis-2.png" alt="">
+            <img src="src\assets\images\About-Jarvis-2.png" alt="">
           </div>
           <div class="text-info">
             <div class="text-1">Собирает данные со всего маркетплейса и предоставляет актуальную аналитику
@@ -44,7 +44,7 @@
         <div class="block">
           <div class="left-block">
             <h1>Расчет индексов показателей магазина</h1>
-            <img src="src\assets\About-Jarvis-3.png" alt="">
+            <img src="src\assets\images\About-Jarvis-3.png" alt="">
           </div>
           <div class="text-info">
             <div class="text-1">Позволяет оценить финансовое здоровье вашего магазина, выявить рентабельные
@@ -79,17 +79,11 @@ $tag-width: 1150px;
   padding: 50px 0px;
 
   h1 {
-    @font-face {
-      font-family: Inter;
-      src: url(src\assets\Inter-SemiBold.otf);
-    }
+    font-family: Inter, sans-serif;
   }
 
   p {
-    @font-face {
-      font-family: Montserrat;
-      src: url(src\assets\Montserrat-Light.ttf);
-    }
+    font-family: Montserrat, sans-serif;
   }
 }
 

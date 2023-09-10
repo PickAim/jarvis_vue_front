@@ -11,13 +11,13 @@
       <div class="line-block">
         <div class="advantages">
           <div class="advantages-image">
-            <img src="src\assets\Trusted-1.png" alt="">
+            <img src="src\assets\images\Trusted-1.png" alt="">
           </div>
           <div class="advantages-image">
-            <img src="src\assets\Trusted-2.png" alt="">
+            <img src="src\assets\images\Trusted-2.png" alt="">
           </div>
           <div class="advantages-image">
-            <img src="src\assets\Trusted-3.png" alt="">
+            <img src="src\assets\images\Trusted-3.png" alt="">
           </div>
         </div>
         <div class="advantages-description">

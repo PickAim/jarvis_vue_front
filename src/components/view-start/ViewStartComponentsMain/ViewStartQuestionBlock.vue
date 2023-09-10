@@ -15,7 +15,7 @@ function openText() {
     </h1>
     <div class="arrow-link">
       <button class="button-link" @click="openText">
-        <img src="src\assets\Arrow.png" alt="">
+        <img src="src\assets\images\Arrow.png" alt="">
       </button>
     </div>
   </div>

@@ -17,7 +17,7 @@ const router = useRouter();
       <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
     </div>
     <button class="mob-menu" @click="actions.openMobMenu()">
-      <img src="src\assets\icon-mob-menu.png" alt="">
+      <img src="src\assets\images\icon-mob-menu.png" alt="">
     </button>
   </header>
 </template>
