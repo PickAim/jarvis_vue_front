@@ -10,8 +10,7 @@ const {hideAllNotifications} = notificationsStore;
 </script>
 
 <template>
-  <div class="notification-list-wrapper"
-       @click="noteLog">
+  <div class="notification-list-wrapper">
     <div :class="{active: activeNotificationsList.length !== 0}"
          class="clear-button"
          @click="hideAllNotifications()"/>
@@ -39,11 +38,13 @@ const {hideAllNotifications} = notificationsStore;
   text-align: center;
   height: 100%;
   overflow-y: hidden;
-  width: 700px;
+  width: 95vw;
+  max-width: 700px;
   pointer-events: none;
 }
 
 .clear-button {
+  flex-shrink: 0;
   width: 50px;
   height: 50px;
   margin-right: 10px;

@@ -37,8 +37,7 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
 }
 
 .first-block-wrapper {
-  height: 100vh;
-  min-height: 600px;
+  min-height: max(600px, 100vh);
   background: #191919;
   border-radius: 0 0 60px 60px;
 }
@@ -82,14 +81,14 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80%;
+      height: 15vw;
       width: 60%;
       padding: 20px 5%;
       background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
       backdrop-filter: blur(15px);
 
       h1 {
-        font-size: 40px;
+        font-size: 3vw;
         font-weight: 700;
       }
     }

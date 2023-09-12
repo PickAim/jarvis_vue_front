@@ -19,10 +19,8 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
           <h2>Сложно выбрать подходящий момент чтобы встать в акцию, запустить рекламу или
             запланировать поставку</h2>
           <div class="card-icons">
-            <img class="line-icon" src="src\assets\images\Cards-Block-Lil-Arrow.png" alt="">
-            <div class="card-icon">
-              <img src="src\assets\images\Cards-block-1.png" alt="">
-            </div>
+            <div class="line-icon"/>
+            <div class="card-icon"/>
           </div>
         </div>
         <div class="opportunity-card second-card">
@@ -30,19 +28,15 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
             и масштабированию бизнеса
           </h2>
           <div class="card-icons">
-            <img class="line-icon" src="src\assets\images\Cards-Block-Lil-Arrow.png" alt="">
-            <div class="card-icon">
-              <img src="src\assets\images\Cards-block-2.png" alt="">
-            </div>
+            <div class="line-icon"/>
+            <div class="card-icon"/>
           </div>
         </div>
         <div class="opportunity-card third-card">
           <h2>Процесс работы с финансовыми отчетами слишком трудоемкий</h2>
           <div class="card-icons">
-            <img class="line-icon" src="src\assets\images\Cards-Block-Black-Lil-Arrow.png" alt="">
-            <div class="card-icon">
-              <img src="src\assets\images\Cards-block-3.png" alt="">
-            </div>
+            <div class="line-icon"/>
+            <div class="card-icon"/>
           </div>
         </div>
       </div>
@@ -53,7 +47,7 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 <style scoped lang="scss">
 @use '/src/assets/styles/variables' as var;
 
-$tag-width: 0;
+$to-column-width: 620px;
 
 .middle-layout {
   background: #fff;
@@ -65,6 +59,7 @@ $tag-width: 0;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  column-gap: 20px;
   padding-block: 40px;
 
   h1, h2 {
@@ -84,11 +79,21 @@ $tag-width: 0;
 
     h1 {
       font-size: 48px;
+
+      @media (max-width: $to-column-width) {
+        font-size: 30px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
     }
 
     .big-arrow {
       width: 100%;
       height: 100%;
+
+      @media (max-width: $to-column-width) {
+        display: none;
+      }
     }
 
     .not-visible-image {
@@ -110,6 +115,7 @@ $tag-width: 0;
       align-items: stretch;
       justify-content: space-between;
       flex: 1 0;
+      min-width: 200px;
       padding: 45px 10px 20px 10px;
       border-radius: 25px;
 
@@ -125,16 +131,25 @@ $tag-width: 0;
         justify-content: space-between;
         padding-right: 20px;
         overflow: hidden;
-        height: 80px;
+        height: 100px;
 
         .card-icon {
-          width: auto;
-          height: auto;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          width: 100px;
+          height: 100%;
         }
 
         .line-icon {
           width: 50px;
-          height: auto;
+          height: 100%;
+          background: url("/src/assets/images/Cards-Block-Lil-Arrow.png") no-repeat center;
+          background-size: contain;
+        }
+
+        @media (max-width: $to-column-width) {
+          height: 60px;
         }
       }
 
@@ -143,25 +158,50 @@ $tag-width: 0;
         background: #191919;
         color: white;
 
-        h1 {
-          width: calc(50% - 45px);
+        .card-icons {
+          height: 130px;
+
+          @media (max-width: $to-column-width) {
+            height: 90px;
+          }
         }
 
-        .card-icons {
-          height: 100px;
+        h2 {
+          width: 100%;
+          max-width: 320px;
+        }
+
+        .line-icon {
+          background-position: bottom;
+        }
+
+        .card-icon {
+          background-image: url("/src/assets/images/Cards-Block-1.png");
         }
       }
 
       &.second-card {
         background: var.$blue-jarvis-color;
         color: white;
+
+        .card-icon {
+          background-image: url("/src/assets/images/Cards-Block-2.png");
+        }
       }
 
       &.third-card {
         background: var.$green-jarvis-color;
         color: black;
+
+        .card-icon {
+          background-image: url("/src/assets/images/Cards-Block-3.png");
+        }
       }
     }
+  }
+
+  @media (max-width: $to-column-width) {
+    flex-direction: column;
   }
 }
 

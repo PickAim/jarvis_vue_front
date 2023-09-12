@@ -48,19 +48,17 @@ function mouseLeaveFunc() {
 .notification-list-item-wrapper {
   display: flex;
   flex-direction: row;
+  align-items: stretch;
   width: 100%;
-  height: calc(80px + max(0, 300px - 50vw));
   background-color: white;
   border: 1px solid black;
   color: black;
-  overflow-y: hidden;
   margin-block: 5px;
   opacity: 1;
   pointer-events: all;
 
   .type-icon {
-    width: 20px;
-    height: 100%;
+    flex: 0 0 20px;
   }
 
   main {
@@ -86,14 +84,12 @@ function mouseLeaveFunc() {
 }
 
 .vertical-separator {
-  height: 100%;
   width: 1px;
   background-color: black;
 }
 
 .horizontal-separator {
   height: 1px;
-  width: 100%;
   background-color: black;
 }
 </style>

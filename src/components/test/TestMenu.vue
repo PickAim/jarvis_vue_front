@@ -3,7 +3,7 @@
     {{ $route.path }}
     <nav v-show="!isSelected">
       <RouterLink :to="item[0]" custom v-slot="{ navigate }" :key="ind" v-for="(item, ind) in linkButtons">
-        <ControlButton @click="navigate(); isSelected=true;" role="link">{{ item[1] }}}</ControlButton>
+        <ControlButton @click="navigate(); isSelected=true;" role="link">{{ item[1] }}</ControlButton>
       </RouterLink>
     </nav>
     <main v-show="isSelected">
