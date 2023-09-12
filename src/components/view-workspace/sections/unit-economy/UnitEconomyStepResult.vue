@@ -120,7 +120,7 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
 
     .result-wrapper {
       opacity: 1;
-      transform: translateY(0px);
+      transform: translateY(0);
     }
   }
 }

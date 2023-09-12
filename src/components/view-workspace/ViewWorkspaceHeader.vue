@@ -60,7 +60,7 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType) {
 </script>
 
 <template>
-  <header class="workspace-header-wrapper">
+  <header class="view-start-wrapper">
     <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
       <img src="/src/assets/images/jarvis_icon_big.png" alt="">
     </div>
@@ -91,10 +91,10 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType) {
 $header-height: 70px;
 
 $menu-item-width: 250px;
-$menu-gap: 0px;
+$menu-gap: 0;
 $hover-effect-width: 30px;
 
-.workspace-header-wrapper {
+.view-start-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;

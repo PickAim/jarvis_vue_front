@@ -206,7 +206,7 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, va
 
     .inputs-wrapper {
       opacity: 1;
-      transform: translateY(0px);
+      transform: translateY(0);
     }
   }
 }

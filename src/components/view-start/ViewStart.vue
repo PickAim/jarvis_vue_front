@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
-import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
 import ViewStartMain from "@/components/view-start/ViewStartMain.vue";
 import {useRouter} from "vue-router";
 
@@ -13,15 +12,15 @@ window.addEventListener('keydown', (e) => {
 </script>
 
 <template>
-  <div class="workspace-header-wrapper">
-    <ViewStartHeader class="header"/>
+  <div class="view-start-wrapper">
     <ViewStartMain class="main"/>
     <ViewStartFooter class="footer"/>
   </div>
 </template>
 
 <style scoped lang="scss">
-.workspace-header-wrapper {
+.view-start-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,13 +28,6 @@ window.addEventListener('keydown', (e) => {
   height: 100vh;
   width: 100%;
   overflow: auto;
-  position: relative;
-
-  .header {
-    position: absolute;
-    //z-index: 1;
-    top: 0;
-  }
 
   .main {
   }

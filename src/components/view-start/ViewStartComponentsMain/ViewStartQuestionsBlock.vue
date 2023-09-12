@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
+import ViewStartQuestion from "./ViewStartQuestion.vue";
 
 </script>
 
 <template>
-  <div class="text-menu-wrapper" id="questions">
+  <div class="questions-block-wrapper" id="questions">
     <div class="questions">
       <h1>ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ:</h1>
     </div>
     <div class="slots-wrapper">
-      <ViewStartQuestionBlock>
+      <ViewStartQuestion>
         <template v-slot:header>
           Чем вы отличаетесь от других сервисов аналитики?
         </template>
@@ -18,8 +18,8 @@ import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
           рекомендации по развитию вашего бизнеса на основе
           самоокупающейся нейросети
         </template>
-      </ViewStartQuestionBlock>
-      <ViewStartQuestionBlock>
+      </ViewStartQuestion>
+      <ViewStartQuestion>
         <template v-slot:header>
           Насколько точны ваши данные?
         </template>
@@ -27,8 +27,8 @@ import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
           Мы регулярно собираем данные и обновляем ежедневно.
           Точность соответствия с фактическими данными равна 99%
         </template>
-      </ViewStartQuestionBlock>
-      <ViewStartQuestionBlock>
+      </ViewStartQuestion>
+      <ViewStartQuestion>
         <template v-slot:header>
           Если у меня есть менеджер, будет ли мне полезен сервис?
         </template>
@@ -38,8 +38,8 @@ import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
           менеджера в разы. Если Вы менеджер маркетплейсов, то с нашим
           сервисом вы сможете вести больше клиентов одновременно
         </template>
-      </ViewStartQuestionBlock>
-      <ViewStartQuestionBlock>
+      </ViewStartQuestion>
+      <ViewStartQuestion>
         <template v-slot:header>
           Могу ли я ознакомится с сервисом до
           приобретения подписки ?
@@ -48,7 +48,7 @@ import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
           Да, у нас есть бесплатный тариф с которым вы можете ознакомиться
           с функционалом сервиса
         </template>
-      </ViewStartQuestionBlock>
+      </ViewStartQuestion>
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ import ViewStartQuestionBlock from "./ViewStartQuestionBlock.vue";
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.text-menu-wrapper {
+.questions-block-wrapper {
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
@@ -65,10 +65,10 @@ $tag-width: 1150px;
   text-align: center;
   background-color: #191919;
   color: #FFFFFF;
-  margin: 50px 0px;
+  margin: 50px 0;
 
   .questions {
-    margin: 50px 0px;
+    margin: 50px 0;
 
     h1 {
       font-weight: 700;
@@ -82,12 +82,12 @@ $tag-width: 1150px;
     flex-direction: column;
     width: 100%;
     max-width: 1200px;
-    padding: 0px 50px;
+    padding: 0 50px;
   }
 }
 
 @media (max-width: $tag-width) {
-  .text-menu-wrapper {
+  .questions-block-wrapper {
     margin: 40px 20px;
 
     .questions {

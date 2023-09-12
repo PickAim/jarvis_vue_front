@@ -4,35 +4,45 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 
 <template>
   <MiddleLineLayout>
-    <div class="view-you-have">
+    <div class="you-have-block-wrapper">
       <div class="what-you-have-label view-you-have-block">
-        <img class="not-visible-image" src="src\assets\images\Cards-block-LineUnderText.png" alt="">
+        <div class="big-arrow not-visible-image">
+          <img src="src\assets\images\Cards-block-LineUnderText.png" alt="">
+        </div>
         <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
-        <img src="src\assets\images\Cards-block-LineUnderText.png" alt="">
+        <div class="big-arrow">
+          <img src="src\assets\images\Cards-block-LineUnderText.png" alt="">
+        </div>
       </div>
       <div class="opportunity-cards view-you-have-block">
         <div class="opportunity-card first-card">
-          <h1>Сложно выбрать подходящий момент чтобы встать в акцию, запустить рекламу или
-            запланировать поставку</h1>
+          <h2>Сложно выбрать подходящий момент чтобы встать в акцию, запустить рекламу или
+            запланировать поставку</h2>
           <div class="card-icons">
             <img class="line-icon" src="src\assets\images\Cards-Block-Lil-Arrow.png" alt="">
-            <img class="card-icon" src="src\assets\images\Cards-block-1.png" alt="">
+            <div class="card-icon">
+              <img src="src\assets\images\Cards-block-1.png" alt="">
+            </div>
           </div>
         </div>
         <div class="opportunity-card second-card">
-          <h1>Рутинная работа отнимает много времени, которое можно посвятить запуску новых товаров
+          <h2>Рутинная работа отнимает много времени, которое можно посвятить запуску новых товаров
             и масштабированию бизнеса
-          </h1>
+          </h2>
           <div class="card-icons">
             <img class="line-icon" src="src\assets\images\Cards-Block-Lil-Arrow.png" alt="">
-            <img class="card-icon" src="src\assets\images\Cards-block-2.png" alt="">
+            <div class="card-icon">
+              <img src="src\assets\images\Cards-block-2.png" alt="">
+            </div>
           </div>
         </div>
         <div class="opportunity-card third-card">
-          <h1>Процесс работы с финансовыми отчетами слишком трудоемкий</h1>
+          <h2>Процесс работы с финансовыми отчетами слишком трудоемкий</h2>
           <div class="card-icons">
             <img class="line-icon" src="src\assets\images\Cards-Block-Black-Lil-Arrow.png" alt="">
-            <img class="card-icon" src="src\assets\images\Cards-block-3.png" alt="">
+            <div class="card-icon">
+              <img src="src\assets\images\Cards-block-3.png" alt="">
+            </div>
           </div>
         </div>
       </div>
@@ -43,13 +53,13 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 <style scoped lang="scss">
 @use '/src/assets/styles/variables' as var;
 
-$tag-width: 0px;
+$tag-width: 0;
 
 .middle-layout {
   background: #fff;
 }
 
-.view-you-have {
+.you-have-block-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -57,9 +67,14 @@ $tag-width: 0px;
   flex-wrap: wrap;
   padding-block: 40px;
 
-  h1 {
+  h1, h2 {
     font-family: Montserrat, sans-serif;
     font-weight: 700;
+  }
+
+  img {
+    width: auto;
+    height: auto;
   }
 
   .what-you-have-label {
@@ -71,8 +86,9 @@ $tag-width: 0px;
       font-size: 48px;
     }
 
-    img {
-      width: 70%;
+    .big-arrow {
+      width: 100%;
+      height: 100%;
     }
 
     .not-visible-image {
@@ -97,9 +113,8 @@ $tag-width: 0px;
       padding: 45px 10px 20px 10px;
       border-radius: 25px;
 
-      h1 {
+      h2 {
         font-size: 15px;
-        line-height: normal;
         padding-bottom: 60px
       }
 
@@ -109,10 +124,12 @@ $tag-width: 0px;
         align-items: center;
         justify-content: space-between;
         padding-right: 20px;
+        overflow: hidden;
         height: 80px;
 
         .card-icon {
-          height: 100%;
+          width: auto;
+          height: auto;
         }
 
         .line-icon {
@@ -169,7 +186,7 @@ $tag-width: 0px;
 //  justify-content: space-around;
 //  align-items: center;
 //  flex-wrap: wrap;
-//  margin: 0px 20px;
+//  margin: 0 20px;
 //}
 //
 //.what-you-have {
@@ -215,7 +232,7 @@ $tag-width: 0px;
 //      display: flex;
 //      flex-direction: column;
 //      justify-content: end;
-//      margin: 0px 14px 40px 14px;
+//      margin: 0 14px 40px 14px;
 //    }
 //
 //    .card-items-img {
@@ -255,7 +272,7 @@ $tag-width: 0px;
 //        display: flex;
 //        flex-direction: column;
 //        justify-content: end;
-//        margin: 0px 14px 40px 14px;
+//        margin: 0 14px 40px 14px;
 //      }
 //
 //      .card-items-img {
@@ -291,7 +308,7 @@ $tag-width: 0px;
 //        display: flex;
 //        flex-direction: column;
 //        justify-content: end;
-//        margin: 0px 14px 40px 14px;
+//        margin: 0 14px 40px 14px;
 //      }
 //
 //      .card-items-img {
@@ -307,7 +324,7 @@ $tag-width: 0px;
 //
 //@media (max-width: $tag-width) {
 //  .view-you-have {
-//    padding: 20px 0px;
+//    padding: 20px 0;
 //  }
 //
 //  .cards-wrapper {
@@ -324,8 +341,8 @@ $tag-width: 0px;
 //    }
 //
 //    img {
-//      width: 0px;
-//      height: 0px;
+//      width: 0;
+//      height: 0;
 //    }
 //  }
 //
@@ -395,7 +412,7 @@ $tag-width: 0px;
 //        .card-items-img {
 //
 //          img {
-//            margin: 0px;
+//            margin: 0;
 //            height: 117px;
 //            width: 117px;
 //          }
@@ -430,7 +447,7 @@ $tag-width: 0px;
 //        .card-items-img {
 //
 //          img {
-//            margin: 0px;
+//            margin: 0;
 //            height: 117px;
 //            width: 117px;
 //          }

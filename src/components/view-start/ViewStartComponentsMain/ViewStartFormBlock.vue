@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="start-form-block">
+  <div class="form-block-wrapper">
     <div class="question-block">
       <h1>ОСТАЛИСЬ ВОПРОСЫ?</h1>
       <h2>Оставьте заявку и мы свяжемся <br> с вами в ближайшее время</h2>
@@ -22,12 +22,12 @@
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.start-form-block {
+.form-block-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 50px 0px;
+  margin: 50px 0;
   gap: 50px;
   color: #FFFFFF;
 
@@ -81,8 +81,8 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .start-form-block {
-    margin: 0px;
+  .form-block-wrapper {
+    margin: 0;
     gap: 25px;
 
     .question-block {
@@ -118,7 +118,7 @@ $tag-width: 1150px;
           font-size: 15px;
           font-weight: 400;
           line-height: 18px;
-          padding: 10px 80px 10px 0px;
+          padding: 10px 80px 10px 0;
         }
       }
     }

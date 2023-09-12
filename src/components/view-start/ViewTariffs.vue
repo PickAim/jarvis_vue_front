@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
-import {useRouter} from "vue-router";
 
 const actions = new ViewStartActions();
-const router = useRouter();
 </script>
 
 <template>
   <div class="view-start-wrapper">
-    <div class="view-you-have">
+    <div class="you-have-block-wrapper">
       <div class="buttons-wrapper">
         <img src="src\assets\images\jarvis.png" alt="">
         <button class="about-product">О продукте</button>
@@ -203,7 +201,7 @@ $tag-width: 1150px;
   overflow: auto;
   position: relative;
 
-  .view-you-have {
+  .you-have-block-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -252,7 +250,7 @@ $tag-width: 1150px;
         font-weight: 700;
         font-size: 64px;
         line-height: 78px;
-        margin: 70px 0px;
+        margin: 70px 0;
         text-align: center;
       }
 
@@ -274,7 +272,7 @@ $tag-width: 1150px;
           display: grid;
           text-align: center;
           border-bottom: 1px solid rgba(183, 255, 68, 1);
-          padding: 10px 0px 20px 10px;
+          padding: 10px 0 20px 10px;
 
           .base-type {
             font-weight: 700;
@@ -311,7 +309,7 @@ $tag-width: 1150px;
             font-size: 24px;
             line-height: 29px;
             color: #D9D9D9;
-            padding: 20px 0px;
+            padding: 20px 0;
           }
         }
 
@@ -342,7 +340,7 @@ $tag-width: 1150px;
       line-height: 59px;
       text-align: center;
       color: #FFFFFF;
-      margin: 70px 0px;
+      margin: 70px 0;
     }
 
     .tariff-types-wrapper {
@@ -350,7 +348,7 @@ $tag-width: 1150px;
       grid-template-columns: 1fr 1fr 1fr;
       max-width: 1100px;
       justify-items: flex-start;
-      margin: 50px 0px;
+      margin: 50px 0;
       column-gap: 30px;
 
       .tariffs-name {
@@ -394,7 +392,7 @@ $tag-width: 1150px;
 
       .description-white-line {
         border-right: 2px solid #FFFFFF;
-        padding: 0px 50px 0px 0px;
+        padding: 0 50px 0 0;
       }
 
       .description {
@@ -406,7 +404,7 @@ $tag-width: 1150px;
 
         .description-line {
           border-top: 1px solid #B7FF44;
-          padding: 20px 0px;
+          padding: 20px 0;
         }
       }
     }

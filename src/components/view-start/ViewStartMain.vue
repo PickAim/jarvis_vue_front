@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import ViewStartStartBlock from "./ViewStartComponentsMain/ViewStartStartBlock.vue";
-import ViewStartYouHave from "./ViewStartComponentsMain/ViewStartYouHave.vue";
-import ViewStartAboutJarvis from "./ViewStartComponentsMain/ViewStartAboutJarvis.vue";
-import ViewStartTariffs from "./ViewStartComponentsMain/ViewStartTariffs.vue"
-import ViewStartWhyTrust from "./ViewStartComponentsMain/ViewStartWhyTrust.vue";
-import ViewStartQuestions from "./ViewStartComponentsMain/ViewStartQuestions.vue";
+import ViewStartFirstBlock from "./ViewStartComponentsMain/ViewStartFirstBlock.vue";
+import ViewStartYouHaveBlock from "./ViewStartComponentsMain/ViewStartYouHaveBlock.vue";
+import ViewStartAboutJarvisBlock from "./ViewStartComponentsMain/ViewStartAboutJarvisBlock.vue";
+import ViewStartTariffsBlock from "./ViewStartComponentsMain/ViewStartTariffsBlock.vue"
+import ViewStartWhyTrustBlock from "./ViewStartComponentsMain/ViewStartWhyTrustBlock.vue";
+import ViewStartQuestionsBlock from "./ViewStartComponentsMain/ViewStartQuestionsBlock.vue";
 import ViewStartFormBlock from "./ViewStartComponentsMain/ViewStartFormBlock.vue";
 </script>
 
 <template>
-  <main>
-    <ViewStartStartBlock/>
-    <ViewStartYouHave/>
-    <ViewStartAboutJarvis/>
-    <ViewStartTariffs/>
-    <ViewStartWhyTrust/>
-    <ViewStartQuestions/>
+  <div class="view-start-main-wrapper">
+    <ViewStartFirstBlock/>
+    <ViewStartYouHaveBlock/>
+    <ViewStartAboutJarvisBlock/>
+    <ViewStartTariffsBlock/>
+    <ViewStartWhyTrustBlock/>
+    <ViewStartQuestionsBlock/>
     <ViewStartFormBlock/>
     <!--<ViewStartTraiffLinkBlock />-->
     <!--<ViewStartHeaderOverlay/>-->
     <!--use on mobile version screen -->
-  </main>
+  </div>
 </template>
 
 <style scoped lang="scss">
-main {
+.view-start-main-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -8,15 +8,19 @@ const router = useRouter();
 
 <template>
   <header>
+    <div class="logo"/>
     <div class="buttons-wrapper">
       <button class="about-product">О продукте</button>
       <button class="tariffs" @click="router.push('ViewTariffs')">Тарифы</button>
       <button class="question">Вопросы</button>
       <!--      <button class="login-button" @click="router.push('workspace')">На работу</button>-->
-      <button class="login-button" @click="actions.openLoginOverlay()">Вход</button>
-      <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
+      <button class="login-button" @click="actions.openLoginOverlay()">
+        <span class="login-label">Войти</span>
+        <span class="arrow"/>
+      </button>
+      <!--      <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>-->
     </div>
-    <button class="mob-menu" @click="actions.openMobMenu()">
+    <button class="mobile-menu-button" @click="actions.openMobMenu()">
       <img src="src\assets\images\icon-mob-menu.png" alt="">
     </button>
   </header>
@@ -30,27 +34,58 @@ header {
   justify-content: center;
   width: 100%;
   color: white;
+  height: 60px;
   background-color: #191919;
-}
 
-.buttons-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 130px;
-  max-width: 90vw;
-  width: 100%;
-  align-items: center;
-  justify-content: space-around;
-
-  button {
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
+  .logo {
+    flex: 1;
+    background: url("/src/assets/images/jarvis_white_icon.png") center no-repeat;
+    background-size: contain;
+    height: 100%;
   }
-}
 
-.mob-menu {
-  display: none;
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    max-width: 90vw;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+
+    button {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    .login-button {
+      display: grid;
+      grid-template-columns: 2fr 5fr 2fr;
+      align-items: center;
+      width: 179px;
+      height: 66px;
+      border-radius: 20px;
+      border: 1px solid #B7FF44;
+
+      .login-label {
+        grid-column: 2;
+      }
+
+      .arrow {
+        grid-column: 3;
+        height: 100%;
+        background: url("/src/assets/images/Arrow.png") no-repeat top;
+        background-size: contain;
+        margin: 15px 15px 0 0;
+        transform: rotate(5deg);
+      }
+    }
+  }
+
+  .mobile-menu-button {
+    display: none;
+  }
 }
 
 @media (max-width: $tag-width) {
@@ -62,10 +97,10 @@ header {
       display: none;
     }
 
-    .mob-menu {
+    .mobile-menu-button {
       display: flex;
       justify-content: flex-end;
-      margin: 50px 50px 0px 50px;
+      margin: 50px 50px 0 50px;
 
       img {
         width: 40px;

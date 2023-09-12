@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="view-about-jarvis">
+  <div class="about-jarvis-block-wrapper">
     <div class="jarvis-wrapper">
       <div class="question-about-jarvis">
         <h1>Что умеет Jarvis?</h1>
@@ -66,7 +66,7 @@
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.view-about-jarvis {
+.about-jarvis-block-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,7 +76,7 @@ $tag-width: 1150px;
   color: #FFFFFF;
   width: 100%;
   flex: 0 0 auto;
-  padding: 50px 0px;
+  padding: 50px 0;
 
   h1 {
     font-family: Inter, sans-serif;
@@ -126,7 +126,7 @@ $tag-width: 1150px;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        padding: 0px 20px;
+        padding: 0 20px;
 
         h1 {
           font-weight: 700;
@@ -173,7 +173,7 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .view-about-jarvis {
+  .about-jarvis-block-wrapper {
   }
 
   .jarvis-wrapper {
@@ -189,8 +189,8 @@ $tag-width: 1150px;
     .blur-block {
       display: grid;
       grid-template-columns: 1fr;
-      padding: 0px;
-      margin: 20px 50px 0px;
+      padding: 0;
+      margin: 20px 50px 0;
       background: none;
 
       .block {
@@ -206,8 +206,8 @@ $tag-width: 1150px;
         .left-block {
           display: flex;
           flex-direction: column;
-          gap: 0px;
-          padding: 0px;
+          gap: 0;
+          padding: 0;
 
           h1 {
             font-weight: 700;

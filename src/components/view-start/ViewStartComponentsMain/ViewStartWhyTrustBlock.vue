@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="trusted-block">
+  <div class="trusted-block-wrapper">
     <div class="trust-wrapper">
       <div class="paragraph-about-trust">
         <h1>ПОЧЕМУ НАМ ДОВЕРЯЮТ?</h1>
@@ -38,14 +38,14 @@
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.trusted-block {
+.trusted-block-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: #FFFFFF;
-  margin: 50px 0px;
+  margin: 50px 0;
 
   .trust-wrapper {
     display: flex;
@@ -54,7 +54,7 @@ $tag-width: 1150px;
     margin: 10px;
     width: 100%;
     max-width: 1200px;
-    padding: 0px 40px;
+    padding: 0 40px;
 
     .paragraph-about-trust {
       display: flex;
@@ -69,8 +69,8 @@ $tag-width: 1150px;
 
     .line-block {
       display: grid;
-      margin: 100px 0px;
-      padding: 0px 50px;
+      margin: 100px 0;
+      padding: 0 50px;
 
       .advantages {
         display: flex;
@@ -119,11 +119,11 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .trusted-block {
-    margin: 0px;
+  .trusted-block-wrapper {
+    margin: 0;
 
     .trust-wrapper {
-      margin: 0px;
+      margin: 0;
 
       .paragraph-about-trust {
         display: flex;
@@ -139,7 +139,7 @@ $tag-width: 1150px;
       .line-block {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        margin: 50px 0px 0px 0px;
+        margin: 50px 0 0 0;
 
         .advantages {
           display: flex;
@@ -165,7 +165,7 @@ $tag-width: 1150px;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0px 50px;
+            padding: 0 50px;
             font-weight: 700;
             font-size: 13px;
             line-height: 16px;

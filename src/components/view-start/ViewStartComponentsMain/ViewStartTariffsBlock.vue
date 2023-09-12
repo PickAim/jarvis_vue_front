@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="view-tariffs-block">
+  <div class="tariffs-block-wrapper">
     <div class="tariffs-name">
       <h1>ТАРИФЫ:</h1>
     </div>
@@ -47,7 +47,7 @@
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.view-tariffs-block {
+.tariffs-block-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,11 +139,11 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .view-tariffs-block {
-    padding: 0px 40px;
+  .tariffs-block-wrapper {
+    padding: 0 40px;
 
     .tariffs-name {
-      padding: 0px;
+      padding: 0;
 
       h1 {
         font-weight: 700;

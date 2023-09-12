@@ -9,7 +9,7 @@ function openText() {
 </script>
 
 <template>
-  <div class="questions-wrapper">
+  <div class="question-wrapper">
     <h1>
       <slot name="header">Здесь будет вопрос</slot>
     </h1>
@@ -29,7 +29,7 @@ function openText() {
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.questions-wrapper {
+.question-wrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -72,7 +72,7 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .questions-wrapper {
+  .question-wrapper {
     h1 {
       font-weight: 400;
       font-size: 12px;

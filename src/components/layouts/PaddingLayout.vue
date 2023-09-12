@@ -3,15 +3,16 @@
 </script>
 
 <template>
-  <div class="padding-wrapper">
+  <div class="padding-layout">
     <slot/>
   </div>
 </template>
 
 <style scoped lang="scss">
-.padding-wrapper {
+.padding-layout {
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
+  width: 100%;
 }
 </style>

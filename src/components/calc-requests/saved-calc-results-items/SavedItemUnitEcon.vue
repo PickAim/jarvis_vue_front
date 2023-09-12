@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace-header-wrapper">
+  <div class="view-start-wrapper">
     {{ request.request }}<br>
     {{ request.result }}
   </div>

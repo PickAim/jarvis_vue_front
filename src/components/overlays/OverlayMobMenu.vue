@@ -82,7 +82,7 @@ const {closeOverlay} = useOverlayStateStore()
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin: 20px 0px;
+      margin: 20px 0;
       gap: 50px;
 
       .link {
@@ -93,7 +93,7 @@ const {closeOverlay} = useOverlayStateStore()
           font-size: 16px;
           line-height: 20px;
           color: rgba(255, 255, 255, 1);
-          padding: 0px 5px;
+          padding: 0 5px;
         }
       }
     }

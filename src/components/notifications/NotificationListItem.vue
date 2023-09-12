@@ -49,7 +49,7 @@ function mouseLeaveFunc() {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: calc(80px + max(0px, 300px - 50vw));
+  height: calc(80px + max(0, 300px - 50vw));
   background-color: white;
   border: 1px solid black;
   color: black;
