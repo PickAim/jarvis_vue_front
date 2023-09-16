@@ -1,182 +1,221 @@
 <script setup lang="ts">
+import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
+import ControlButton from "@/components/controls/ControlButton.vue";
 </script>
 
 <template>
-  <div class="about-jarvis-block-wrapper">
-    <div class="jarvis-wrapper">
-      <div class="question-about-jarvis">
-        <h1>Что умеет Jarvis?</h1>
+  <MiddleLineLayout>
+    <div class="about-jarvis-block-wrapper">
+      <h1>ЧТО УМЕЕТ JARVIS?</h1>
+      <div class="feature-grid-wrapper">
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="title-with-image feature-column">
+              <h2>Рекомендательная система</h2>
+              <div class="feature-image image-1"/>
+            </div>
+            <div class="text-info feature-column">
+              <div class="text-1">Предлагает рекомендации по работе с Вашими продажами: предлагает цену товара,
+                заранее
+                сообщает о необходимости поставки, рекомендует наиболее выгодные ниши и многое
+                другое.
+              </div>
+              <div class="text-2"> Благодаря этому вы не упустите момент принятия решения, что предотвратит
+                упущенную
+                прибыль и сократит Ваши расходы
+              </div>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="title-with-image feature-column">
+              <h2>Внешняя аналитика</h2>
+              <div class="feature-image image-2"/>
+            </div>
+            <div class="text-info feature-column">
+              <div class="text-1">Собирает данные со всего маркетплейса и предоставляет актуальную аналитику
+                рынка.
+              </div>
+              <div class="text-2">Благодаря внешней аналитике и рекомендательной системе Вы всегда знаете, как
+                идут дела
+                у Ваших конкурентов, и сможете выходить на новые ниши максимально подготовленными и
+                информированными
+              </div>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="title-with-image feature-column">
+              <h2>Расчет индексов показателей магазина</h2>
+              <div class="feature-image image-3"/>
+            </div>
+            <div class="text-info feature-column">
+              <div class="text-1">Позволяет оценить финансовое здоровье вашего магазина, выявить рентабельные
+                позиции и
+                отсеять нерентабельные.
+              </div>
+              <div class="text-2">На основе внутренней аналитики рекомендательная система подскажет, как
+                эффективнее
+                масштабировать наиболее прибыльные товары и увеличить продажи
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="circles">
+          <div class="circle circle-1"/>
+          <div class="circle circle-2"/>
+          <div class="circle circle-3"/>
+          <div class="circle circle-4"/>
+          <div class="circle circle-5"/>
+          <div class="circle circle-6"/>
+        </div>
       </div>
-      <div class="blur-block">
-        <div class="block">
-          <div class="left-block">
-            <h1>Рекомендательная система</h1>
-            <img src="src\assets\images\About-Jarvis-1.png" alt="">
-          </div>
-          <div class="text-info">
-            <div class="text-1">Предлагает рекомендации по работе с Вашими продажами: предлагает цену товара,
-              заранее
-              сообщает о необходимости поставки, рекомендует наиболее выгодные ниши и многое
-              другое.
-            </div>
-            <div class="text-2"> Благодаря этому вы не упустите момент принятия решения, что предотвратит
-              упущенную
-              прибыль и сократит Ваши расходы
-            </div>
-          </div>
-        </div>
-        <div class="block">
-          <div class="left-block">
-            <h1>Внешняя аналитика</h1>
-            <img src="src\assets\images\About-Jarvis-2.png" alt="">
-          </div>
-          <div class="text-info">
-            <div class="text-1">Собирает данные со всего маркетплейса и предоставляет актуальную аналитику
-              рынка.
-            </div>
-            <div class="text-2">Благодаря внешней аналитике и рекомендательной системе Вы всегда знаете, как
-              идут дела
-              у Ваших конкурентов, и сможете выходить на новые ниши максимально подготовленными и
-              информированными
-            </div>
-          </div>
-        </div>
-        <div class="block">
-          <div class="left-block">
-            <h1>Расчет индексов показателей магазина</h1>
-            <img src="src\assets\images\About-Jarvis-3.png" alt="">
-          </div>
-          <div class="text-info">
-            <div class="text-1">Позволяет оценить финансовое здоровье вашего магазина, выявить рентабельные
-              позиции и
-              отсеять нерентабельные.
-            </div>
-            <div class="text-2">На основе внутренней аналитики рекомендательная система подскажет, как
-              эффективнее
-              масштабировать наиболее прибыльные товары и увеличить продажи
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="button-try">Попробовать сейчас</button>
+      <ControlButton class="button-try">Попробовать сейчас</ControlButton>
     </div>
-  </div>
+  </MiddleLineLayout>
 </template>
 
 <style scoped lang="scss">
-$tag-width: 1150px;
-
 .about-jarvis-block-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  background-color: #191919;
-  color: #FFFFFF;
-  width: 100%;
-  flex: 0 0 auto;
-  padding: 50px 0;
+  padding-top: 50px;
+  font-family: Montserrat, sans-serif;
+  line-height: normal;
+  color: white;
 
   h1 {
-    font-family: Inter, sans-serif;
-  }
-
-  p {
-    font-family: Montserrat, sans-serif;
-  }
-}
-
-.jarvis-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #191919;
-  width: 100%;
-  max-width: 1200px;
-
-  .question-about-jarvis {
     text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+  }
 
-    h1 {
-      font-weight: 700;
-      font-size: 64px;
-      line-height: 77px;
+  .feature-grid-wrapper {
+    max-width: 1060px;
+    margin-block: 50px;
+    position: relative;
+    overflow: visible;
+
+    .circles {
+      display: flex;
+      flex-direction: row;
+      z-index: 1;
+
+      .circle {
+        border-radius: 999px;
+        background: linear-gradient(180deg, #B7FF44 0%, rgba(43, 44, 42, 0.31) 100%);
+        position: absolute;
+      }
+
+      .circle-1 {
+        left: -80px;
+        top: 30%;
+        width: 260px;
+        height: 260px;
+      }
+
+      .circle-2 {
+        right: -36px;
+        bottom: -27px;
+        width: 120px;
+        height: 120px;
+      }
+
+      .circle-3, .circle-4, .circle-5 {
+        background: #B7FF44;
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+      }
+
+      .circle-3 {
+        top: 14%;
+      }
+
+      .circle-4 {
+        top: 47%;
+      }
+
+      .circle-5 {
+        top: 82%;
+      }
     }
   }
 
-  .blur-block {
+  .feature-grid {
     display: grid;
     position: relative;
     grid-template-columns: 1fr;
     background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
     backdrop-filter: blur(15px);
-    z-index: 100;
-    max-width: 1200px;
-    margin: 50px 80px;
-    padding: 40px 20px;
+    padding-block: 62px;
+    z-index: 2;
 
-    .block {
+    .feature {
       display: grid;
       grid-template-columns: 1fr 1fr;
 
-      .left-block {
+      .feature-column {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 0 20px;
+        padding: 0 25px 0 60px;
+      }
 
-        h1 {
+      &:not(:last-child) .title-with-image {
+        padding-bottom: 200px;
+      }
+
+      .title-with-image {
+        gap: 60px;
+
+        h2 {
+          text-align: center;
+          font-size: 36px;
           font-weight: 700;
-          font-size: 24px;
-          line-height: 44px;
         }
 
-        h3 {
-          color: #B7FF44;
+        .feature-image {
+          width: 150px;
+          height: 100px;
+          background-size: contain;
+          background-repeat: no-repeat;
+
+          &.image-1 {
+            background-image: url("/src/assets/images/About-Jarvis-1.png");
+          }
+
+          &.image-2 {
+            background-image: url("/src/assets/images/About-Jarvis-2.png");
+          }
+
+          &.image-3 {
+            background-image: url("/src/assets/images/About-Jarvis-3.png");
+          }
         }
       }
 
       .text-info {
-        display: flex;
-        flex-direction: column;
         text-align: start;
         border-left: 2px solid #B7FF44;
-        padding: 30px 60px;
 
         .text-1 {
-          font-weight: 400;
           font-size: 20px;
-          line-height: 24px;
-          margin-bottom: 10px;
+          font-weight: 700;
+          margin-bottom: 12px;
         }
 
         .text-2 {
-          font-weight: 400;
           font-size: 16px;
-          line-height: 19.5px;
+          font-weight: 400;
         }
       }
     }
   }
-
-  .button-try {
-    border: 1px solid #B7FF44;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 23px;
-    line-height: 28px;
-    padding: 15px;
-  }
 }
 
-@media (max-width: $tag-width) {
-  .about-jarvis-block-wrapper {
-  }
+@media (max-width: 1200px) {
 
-  .jarvis-wrapper {
+  .about-jarvis-block-wrapper {
     .question-about-jarvis {
 
       h1 {
@@ -186,28 +225,34 @@ $tag-width: 1150px;
       }
     }
 
-    .blur-block {
+    .feature-grid-wrapper {
+      max-width: 700px;
+
+      .circle-1, .circle-2 {
+        display: none;
+      }
+    }
+
+    .feature-grid {
       display: grid;
       grid-template-columns: 1fr;
       padding: 0;
-      margin: 20px 50px 0;
+      backdrop-filter: none;
       background: none;
 
-      .block {
+      .feature {
         display: flex;
         flex-direction: column;
         background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
         backdrop-filter: blur(15px);
         margin-bottom: 50px;
-        overflow: hidden;
-        max-width: 400px;
         padding: 20px 15px;
 
-        .left-block {
+        .title-with-image {
           display: flex;
           flex-direction: column;
           gap: 0;
-          padding: 0;
+          padding: 0 20px 50px 20px !important;
 
           h1 {
             font-weight: 700;
