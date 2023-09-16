@@ -214,19 +214,14 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 }
 
 @media (max-width: 1200px) {
-
   .about-jarvis-block-wrapper {
-    .question-about-jarvis {
-
-      h1 {
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
-      }
+    h1 {
+      font-size: 30px;
     }
 
     .feature-grid-wrapper {
       max-width: 700px;
+      margin-top: 30px;
 
       .circle-1, .circle-2 {
         display: none;
@@ -237,6 +232,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
       display: grid;
       grid-template-columns: 1fr;
       padding: 0;
+      gap: 50px;
       backdrop-filter: none;
       background: none;
 
@@ -245,23 +241,16 @@ import ControlButton from "@/components/controls/ControlButton.vue";
         flex-direction: column;
         background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
         backdrop-filter: blur(15px);
-        margin-bottom: 50px;
         padding: 20px 15px;
 
         .title-with-image {
           display: flex;
           flex-direction: column;
-          gap: 0;
-          padding: 0 20px 50px 20px !important;
+          gap: 15px;
+          padding: 0 20px 20px 20px !important;
 
-          h1 {
-            font-weight: 700;
+          h2 {
             font-size: 24px;
-            line-height: 44px;
-          }
-
-          h3 {
-            color: #B7FF44;
           }
         }
 
@@ -273,30 +262,17 @@ import ControlButton from "@/components/controls/ControlButton.vue";
           padding: 20px;
 
           .text-1 {
-            font-weight: 700;
             font-size: 15px;
-            line-height: 18.29px;
             margin-bottom: 20px;
           }
 
           .text-2 {
             padding: 10px;
             border: 1px solid #B7FF44;
-            font-weight: 400;
             font-size: 13px;
-            line-height: 16px;
           }
         }
       }
-    }
-
-    .button-try {
-      border: 1px solid #B7FF44;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 11px;
-      line-height: 13px;
-      padding: 15px 30px;
     }
   }
 }
