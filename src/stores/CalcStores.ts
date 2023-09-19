@@ -3,12 +3,17 @@ import type {
     CalculateRequestData,
     CalculateRequestInfoData, ISavableCalculatorStoreActions, ISavableCalculatorStoreState
 } from "@/types/RequestTypes";
-import type {NicheDistRequestData, NicheDistResultData, UnitEconomyResultData} from "@/types/DataTypes";
-import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {
+    NicheDistRequestData,
+    NicheDistResultData,
+    SimpleUnitEconomyResultData,
+    TransitUnitEconomyResultData
+} from "@/types/DataTypes";
+import type {TransitUnitEconomyRequestData, SimpleUnitEconomyRequestData} from "@/types/DataTypes";
 
 const copyObject = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
 
-function State<Q, R>(): ISavableCalculatorStoreState<Q, R>{
+function State<Q, R>(): ISavableCalculatorStoreState<Q, R> {
     return {
         requests: []
     }
@@ -44,16 +49,23 @@ function Actions<Q, R>(): ISavableCalculatorStoreActions<Q, R> &
     }
 }
 
-export const useUnitEconCalcStore = defineStore<"unitEconCalcStore",
-    ISavableCalculatorStoreState<UnitEconomyRequestData, UnitEconomyResultData>, any,
-    ISavableCalculatorStoreActions<UnitEconomyRequestData, UnitEconomyResultData>>("unitEconCalcStore", {
+export const useSimpleUnitEconCalcStore = defineStore<"unitSimpleEconCalcStore",
+    ISavableCalculatorStoreState<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData>, any,
+    ISavableCalculatorStoreActions<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData>>("unitSimpleEconCalcStore", {
+    state: State,
+    actions: Actions()
+});
+
+export const useTransitUnitEconCalcStore = defineStore<"unitTransitEconCalcStore",
+    ISavableCalculatorStoreState<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>, any,
+    ISavableCalculatorStoreActions<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>>("unitTransitEconCalcStore", {
     state: State,
     actions: Actions()
 });
 
 export const useNicheDistCalcStore = defineStore<"nicheDistCalcStore",
     ISavableCalculatorStoreState<NicheDistRequestData, NicheDistResultData>, any,
-    ISavableCalculatorStoreActions<UnitEconomyRequestData, UnitEconomyRequestData>>("nicheDistCalcStore", {
+    ISavableCalculatorStoreActions<NicheDistRequestData, NicheDistResultData>>("nicheDistCalcStore", {
     state: State,
     actions: Actions()
 });

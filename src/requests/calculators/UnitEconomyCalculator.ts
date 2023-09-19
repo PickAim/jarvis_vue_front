@@ -1,40 +1,50 @@
 import type {
     CalculateRequestInfoData
 } from "@/types/RequestTypes";
-import {UnitEconomyActions} from "@/requests/request-actions/calculations/UnitEconomyActions";
+import {
+    SimpleUnitEconomyActions,
+    TransitUnitEconomyActions
+} from "@/requests/request-actions/calculations/UnitEconomyActions";
 import {SavableCalculator} from "@/requests/calculators/SavableCalculator";
 import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
-import type {UnitEconomyResultData} from "@/types/DataTypes";
-import {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {SimpleUnitEconomyResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
+import {SimpleUnitEconomyRequestData, TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 
-type RequestType = UnitEconomyRequestData;
-type ResultType = UnitEconomyResultData;
+type RequestType = TransitUnitEconomyRequestData | SimpleUnitEconomyRequestData;
+type ResultType = TransitUnitEconomyResultData | SimpleUnitEconomyResultData;
 
 export class UnitEconomyCalculator extends SavableCalculator<RequestType, ResultType> {
     isTransitOn = false;
-    isTransitCostOn = false;
 
-    private requestTransitKeys: (keyof RequestType)[] = ["market_place_transit_price", "transit_count", "transit_price"];
-    private requestWarehouseKeys: (keyof RequestType)[] = ["warehouse_name"];
-
-    private resultTransitKeys: (keyof ResultType)[] = ["transit_profit", "transit_margin", "marketplace_commission"];
-    private resultWarehouseKeys: (keyof ResultType)[] = ["storage_price"];
+    private requestTransitKeys: (keyof TransitUnitEconomyRequestData)[] = ["transit_price", "transit_count"];
+    private resultTransitKeys: (keyof TransitUnitEconomyResultData)[] = ["purchase_investments", "commercial_expanses",
+        "tax_expanses", "absolute_transit_margin", "relative_transit_margin", "transit_roi"];
 
     constructor() {
-        super(new UnitEconomyActions(), "Запрос UNIT экономики");
+        super(new SimpleUnitEconomyActions(), "Запрос UNIT экономики");
     }
 
     initDefault(): void {
-        this.request = new UnitEconomyRequestData();
+        this.request = new TransitUnitEconomyRequestData();
+    }
+
+    setSimpleCalculateActions() {
+        this.calculateActions = new SimpleUnitEconomyActions();
+    }
+
+    setTransitCalculateActions() {
+        this.calculateActions = new TransitUnitEconomyActions();
     }
 
     beforeCalculating() {
-        const pattern = new UnitEconomyRequestData();
-        if (!this.isTransitCostOn)
+        const pattern = new TransitUnitEconomyRequestData();
+        if (!this.isTransitOn) {
+            this.setSimpleCalculateActions();
             removeKeys(pattern, this.requestTransitKeys);
-        if (!this.isTransitOn)
-            removeKeys(pattern, this.requestWarehouseKeys);
+        } else {
+            this.setTransitCalculateActions();
+        }
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
             useNotificationsStore().addErrorNotification(["Ошибка", `Ошибка в поле ${requestOrKey}`]);
@@ -45,18 +55,15 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     }
 
     afterSuccessfulCalculating(result: ResultType) {
-        if (!this.isTransitCostOn)
-            removeKeys(result, this.resultTransitKeys);
         if (!this.isTransitOn)
-            removeKeys(result, this.resultWarehouseKeys);
+            removeKeys(result as TransitUnitEconomyResultData, this.resultTransitKeys);
         return super.afterSuccessfulCalculating(result);
     }
 
     selectCalcRequest(id: CalculateRequestInfoData["id"]): void {
         super.selectCalcRequest(id);
         if (this.request) {
-            this.isTransitCostOn = "transit_count" in this.request;
-            this.isTransitOn = "warehouse_name" in this.request;
+            this.isTransitOn = "transit_price" in this.request;
         }
     }
 }

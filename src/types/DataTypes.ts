@@ -4,7 +4,7 @@ import type {ResultCode} from "@/requests/ResultCode";
 export interface RequestData {
     url: string;
     method?: "POST" | "GET";
-    body?: any;
+    body?: object;
     responseType?: ResponseType;
 }
 
@@ -60,35 +60,48 @@ export interface SubscribeData {
     pay_api_key?: string;
 }
 
-export interface NicheRequestData {
-    niche: string;
-    category_id: number;
+export type NicheRequestData = {
     marketplace_id: number;
-}
+    niche_id: number;
+    category_id: number;
+};
 
-export class UnitEconomyRequestData implements NicheRequestData {
-    buy = NaN; // Need
-    pack = NaN; // Need
-    niche = ""; // Need
-    category_id = 0; // Need
+export class SimpleUnitEconomyRequestData implements NicheRequestData {
     marketplace_id = 2;
-    transit_count? = NaN;
-    transit_price? = NaN;
-    market_place_transit_price? = NaN;
-    warehouse_name? = "";
+    category_id = 0; // Need
+    niche_id = 0; // Need
+    product_exist_cost = NaN;
+    cost_price = NaN;
+    length = NaN;
+    width = NaN;
+    height = NaN;
+    mass = NaN;
+    target_warehouse_name = "";
 }
 
-export interface UnitEconomyResultData {
-    product_cost?: number;  // Закупочная себестоимость
-    pack_cost?: number;  // Упаковка
-    marketplace_commission?: number; // Комиссия маркетплейса
-    logistic_price?: number; // Логистика
-    storage_price?: number; // Хранение
-    margin?: number; // Маржа в копейках
-    recommended_price: number; // Рекомендованная стоимость
-    transit_profit?: number; // Чистая прибыль с транзита
-    roi?: number; // ROI
-    transit_margin?: number; // Маржа с транзита (%)
+export interface SimpleUnitEconomyResultData {
+    result_cost: number;
+    logistic_price: number;
+    storage_price: number;
+    purchase_cost: number;
+    marketplace_expanses: number;
+    absolute_margin: number;
+    relative_margin: number;
+    roi: number;
+}
+
+export class TransitUnitEconomyRequestData extends SimpleUnitEconomyRequestData {
+    transit_price = NaN;
+    transit_count = NaN;
+}
+
+export interface TransitUnitEconomyResultData extends SimpleUnitEconomyResultData {
+    purchase_investments: number;
+    commercial_expanses: number;
+    tax_expanses: number;
+    absolute_transit_margin: number;
+    relative_transit_margin: number;
+    transit_roi: number;
 }
 
 export type NicheDistRequestData = NicheRequestData;

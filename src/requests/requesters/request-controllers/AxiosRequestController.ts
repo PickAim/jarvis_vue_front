@@ -57,6 +57,7 @@ export default class AxiosRequestController implements IRequestController {
             }
             response = {code: ResultCode.OK, result: result.data};
         } catch (err) {
+            console.log(err);
             if (err instanceof CanceledError) {
                 response = {code: ResultCode.CANCEL_ERROR, error: {description: "Cancelled error"}};
             } else if (!(err instanceof AxiosError)) {
