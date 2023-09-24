@@ -4,7 +4,7 @@ import type {ResultCode} from "@/requests/ResultCode";
 export interface RequestData {
     url: string;
     method?: "POST" | "GET";
-    body?: object;
+    body?: any;
     responseType?: ResponseType;
 }
 
@@ -70,7 +70,7 @@ export class SimpleUnitEconomyRequestData implements NicheRequestData {
     marketplace_id = 2;
     category_id = 0; // Need
     niche_id = 0; // Need
-    product_exist_cost = NaN;
+    product_exist_cost = 0;
     cost_price = NaN;
     length = NaN;
     width = NaN;
@@ -79,7 +79,7 @@ export class SimpleUnitEconomyRequestData implements NicheRequestData {
     target_warehouse_name = "";
 }
 
-export interface SimpleUnitEconomyResultData {
+type SimpleUnitEconomyOneResultData = {
     result_cost: number;
     logistic_price: number;
     storage_price: number;
@@ -90,12 +90,14 @@ export interface SimpleUnitEconomyResultData {
     roi: number;
 }
 
+export type SimpleUnitEconomyResultData = [SimpleUnitEconomyOneResultData, SimpleUnitEconomyOneResultData];
+
 export class TransitUnitEconomyRequestData extends SimpleUnitEconomyRequestData {
     transit_price = NaN;
     transit_count = NaN;
 }
 
-export interface TransitUnitEconomyResultData extends SimpleUnitEconomyResultData {
+interface TransitUnitEconomyOneResultData extends SimpleUnitEconomyOneResultData {
     purchase_investments: number;
     commercial_expanses: number;
     tax_expanses: number;
@@ -103,6 +105,8 @@ export interface TransitUnitEconomyResultData extends SimpleUnitEconomyResultDat
     relative_transit_margin: number;
     transit_roi: number;
 }
+
+export type TransitUnitEconomyResultData = [TransitUnitEconomyOneResultData, TransitUnitEconomyOneResultData];
 
 export type NicheDistRequestData = NicheRequestData;
 

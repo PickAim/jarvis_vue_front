@@ -10,7 +10,7 @@
     <div class="tariffs-wrapper">
       <div class="tariff-side-wrapper">
         <div class="tariff first-tariff">
-          <img src="src\assets\images\Tariffs-1.png" alt="">
+          <div class="tariff-image image-1"/>
           <div class="board-info">
             <span>Дашборд с системой виджетов</span>
             <span>Внутренняя аналитика</span>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="tariff second-tariff">
-        <img src="src\assets\images\Tariffs-2.png" alt="">
+        <div class="tariff-image image-2"/>
         <div class="board-info">
           <span>Дашборд с системой виджетов</span>
           <span>Внутренняя аналитика</span>
@@ -31,7 +31,7 @@
       </div>
       <div class="tariff-side-wrapper">
         <div class="tariff third-tariff">
-          <img src="src\assets\images\Tariffs-3.png" alt="">
+          <div class="tariff-image image-3"/>
           <div class="board-info">
             <span>Дашборд с системой виджетов</span>
             <span>Внутренняя аналитика</span>
@@ -95,9 +95,24 @@ $tag-width: 1150px;
       border-radius: 24px;
       padding: 10px;
 
-      img {
-        height: 300px;
-        width: 370px;
+      .tariff-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-top: 50px;
+        height: 100px;
+        width: 100px;
+
+        &.image-1 {
+          background-image: url("/src/assets/images/Tariffs-1.png");
+        }
+
+        &.image-2 {
+          background-image: url("/src/assets/images/Tariffs-2.png");
+        }
+
+        &.image-3 {
+          background-image: url("/src/assets/images/Tariffs-3.png");
+        }
       }
 
       .board-info {

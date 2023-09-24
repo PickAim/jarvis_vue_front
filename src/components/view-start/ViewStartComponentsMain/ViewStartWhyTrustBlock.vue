@@ -83,10 +83,11 @@ $tag-width: 1150px;
         .advantages-image {
           display: flex;
           flex-direction: column;
+          padding-block: 50px;
 
           img {
-            width: 290px;
-            height: 290px;
+            width: 100px;
+            height: 100px;
           }
         }
       }
@@ -138,7 +139,7 @@ $tag-width: 1150px;
 
       .line-block {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 157px 1fr;
         margin: 50px 0 0 0;
 
         .advantages {
@@ -147,9 +148,11 @@ $tag-width: 1150px;
           border: none;
 
           .advantages-image {
+            flex-shrink: 0;
+
             img {
-              width: 155px;
-              height: 155px;
+              width: 70px;
+              height: 70px;
             }
           }
         }

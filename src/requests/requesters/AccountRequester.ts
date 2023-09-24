@@ -13,7 +13,7 @@ export default class AccountRequester extends Requester {
         this.authStore = useAuthStore();
     }
 
-    async loginPassword(loginData: LoginData): Promise<ResponseData<object>> {
+    async loginPassword(loginData: LoginData): Promise<ResponseData<any>> {
         const response = await this.requestHandler.makeRequest<TokenData>({
             url: "/auth/",
             body: loginData,

@@ -8,12 +8,12 @@
 <script setup lang="ts">
 import {CalculateRequestData} from "@/types/RequestTypes";
 import {
-  UnitEconomyRequestData,
-  UnitEconomyResultData
+  TransitUnitEconomyRequestData,
+  TransitUnitEconomyResultData
 } from "@/types/DataTypes";
 
 defineProps<{
-  request: CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData>
+  request: CalculateRequestData<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>
 }>()
 </script>
 

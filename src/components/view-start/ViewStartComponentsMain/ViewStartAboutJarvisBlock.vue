@@ -108,7 +108,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 
       .circle-1 {
         left: -80px;
-        top: 30%;
+        top: 20%;
         width: 260px;
         height: 260px;
       }

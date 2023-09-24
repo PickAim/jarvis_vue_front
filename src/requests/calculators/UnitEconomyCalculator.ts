@@ -17,7 +17,6 @@ type ResultType = TransitUnitEconomyResultData | SimpleUnitEconomyResultData;
 export class UnitEconomyCalculator extends SavableCalculator<RequestType, ResultType> {
     isTransitOn = false;
 
-    private requestTransitKeys: (keyof TransitUnitEconomyRequestData)[] = ["transit_price", "transit_count"];
     private resultTransitKeys: (keyof TransitUnitEconomyResultData)[] = ["purchase_investments", "commercial_expanses",
         "tax_expanses", "absolute_transit_margin", "relative_transit_margin", "transit_roi"];
 
@@ -38,25 +37,29 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     }
 
     beforeCalculating() {
-        const pattern = new TransitUnitEconomyRequestData();
-        if (!this.isTransitOn) {
-            this.setSimpleCalculateActions();
-            removeKeys(pattern, this.requestTransitKeys);
-        } else {
+        let pattern;
+        if (this.isTransitOn) {
+            pattern = new TransitUnitEconomyRequestData();
             this.setTransitCalculateActions();
+        } else {
+            pattern = new SimpleUnitEconomyRequestData();
+            this.setSimpleCalculateActions();
         }
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
             useNotificationsStore().addErrorNotification(["Ошибка", `Ошибка в поле ${requestOrKey}`]);
             // TODO: add error key handling
         } else {
+            requestOrKey.category_id = 2
+            requestOrKey.niche_id = 2;
             return requestOrKey;
         }
     }
 
     afterSuccessfulCalculating(result: ResultType) {
-        if (!this.isTransitOn)
+        if (!this.isTransitOn) {
             removeKeys(result as TransitUnitEconomyResultData, this.resultTransitKeys);
+        }
         return super.afterSuccessfulCalculating(result);
     }
 

@@ -1,19 +1,27 @@
 <script setup lang="ts">
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
-import {ProductData, SelectOptionType, UnitEconomyRequestData, UnitEconomyResultData} from "@/types/DataTypes";
+import {
+  ProductData,
+  SelectOptionType, SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData,
+  TransitUnitEconomyRequestData,
+  TransitUnitEconomyResultData
+} from "@/types/DataTypes";
 import "./unit-economy-step-style.scss";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import type {CalculateRequestData} from "@/types/RequestTypes";
 import {computed} from "vue";
+import ControlButton from "@/components/controls/ControlButton.vue";
 
 const props = defineProps<{
   products?: ProductData[],
-  requests?: CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData>[]
+  simpleRequests?: CalculateRequestData<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData>[]
+  transitRequests?: CalculateRequestData<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>[]
 }>();
 
 const emit = defineEmits<{
   (e: "select-product", ID): void,
-  (e: "select-request", ID): void
+  (e: "select-request", ID, isTransit: boolean): void,
+  (e: "just-continue"): void
 }>()
 
 const requests = computed<SelectOptionType[] | undefined>(() => {
@@ -24,21 +32,29 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
     }
   })
 })
-
 </script>
 
 <template>
   <div class="unit-economy-step">
-    <h2>Шаг 1. Надстройка</h2>
+    <h2>Надстройка</h2>
     <div class="step-body">
-      <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
-      <ProductsList v-if="props.products"
-                    class="select-product"
-                    :products="props.products"
-                    @select-product="(ID) => emit('select-product', ID)"/>
+      <div v-if="products && products.length > 0">
+        <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
+        <ProductsList v-if="props.products"
+                      class="select-product"
+                      :products="props.products"
+                      @select-product="(ID) => emit('select-product', ID)"/>
+      </div>
       <div v-if="requests && requests.length > 0">
-        <span class="select-request-label">или один из своих сохранённых запросов:</span>
+        <span class="select-request-label">
+          <span v-if="products && products.length > 0">или </span>
+          <span v-else>Выберите </span>
+           один из своих сохранённых запросов:
+        </span>
         <ControlSelect :options="requests" :selected-value="1"/>
+      </div>
+      <div>
+        <ControlButton class="just-continue-button" @click="emit('just-continue')">Начать с нуля</ControlButton>
       </div>
     </div>
   </div>
@@ -60,6 +76,10 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
 
   .select-request {
     color: black;
+  }
+
+  .just-continue-button {
+    width: 300px;
   }
 }
 </style>

@@ -11,7 +11,7 @@ export class SimpleUnitEconomyActions<Q extends SimpleUnitEconomyRequestData, R 
 
     static requestMoneyKeys: (keyof SimpleUnitEconomyRequestData)[] =
         ["product_exist_cost", "cost_price"];
-    static resultMoneyKeys: (keyof SimpleUnitEconomyResultData)[] =
+    static resultMoneyKeys: (keyof SimpleUnitEconomyResultData[0])[] =
         ["result_cost", "logistic_price", "storage_price", "purchase_cost", "marketplace_expanses", "absolute_margin"];
 
     constructor() {
@@ -26,7 +26,8 @@ export class SimpleUnitEconomyActions<Q extends SimpleUnitEconomyRequestData, R 
 
     prepareResultData(result: R): R {
         // Convert data to server-format (to roubles)
-        convertMoneyToRoubles(result, SimpleUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[0], SimpleUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[1], SimpleUnitEconomyActions.resultMoneyKeys);
         return result;
     }
 }
@@ -36,7 +37,7 @@ export class TransitUnitEconomyActions<Q extends TransitUnitEconomyRequestData, 
 
     static requestMoneyKeys: (keyof TransitUnitEconomyRequestData)[] =
         [...SimpleUnitEconomyActions.requestMoneyKeys, "transit_count", "transit_price"];
-    static resultMoneyKeys: (keyof TransitUnitEconomyResultData)[] =
+    static resultMoneyKeys: (keyof TransitUnitEconomyResultData[0])[] =
         [...SimpleUnitEconomyActions.resultMoneyKeys, "purchase_investments", "commercial_expanses", "tax_expanses",
             "absolute_margin"];
 
@@ -52,7 +53,8 @@ export class TransitUnitEconomyActions<Q extends TransitUnitEconomyRequestData, 
 
     prepareResultData(result: R): R {
         // Convert data to server-format (to roubles)
-        convertMoneyToRoubles(result, TransitUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[0], SimpleUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[1], SimpleUnitEconomyActions.resultMoneyKeys);
         return result;
     }
 }

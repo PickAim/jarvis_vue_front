@@ -1,11 +1,10 @@
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import type {CalculateRequestData} from "@/types/RequestTypes";
-import {useUnitEconCalcStore} from "@/stores/CalcStores";
-import type {UnitEconomyResultData} from "@/types/DataTypes";
-import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import {useSimpleUnitEconCalcStore} from "@/stores/CalcStores";
+import type {SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData} from "@/types/DataTypes";
 
 export class UnitEconWidgetClass extends WidgetClass<"unitEcon"> {
-    request: CalculateRequestData<UnitEconomyRequestData, UnitEconomyResultData> | undefined = undefined;
+    request: CalculateRequestData<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData> | undefined = undefined;
 
     constructor(config: WidgetClass<"unitEcon">["config"]) {
         if (config.options === undefined) {
@@ -18,7 +17,7 @@ export class UnitEconWidgetClass extends WidgetClass<"unitEcon"> {
 
     async render(): Promise<void> {
         if (this.config.options) {
-            this.request = useUnitEconCalcStore().getRequest(this.config.options.saveResultID);
+            this.request = useSimpleUnitEconCalcStore().getRequest(this.config.options.saveResultID);
         }
     }
 }

@@ -8,8 +8,8 @@ import {ResultCode} from "@/requests/ResultCode";
 import {useRouter} from "vue-router";
 import {useOverlayStateStore} from "@/stores/overlayStore";
 
-const loginInput = ref("cooluser@jarvis.ru");
-const passwordInput = ref("IfYouReadThisYouAwesome<666>");
+const loginInput = ref("+11111111111");
+const passwordInput = ref("Apassword123!");
 const actions = new OverlayLoginActions();
 const router = useRouter();
 

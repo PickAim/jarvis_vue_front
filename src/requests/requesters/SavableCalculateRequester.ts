@@ -2,10 +2,16 @@ import type {
     CalculateRequestData,
     CalculateRequestInfoData, ISavableCalculateRequestActions
 } from "@/types/RequestTypes";
-import type {NicheDistRequestData, NicheDistResultData, ResponseData, UnitEconomyResultData} from "@/types/DataTypes";
+import type {
+    NicheDistRequestData,
+    NicheDistResultData,
+    ResponseData,
+    SimpleUnitEconomyResultData,
+    TransitUnitEconomyResultData
+} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
 import {CalculateRequester} from "@/requests/requesters/CalculateRequester";
-import type {UnitEconomyRequestData} from "@/types/DataTypes";
+import type {TransitUnitEconomyRequestData, SimpleUnitEconomyRequestData} from "@/types/DataTypes";
 
 export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
     implements ISavableCalculateRequestActions<Q, R> {
@@ -34,10 +40,17 @@ export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
     }
 }
 
-export class UnitEconomyRequester
-    extends SavableCalculateRequester<UnitEconomyRequestData, UnitEconomyResultData> {
+export class SimpleUnitEconomyRequester
+    extends SavableCalculateRequester<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData> {
     constructor() {
-        super("/unit-econ");
+        super("/simple-unit-econ");
+    }
+}
+
+export class TransitUnitEconomyRequester
+    extends SavableCalculateRequester<TransitUnitEconomyRequestData, TransitUnitEconomyResultData> {
+    constructor() {
+        super("/transit-unit-econ");
     }
 }
 

@@ -5,27 +5,25 @@ import {computed, reactive} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import type {SelectOptionType, UnitEconomyRequestData} from "@/types/DataTypes";
+import type {SelectOptionType, TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {niches} from "@/nichesData";
 
 const props = defineProps<{
   shown: boolean,
-  parameters: UnitEconomyRequestData,
-  isCalculateTransit: boolean,
-  isCalculateTransitCost: boolean
+  parameters: TransitUnitEconomyRequestData,
+  isCalculateTransit: boolean
 }>();
 
 const emits = defineEmits<{
-  <A extends keyof UnitEconomyRequestData>(e: "parameterChanged", key: A, value: UnitEconomyRequestData[A]): void,
+  <A extends keyof TransitUnitEconomyRequestData>(e: "parameterChanged", key: A, value: TransitUnitEconomyRequestData[A]): void,
   (e: "calculate"): void,
-  (e: "update:isCalculateTransit", value): void,
-  (e: "update:isCalculateTransitCost", value): void,
+  (e: "update:isCalculateTransit", value): void
 }>()
 
 type InputInfoType<VType> =
     {
-      name?: keyof UnitEconomyRequestData,
+      name?: keyof TransitUnitEconomyRequestData,
       value?: VType | Ref<VType>,
       onChange?: (value: VType) => void,
       placeholder?: string
@@ -61,8 +59,7 @@ const nicheOptions = computed<SelectOptionType[]>(() => {
 });
 
 const nicheValue = computed<string>(() => {
-  return nicheOptions.value.find(
-      (niche) => niche.name.toLowerCase() == props.parameters.niche.toLowerCase())?.value || "";
+  return props.parameters.niche_id.toString();
 })
 
 const baseParameters: ParametersType = reactive([
@@ -74,62 +71,47 @@ const baseParameters: ParametersType = reactive([
   },
   {name: "category_id", type: "select", placeholder: "Категория", options: categoryOptions, onChange: onCategoryChange},
   {
-    name: "niche", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
+    name: "niche_id", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
     value: nicheValue
   },
-  {name: "buy", type: "input", title: "Себестоимость", inputType: "number"},
-  {name: "pack", type: "input", title: "Стоимость упаковки", inputType: "number"},
+  {name: "product_exist_cost", type: "input", title: "Текущая цена товара", inputType: "number", value: "0"},
+  {name: "cost_price", type: "input", title: "Себестоимость", inputType: "number"},
+  {name: "length", type: "input", title: "Длина", inputType: "number"},
+  {name: "width", type: "input", title: "Ширина", inputType: "number"},
+  {name: "height", type: "input", title: "Высота", inputType: "number"},
+  {name: "mass", type: "input", title: "Масса", inputType: "number"},
+  {name: "target_warehouse_name", type: "input", title: "Склад назначения", inputType: "text"},
   {
-    type: "check", value: computed(() => props.isCalculateTransitCost),
+    type: "check", value: computed(() => props.isCalculateTransit),
     placeholder: "Рассчитать стоимость транзита",
-    onChange: onTransitCostCheckChanged
-  }
-])
-
-const transitCostParameters: ParametersType = reactive([
-  {name: "transit_count", type: "input", title: "Количество штук в партии", inputType: "number"},
-  {name: "transit_price", type: "input", title: "Стоимость логистики партии", inputType: "number"},
-  {
-    name: "market_place_transit_price", type: "input", title: "Стоимость транзита маркетплейса",
-    inputType: "number"
-  },
-  {
-    type: "check", value: computed(() => props.isCalculateTransit), placeholder: "Транзитная поставка",
     onChange: onTransitCheckChanged
   }
 ])
 
 const transitParameters: ParametersType = reactive([
-  {name: "warehouse_name", type: "input", title: "Расположение склада", inputType: "text"},
+  {name: "transit_count", type: "input", title: "Количество штук в партии", inputType: "number"},
+  {name: "transit_price", type: "input", title: "Стоимость логистики партии", inputType: "number"}
 ])
 
 const parameters = computed(() => [
   ...baseParameters,
-  ...(props.isCalculateTransitCost ? transitCostParameters : []),
   ...(props.isCalculateTransit ? transitParameters : [])
 ]);
 
 function onCategoryChange(value) {
-  emits('parameterChanged', 'niche', "");
+  emits('parameterChanged', 'niche_id', 0);
   defaultOnChange('category_id', value);
 }
 
-function onNicheChange(value) {
-  emits('parameterChanged', 'niche', nicheOptions.value.find((niche) => niche.value == value)?.name || "");
-}
-
-function onTransitCostCheckChanged(value) {
-  if (value === false) {
-    onTransitCheckChanged(false);
-  }
-  emits('update:isCalculateTransitCost', value);
+function onNicheChange(nicheID) {
+  emits('parameterChanged', 'niche_id', nicheID);
 }
 
 function onTransitCheckChanged(value) {
   emits('update:isCalculateTransit', value);
 }
 
-function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, value) {
+function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefined, value) {
   if (parameter !== undefined) {
     emits('parameterChanged', parameter, value);
   }
@@ -139,11 +121,11 @@ function defaultOnChange(parameter: keyof UnitEconomyRequestData | undefined, va
 
 <template>
   <div id="unit-economy-parameters" class="unit-economy-step" :class="{active: props.shown}">
-    <h2>Шаг 2. Параметры</h2>
+    <h2>Параметры</h2>
     <div class="inputs-wrapper">
       <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
         <ControlTextInput v-if="input.type === 'input'"
-                          :model-value="props.parameters[input.name]"
+                          :model-value="props.parameters[input.name] || input.value"
                           @update:model-value="(value) => {
                             input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                           }"

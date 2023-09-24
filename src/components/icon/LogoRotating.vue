@@ -37,7 +37,7 @@ onMounted(() => {
   width: 100%;
   transition: opacity 0.3s ease-in;
 
-  background-image: url('images/jarvis_icon_big.png');
+  background-image: url('src/assets/images/jarvis_icon_big.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

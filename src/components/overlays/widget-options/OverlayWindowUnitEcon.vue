@@ -4,7 +4,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import type {WidgetOptions} from "@/types/WidgetTypes";
 import _ from "lodash";
-import {useUnitEconCalcStore} from "@/stores/CalcStores";
+import {useSimpleUnitEconCalcStore} from "@/stores/CalcStores";
 
 type widgetName = "unitEcon";
 
@@ -16,7 +16,7 @@ const emit = defineEmits<{
   (ev: 'submit', options: WidgetOptions[widgetName]): void
 }>()
 
-const requests = useUnitEconCalcStore().requests;
+const requests = useSimpleUnitEconCalcStore().requests;
 
 const widgetOptions = reactive<WidgetOptions[widgetName]>({
   saveResultID: "0"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "./unit-economy-step-style.scss";
-import type {UnitEconomyResultData} from "@/types/DataTypes";
+import type {TransitUnitEconomyResultData} from "@/types/DataTypes";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import {computed, ref} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
@@ -9,7 +9,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 const props = defineProps<{
   shown: boolean,
   saveName: string,
-  resultData: UnitEconomyResultData | undefined
+  resultData: TransitUnitEconomyResultData | undefined
 }>();
 
 const emits = defineEmits<{
@@ -21,17 +21,17 @@ const requestNamePlaceholder = computed(() => `${props.saveName}, ${
 }`);
 const requestName = ref(requestNamePlaceholder);
 
-const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
-  margin: "Маржа",
-  logistic_price: "Стоимость логистики",
-  pack_cost: "Стоимость упаковки",
-  product_cost: "Себестоимость",
-  storage_price: "Хранение",
-  marketplace_commission: "Комиссия маркетплейса",
-  transit_margin: "Комиссия транзита",
-  transit_profit: "Транизтная выручка",
-  recommended_price: "",
-  roi: ""
+const chartKeyToTitle: { [ind in keyof TransitUnitEconomyResultData]: string } = {
+  // margin: "Маржа",
+  // logistic_price: "Стоимость логистики",
+  // pack_cost: "Стоимость упаковки",
+  // product_cost: "Себестоимость",
+  // storage_price: "Хранение",
+  // marketplace_commission: "Комиссия маркетплейса",
+  // transit_margin: "Комиссия транзита",
+  // transit_profit: "Транизтная выручка",
+  // recommended_price: "",
+  // roi: ""
 }
 
 const chartResult = computed(() => {
@@ -49,27 +49,28 @@ const chartResult = computed(() => {
   return result;
 });
 
-const chartTitle = computed(() => `Рекомендуемая цена: ${props.resultData?.recommended_price}`);
+const chartTitle = computed(() => `Рекомендуемая цена: ${props.resultData?.result_cost}`);
 
 </script>
 
 <template>
   <div class="unit-economy-step" id="unit-economy-result" :class="{active: props.shown}">
-    <h2>Шаг 3. Результат</h2>
-    <div class="result-wrapper">
-      <DoughnutBar class="result-chart"
-                   :data-and-labels="chartResult"
-                   :title="chartTitle" v-if="chartResult.length >= 0"/>
-    </div>
-    <div class="save-wrapper">
-      <ControlTextInput class="save-name-input"
-                        v-model="requestName"
-                        title="Имя сохранения"/>
-      <ControlButton class="save-button"
-                     @click="emits('saveRequest', requestName)">
-        Сохранить запрос
-      </ControlButton>
-    </div>
+    <h2>Результат</h2>
+    {{ resultData }}
+    <!--    <div class="result-wrapper">-->
+    <!--      <DoughnutBar class="result-chart"-->
+    <!--                   :data-and-labels="chartResult"-->
+    <!--                   :title="chartTitle" v-if="chartResult.length >= 0"/>-->
+    <!--    </div>-->
+    <!--    <div class="save-wrapper">-->
+    <!--      <ControlTextInput class="save-name-input"-->
+    <!--                        v-model="requestName"-->
+    <!--                        title="Имя сохранения"/>-->
+    <!--      <ControlButton class="save-button"-->
+    <!--                     @click="emits('saveRequest', requestName)">-->
+    <!--        Сохранить запрос-->
+    <!--      </ControlButton>-->
+    <!--    </div>-->
   </div>
 </template>
 

@@ -4,21 +4,32 @@ import {sections} from "@/components/view-workspace/workspaceSections";
 import {
   WorkspaceSectionUnitEconomyActions
 } from "@/component-actions/view-workspace/WorkspaceSectionUnitEconomyActions";
-import type {ProductData} from "@/types/DataTypes";
+import type {ProductData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import UnitEconomyStepSet from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepSet.vue";
 import UnitEconomyStepParameters from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepParameters.vue";
 import UnitEconomyStepResult from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepResult.vue";
 import {computed, reactive, ref} from "vue";
 import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
 import {niches} from "@/nichesData";
+import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
+import UnitEconomyPreloader from "@/components/view-workspace/sections/unit-economy/UnitEconomyPreloader.vue";
+import {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 
 const actions = reactive(new WorkspaceSectionUnitEconomyActions());
 const calculator = reactive(new UnitEconomyCalculator());
-actions.initSection();
 
 const settingSelected = ref(false);
+const emptySettings = ref(true);
 const calculated = ref(false);
 const saveName = ref("");
+
+actions.initSection().then(() => {
+  if ((actions.products && actions.products > 0) ||
+      (actions.simpleRequests && actions.simpleRequests.length > 0) ||
+      (actions.transitRequests && actions.transitRequests.length > 0)) {
+    emptySettings.value = false;
+  }
+});
 
 const products = computed<ProductData[] | undefined>(() => {
   if (!actions.products) return;
@@ -50,10 +61,10 @@ function onProductSelect(ID) {
 }
 
 function onRequestSelect(ID) {
-  if (!actions.requests) return;
-  const request = actions.requests.find(request => request.info.id === ID);
+  if (!actions.simpleRequests) return;
+  const request = actions.simpleRequests.find(request => request.info.id === ID);
   if (!request) return;
-  saveName.value = actions.requests[0].info.name;
+  saveName.value = actions.simpleRequests[0].info.name;
   onSet();
 }
 
@@ -90,21 +101,27 @@ function onSaveRequest(name: string) {
   <ViewWorkspaceSection>
     <template v-slot:header>{{ sections.unitEconomy.title }}</template>
     <div class="section-body-wrapper">
-      <div class="steps-wrapper">
-        <UnitEconomyStepSet :products="products" :requests="actions.requests"
-                            @select-product="onProductSelect"
-                            @select-request="onRequestSelect"/>
-        <UnitEconomyStepParameters :shown="settingSelected"
-                                   :parameters="calculator.request"
-                                   @parameter-changed="onParameterChanged"
-                                   @calculate="onCalculate"
-                                   v-model:is-calculate-transit-cost="calculator.isTransitCostOn"
-                                   v-model:is-calculate-transit="calculator.isTransitOn"/>
-        <UnitEconomyStepResult :shown="calculated && !!calculator.result"
-                               :result-data="calculator.result"
-                               :save-name="saveName"
-                               @save-request="onSaveRequest"/>
-      </div>
+      <MiddleLineLayout>
+        <UnitEconomyPreloader v-if="actions.isPageLoading"/>
+        <div class="steps-wrapper" v-else>
+          <UnitEconomyStepSet v-if="!emptySettings"
+                              :products="products"
+                              :simple-requests="actions.simpleRequests"
+                              :transit-requests="actions.transitRequests"
+                              @select-product="onProductSelect"
+                              @select-request="onRequestSelect"
+                              @just-continue="settingSelected=true"/>
+          <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
+                                     :parameters="calculator.request as TransitUnitEconomyRequestData"
+                                     @parameter-changed="onParameterChanged"
+                                     @calculate="onCalculate"
+                                     v-model:is-calculate-transit="calculator.isTransitOn"/>
+          <UnitEconomyStepResult :shown="calculated && !!calculator.result"
+                                 :result-data="calculator.result as TransitUnitEconomyResultData"
+                                 :save-name="saveName"
+                                 @save-request="onSaveRequest"/>
+        </div>
+      </MiddleLineLayout>
     </div>
   </ViewWorkspaceSection>
 </template>
@@ -114,11 +131,5 @@ function onSaveRequest(name: string) {
   width: 100%;
   height: 100%;
   overflow: auto;
-  padding-inline: 30px;
-
-  .steps-wrapper {
-    width: 100%;
-    max-width: 1280px;
-  }
 }
 </style>

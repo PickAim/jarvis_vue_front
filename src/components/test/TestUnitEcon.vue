@@ -24,7 +24,7 @@
                         v-model="calculator.request.niche"/>
       <ControlTextInput title="Себестоимость товара"
                         input-type="number"
-                        v-model="calculator.request.buy"/>
+                        v-model="calculator.request.cost_price"/>
       <ControlTextInput title="Стоимость упаковки"
                         input-type="number"
                         v-model="calculator.request.pack"/>
@@ -66,13 +66,13 @@ import {computed, reactive} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
-import type {UnitEconomyResultData} from "@/types/DataTypes";
+import type {TransitUnitEconomyResultData} from "@/types/DataTypes";
 import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
 import SavedItemsList from "@/components/calc-requests/SavedItemsList.vue";
 
 const calculator = reactive(new UnitEconomyCalculator());
 
-const chartKeyToTitle: { [ind in keyof UnitEconomyResultData]: string } = {
+const chartKeyToTitle: { [ind in keyof TransitUnitEconomyResultData]: string } = {
   margin: "Маржа",
   logistic_price: "Логистики",
   pack_cost: "Стоиомсть упаковки",
