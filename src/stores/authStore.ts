@@ -33,9 +33,11 @@ export const useAuthStore = defineStore<any, any, any, IAuthStore>("authStore", 
                 this.setUpdateToken(undefined);
                 return;
             }
-            this.setAccessToken(token.access_token);
-            this.setImprint(token.imprint_token);
-            this.setUpdateToken(token.update_token);
+            if (!window?.navigator?.cookieEnabled) {
+                this.setAccessToken(token.access_token);
+                this.setImprint(token.imprint_token);
+                this.setUpdateToken(token.update_token);
+            }
         }
     }
 });

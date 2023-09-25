@@ -9,7 +9,7 @@
 <style scoped lang="scss">
 @keyframes blinking-animation {
   0% {
-    background: #333;
+    background: #222;
   }
 
   100% {
@@ -21,7 +21,7 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  animation: blinking-animation 1s infinite running;
+  animation: blinking-animation 0.5s infinite running;
   animation-direction: alternate;
 }
 </style>

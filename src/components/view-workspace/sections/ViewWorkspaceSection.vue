@@ -12,13 +12,16 @@
   </div>
 </template>
 <style scoped lang="scss">
+@use "/src/assets/styles/variables" as var;
+
 .section-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   height: 100%;
-  overflow: hidden;
-  background-color: #161616;
+  overflow: auto;
+  background-color: var.$dark-jarvis-color;
 
   h1 {
     color: white;
@@ -29,12 +32,12 @@
     border-color: white;
     border-bottom-width: 2px;
     margin-left: 20px;
+    z-index: 19;
   }
 
   main {
     flex: 1 0;
     height: 100%;
-    overflow: hidden;
   }
 }
 </style>

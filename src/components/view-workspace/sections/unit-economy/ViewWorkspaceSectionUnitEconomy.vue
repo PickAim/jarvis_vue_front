@@ -53,7 +53,8 @@ function onProductSelect(ID) {
   if (!productsArray) return;
   const product = productsArray.find((product) => product.productID === ID);
   if (!product) return;
-  calculator.request.niche = product.niche[0].toUpperCase() + product.niche.substring(1).toLowerCase();
+  // TODO: Change niche to niche_id!
+  calculator.request.niche_id = Number(product.niche);
   calculator.request.marketplace_id = Number(product.marketplaceID);
   calculator.request.category_id = Object.keys(niches).indexOf(product.category) + 2;
   saveName.value = product.name;
@@ -130,6 +131,5 @@ function onSaveRequest(name: string) {
 .section-body-wrapper {
   width: 100%;
   height: 100%;
-  overflow: auto;
 }
 </style>

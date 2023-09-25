@@ -195,7 +195,6 @@ $tag-width: 1150px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 0;
   height: 100vh;
   width: 100%;
   overflow: auto;

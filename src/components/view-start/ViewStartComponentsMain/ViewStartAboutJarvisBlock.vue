@@ -98,7 +98,6 @@ import ControlButton from "@/components/controls/ControlButton.vue";
     .circles {
       display: flex;
       flex-direction: row;
-      z-index: 1;
 
       .circle {
         border-radius: 999px;
@@ -148,7 +147,6 @@ import ControlButton from "@/components/controls/ControlButton.vue";
     background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
     backdrop-filter: blur(15px);
     padding-block: 62px;
-    z-index: 2;
 
     .feature {
       display: grid;

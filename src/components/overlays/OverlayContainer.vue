@@ -6,23 +6,18 @@ import {storeToRefs} from "pinia";
 const overlayState = useOverlayStateStore();
 const {overlayName, isOpen} = storeToRefs(overlayState)
 
-// const loadedOverlays = Object.keys(overlays).reduce((obj, name)=>{
-//   return Object.assign(obj, {
-//     [name]: defineAsyncComponent(() => import(overlays[name as OverlayName]))
-//   })
-// }, {})
-
-function backgroundClick(e: Event) {
-  if (e.target === e.currentTarget) overlayState.closeOverlay();
+function backgroundPointerDown() {
+  overlayState.closeOverlay();
 }
 
 </script>
 
 <template>
   <div class="overlay-container-wrapper" :class="{active: isOpen}">
-    <div class="background-wrapper" @click="backgroundClick">
+    <div class="background-wrapper"
+         @pointerdown="backgroundPointerDown">
       <component :is="overlays[overlayName]"
-                 :options="overlayState.overlayOptions"/>
+                 :options="overlayState.overlayOptions" @pointerdown="(e) => e.stopPropagation()"/>
     </div>
   </div>
 </template>
@@ -43,9 +38,14 @@ function backgroundClick(e: Event) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    transition: all 0.6s;
-    clip-path: circle(0% at 105% -5%);
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.2s;
+    opacity: 1;
+
+    > * {
+      transition: all 0.2s;
+      opacity: 0;
+    }
   }
 }
 
@@ -53,8 +53,11 @@ function backgroundClick(e: Event) {
   pointer-events: all;
 
   .background-wrapper {
-    clip-path: circle(100%);
     background: rgba(0, 0, 0, 0.5);
+
+    > * {
+      opacity: 1;
+    }
   }
 }
 </style>
