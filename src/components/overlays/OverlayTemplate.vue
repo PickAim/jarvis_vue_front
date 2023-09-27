@@ -30,8 +30,11 @@ defineProps<{
   }
 
   .main-wrapper {
+    flex: 1 0 auto;
+    display: flex;
     overflow-y: auto;
     height: 100%;
+    opacity: 1;
   }
 }
 </style>

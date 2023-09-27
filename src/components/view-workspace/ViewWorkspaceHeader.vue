@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import {sections} from "@/components/view-workspace/workspaceSections";
 import ViewWorkspaceHeaderMenu from "@/components/view-workspace/ViewWorkspaceHeaderMenu.vue";
-import {useOverlayStateStore} from "@/stores/overlayStore";
-
-const overlayState = useOverlayStateStore();
-
-function onProfileClick() {
-  overlayState.openOverlay("login");
-}
+import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorkspaceHeaderMenuPopup.vue";
 
 </script>
 
@@ -18,8 +12,12 @@ function onProfileClick() {
     </div>
     <div class="menu-and-profile-wrapper">
       <ViewWorkspaceHeaderMenu/>
-      <button class="profile-button" @click="onProfileClick">
-      </button>
+      <div class="header-popup-wrapper">
+        <div class="profile-button">
+          <span class="profile-logo"/>
+        </div>
+        <ViewWorkspaceHeaderMenuPopup class="header-popup"/>
+      </div>
     </div>
   </header>
 </template>
@@ -58,13 +56,32 @@ $header-height: 70px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
 
-  .profile-button {
-    width: 60px;
-    aspect-ratio: 1/1;
-    border-radius: 999px;
-    border: 2px solid var.$green-jarvis-color;
+    .header-popup-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      height: 60px;
+
+      .profile-button {
+        display: inherit;
+        width: 60px;
+        height: 60px;
+        aspect-ratio: 1/1;
+
+        .profile-logo {
+          width: 60px;
+          height: 60px;
+          border-radius: 999px;
+          border: 2px solid var.$green-jarvis-color;
+        }
+      }
+
+      .header-popup:hover, .profile-button:hover + .header-popup {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
   }
 }
 </style>

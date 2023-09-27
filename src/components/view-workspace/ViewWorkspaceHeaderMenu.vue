@@ -5,7 +5,7 @@ import {useRouter} from "vue-router";
 
 const router = useRouter();
 const isOpen = ref(false);
-const selectedRoute = ref(0);
+const selectedRoute = ref(-1);
 
 const menus: { title: string, menuItems: SectionInfoType[] }[] = [
   {
@@ -44,6 +44,10 @@ const menuItems = menus.reduce(
       });
       return accum;
     }, []);
+
+router.beforeEach((to) => {
+  selectedRoute.value = menuItems.findIndex((menuItem) => menuItem.item.link === to.fullPath);
+});
 
 function onMouseEnter() {
   isOpen.value = true;

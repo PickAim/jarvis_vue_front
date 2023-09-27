@@ -53,7 +53,7 @@ export default class AccountRequester extends Requester {
     }
 
     async logout(): Promise<ResponseData<object>>{
-        this.authStore.setTokens({access_token: "", update_token: ""});
+        this.authStore.setTokens(undefined);
         return await this.requestHandler.makeRequest({
             url: "/access/logout/",
         });

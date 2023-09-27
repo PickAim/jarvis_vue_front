@@ -4,10 +4,11 @@ import {widgets} from "@/components/view-workspace/widgets";
 import ControlButtonRoundWhite from "@/components/controls/ControlButtonRoundWhite.vue";
 import type {WidgetName} from "@/types/WidgetTypes";
 import {useWidgetStore} from "@/stores/widgetStore";
+import {reactive} from "vue";
 
 const widgetStore = useWidgetStore();
 
-const mainSectionWidgets: WidgetName[] = [
+const mainSectionWidgets = reactive<WidgetName[]>([
   'nicheDist',
   'unitEcon',
   'remains',
@@ -16,17 +17,17 @@ const mainSectionWidgets: WidgetName[] = [
   'averageCheck',
   'lostRevenue',
   'turnover'
-]
+])
 
 function onAddClick(name: WidgetName) {
-  widgetStore.addWidget(name);
+  widgetStore.addWidget(name, undefined);
 }
 
 </script>
 
 <template>
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="Добавление виджета">
-    <main>
+    <main @click="mainSectionWidgets.splice(0,1)">
       <div class="widget" v-for="w in mainSectionWidgets" :key="w">
         <div class="widget-overlay">
           <ControlButtonRoundWhite class="add-button" @click="onAddClick(w)">ADD</ControlButtonRoundWhite>

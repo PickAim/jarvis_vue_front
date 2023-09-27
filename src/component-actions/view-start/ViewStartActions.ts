@@ -16,6 +16,6 @@ export class ViewStartActions {
     }
 
     openMobMenu(){
-        this.overlayState.openOverlay('mobmenu');
+        this.overlayState.openOverlay('mobileMenu');
     }
 }

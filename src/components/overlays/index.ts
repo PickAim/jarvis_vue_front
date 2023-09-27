@@ -10,19 +10,19 @@
 
 import {default as login} from './OverlayWindowLogin.vue';
 import {default as registration} from './OverlayWindowRegistration.vue';
-import {default as controlPanel} from './OverlayWindowControlPanel.vue';
+import {default as settingsPanel} from './settings-panel-overlay/OverlayWindowSettingsPanel.vue';
 import {default as widgetAdd} from './OverlayWindowWidgetAdd.vue';
 import {default as widgetSettings} from './OverlayWindowWidgetSettings.vue';
 import {default as widgetOptions} from './OverlayWindowWidgetOptions.vue';
-import {default as mobmenu} from './OverlayMobMenu.vue'; 
+import {default as mobileMenu} from './OverlayMobMenu.vue';
 import type {OverlayName} from "@/types/OverlayTypes";
 
-export const overlays: {[name in OverlayName]: any} = {
+export const overlays: { [name in OverlayName]: any } = {
     login,
     registration,
-    controlPanel,
+    settingsPanel,
     widgetAdd,
     widgetSettings,
     widgetOptions,
-    mobmenu
+    mobileMenu
 }
