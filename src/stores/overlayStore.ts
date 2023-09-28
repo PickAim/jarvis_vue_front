@@ -21,8 +21,9 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
     }
 
     function closeOverlay() {
-        if (!isLoading.value)
+        if (!isLoading.value) {
             isOpen.value = false;
+        }
     }
 
     function startLoading() {

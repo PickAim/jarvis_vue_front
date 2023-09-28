@@ -22,7 +22,6 @@ defineProps<{
   min-height: 65vh;
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
   overflow: hidden;
 
   .header {
@@ -33,7 +32,6 @@ defineProps<{
     flex: 1 0 auto;
     display: flex;
     overflow-y: auto;
-    height: 100%;
     opacity: 1;
   }
 }

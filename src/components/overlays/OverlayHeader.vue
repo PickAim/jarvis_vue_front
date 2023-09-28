@@ -16,7 +16,8 @@ const {closeOverlay} = useOverlayStateStore()
 </template>
 
 <style scoped lang="scss">
-$headerHeight: 50px;
+$headerHeight: 35px;
+
 header {
   display: flex;
   flex-direction: row;
