@@ -11,6 +11,7 @@ import {
     SimpleUnitEconomyActions,
     TransitUnitEconomyActions
 } from "@/requests/request-actions/calculations/UnitEconomyActions";
+import {useRequestStore} from "@/stores/requestStore";
 
 export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions {
     products: AllProductsResultData | undefined = undefined;
@@ -25,12 +26,17 @@ export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions 
         const simpleUnitEconomyActions = new SimpleUnitEconomyActions();
         const transitUnitEconomyActions = new TransitUnitEconomyActions();
 
-        await simpleUnitEconomyActions.loadAll();
-        await transitUnitEconomyActions.loadAll();
+        useRequestStore().startSequence();
+        const promise = Promise.all([
+            simpleUnitEconomyActions.loadAll(),
+            transitUnitEconomyActions.loadAll(),
+            (new AllProductsActions()).getUserInfo()
+        ]);
+        useRequestStore().stopSequence();
 
-        this.simpleRequests = simpleUnitEconomyActions.getAll();
-        this.transitRequests = transitUnitEconomyActions.getAll();
-        this.products = (await (new AllProductsActions()).getUserInfo()).result;
-        console.log(this.products);
+        const result = await promise;
+        this.simpleRequests = result[0].result;
+        [this.simpleRequests, this.transitRequests, this.products] =
+            [result[0].result, result[1].result, result[2].result];
     }
 }

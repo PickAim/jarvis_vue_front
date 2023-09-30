@@ -8,7 +8,7 @@ import {useRequestStore} from "@/stores/requestStore";
 import {Configs} from "@/Configs";
 
 export default class AxiosRequestController implements IRequestController {
-    axiosInst: AxiosInstance
+    axiosInst: AxiosInstance;
     requestStore;
 
     constructor(private authStore: IAuthStore) {
@@ -26,10 +26,8 @@ export default class AxiosRequestController implements IRequestController {
         Promise<ResponseData<K>> {
         const {url, body = {}, method = "POST", responseType = "json"} = request;
 
-        const controller = new AbortController();
         const config: AxiosRequestConfig = {
-            responseType: responseType,
-            signal: controller.signal
+            responseType: responseType
         }
 
         const tokens: Partial<TokenData> = {} as TokenData;
@@ -42,9 +40,9 @@ export default class AxiosRequestController implements IRequestController {
 
         const requestBody = {"request_data": body, ...tokens};
 
-        let response;
+        let response: ResponseData<K>;
         try {
-            this.requestStore.loadingStart(controller);
+            config.signal = this.requestStore.loadingStart().signal;
             let result: AxiosResponse<K> | undefined = undefined;
             if (method == "GET") {
                 config.params = requestBody;
