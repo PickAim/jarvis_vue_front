@@ -45,9 +45,9 @@ export const useRequestStore = defineStore('requestStore', () => {
     }
 
     async function executeInBackground(fn: () => Promise<void>) {
-        isHidden.value = true;
+        hidePreloader();
         await fn();
-        isHidden.value = false;
+        showPreloader();
     }
 
     function startSequence() {
@@ -60,7 +60,7 @@ export const useRequestStore = defineStore('requestStore', () => {
     }
 
     return {
-        isLoading, loadingStart, loadingStop, loadingAbort, hidePreloader, showPreloader,
+        isHidden, isLoading, loadingStart, loadingStop, loadingAbort, hidePreloader, showPreloader,
         executeInBackground, startSequence, stopSequence
     }
 })
