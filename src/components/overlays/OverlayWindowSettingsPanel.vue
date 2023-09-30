@@ -65,12 +65,9 @@ function onMenuClick(ind: number) {
 
     header {
       width: 100%;
-      margin-bottom: 25px;
-      padding-left: 56px;
+      padding: 15px 36px;
       font-size: 36px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
     }
 
     .body-wrapper {

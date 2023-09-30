@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import OverlayHeader from "@/components/overlays/OverlayHeader.vue";
+import {useOverlayStateStore} from "@/stores/overlayStore";
 
 defineProps<{
   headerText: string
 }>()
+
+const {closeOverlay} = useOverlayStateStore()
 </script>
 
 <template>
   <div class="template-wrapper" ref="templateWrapper">
-    <OverlayHeader class="header">{{ headerText }}</OverlayHeader>
+    <button class="close-button" @click="closeOverlay()">○</button>
     <div class="main-wrapper">
       <slot/>
     </div>
@@ -24,8 +26,12 @@ defineProps<{
   flex-direction: column;
   overflow: hidden;
 
-  .header {
-    width: 100%;
+  .close-button {
+    position: absolute;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    color: #FFFFFF;
   }
 
   .main-wrapper {

@@ -57,7 +57,7 @@ main {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 50px;
+  padding-block: 50px;
 
   header {
     font-weight: 700;

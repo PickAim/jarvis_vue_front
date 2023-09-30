@@ -15,7 +15,7 @@ async function onExitClick() {
 
 <template>
   <div class="workspace-header-popup-wrapper">
-    <div class="top-triangle"/>
+<!--    <div class="top-triangle"/>-->
     <div class="popup-body">
       <button class="menu-item" @click="overlayState.openOverlay('settingsPanel')">Панель управления</button>
       <div class="separator"/>
