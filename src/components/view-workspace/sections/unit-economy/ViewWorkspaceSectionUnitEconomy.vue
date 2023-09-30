@@ -34,7 +34,6 @@ actions.initSection().then(() => {
 const products = computed<ProductData[] | undefined>(() => {
   if (!actions.products) return;
   const requestedProducts = actions.products;
-  console.log(requestedProducts);
   const products: ProductData[] = [];
   Object.keys(requestedProducts).forEach((marketplaceID) => {
     Object.keys(requestedProducts[marketplaceID]).forEach((productID) => {
