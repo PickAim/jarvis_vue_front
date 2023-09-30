@@ -9,6 +9,7 @@ import type {GreenZoneResultData, SelectOptionType} from "@/types/DataTypes";
 import {GreenZoneActions} from "@/requests/request-actions/calculations/GreenZoneActions";
 import {ResultCode} from "@/requests/ResultCode";
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
+import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 
 const selectedCategoryID = ref("");
 const selectedNicheID = ref("");
@@ -55,82 +56,84 @@ async function onCalculate() {
   <ViewWorkspaceSection>
     <template v-slot:header>{{ sections.segmentsAnalyze.title }}</template>
     <div class="section-body-wrapper">
-      <div class="segments-analyze-wrapper">
-        <div class="niche-input">
-          <div class="niche-input-label">Выберите категорию и нишу для расчёта:</div>
-          <ControlSelect class="select-wrapper"
-                         v-model:selected-value="selectedCategoryID"
-                         @update:selected-value="selectedNicheID=''"
-                         :options="categoryOptions"
-                         placeholder="Категория"
-          />
-          <ControlSelect class="select-wrapper"
-                         v-model:selected-value="selectedNicheID"
-                         :options="nicheOptions"
-                         placeholder="Ниша"
-          />
-        </div>
-        <ControlButton class="calculate-button" @click="onCalculate">Рассчитать</ControlButton>
-        <div class="segments-result-wrapper" v-if="analyzeResult">
-          <div class="segments-chart-wrapper">
-            <BarChart class="segments-chart" :data="chartData"/>
-            <div class="segments-result-interpretation">
-              <div class="priority-segment-label recommendation-label">
-                Приоритетный сегмент: {{ analyzeResult.green.best_segment_idx + 1 }}
+      <MiddleLineLayout>
+        <div class="segments-analyze-wrapper">
+          <div class="niche-input">
+            <div class="niche-input-label">Выберите категорию и нишу для расчёта:</div>
+            <ControlSelect class="select-wrapper"
+                           v-model:selected-value="selectedCategoryID"
+                           @update:selected-value="selectedNicheID=''"
+                           :options="categoryOptions"
+                           placeholder="Категория"
+            />
+            <ControlSelect class="select-wrapper"
+                           v-model:selected-value="selectedNicheID"
+                           :options="nicheOptions"
+                           placeholder="Ниша"
+            />
+          </div>
+          <ControlButton class="calculate-button" @click="onCalculate">Рассчитать</ControlButton>
+          <div class="segments-result-wrapper" v-if="analyzeResult">
+            <div class="segments-chart-wrapper">
+              <BarChart class="segments-chart" :data="chartData"/>
+              <div class="segments-result-interpretation">
+                <div class="priority-segment-label recommendation-label">
+                  Приоритетный сегмент: {{ analyzeResult.green.best_segment_idx + 1 }}
+                </div>
+                <div class="segment-recommendation-label recommendation-label">
+                  Рекомендуется держать цену в диапазоне от
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][0] }}
+                  до
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][1] }}
+                </div>
+                <div class="high-sells-segment-label recommendation-label">
+                  Высокая выручка в сегменте от
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][0] }}
+                  до
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][1] }}
+                </div>
+                <div class="high-gross-segment-label recommendation-label">
+                  Высокий % с продажами в сегменте от
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][0] }}
+                  до
+                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][1] }}
+                </div>
               </div>
-              <div class="segment-recommendation-label recommendation-label">
-                Рекомендуется держать цену в диапазоне от
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][0] }}
-                до
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][1] }}
+            </div>
+            <div class="segments-recommendation-grid">
+              <div class="grid-header segment-grid-row">
+                <div class="grid-cell">Номер</div>
+                <div class="grid-cell">Промежуток</div>
+                <div class="grid-cell">Количество</div>
+                <div class="grid-cell">Выручка</div>
+                <div class="grid-cell">Количество проданых</div>
+                <div class="grid-cell">Средняя выручка</div>
               </div>
-              <div class="high-sells-segment-label recommendation-label">
-                Высокая выручка в сегменте от
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][0] }}
-                до
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][1] }}
-              </div>
-              <div class="high-gross-segment-label recommendation-label">
-                Высокий % с продажами в сегменте от
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][0] }}
-                до
-                {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][1] }}
+              <div class="segment-grid-row" v-for="(_, ind) in analyzeResult.freq.x" :key="ind">
+                <div class="grid-cell">
+                  {{ ind + 1 }}
+                </div>
+                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_idx}">
+                  {{ analyzeResult.green.segments[ind][0] }}-{{ analyzeResult.green.segments[ind][1] }}
+                </div>
+                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_product_count_idx}">
+                  {{ analyzeResult.green.segment_product_count[ind] }}
+                </div>
+                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_profit_idx}">
+                  {{ analyzeResult.green.segment_profits[ind] }}
+                </div>
+                <div class="grid-cell"
+                     :class="{best: ind === analyzeResult.green.best_segment_product_with_trades_count_idx}">
+                  {{ analyzeResult.green.segment_product_with_trades_count[ind] }}
+                </div>
+                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_mean_segment_profit_idx}">
+                  {{ analyzeResult.green.mean_segment_profit[ind] }}
+                </div>
               </div>
             </div>
           </div>
-          <div class="segments-recommendation-grid">
-            <div class="grid-header segment-grid-row">
-              <div class="grid-cell">Номер</div>
-              <div class="grid-cell">Промежуток</div>
-              <div class="grid-cell">Количество</div>
-              <div class="grid-cell">Выручка</div>
-              <div class="grid-cell">Количество проданых</div>
-              <div class="grid-cell">Средняя выручка</div>
-            </div>
-            <div class="segment-grid-row" v-for="(_, ind) in analyzeResult.freq.x" :key="ind">
-              <div class="grid-cell">
-                {{ ind + 1 }}
-              </div>
-              <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_idx}">
-                {{ analyzeResult.green.segments[ind][0] }}-{{ analyzeResult.green.segments[ind][1] }}
-              </div>
-              <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_product_count_idx}">
-                {{ analyzeResult.green.segment_product_count[ind] }}
-              </div>
-              <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_profit_idx}">
-                {{ analyzeResult.green.segment_profits[ind] }}
-              </div>
-              <div class="grid-cell"
-                   :class="{best: ind === analyzeResult.green.best_segment_product_with_trades_count_idx}">
-                {{ analyzeResult.green.segment_product_with_trades_count[ind] }}
-              </div>
-              <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_mean_segment_profit_idx}">
-                {{ analyzeResult.green.mean_segment_profit[ind] }}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+      </MiddleLineLayout>
     </div>
   </ViewWorkspaceSection>
 </template>
@@ -139,8 +142,6 @@ async function onCalculate() {
 .section-body-wrapper {
   width: 100%;
   height: 100%;
-  overflow: auto;
-  padding-inline: 30px;
 
   .segments-analyze-wrapper {
     width: 100%;
