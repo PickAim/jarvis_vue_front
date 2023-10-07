@@ -89,19 +89,21 @@ import ControlButton from "@/components/controls/ControlButton.vue";
   }
 
   .feature-grid-wrapper {
+    position: relative;
     max-width: 1060px;
     margin-block: 50px;
-    position: relative;
     overflow: visible;
 
     .circles {
       display: flex;
       flex-direction: row;
 
+
       .circle {
+        position: absolute;
         border-radius: 999px;
         background: linear-gradient(180deg, #B7FF44 0%, rgba(43, 44, 42, 0.31) 100%);
-        position: absolute;
+        z-index: 1;
       }
 
       .circle-1 {
@@ -146,6 +148,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
     background: linear-gradient(97.84deg, rgba(107, 166, 255, 0.228) 4.44%, rgba(199, 244, 70, 0.201) 93.84%);
     backdrop-filter: blur(15px);
     padding-block: 62px;
+    z-index: 2;
 
     .feature {
       display: grid;
@@ -230,7 +233,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
       grid-template-columns: 1fr;
       padding: 0;
       gap: 50px;
-      backdrop-filter: none;
+      backdrop-filter: blur(15px);
       background: none;
 
       .feature {
