@@ -8,7 +8,12 @@
     "target": "ESNext",
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@styles/*": [
+        "./src/assets/styles/*"
+      ]
     }
   }
 }

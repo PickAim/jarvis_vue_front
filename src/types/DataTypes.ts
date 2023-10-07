@@ -76,7 +76,7 @@ export class SimpleUnitEconomyRequestData implements NicheRequestData {
     width = NaN;
     height = NaN;
     mass = NaN;
-    target_warehouse_name = "";
+    target_warehouse_id = 2;
 }
 
 type SimpleUnitEconomyOneResultData = {

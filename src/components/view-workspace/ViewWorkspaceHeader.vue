@@ -6,9 +6,9 @@ import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorksp
 </script>
 
 <template>
-  <header class="view-start-wrapper">
+  <header class="view-workspace-header">
     <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
-      <img src="/src/assets/images/jarvis_icon_big.png" alt="">
+      <img src="/src/assets/images/jarvis_white_icon.png" alt="">
     </div>
     <div class="menu-and-profile-wrapper">
       <ViewWorkspaceHeaderMenu/>
@@ -25,15 +25,15 @@ import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorksp
 <style scoped lang="scss">
 @use "/src/assets/styles/variables" as var;
 
-$header-height: 70px;
+$header-height: 80px;
 
-.view-start-wrapper {
+.view-workspace-header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-inline: 30px;
-  background-color: black;
+  padding: 0 60px 0 40px;
   height: $header-height;
+  margin-top: 25px;
   width: 100%;
   flex: 0 0 auto;
 
@@ -51,16 +51,23 @@ $header-height: 70px;
   }
 
   .menu-and-profile-wrapper {
+    position: relative;
     flex: 1 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 20px;
+    height: 100%;
+    border: 1px solid var.$gray-color;
+    background: var.$dark-gradient-color;
+    //backdrop-filter: blur(1px);
     align-items: center;
 
     .header-popup-wrapper {
       position: relative;
       display: flex;
       flex-direction: row;
+      margin-right: 30px;
       height: 60px;
 
       .profile-button {

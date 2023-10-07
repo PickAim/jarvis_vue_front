@@ -5,7 +5,7 @@ const actions = new ViewStartActions();
 </script>
 
 <template>
-  <div class="view-start-wrapper">
+  <div class="view-workspace-header">
     <div class="you-have-block-wrapper">
       <div class="buttons-wrapper">
         <img src="src\assets\images\jarvis.png" alt="">
@@ -191,7 +191,7 @@ const actions = new ViewStartActions();
 <style scoped lang="scss">
 $tag-width: 1150px;
 
-.view-start-wrapper {
+.view-workspace-header {
   display: flex;
   flex-direction: column;
   align-items: center;

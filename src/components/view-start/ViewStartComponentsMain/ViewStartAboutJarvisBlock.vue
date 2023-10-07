@@ -79,7 +79,6 @@ import ControlButton from "@/components/controls/ControlButton.vue";
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
-  font-family: Montserrat, sans-serif;
   line-height: normal;
   color: white;
 

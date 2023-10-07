@@ -17,7 +17,7 @@ type ResultType = TransitUnitEconomyResultData | SimpleUnitEconomyResultData;
 export class UnitEconomyCalculator extends SavableCalculator<RequestType, ResultType> {
     isTransitOn = false;
 
-    private resultTransitKeys: (keyof TransitUnitEconomyResultData)[] = ["purchase_investments", "commercial_expanses",
+    private resultTransitKeys: (keyof TransitUnitEconomyResultData[0])[] = ["purchase_investments", "commercial_expanses",
         "tax_expanses", "absolute_transit_margin", "relative_transit_margin", "transit_roi"];
 
     constructor() {
@@ -58,7 +58,8 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
 
     afterSuccessfulCalculating(result: ResultType) {
         if (!this.isTransitOn) {
-            removeKeys(result as TransitUnitEconomyResultData, this.resultTransitKeys);
+            removeKeys(result[0] as TransitUnitEconomyResultData[0], this.resultTransitKeys);
+            removeKeys(result[1] as TransitUnitEconomyResultData[0], this.resultTransitKeys);
         }
         return super.afterSuccessfulCalculating(result);
     }

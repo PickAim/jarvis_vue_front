@@ -44,9 +44,11 @@ function onLoginClick() {
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .overlay-window-wrapper {
   width: 450px;
-  background: linear-gradient(180deg, rgba(52, 52, 52, 0.5) 0%, rgba(217, 217, 217, 0.07) 100%);
+  background: var.$dark-gradient-color;
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(15px);
   border-radius: 21px;

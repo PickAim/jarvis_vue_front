@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import "./unit-economy-step-style.scss";
 import type {Ref} from "vue";
 import {computed, reactive} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
@@ -8,6 +7,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 import type {SelectOptionType, TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {niches} from "@/nichesData";
+import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 
 const props = defineProps<{
   shown: boolean,
@@ -120,39 +120,42 @@ function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefi
 </script>
 
 <template>
-  <div id="unit-economy-parameters" class="unit-economy-step" :class="{active: props.shown}">
-    <h2>Параметры</h2>
-    <div class="inputs-wrapper">
-      <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
-        <ControlTextInput v-if="input.type === 'input'"
-                          :model-value="props.parameters[input.name] || input.value"
-                          @update:model-value="(value) => {
-                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
-                          }"
-                          :title="input.title"
-                          :input-type="input.inputType"/>
-        <ControlSelect v-if="input.type === 'select'"
-                       :selected-value="input.value || props.parameters[input.name]"
-                       @update:selected-value="(value) => {
-                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
-                       }"
-                       :placeholder="input.placeholder"
-                       :options="input.options"/>
-        <ControlCheckBox v-if="input.type === 'check'"
-                         :model-value="input.value || props.parameters[input.name]"
-                         @update:model-value="(value) => {
-                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
-                          }">
-          {{ input.placeholder }}
-        </ControlCheckBox>
+  <UnitEconomyStep id="unit-economy-parameters" :class="{active: props.shown}">
+    <template v-slot:header>Параметры</template>
+    <template v-slot:body>
+      <div class="inputs-wrapper">
+        <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
+          <ControlTextInput v-if="input.type === 'input'"
+                            :model-value="props.parameters[input.name] || input.value"
+                            @update:model-value="(value) =>
+                            {
+                              input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                            }"
+                            :title="input.title"
+                            :input-type="input.inputType"/>
+          <ControlSelect v-if="input.type === 'select'"
+                         :selected-value="input.value || props.parameters[input.name]"
+                         @update:selected-value="(value) => {
+                           input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                         }"
+                         :placeholder="input.placeholder"
+                         :options="input.options"/>
+          <ControlCheckBox v-if="input.type === 'check'"
+                           :model-value="input.value || props.parameters[input.name]"
+                           @update:model-value="(value) => {
+                             input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
+                           }">
+            {{ input.placeholder }}
+          </ControlCheckBox>
+        </div>
       </div>
-    </div>
-    <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
-  </div>
+      <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
+    </template>
+  </UnitEconomyStep>
 </template>
 
 <style scoped lang="scss">
-.unit-economy-step {
+#unit-economy-parameters {
   position: relative;
   visibility: hidden;
   height: 0;
@@ -163,12 +166,12 @@ function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefi
   .inputs-wrapper {
     display: flex;
     flex-direction: column;
-    width: 700px;
+    width: 400px;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
     margin: 10px 0 50px 0;
-    gap: 15px;
+    gap: 30px;
 
     .input-item-wrapper {
       flex: 0 0 auto;

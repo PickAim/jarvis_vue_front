@@ -53,7 +53,6 @@ function onMenuClick(ind: number) {
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(15px);
   color: white;
-  font-family: Montserrat, sans-serif;
   line-height: normal;
 
   main {

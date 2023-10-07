@@ -21,18 +21,20 @@ useRequestStore().executeInBackground(() => actions.initSection())
 </template>
 
 <style scoped lang="scss">
+@use "/src/assets/styles/variables" as var;
+
 .workspace-wrapper {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   height: 100vh;
   width: 100vw;
+  background: var.$dark-jarvis-color;
   color: white;
-  overflow: hidden;
+  overflow: auto;
 
   .section-wrapper {
     flex: 1 0;
-    overflow: hidden;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="view-start-wrapper">
+  <div class="view-workspace-header">
     <div class="calc-input-wrapper">
       <div class="calc-control-button-wrapper">
         <ControlButton @click="getAllClickHandler"
@@ -120,7 +120,7 @@ async function getAllClickHandler() {
 </script>
 
 <style scoped lang="scss">
-.view-start-wrapper {
+.view-workspace-header {
   display: flex;
   flex-direction: row;
   width: 100%;

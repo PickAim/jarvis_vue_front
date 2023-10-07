@@ -6,11 +6,11 @@ import {
   TransitUnitEconomyRequestData,
   TransitUnitEconomyResultData
 } from "@/types/DataTypes";
-import "./unit-economy-step-style.scss";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import type {CalculateRequestData} from "@/types/RequestTypes";
 import {computed} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
+import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 
 const props = defineProps<{
   products?: ProductData[],
@@ -35,9 +35,9 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
 </script>
 
 <template>
-  <div class="unit-economy-step">
-    <h2>Надстройка</h2>
-    <div class="step-body">
+  <UnitEconomyStep class="unit-economy-set">
+    <template v-slot:header>Надстройка</template>
+    <template v-slot:body>
       <div v-if="products && products.length > 0">
         <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
         <ProductsList v-if="props.products"
@@ -56,12 +56,12 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
       <div>
         <ControlButton class="just-continue-button" @click="emit('just-continue')">Начать с нуля</ControlButton>
       </div>
-    </div>
-  </div>
+    </template>
+  </UnitEconomyStep>
 </template>
 
 <style scoped lang="scss">
-.unit-economy-step {
+.unit-economy-set {
   .select-product-label {
     margin-bottom: 15px;
   }

@@ -24,7 +24,6 @@ withDefaults(defineProps<{
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: #B7FF44;
   padding: 5px 14px;
-  font-family: Montserrat, sans-serif;
   font-weight: 700;
   font-size: 23px;
   backdrop-filter: blur(15px);

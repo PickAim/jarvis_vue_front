@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import "./unit-economy-step-style.scss";
 import type {TransitUnitEconomyResultData} from "@/types/DataTypes";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import {computed, ref} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
+import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 
 const props = defineProps<{
   shown: boolean,
@@ -54,24 +54,26 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
 </script>
 
 <template>
-  <div class="unit-economy-step" id="unit-economy-result" :class="{active: props.shown}">
-    <h2>Результат</h2>
-    {{ resultData }}
-    <!--    <div class="result-wrapper">-->
-    <!--      <DoughnutBar class="result-chart"-->
-    <!--                   :data-and-labels="chartResult"-->
-    <!--                   :title="chartTitle" v-if="chartResult.length >= 0"/>-->
-    <!--    </div>-->
-    <!--    <div class="save-wrapper">-->
-    <!--      <ControlTextInput class="save-name-input"-->
-    <!--                        v-model="requestName"-->
-    <!--                        title="Имя сохранения"/>-->
-    <!--      <ControlButton class="save-button"-->
-    <!--                     @click="emits('saveRequest', requestName)">-->
-    <!--        Сохранить запрос-->
-    <!--      </ControlButton>-->
-    <!--    </div>-->
-  </div>
+  <UnitEconomyStep id="unit-economy-result" :class="{active: props.shown}">
+    <template v-slot:header>Результат</template>
+    <template v-slot:body>
+      {{ resultData }}
+      <!--      <div class="result-wrapper">-->
+      <!--        <DoughnutBar class="result-chart"-->
+      <!--                     :data-and-labels="chartResult"-->
+      <!--                     :title="chartTitle" v-if="chartResult.length >= 0"/>-->
+      <!--      </div>-->
+      <!--      <div class="save-wrapper">-->
+      <!--        <ControlTextInput class="save-name-input"-->
+      <!--                          v-model="requestName"-->
+      <!--                          title="Имя сохранения"/>-->
+      <!--        <ControlButton class="save-button"-->
+      <!--                       @click="emits('saveRequest', requestName)">-->
+      <!--          Сохранить запрос-->
+      <!--        </ControlButton>-->
+      <!--      </div>-->
+    </template>
+  </UnitEconomyStep>
 </template>
 
 <style scoped lang="scss">

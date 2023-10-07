@@ -3,19 +3,22 @@ import {useOverlayStateStore} from "@/stores/overlayStore";
 import {AccountRequestActions} from "@/requests/request-actions/AccountRequestActions";
 import {ErrorHandler} from "@/requests/ErrorHandler";
 import {ResultCode} from "@/requests/ResultCode";
+import {useRequestStore} from "@/stores/requestStore";
 
 const overlayState = useOverlayStateStore();
 const accountActions = new AccountRequestActions();
 
 async function onExitClick() {
-  await accountActions.logout();
+  await useRequestStore().executeInBackground(async () => {
+    await accountActions.logout();
+  });
   ErrorHandler.handle(ResultCode.INCORRECT_TOKEN);
 }
 </script>
 
 <template>
   <div class="workspace-header-popup-wrapper">
-<!--    <div class="top-triangle"/>-->
+    <!--    <div class="top-triangle"/>-->
     <div class="popup-body">
       <button class="menu-item" @click="overlayState.openOverlay('settingsPanel')">Панель управления</button>
       <div class="separator"/>

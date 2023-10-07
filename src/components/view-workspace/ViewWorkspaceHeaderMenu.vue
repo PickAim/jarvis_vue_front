@@ -35,6 +35,7 @@ const menus: { title: string, menuItems: SectionInfoType[] }[] = [
 ]
 
 const gridColumns = menus.length;
+const gridRows = Math.max(...menus.map((menu) => menu.menuItems.length));
 
 type SectionButtonInfoType = { item: SectionInfoType, row: number, column: number };
 const menuItems = menus.reduce(
@@ -90,25 +91,26 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType, id: number) {
 </template>
 
 <style scoped lang="scss">
-$header-height: 70px;
+@use "src/assets/styles/variables" as var;
 
-$menu-item-width: 250px;
+$header-height: 80px;
+
+$menu-item-width: 300px;
 $menu-gap: 0;
-$hover-effect-width: 30px;
+$hover-effect-width: 40px;
 
 .menu-wrapper {
-  position: relative;
   display: flex;
   flex-direction: row;
   height: 100%;
   color: white;
-  margin-left: 100px;
 
   .title {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: $header-height;
+    font-size: 17px;
     width: 100%;
     padding-right: 10px;
     -webkit-user-select: none;
@@ -116,7 +118,7 @@ $hover-effect-width: 30px;
     .hover-effect-box {
       flex: 0 0 $hover-effect-width;
       height: 100%;
-      border-left: 1px solid white;
+      //border-left: 1px solid white;
       margin-right: 10px;
       transition: all 0.2s;
       box-sizing: border-box;
@@ -130,28 +132,35 @@ $hover-effect-width: 30px;
   .menu-grid {
     display: grid;
     grid-template-columns: repeat(v-bind(gridColumns), $menu-item-width);
-    border-right: 1px solid white;
+    //border-right: 1px solid white;
   }
 
   .title-list {
+    position: relative;
+    z-index: 22;
     grid-template-columns: repeat(v-bind(gridColumns), $menu-item-width);
     height: 100%;
-    background: #000;
-    z-index: 21;
+    background: var.$dark-gradient-color;
   }
 
+  $menu-items-border-color: white;
+
   .menu-items-grid {
-    transform: translateY(-100%);
     position: absolute;
-    background: #000;
-    top: 100%;
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-    transition: transform 0.1s cubic-bezier(0.620, 0.145, 0.340, 0.905);
-    z-index: 20;
+    background: var.$dark-jarvis-color;
+    top: calc(100% + 1px);
+    left: -1px;
+    height: 1px;
+    overflow: hidden;
+    border-color: white;
+    border-width: 1px 1px 1px 0;
+    opacity: 0;
+    transition: height 150ms cubic-bezier(0.620, 0.145, 0.340, 0.905), opacity 150ms;
+    z-index: 21;
 
     .menu-item {
       cursor: pointer;
+      border-left: 1px solid $menu-items-border-color;
 
       &:hover, &.selected {
         .hover-effect-box {
@@ -161,8 +170,10 @@ $hover-effect-width: 30px;
     }
 
     &.isShown {
-      transition-duration: 0.3s;
-      transform: translateY(0%);
+      transition-property: opacity, height;
+      transition-duration: 0.2s, 0.3s;
+      opacity: 1;
+      height: calc(v-bind(gridRows) * $header-height);
     }
   }
 }

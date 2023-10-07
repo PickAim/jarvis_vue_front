@@ -49,7 +49,6 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
   color: white;
 
   h1, h2 {
-    font-family: Montserrat, sans-serif;
     text-align: center;
     line-height: normal;
   }

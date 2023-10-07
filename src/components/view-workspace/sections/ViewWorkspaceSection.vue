@@ -25,12 +25,10 @@
 
   h1 {
     color: white;
-    font-size: 22px;
-    font-weight: bold;
-    width: fit-content;
-    padding: 10px 30px 10px 30px;
-    border-color: white;
-    border-bottom-width: 2px;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    padding-top: 30px;
     margin-left: 20px;
     z-index: 19;
   }
