@@ -16,13 +16,14 @@ withDefaults(defineProps<{
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .button-wrapper {
   min-width: 200px;
   min-height: 63px;
   color: #000;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: #B7FF44;
+  background: var.$green-jarvis-color;
   padding: 5px 14px;
   font-weight: 700;
   font-size: 23px;
@@ -30,11 +31,11 @@ withDefaults(defineProps<{
 
   &.enabled {
     &:hover {
-      border-color: #B7FF44;
+      //border-color: var.$green-jarvis-color;
     }
 
     &:active {
-      border-color: #d2ff8d;
+      //border-color: #d2ff8d;
     }
   }
 }

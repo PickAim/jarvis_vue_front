@@ -28,8 +28,10 @@ function backgroundPointerDown() {
   left: 0;
   width: 100%;
   height: 100%;
+  clip-path: inset(0 0 100% 0);
   pointer-events: none;
   z-index: 100;
+  transition: clip-path 0.2s;
   position: fixed;
 
   .background-wrapper {
@@ -38,26 +40,12 @@ function backgroundPointerDown() {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0);
-    transition: all 0.2s;
-    opacity: 1;
-
-    > * {
-      transition: all 0.2s;
-      opacity: 0;
-    }
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 
 .overlay-container-wrapper.active {
   pointer-events: all;
-
-  .background-wrapper {
-    background: rgba(0, 0, 0, 0.5);
-
-    > * {
-      opacity: 1;
-    }
-  }
+  clip-path: inset(0 0 0 0);
 }
 </style>

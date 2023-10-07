@@ -29,24 +29,18 @@ defineEmits(['update:modelValue'])
 </template>
 
 <style scoped lang="scss">
-@use "src/assets/styles/variables" as var;
 
 .text-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  height: 50px;
-  border-radius: 12px 12px 0 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: var.$dark-gradient-color;
-  backdrop-filter: blur(15px);
+  height: fit-content;
+  display: block;
+  margin: 0;
   $left-padding: 12px;
 
   .error-text {
     font-size: 17px;
     color: crimson;
     font-style: italic;
-    height: 100%;
+    height: 50px;
     width: 100%;
     margin-left: 5px;
     visibility: hidden;
@@ -57,20 +51,18 @@ defineEmits(['update:modelValue'])
   }
 
   .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-end;
     position: relative;
     height: 50px;
+    width: 100%;
     box-sizing: border-box;
 
     .title {
       position: absolute;
-      top: 15px;
+      top: 10px;
       left: $left-padding;
       font-size: 20px;
       line-height: 1em;
+      width: calc(100% - $left-padding);
       pointer-events: none;
       transition: .1s;
       color: #999;
@@ -81,16 +73,23 @@ defineEmits(['update:modelValue'])
 
     input {
       font-size: 18px;
-      margin-left: $left-padding;
-      padding: 15px 0 0 0;
+      padding: 10px 0 0 $left-padding;
+      height: 100%;
+      width: 100%;
+      bottom: 0;
+      border-bottom: 1px solid rgba(183, 255, 68, 0.2);
       background-color: transparent;
       outline: none;
       box-sizing: border-box;
       transition: border-width 0.1s linear, border-color 0.1s linear;
 
+      &:focus {
+        border-bottom: 1px solid rgba(183, 255, 68, 1);
+      }
+
       &:focus + .title, &:not(:placeholder-shown) + .title {
         font-size: 13px;
-        top: 2px;
+        top: 0;
       }
     }
   }

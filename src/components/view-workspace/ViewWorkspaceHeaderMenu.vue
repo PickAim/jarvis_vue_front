@@ -140,7 +140,7 @@ $hover-effect-width: 40px;
     z-index: 22;
     grid-template-columns: repeat(v-bind(gridColumns), $menu-item-width);
     height: 100%;
-    background: var.$dark-gradient-color;
+    background: transparent;
   }
 
   $menu-items-border-color: white;
