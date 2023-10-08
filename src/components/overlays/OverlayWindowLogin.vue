@@ -41,7 +41,7 @@ function onLoginClick() {
       </ControlButtonTransparent>
       <div class="other-options">
         <div class="forgot-password">Забыли пароль?</div>
-        <div class="registration-link">Ещё нет акканта?<br><b>РЕГИСТРАЦИЯ</b></div>
+        <div class="registration-link">Ещё нет аккаунта?<br><b>РЕГИСТРАЦИЯ</b></div>
       </div>
     </main>
   </OverlayTemplateDecorated>
