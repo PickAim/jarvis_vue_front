@@ -93,8 +93,9 @@ type SimpleUnitEconomyOneResultData = {
 export type SimpleUnitEconomyResultData = [SimpleUnitEconomyOneResultData, SimpleUnitEconomyOneResultData];
 
 export class TransitUnitEconomyRequestData extends SimpleUnitEconomyRequestData {
-    transit_price = NaN;
-    transit_count = NaN;
+    logistic_price = NaN;
+    logistic_count = NaN;
+    transit_cost_for_cubic_meter = NaN;
 }
 
 interface TransitUnitEconomyOneResultData extends SimpleUnitEconomyOneResultData {

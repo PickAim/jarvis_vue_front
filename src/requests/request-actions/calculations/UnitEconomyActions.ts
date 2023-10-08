@@ -36,7 +36,7 @@ export class TransitUnitEconomyActions<Q extends TransitUnitEconomyRequestData, 
     extends SavableCalculateActions<TransitUnitEconomyRequestData, TransitUnitEconomyResultData> {
 
     static requestMoneyKeys: (keyof TransitUnitEconomyRequestData)[] =
-        [...SimpleUnitEconomyActions.requestMoneyKeys, "transit_count", "transit_price"];
+        [...SimpleUnitEconomyActions.requestMoneyKeys, "logistic_count", "logistic_price"];
     static resultMoneyKeys: (keyof TransitUnitEconomyResultData[0])[] =
         [...SimpleUnitEconomyActions.resultMoneyKeys, "purchase_investments", "commercial_expanses", "tax_expanses",
             "absolute_margin"];

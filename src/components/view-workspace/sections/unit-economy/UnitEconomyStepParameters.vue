@@ -62,7 +62,7 @@ const nicheValue = computed<string>(() => {
   return props.parameters.niche_id.toString();
 })
 
-const baseParameters: ParametersType = reactive([
+const baseParameters = reactive<ParametersType>([
   {
     name: "marketplace_id", type: "select", placeholder: "Маркетплейс", options: [
       {name: "Wildberries", value: "2"},
@@ -71,7 +71,7 @@ const baseParameters: ParametersType = reactive([
   },
   {name: "category_id", type: "select", placeholder: "Категория", options: categoryOptions, onChange: onCategoryChange},
   {
-    name: "niche_id", type: "select", placeholder: "Ниша", options: nicheOptions, onChange: onNicheChange,
+    name: "niche_id", type: "select", placeholder: "Ниша", options: nicheOptions.value, onChange: onNicheChange,
     value: nicheValue
   },
   {name: "product_exist_cost", type: "input", title: "Текущая цена товара", inputType: "number", value: "0"},
@@ -80,7 +80,7 @@ const baseParameters: ParametersType = reactive([
   {name: "width", type: "input", title: "Ширина", inputType: "number"},
   {name: "height", type: "input", title: "Высота", inputType: "number"},
   {name: "mass", type: "input", title: "Масса", inputType: "number"},
-  {name: "target_warehouse_name", type: "input", title: "Склад назначения", inputType: "text"},
+  {name: "target_warehouse_id", type: "input", title: "Склад назначения", inputType: "number"},
   {
     type: "check", value: computed(() => props.isCalculateTransit),
     placeholder: "Рассчитать стоимость транзита",
@@ -89,8 +89,9 @@ const baseParameters: ParametersType = reactive([
 ])
 
 const transitParameters: ParametersType = reactive([
-  {name: "transit_count", type: "input", title: "Количество штук в партии", inputType: "number"},
-  {name: "transit_price", type: "input", title: "Стоимость логистики партии", inputType: "number"}
+  {name: "logistic_count", type: "input", title: "Количество штук в партии", inputType: "number"},
+  {name: "logistic_price", type: "input", title: "Стоимость логистики партии", inputType: "number"},
+  {name: "transit_cost_for_cubic_meter", type: "input", title: "Стоимость перевоза за м^3", inputType: "number"}
 ])
 
 const parameters = computed(() => [
