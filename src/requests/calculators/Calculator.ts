@@ -4,7 +4,6 @@ import type {ICalculateActions} from "@/types/RequestTypes";
 export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActions<Q, R> = ICalculateActions<Q, R>> {
     request: Q = {} as Q;
     result: R | undefined;
-    isBusy = false;
 
     protected constructor(public calculateActions: TCalculateActions) {
         this.initDefault();
@@ -13,8 +12,6 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
     abstract initDefault(): void;
 
     async calculate() {
-        if (this.isBusy) return;
-        this.isBusy = true;
         this.result = undefined;
         const request: Q | undefined = this.beforeCalculating();
         if (request) {
@@ -23,7 +20,6 @@ export abstract class Calculator<Q, R, TCalculateActions extends ICalculateActio
                 this.result = this.afterSuccessfulCalculating(response.result);
             }
         }
-        this.isBusy = false;
     }
 
     protected beforeCalculating(): Q | undefined {

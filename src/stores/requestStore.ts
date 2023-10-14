@@ -6,21 +6,25 @@ export const useRequestStore = defineStore('requestStore', () => {
     const isHidden = ref(false);
     const isSequence = ref(false);
     const requestsCount = ref(0);
-    const abortController = ref<AbortController>(new AbortController());
+    const requestLevel = ref(0);
+    const requestAbortControllers = ref<AbortController[]>([]);
 
-    function updateAbortController() {
-        abortController.value.abort();
-        abortController.value = new AbortController();
+    function updateAbortController(requestLevel: number) {
+        loadingAbort(requestLevel);
+        requestAbortControllers.value[requestLevel] = new AbortController();
+    }
+
+    function setLevel(setRequestLevel: number) {
+        requestLevel.value = setRequestLevel;
     }
 
     function loadingStart(): AbortController {
         requestsCount.value++;
         if (!isSequence.value) {
-            updateAbortController();
-            requestsCount.value = 1;
+            updateAbortController(requestLevel.value);
         }
         isLoading.value = true;
-        return abortController.value;
+        return requestAbortControllers.value[requestLevel.value];
     }
 
     function loadingStop() {
@@ -30,10 +34,13 @@ export const useRequestStore = defineStore('requestStore', () => {
         }
     }
 
-    function loadingAbort() {
-        updateAbortController();
-        requestsCount.value = 0;
-        loadingStop();
+    function loadingAbort(requestLevel: number) {
+        requestAbortControllers.value.forEach((item, ind) => {
+            if (ind >= requestLevel) {
+                item.abort();
+                delete requestAbortControllers.value[ind];
+            }
+        })
     }
 
     function hidePreloader() {
@@ -44,14 +51,20 @@ export const useRequestStore = defineStore('requestStore', () => {
         isHidden.value = false;
     }
 
-    async function executeInBackground(fn: () => Promise<void>) {
+    async function executeInBackground(fn: () => Promise<void>, onLevel?: number) {
         hidePreloader();
+        if (onLevel !== undefined) {
+            setLevel(onLevel);
+        }
         await fn();
         showPreloader();
     }
 
-    function startSequence() {
-        updateAbortController();
+    function startSequence(onLevel?: number) {
+        if (onLevel !== undefined) {
+            setLevel(onLevel);
+        }
+        updateAbortController(requestLevel.value);
         isSequence.value = true;
     }
 
@@ -61,6 +74,6 @@ export const useRequestStore = defineStore('requestStore', () => {
 
     return {
         isHidden, isLoading, loadingStart, loadingStop, loadingAbort, hidePreloader, showPreloader,
-        executeInBackground, startSequence, stopSequence
+        executeInBackground, startSequence, stopSequence, setLevel
     }
 })

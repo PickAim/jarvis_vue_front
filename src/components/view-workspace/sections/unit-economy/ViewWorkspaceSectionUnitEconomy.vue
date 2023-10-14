@@ -14,6 +14,7 @@ import {niches} from "@/nichesData";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import UnitEconomyPreloader from "@/components/view-workspace/sections/unit-economy/UnitEconomyPreloader.vue";
 import {TransitUnitEconomyRequestData} from "@/types/DataTypes";
+import {useRequestStore} from "@/stores/requestStore";
 
 const actions = reactive(new WorkspaceSectionUnitEconomyActions());
 const calculator = reactive(new UnitEconomyCalculator());
@@ -22,6 +23,12 @@ const settingSelected = ref(false);
 const emptySettings = ref(true);
 const calculated = ref(false);
 const saveName = ref("");
+
+/* REQUEST LEVELS
+- 201: categories and niches
+- 202: calculate
+- 203: save
+ */
 
 actions.initSection().then(() => {
   if ((actions.products
@@ -83,8 +90,13 @@ function onSet() {
 }
 
 function onCalculate() {
+  calculated.value = false;
+  useRequestStore().setLevel(202);
+  calculator.calculate();
+  calculator.calculate();
+  calculator.calculate();
   calculator.calculate().then(() => {
-    if (!calculator.result) return;
+    if (!calculator.result || calculated.value) return;
     calculated.value = true;
     setTimeout(() => {
       document.querySelector('#unit-economy-result').scrollIntoView({
@@ -95,6 +107,7 @@ function onCalculate() {
 }
 
 function onSaveRequest(name: string) {
+  useRequestStore().setLevel(203);
   calculator.saveRequest(name);
 }
 </script>
@@ -112,7 +125,7 @@ function onSaveRequest(name: string) {
                               :transit-requests="actions.transitRequests"
                               @select-product="onProductSelect"
                               @select-request="onRequestSelect"
-                              @just-continue="settingSelected=true"/>
+                              @just-continue="onSet"/>
           <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
                                      :parameters="calculator.request as TransitUnitEconomyRequestData"
                                      @parameter-changed="onParameterChanged"

@@ -36,7 +36,8 @@ defineEmits(['update:modelValue'])
   flex-direction: column;
   align-items: stretch;
   height: 50px;
-  border-radius: 12px 12px 0 12px;
+  border-radius: 12px 12px 12px 12px;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: var.$dark-gradient-color;
   backdrop-filter: blur(15px);

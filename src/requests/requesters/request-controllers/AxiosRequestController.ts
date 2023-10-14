@@ -26,6 +26,8 @@ export default class AxiosRequestController implements IRequestController {
         Promise<ResponseData<K>> {
         const {url, body = {}, method = "POST", responseType = "json"} = request;
 
+        console.log("MAKE REQUEST");
+
         const config: AxiosRequestConfig = {
             responseType: responseType
         }
@@ -79,10 +81,7 @@ export default class AxiosRequestController implements IRequestController {
                 response = {code: err.response.data.jarvis_exception, error: err.response.data};
             }
         }
-        // if not cancelled - stop loading
-        if (response.code !== ResultCode.CANCEL_ERROR) {
-            this.requestStore.loadingStop();
-        }
+        this.requestStore.loadingStop();
         return response;
     }
 

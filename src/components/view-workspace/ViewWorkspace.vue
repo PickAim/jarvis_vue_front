@@ -7,7 +7,7 @@ import {useRequestStore} from "@/stores/requestStore";
 
 const actions = reactive(new WorkspaceActions());
 
-useRequestStore().executeInBackground(() => actions.initSection())
+useRequestStore().executeInBackground(() => actions.initSection(), 100);
 </script>
 
 <template>

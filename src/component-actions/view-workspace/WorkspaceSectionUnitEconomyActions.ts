@@ -23,7 +23,7 @@ export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions 
     }
 
     protected async prepareSectionData() {
-        useRequestStore().startSequence();
+        useRequestStore().startSequence(200);
         const promise = Promise.all([
             (new SimpleUnitEconomyActions()).loadAll(),
             (new TransitUnitEconomyActions()).loadAll(),
