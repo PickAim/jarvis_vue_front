@@ -24,9 +24,11 @@ const calculated = ref(false);
 const saveName = ref("");
 
 actions.initSection().then(() => {
-  if ((actions.products && actions.products > 0) ||
+  if ((actions.products
+          && Object.keys(actions.products).some(market => Object.keys(actions.products[market]).length > 0)) ||
       (actions.simpleRequests && actions.simpleRequests.length > 0) ||
       (actions.transitRequests && actions.transitRequests.length > 0)) {
+    console.log("NOT EMPTY");
     emptySettings.value = false;
   }
 });

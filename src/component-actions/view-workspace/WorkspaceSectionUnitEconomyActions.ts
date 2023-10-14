@@ -23,18 +23,16 @@ export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions 
     }
 
     protected async prepareSectionData() {
-        const simpleUnitEconomyActions = new SimpleUnitEconomyActions();
-        const transitUnitEconomyActions = new TransitUnitEconomyActions();
-
         useRequestStore().startSequence();
         const promise = Promise.all([
-            simpleUnitEconomyActions.loadAll(),
-            transitUnitEconomyActions.loadAll(),
+            (new SimpleUnitEconomyActions()).loadAll(),
+            (new TransitUnitEconomyActions()).loadAll(),
             (new AllProductsActions()).getUserInfo()
         ]);
         useRequestStore().stopSequence();
 
         const result = await promise;
+        console.log(result);
         [this.simpleRequests, this.transitRequests, this.products] =
             [result[0].result, result[1].result, result[2].result];
     }

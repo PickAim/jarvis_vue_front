@@ -22,21 +22,54 @@ function onProductSelect(id: string) {
 
 <template>
   <div class="product-list">
-    <ProductItem v-for="product in props.products"
-                 :class="{selected: selectedProductID === product.productID}"
-                 :key="product.productID"
-                 :product-item="product"
-                 @select="onProductSelect(product.productID)"/>
+    <div class="shadow left"/>
+    <div class="products-wrapper">
+      <ProductItem v-for="product in props.products"
+                   :class="{selected: selectedProductID === product.productID}"
+                   :key="product.productID"
+                   :product-item="product"
+                   @select="onProductSelect(product.productID)"/>
+    </div>
+    <div class="shadow right"/>
   </div>
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .product-list {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 190px;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: visible;
+  //box-shadow: rgba(0, 0, 0, 1) -50px 0px 36px -28px inset, rgba(0, 0, 0, 1) 50px 0px 36px -28px inset;
+
+  .products-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding-inline: 40px;
+    overflow-x: auto;
+  }
+
+  .shadow {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    box-shadow: var.$dark-jarvis-color 0 0 30px 50px;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      right: 0;
+    }
+  }
 }
 </style>

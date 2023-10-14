@@ -45,6 +45,8 @@ function onMouseLeave() {
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .product-effect-container {
   display: flex;
   flex-direction: column;
@@ -69,16 +71,16 @@ function onMouseLeave() {
   flex-direction: column;
   height: 100%;
   border-radius: 30px;
-  border: 2px solid black;
+  background: var.$dark-gradient-color;
+  backdrop-filter: blur(15px);
+  border: 1px solid gray;
   overflow: hidden;
-  background: #000;
   transform-style: preserve-3d;
   transform: rotateY(v-bind(xDegrees)) rotateX(v-bind(yDegrees));
   transition: transform 1s cubic-bezier(0, 0.35, 0.14, 0.99), border-color 0.3s;
 
   .product-info {
     flex: 1 0;
-    background: black;
     border-bottom: 1px solid white;
     padding-top: 5px;
 

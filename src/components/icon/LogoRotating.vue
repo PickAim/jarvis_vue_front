@@ -25,7 +25,7 @@ onMounted(() => {
     transform: rotate3d(0, 1, 0, 180deg);
   }
   100% {
-    transform: rotate3d(0, 1, 0, 0);
+    transform: rotate3d(0, 1, 0, 360deg);
   }
 }
 
@@ -43,7 +43,7 @@ onMounted(() => {
   background-position: center;
 
   animation-name: logoRounding;
-  animation-timing-function: cubic-bezier(.47, .1, .52, .85);
+  animation-timing-function: ease-in-out;
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }

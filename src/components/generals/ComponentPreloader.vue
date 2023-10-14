@@ -24,6 +24,7 @@ defineProps<{ isLoading: boolean }>()
   z-index: 100;
   background-color: rgba(0, 0, 0, 1);
   opacity: 0;
+  perspective: 225px;
   transition: 0.3s;
   pointer-events: none;
 

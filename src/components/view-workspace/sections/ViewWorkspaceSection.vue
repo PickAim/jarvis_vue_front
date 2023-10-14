@@ -47,7 +47,7 @@ import SmallCircle from "@/components/generals/SmallCircle.vue";
   }
 
   .circles-wrapper {
-    top: 230px;
+    top: 260px;
     left: 10px;
     position: absolute;
     z-index: 0;
