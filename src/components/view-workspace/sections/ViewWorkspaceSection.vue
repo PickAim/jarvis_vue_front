@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import BigCircle from "@/components/generals/BigCircle.vue";
+import SmallCircle from "@/components/generals/SmallCircle.vue";
 </script>
 <template>
   <div class="section-container">
@@ -9,6 +11,10 @@
     <main>
       <slot/>
     </main>
+    <div class="circles-wrapper">
+      <BigCircle/>
+      <SmallCircle/>
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -34,8 +40,29 @@
   }
 
   main {
+    position: relative;
     flex: 1 0;
     height: 100%;
+    z-index: 1;
+  }
+
+  .circles-wrapper {
+    top: 230px;
+    left: 10px;
+    position: absolute;
+    z-index: 0;
+
+    * {
+      position: absolute;
+
+      &:nth-child(1) {
+        top: 70px;
+      }
+
+      &:nth-child(2) {
+        left: 240px;
+      }
+    }
   }
 }
 </style>
