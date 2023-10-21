@@ -10,9 +10,9 @@ const props = defineProps<{
 }>()
 
 const typeToColor = {
-  'error': '#F21',
-  'warning': '#FB0',
-  'notify': '#09F',
+  'error': '#D82C21',
+  'warning': '#D8C521',
+  'notify': '#2196D8',
   'success': '#8F3'
 }
 
@@ -28,68 +28,69 @@ function mouseLeaveFunc() {
 <template>
   <div class="notification-list-item-wrapper"
        @mouseenter="mouseEnterFunc"
-       @mouseleave="mouseLeaveFunc">
-    <div class="type-icon"
-         :style="{backgroundColor: typeToColor[note.type]}"/>
-    <div class="vertical-separator"/>
-    <main>
-      <div class="header-wrapper">
-        <div class="header-text">{{ note.header }}</div>
-        <button class="hide-button"
-                @click="hideNotification(note.id)"/>
-      </div>
-      <div class="horizontal-separator"/>
-      <div class="body-text">{{ note.body }}</div>
-    </main>
+       @mouseleave="mouseLeaveFunc"
+       :style="{borderColor: typeToColor[note.type]}">
+    <div class="header-wrapper">
+      <button class="hide-button"
+              @click="hideNotification(note.id)">○
+      </button>
+    </div>
+    <div class="notification-title">{{ note.header }}</div>
+    <div class="horizontal-separator"/>
+    <div class="body-text">{{ note.body }}</div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .notification-list-item-wrapper {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  background-color: white;
-  border: 1px solid black;
-  color: black;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.30) 100%);
+  backdrop-filter: blur(15px);
+  border-width: 2px;
   margin-block: 5px;
+  padding: 5px;
+  border-radius: 6px;
+  color: white;
   opacity: 1;
   pointer-events: all;
 
-  .type-icon {
-    flex: 0 0 20px;
+  .hide-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
   }
 
-  main {
-    margin-left: 20px;
+  .notification-title {
     flex: 1 0;
-    text-align: left;
-
-    .header-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-
-      .hide-button {
-        width: 20px;
-        height: 20px;
-        background-color: black;
-        margin-right: 5px;
-      }
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
   }
-}
 
-.vertical-separator {
-  width: 1px;
-  background-color: black;
+  .body-text {
+    flex: 2 0;
+    text-align: left;
+    margin-top: 10px;
+    padding-inline: 10px;
+    line-height: 1.8em;
+    max-height: 3.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .horizontal-separator {
   height: 1px;
-  background-color: black;
+  width: 50%;
+  background-color: white;
 }
 </style>

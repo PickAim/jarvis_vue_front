@@ -39,7 +39,7 @@ const {hideAllNotifications} = notificationsStore;
   height: 100%;
   overflow-y: hidden;
   width: 95vw;
-  max-width: 700px;
+  max-width: 600px;
   pointer-events: none;
 }
 
@@ -78,14 +78,14 @@ const {hideAllNotifications} = notificationsStore;
 
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.3s ease;
+  transition: all 100ms ease;
 }
 
 .list-enter-from,
 .list-leave-to {
   height: 0;
   margin-block: 0;
-  border-width: 0;
-  opacity: 0.1;
+  //border-color: rgba(0,0,0,0);
+  opacity: 0;
 }
 </style>
