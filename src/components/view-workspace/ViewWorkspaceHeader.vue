@@ -16,7 +16,7 @@ import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorksp
         <div class="profile-button">
           <span class="profile-logo"/>
         </div>
-        <ViewWorkspaceHeaderMenuPopup class="header-popup"/>
+        <ViewWorkspaceHeaderMenuPopup tabindex="0" class="header-popup"/>
       </div>
     </div>
   </header>
@@ -64,7 +64,7 @@ $header-height: 80px;
     align-items: center;
 
     .header-popup-wrapper {
-      position: relative;
+      //position: relative;
       display: flex;
       flex-direction: row;
       margin-right: 30px;
