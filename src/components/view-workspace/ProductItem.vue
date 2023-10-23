@@ -35,7 +35,7 @@ function onMouseLeave() {
        @mouseleave="onMouseLeave">
     <div class="product" @click="emit('select')">
       <div class="product-info">
-        <div class="cost-info info-text">Стоимость: {{ props.productItem.cost / 100 }} ₽</div>
+        <div class="cost-info info-text">Стоимость: {{ props.productItem.cost }} ₽</div>
         <div class="category-info info-text">Категория: {{ props.productItem.category }}</div>
         <div class="niche-info info-text">Ниша: {{ props.productItem.niche }}</div>
       </div>

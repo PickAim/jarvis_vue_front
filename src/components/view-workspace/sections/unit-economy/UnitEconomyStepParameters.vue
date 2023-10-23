@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type {Ref} from "vue";
-import {computed, reactive} from "vue";
+import {computed, reactive, Ref, ref} from "vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 import ControlCheckBox from "@/components/controls/ControlCheckBox.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import type {SelectOptionType, TransitUnitEconomyRequestData} from "@/types/DataTypes";
+import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
-import {niches} from "@/nichesData";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
+import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
 
 const props = defineProps<{
   shown: boolean,
@@ -20,6 +19,8 @@ const emits = defineEmits<{
   (e: "calculate"): void,
   (e: "update:isCalculateTransit", value): void
 }>()
+
+const nicheSelectComp = ref(null);
 
 type InputInfoType<VType> =
     {
@@ -42,44 +43,13 @@ type InputCheckInfoType = InputInfoType<boolean> &
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType | InputCheckInfoType)[];
 
-const categoryOptions: SelectOptionType[] = Object.keys(niches).reduce(
-    (accum, val, ind) => {
-      accum.push({name: val, value: ind + 2})
-      return accum;
-    }, []);
-
-const nicheOptions = computed<SelectOptionType[]>(() => {
-  const nichesArray = niches[categoryOptions.find((option) => option.value == props.parameters.category_id)?.name];
-  if (!nichesArray) return [];
-  return nichesArray.reduce(
-      (accum, val, ind) => {
-        accum.push({name: val, value: ind + 2})
-        return accum;
-      }, []);
-});
-
-const nicheValue = computed<string>(() => {
-  return props.parameters.niche_id.toString();
-})
-
 const baseParameters = reactive<ParametersType>([
-  {
-    name: "marketplace_id", type: "select", placeholder: "Маркетплейс", options: [
-      {name: "Wildberries", value: "2"},
-      {name: "OZON", value: "3"},
-    ]
-  },
-  {name: "category_id", type: "select", placeholder: "Категория", options: categoryOptions, onChange: onCategoryChange},
-  {
-    name: "niche_id", type: "select", placeholder: "Ниша", options: nicheOptions.value, onChange: onNicheChange,
-    value: nicheValue
-  },
-  {name: "product_exist_cost", type: "input", title: "Текущая цена товара", inputType: "number", value: "0"},
-  {name: "cost_price", type: "input", title: "Себестоимость", inputType: "number"},
-  {name: "length", type: "input", title: "Длина", inputType: "number"},
-  {name: "width", type: "input", title: "Ширина", inputType: "number"},
-  {name: "height", type: "input", title: "Высота", inputType: "number"},
-  {name: "mass", type: "input", title: "Масса", inputType: "number"},
+  {name: "product_exist_cost", type: "input", title: "Текущая цена товара (₽)", inputType: "number", value: "0"},
+  {name: "cost_price", type: "input", title: "Себестоимость (₽)", inputType: "number"},
+  {name: "length", type: "input", title: "Длина (см)", inputType: "number"},
+  {name: "width", type: "input", title: "Ширина (см)", inputType: "number"},
+  {name: "height", type: "input", title: "Высота (см)", inputType: "number"},
+  {name: "mass", type: "input", title: "Масса (кг)", inputType: "number"},
   {name: "target_warehouse_id", type: "input", title: "Склад назначения", inputType: "number"},
   {
     type: "check", value: computed(() => props.isCalculateTransit),
@@ -99,17 +69,24 @@ const parameters = computed(() => [
   ...(props.isCalculateTransit ? transitParameters : [])
 ]);
 
+function onMarketplaceChange(value) {
+  defaultOnChange('marketplace_id', value);
+}
+
 function onCategoryChange(value) {
-  emits('parameterChanged', 'niche_id', 0);
   defaultOnChange('category_id', value);
 }
 
-function onNicheChange(nicheID) {
-  emits('parameterChanged', 'niche_id', nicheID);
+function onNicheChange(value) {
+  defaultOnChange('niche_id', value);
 }
 
 function onTransitCheckChanged(value) {
   emits('update:isCalculateTransit', value);
+}
+
+async function setNicheByNames(marketplaceID: number, categoryName: string, nicheName: string) {
+  await nicheSelectComp.value.setByNames(marketplaceID, categoryName, nicheName);
 }
 
 function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefined, value) {
@@ -118,6 +95,8 @@ function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefi
   }
 }
 
+defineExpose({setNicheByNames});
+
 </script>
 
 <template>
@@ -125,11 +104,15 @@ function defaultOnChange(parameter: keyof TransitUnitEconomyRequestData | undefi
     <template v-slot:header>Параметры</template>
     <template v-slot:body>
       <div class="inputs-wrapper">
+        <NicheSelect ref="nicheSelectComp"
+                     @update:marketplaceID="onMarketplaceChange"
+                     @update:categoryID="onCategoryChange"
+                     @update:nicheID="onNicheChange"
+                     :request-level="201"/>
         <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
           <ControlTextInput v-if="input.type === 'input'"
                             :model-value="props.parameters[input.name] || input.value"
-                            @update:model-value="(value) =>
-                            {
+                            @update:model-value="(value) => {
                               input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                             }"
                             :title="input.title"

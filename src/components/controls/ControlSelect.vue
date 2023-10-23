@@ -1,30 +1,3 @@
-<template>
-  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectFocused}"
-       @blur="onFocusOut" :tabindex="0">
-    <div class="select-button" @click="onSelectClick">
-      <div class="selected-item">
-        {{ props.options.find((option) => option.value == props.selectedValue)?.name || props.placeholder }}
-      </div>
-      <div class="select-icon">
-        <svg class="arrow"
-             :class="{'is-shaking': isShaking}"
-             ref="arrow"
-             width="35%"
-             height="60%"
-             viewBox="0 -1 2 1">
-          <path stroke="white" stroke-width="0.1px"
-                d="m 0 0 l 1 1 l 1 -1 l -0.1 0 l -0.87 0.87 l 0 -3 l -0.06 0 l 0 3 l -0.97 -0.97 L 0 0"/>
-        </svg>
-      </div>
-    </div>
-    <div class="select-list">
-      <div class="select-item" v-for="(option, ind) in props.options" :key="ind" @click="onSelect(option.value)">
-        {{ option.name }}
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import type {SelectOptionType} from "@/types/DataTypes";
@@ -48,7 +21,6 @@ const arrow = ref<HTMLElement>(null as HTMLElement);
 onMounted(() => {
   arrow.value.addEventListener('animationend', () => {
     isShaking.value = false;
-    console.log("END");
   });
 });
 
@@ -65,10 +37,39 @@ function onFocusOut() {
 
 function onSelect(value) {
   isSelectFocused.value = false;
-  emits('update:selectedValue', value);
+  if (props.selectedValue !== value) {
+    emits('update:selectedValue', value);
+  }
 }
 
 </script>
+
+<template>
+  <div class="select-wrapper" :class="{active: props.options.length > 0 && isSelectFocused}"
+       @blur="onFocusOut" :tabindex="0">
+    <div class="select-button" @click="onSelectClick">
+      <div class="selected-item">
+        {{ props.options.find((option) => option.value === props.selectedValue)?.name || props.placeholder }}
+      </div>
+      <div class="select-icon">
+        <svg class="arrow"
+             :class="{'is-shaking': isShaking}"
+             ref="arrow"
+             width="35%"
+             height="60%"
+             viewBox="0 -1 2 1">
+          <path stroke="white" stroke-width="0.1px"
+                d="m 0 0 l 1 1 l 1 -1 l -0.1 0 l -0.87 0.87 l 0 -3 l -0.06 0 l 0 3 l -0.97 -0.97 L 0 0"/>
+        </svg>
+      </div>
+    </div>
+    <div class="select-list">
+      <div class="select-item" v-for="(option, ind) in props.options" :key="ind" @click="onSelect(option.value)">
+        {{ option.name }}
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @use "src/assets/styles/variables" as var;

@@ -67,9 +67,9 @@ export type NicheRequestData = {
 };
 
 export class SimpleUnitEconomyRequestData implements NicheRequestData {
-    marketplace_id = 2;
-    category_id = 0; // Need
-    niche_id = 0; // Need
+    marketplace_id = NaN;
+    category_id = NaN; // Need
+    niche_id = NaN; // Need
     product_exist_cost = 0;
     cost_price = NaN;
     length = NaN;
@@ -148,9 +148,23 @@ export interface NicheCharacteristicsResultData {
     maximum_profit_idx: number;
 }
 
+export interface AllMarketplacesRequestData {
+    is_allow_defaults?: boolean
+}
+
 export type AllMarketplacesResultData = { [marketplaceID: number]: string }
 
+export interface AllNichesRequestData {
+    category_id: number,
+    is_allow_defaults?: boolean
+}
+
 export type AllNichesResultData = { [nicheID: number]: string }
+
+export interface AllCategoriesRequestData {
+    marketplace_id: number,
+    is_allow_defaults?: boolean
+}
 
 export type AllCategoriesResultData = { [categoryID: number]: string }
 
@@ -167,8 +181,8 @@ export type ResultProductData = {
 
 export type ProductData = ResultProductData &
     {
-        productID: string,
-        marketplaceID: string
+        productID: number,
+        marketplaceID: number
     }
 
 export type AllProductsResultData = { [marketplaceID: string]: { [productID: string]: ResultProductData } }
@@ -200,4 +214,4 @@ export type GreenZoneResultData = {
     }
 }
 
-export type SelectOptionType = { name: string, value: string };
+export type SelectOptionType = { name: string, value: number };

@@ -26,8 +26,6 @@ export default class AxiosRequestController implements IRequestController {
         Promise<ResponseData<K>> {
         const {url, body = {}, method = "POST", responseType = "json"} = request;
 
-        console.log("MAKE REQUEST");
-
         const config: AxiosRequestConfig = {
             responseType: responseType
         }

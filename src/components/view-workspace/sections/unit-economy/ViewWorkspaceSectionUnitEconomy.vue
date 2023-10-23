@@ -10,7 +10,6 @@ import UnitEconomyStepParameters from "@/components/view-workspace/sections/unit
 import UnitEconomyStepResult from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepResult.vue";
 import {computed, reactive, ref} from "vue";
 import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
-import {niches} from "@/nichesData";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import UnitEconomyPreloader from "@/components/view-workspace/sections/unit-economy/UnitEconomyPreloader.vue";
 import {TransitUnitEconomyRequestData} from "@/types/DataTypes";
@@ -23,6 +22,7 @@ const settingSelected = ref(false);
 const emptySettings = ref(true);
 const calculated = ref(false);
 const saveName = ref("");
+// const parametersStep = ref(null);
 
 /* REQUEST LEVELS
 - 201: categories and niches
@@ -35,7 +35,6 @@ actions.initSection().then(() => {
           && Object.keys(actions.products).some(market => Object.keys(actions.products[market]).length > 0)) ||
       (actions.simpleRequests && actions.simpleRequests.length > 0) ||
       (actions.transitRequests && actions.transitRequests.length > 0)) {
-    console.log("NOT EMPTY");
     emptySettings.value = false;
   }
 });
@@ -46,7 +45,12 @@ const products = computed<ProductData[] | undefined>(() => {
   const products: ProductData[] = [];
   Object.keys(requestedProducts).forEach((marketplaceID) => {
     Object.keys(requestedProducts[marketplaceID]).forEach((productID) => {
-      products.push({...requestedProducts[marketplaceID][productID], productID, marketplaceID});
+      products.push(
+          {
+            ...requestedProducts[marketplaceID][productID],
+            productID: Number(productID),
+            marketplaceID: Number(marketplaceID)
+          });
     })
   });
   return products;
@@ -56,15 +60,13 @@ function onParameterChanged(key, value) {
   calculator.request[key] = value;
 }
 
-function onProductSelect(ID) {
+function onProductSelect(ID, parametersStep) {
   const productsArray = products.value;
   if (!productsArray) return;
   const product = productsArray.find((product) => product.productID === ID);
   if (!product) return;
-  // TODO: Change niche to niche_id!
-  calculator.request.niche_id = Number(product.niche);
-  calculator.request.marketplace_id = Number(product.marketplaceID);
-  calculator.request.category_id = Object.keys(niches).indexOf(product.category) + 2;
+  parametersStep.setNicheByNames(product.marketplaceID, product.category, product.niche);
+  calculator.request.product_exist_cost = product.cost;
   saveName.value = product.name;
   onSet();
 }
@@ -92,9 +94,6 @@ function onSet() {
 function onCalculate() {
   calculated.value = false;
   useRequestStore().setLevel(202);
-  calculator.calculate();
-  calculator.calculate();
-  calculator.calculate();
   calculator.calculate().then(() => {
     if (!calculator.result || calculated.value) return;
     calculated.value = true;
@@ -123,13 +122,14 @@ function onSaveRequest(name: string) {
                               :products="products"
                               :simple-requests="actions.simpleRequests"
                               :transit-requests="actions.transitRequests"
-                              @select-product="onProductSelect"
+                              @select-product="(ID) => onProductSelect(ID, $refs.parametersStep)"
                               @select-request="onRequestSelect"
                               @just-continue="onSet"/>
           <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
                                      :parameters="calculator.request as TransitUnitEconomyRequestData"
                                      @parameter-changed="onParameterChanged"
                                      @calculate="onCalculate"
+                                     ref="parametersStep"
                                      v-model:is-calculate-transit="calculator.isTransitOn"/>
           <UnitEconomyStepResult :shown="calculated && !!calculator.result"
                                  :result-data="calculator.result as TransitUnitEconomyResultData"

@@ -5,6 +5,7 @@ import type {AllProductsResultData} from "@/types/DataTypes";
 import {ResultCode} from "@/requests/ResultCode";
 import {ErrorHandler} from "@/requests/ErrorHandler";
 import {AllMarketplaceProductsRequester, AllProductsRequester} from "@/requests/requesters/UserInfoRequester";
+import {convertMoneyToRoubles} from "@/requests/request-actions/utils";
 
 export class UserInfoRequestActions<Q, R>
     extends RequestActions<Q, R>
@@ -25,6 +26,15 @@ export class UserInfoRequestActions<Q, R>
 }
 
 export class AllProductsActions extends UserInfoRequestActions<void, AllProductsResultData> {
+    protected prepareResultData(result: AllProductsResultData): AllProductsResultData {
+        Object.keys(result).forEach(marketplace => {
+            Object.keys(result[marketplace]).forEach(product => {
+                convertMoneyToRoubles(result[marketplace][product], ["cost"]);
+            })
+        })
+        return super.prepareResultData(result);
+    }
+
     constructor() {
         super(new AllProductsRequester());
     }

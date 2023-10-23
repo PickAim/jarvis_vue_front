@@ -1,6 +1,11 @@
 import type {IInfoActions, IInfoRequester} from "@/types/RequestTypes";
 import {RequestActions} from "@/requests/request-actions/RequestActions";
-import type {ResponseData} from "@/types/DataTypes";
+import type {
+    AllCategoriesRequestData,
+    AllMarketplacesRequestData,
+    AllNichesRequestData,
+    ResponseData
+} from "@/types/DataTypes";
 import type {AllCategoriesResultData, AllMarketplacesResultData, AllNichesResultData} from "@/types/DataTypes";
 import {ResultCode} from "@/requests/ResultCode";
 import {ErrorHandler} from "@/requests/ErrorHandler";
@@ -28,19 +33,34 @@ export class InfoRequestActions<Q, R>
     }
 }
 
-export class AllCategoriesActions extends InfoRequestActions<void, AllCategoriesResultData> {
+export class AllCategoriesActions extends InfoRequestActions<AllCategoriesRequestData, AllCategoriesResultData> {
+    protected prepareRequestData(request: AllCategoriesRequestData): AllCategoriesRequestData {
+        request.is_allow_defaults = request.is_allow_defaults ?? true;
+        return super.prepareRequestData(request);
+    }
+
     constructor() {
         super(new AllCategoriesRequester());
     }
 }
 
-export class AllMarketplacesActions extends InfoRequestActions<void, AllMarketplacesResultData> {
+export class AllMarketplacesActions extends InfoRequestActions<AllMarketplacesRequestData, AllMarketplacesResultData> {
+    protected prepareRequestData(request: AllMarketplacesRequestData): AllMarketplacesRequestData {
+        request.is_allow_defaults = request.is_allow_defaults ?? true;
+        return super.prepareRequestData(request);
+    }
+
     constructor() {
         super(new AllMarketplacesRequester());
     }
 }
 
-export class AllNichesActions extends InfoRequestActions<void, AllNichesResultData> {
+export class AllNichesActions extends InfoRequestActions<AllNichesRequestData, AllNichesResultData> {
+    protected prepareRequestData(request: AllNichesRequestData): AllNichesRequestData {
+        request.is_allow_defaults = request.is_allow_defaults ?? true;
+        return super.prepareRequestData(request);
+    }
+
     constructor() {
         super(new AllNichesRequester());
     }

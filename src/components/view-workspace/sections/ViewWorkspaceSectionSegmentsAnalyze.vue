@@ -4,8 +4,7 @@ import {sections} from "@/components/view-workspace/workspaceSections";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
-import {niches} from "@/nichesData";
-import type {GreenZoneResultData, SelectOptionType} from "@/types/DataTypes";
+import type {GreenZoneResultData} from "@/types/DataTypes";
 import {GreenZoneActions} from "@/requests/request-actions/calculations/GreenZoneActions";
 import {ResultCode} from "@/requests/ResultCode";
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
@@ -16,21 +15,6 @@ const selectedNicheID = ref("");
 const analyzeResult = ref<GreenZoneResultData | undefined>(undefined);
 const calculateActions = new GreenZoneActions();
 
-const categoryOptions: SelectOptionType[] = Object.keys(niches).reduce(
-    (accum, val, ind) => {
-      accum.push({name: val, value: ind + 2})
-      return accum;
-    }, []);
-
-const nicheOptions = computed<SelectOptionType[]>(() => {
-  const nichesArray = niches[categoryOptions.find((option) => option.value == selectedCategoryID.value)?.name];
-  if (!nichesArray) return [];
-  return nichesArray.reduce(
-      (accum, val, ind) => {
-        accum.push({name: val, value: ind + 2})
-        return accum;
-      }, []);
-});
 
 const chartData = computed<[number, number][]>(() => {
   const segments = analyzeResult.value?.freq;
@@ -40,10 +24,11 @@ const chartData = computed<[number, number][]>(() => {
   });
 });
 
+// FIX NICHE ID!!!
 async function onCalculate() {
   const response = await calculateActions.calculate({
     category_id: Number(selectedCategoryID.value),
-    niche: nicheOptions.value.find((niche) => niche.value == selectedNicheID.value)?.name || "",
+    niche: "1",
     marketplace_id: 2
   })
   if (response.code === ResultCode.OK) {
@@ -63,12 +48,12 @@ async function onCalculate() {
             <ControlSelect class="select-wrapper"
                            v-model:selected-value="selectedCategoryID"
                            @update:selected-value="selectedNicheID=''"
-                           :options="categoryOptions"
+                           :options="[]"
                            placeholder="Категория"
             />
             <ControlSelect class="select-wrapper"
                            v-model:selected-value="selectedNicheID"
-                           :options="nicheOptions"
+                           :options="[]"
                            placeholder="Ниша"
             />
           </div>

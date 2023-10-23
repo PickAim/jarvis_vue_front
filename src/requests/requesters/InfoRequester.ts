@@ -1,6 +1,11 @@
 import Requester from "@/requests/requesters/Requester";
 import type {IInfoRequester} from "@/types/RequestTypes";
-import type {AllMarketplacesResultData, ResponseData} from "@/types/DataTypes";
+import type {
+    AllCategoriesRequestData, AllMarketplacesRequestData,
+    AllMarketplacesResultData,
+    AllNichesRequestData,
+    ResponseData
+} from "@/types/DataTypes";
 import type {AllCategoriesResultData, AllNichesResultData} from "@/types/DataTypes";
 
 export class InfoRequester<Q, R> extends Requester implements IInfoRequester<Q, R> {
@@ -16,19 +21,19 @@ export class InfoRequester<Q, R> extends Requester implements IInfoRequester<Q, 
     }
 }
 
-export class AllMarketplacesRequester extends InfoRequester<undefined, AllMarketplacesResultData> {
+export class AllMarketplacesRequester extends InfoRequester<AllMarketplacesRequestData, AllMarketplacesResultData> {
     constructor() {
         super("/get-all-marketplaces");
     }
 }
 
-export class AllCategoriesRequester extends InfoRequester<undefined, AllCategoriesResultData> {
+export class AllCategoriesRequester extends InfoRequester<AllCategoriesRequestData, AllCategoriesResultData> {
     constructor() {
         super("/get-all-categories");
     }
 }
 
-export class AllNichesRequester extends InfoRequester<undefined, AllNichesResultData> {
+export class AllNichesRequester extends InfoRequester<AllNichesRequestData, AllNichesResultData> {
     constructor() {
         super("/get-all-niches");
     }

@@ -1,7 +1,7 @@
 import {SavableCalculateActions} from "@/requests/request-actions/calculations/SavableCalculateActions";
 import type {SimpleUnitEconomyResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
-import {convertMoneyToPennie, convertMoneyToRoubles} from "@/requests/request-actions/calculations/utils";
+import {convertMoneyToPennie, convertMoneyToRoubles} from "@/requests/request-actions/utils";
 import type {SimpleUnitEconomyRequestData} from "@/types/DataTypes";
 import {SimpleUnitEconomyRequester, TransitUnitEconomyRequester} from "@/requests/requesters/SavableCalculateRequester";
 import {useSimpleUnitEconCalcStore, useTransitUnitEconCalcStore} from "@/stores/CalcStores";
@@ -36,10 +36,10 @@ export class TransitUnitEconomyActions<Q extends TransitUnitEconomyRequestData, 
     extends SavableCalculateActions<TransitUnitEconomyRequestData, TransitUnitEconomyResultData> {
 
     static requestMoneyKeys: (keyof TransitUnitEconomyRequestData)[] =
-        [...SimpleUnitEconomyActions.requestMoneyKeys, "logistic_count", "logistic_price"];
+        [...SimpleUnitEconomyActions.requestMoneyKeys, "logistic_price"];
     static resultMoneyKeys: (keyof TransitUnitEconomyResultData[0])[] =
         [...SimpleUnitEconomyActions.resultMoneyKeys, "purchase_investments", "commercial_expanses", "tax_expanses",
-            "absolute_margin"];
+            "absolute_transit_margin"];
 
     constructor() {
         super(new TransitUnitEconomyRequester(), useTransitUnitEconCalcStore());
@@ -53,8 +53,8 @@ export class TransitUnitEconomyActions<Q extends TransitUnitEconomyRequestData, 
 
     prepareResultData(result: R): R {
         // Convert data to server-format (to roubles)
-        convertMoneyToRoubles(result[0], SimpleUnitEconomyActions.resultMoneyKeys);
-        convertMoneyToRoubles(result[1], SimpleUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[0], TransitUnitEconomyActions.resultMoneyKeys);
+        convertMoneyToRoubles(result[1], TransitUnitEconomyActions.resultMoneyKeys);
         return result;
     }
 }

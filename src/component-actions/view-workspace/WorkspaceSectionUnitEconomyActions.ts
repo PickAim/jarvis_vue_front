@@ -32,7 +32,6 @@ export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions 
         useRequestStore().stopSequence();
 
         const result = await promise;
-        console.log(result);
         [this.simpleRequests, this.transitRequests, this.products] =
             [result[0].result, result[1].result, result[2].result];
     }

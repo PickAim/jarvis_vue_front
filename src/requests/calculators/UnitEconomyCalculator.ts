@@ -48,10 +48,7 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
             useNotificationsStore().addErrorNotification(["Ошибка", `Ошибка в поле ${requestOrKey}`]);
-            // TODO: add error key handling
         } else {
-            requestOrKey.category_id = 2
-            requestOrKey.niche_id = 2;
             return requestOrKey;
         }
     }

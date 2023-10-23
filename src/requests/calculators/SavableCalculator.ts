@@ -22,22 +22,14 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
     }
 
     async deleteRequest(id: CalculateRequestInfoData["id"]) {
-        if (this.isBusy) return;
-        this.isBusy = true;
         await this.calculateActions.deleteRequest(id);
-        this.isBusy = false;
     }
 
     async loadAll() {
-        if (this.isBusy) return;
-        this.isBusy = true;
         await this.calculateActions.loadAll();
-        this.isBusy = false;
     }
 
     async saveRequest(name: string) {
-        if (this.isBusy) return;
-        this.isBusy = true;
         const preparedRequest = this.beforeCalculating();
         if (preparedRequest && this.result && !this.isRequestChanged) {
             const response = await this.calculateActions.saveRequest({
@@ -49,7 +41,6 @@ export abstract class SavableCalculator<Q, R> extends Calculator<Q, R, ISavableC
                 this.info = response.result;
             }
         }
-        this.isBusy = false;
     }
 
     getAll(): CalculateRequestData<Q, R>[] {
