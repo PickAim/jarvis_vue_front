@@ -5,7 +5,7 @@
 <template>
   <footer>
     <div class="footer-wrapper">
-      <img src="\src\assets\images\jarvis.png" alt="">
+      <div class="jarvis-label"/>
       <a href="">Контакты</a>
       <a href="">Мы в социальных сетях:</a>
     </div>
@@ -20,7 +20,7 @@ footer {
   background: #191919;
   color: #FFFFFF;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 
   .footer-wrapper {
     display: flex;
@@ -28,8 +28,10 @@ footer {
     gap: 45px;
     padding: 50px 40px;
 
-    img {
-      width: 300px;
+    .jarvis-label {
+      background: url("/src/assets/images/Jarvis-Label-256px.png") no-repeat top;
+      background-size: contain;
+      width: 250px;
       height: 70px;
     }
 
@@ -44,11 +46,6 @@ footer {
 @media (max-width:$tag-width) {
   footer {
     .footer-wrapper {
-      img {
-        width: 150px;
-        height: 35px;
-      }
-
       a {
         font-weight: 700;
         font-size: 15px;

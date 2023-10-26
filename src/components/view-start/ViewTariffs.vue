@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
-
-const actions = new ViewStartActions();
+import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
+import PaddingLayout from "@/components/layouts/PaddingLayout.vue";
+import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
 </script>
 
 <template>
   <div class="view-workspace-header">
-    <div class="you-have-block-wrapper">
-      <div class="buttons-wrapper">
-        <img src="src\assets\images\jarvis.png" alt="">
-        <button class="about-product">О продукте</button>
-        <button class="tariffs">Тарифы</button>
-        <button class="question">Вопросы</button>
-        <button class="login-button" @click="actions.openLoginOverlay()">Вход</button>
-        <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>
-      </div>
+    <PaddingLayout class="tariffs-view-wrapper">
+      <ViewStartHeader/>
       <div class="tariff-title">
         <div class="tariff-paragraph">
           ТАРИФЫ:
@@ -177,14 +170,8 @@ const actions = new ViewStartActions();
           </h1>
         </div>
       </div>
-      <div class="footer">
-        <div class="footer-wrapper">
-          <img src="\src\assets\images\jarvis.png" alt="">
-          <a href="">Контакты</a>
-          <a href="">Мы в социальных сетях:</a>
-        </div>
-      </div>
-    </div>
+      <ViewStartFooter/>
+    </PaddingLayout>
   </div>
 </template>
 
@@ -200,12 +187,11 @@ $tag-width: 1150px;
   overflow: auto;
   position: relative;
 
-  .you-have-block-wrapper {
+  .tariffs-view-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px;
     width: 100%;
     background-color: rgba(25, 25, 25, 1);
     color: rgba(255, 255, 255, 1);
@@ -413,7 +399,7 @@ $tag-width: 1150px;
       background: #191919;
       color: #FFFFFF;
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
 
       .footer-wrapper {
         display: flex;

@@ -181,15 +181,15 @@ import ControlButton from "@/components/controls/ControlButton.vue";
           background-repeat: no-repeat;
 
           &.image-1 {
-            background-image: url("/src/assets/images/About-Jarvis-1.png");
+            background-image: url("/src/assets/images/About-Jarvis-1-512px.png");
           }
 
           &.image-2 {
-            background-image: url("/src/assets/images/About-Jarvis-2.png");
+            background-image: url("/src/assets/images/About-Jarvis-2-512px.png");
           }
 
           &.image-3 {
-            background-image: url("/src/assets/images/About-Jarvis-3.png");
+            background-image: url("/src/assets/images/About-Jarvis-3-512px.png");
           }
         }
       }

@@ -7,9 +7,7 @@ import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorksp
 
 <template>
   <header class="view-workspace-header">
-    <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу">
-      <img src="/src/assets/images/jarvis_white_icon.png" alt="">
-    </div>
+    <div class="logo" @click="$router.push(sections.dashboard.link)" title="На главную страницу"/>
     <div class="menu-and-profile-wrapper">
       <ViewWorkspaceHeaderMenu/>
       <div class="header-popup-wrapper">
@@ -43,11 +41,10 @@ $header-height: 80px;
     justify-content: center;
     flex: 0 0 auto;
     height: 85%;
+    width: 70px;
     cursor: pointer;
-
-    img {
-      height: 100%;
-    }
+    background: url("/src/assets/images/Jarvis-Logo-White-128px.png") no-repeat top;
+    background-size: contain;
   }
 
   .menu-and-profile-wrapper {

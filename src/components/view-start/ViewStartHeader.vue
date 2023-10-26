@@ -8,8 +8,9 @@ const router = useRouter();
 
 <template>
   <header>
-    <div class="logo"/>
+
     <div class="buttons-wrapper">
+      <div class="logo"/>
       <button class="about-product">О продукте</button>
       <button class="tariffs" @click="router.push('ViewTariffs')">Тарифы</button>
       <button class="question">Вопросы</button>
@@ -20,9 +21,7 @@ const router = useRouter();
       </button>
       <!--      <button class="reg-button" @click="actions.openRegistrationOverlay()">Регистрация</button>-->
     </div>
-    <button class="mobile-menu-button" @click="actions.openMobMenu()">
-      <img src="src\assets\images\icon-mob-menu.png" alt="">
-    </button>
+    <button class="mobile-menu-button" @click="actions.openMobMenu()"/>
   </header>
 </template>
 
@@ -38,8 +37,9 @@ header {
   background-color: #191919;
 
   .logo {
-    flex: 1;
-    background: url("/src/assets/images/jarvis_white_icon.png") center no-repeat;
+    //flex: 1;
+    width: 80px;
+    background: url("/src/assets/images/Jarvis-Logo-White-128px.png") center no-repeat;
     background-size: contain;
     height: 100%;
   }
@@ -51,7 +51,7 @@ header {
     max-width: 90vw;
     width: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
     button {
       font-weight: 400;
@@ -75,7 +75,7 @@ header {
       .arrow {
         grid-column: 3;
         height: 100%;
-        background: url("/src/assets/images/Arrow.png") no-repeat top;
+        background: url("/src/assets/images/Arrow-64px.png") no-repeat top;
         background-size: contain;
         margin: 15px 15px 0 0;
         transform: rotate(5deg);
@@ -100,12 +100,11 @@ header {
     .mobile-menu-button {
       display: flex;
       justify-content: flex-end;
-      margin: 50px 50px 0 50px;
-
-      img {
-        width: 40px;
-        height: 20px;
-      }
+      margin-left: 20px;
+      background: url("/src/assets/images/Mobile-Menu-64px.png") no-repeat top;
+      background-size: contain;
+      width: 40px;
+      height: 40px;
     }
   }
 }</style>

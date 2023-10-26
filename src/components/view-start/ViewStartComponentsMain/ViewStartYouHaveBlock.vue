@@ -6,13 +6,9 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
   <MiddleLineLayout>
     <div class="you-have-block-wrapper">
       <div class="what-you-have-label view-you-have-block">
-        <div class="big-arrow not-visible-image">
-          <img src="src\assets\images\Cards-block-LineUnderText.png" alt="">
-        </div>
+        <div class="big-arrow not-visible-image"/>
         <h1>ЧТО ВЫ <br> СЕЙЧАС ИМЕЕТЕ:</h1>
-        <div class="big-arrow">
-          <img src="src\assets\images\Cards-block-LineUnderText.png" alt="">
-        </div>
+        <div class="big-arrow"/>
       </div>
       <div class="opportunity-cards view-you-have-block">
         <div class="opportunity-card first-card">
@@ -74,6 +70,7 @@ $to-column-width: 620px;
   .what-you-have-label {
     display: flex;
     flex-direction: column;
+    height: 100%;
     flex: 4 0;
 
     h1 {
@@ -87,8 +84,13 @@ $to-column-width: 620px;
     }
 
     .big-arrow {
-      width: 100%;
+      flex: 1;
       height: 100%;
+      width: 100%;
+      max-width: 400px;
+      background-image: url("/src/assets/images/Figured-Arrow-256px.png");
+      background-size: contain;
+      background-repeat: no-repeat;
 
       @media (max-width: $to-column-width) {
         display: none;
@@ -143,7 +145,7 @@ $to-column-width: 620px;
         .line-icon {
           width: 50px;
           height: 100%;
-          background: url("/src/assets/images/Cards-Block-Lil-Arrow.png") no-repeat center;
+          background: url("/src/assets/images/Cards-Block-Lil-Arrow-64px.png") no-repeat center;
           background-size: contain;
         }
 
@@ -175,7 +177,7 @@ $to-column-width: 620px;
         }
 
         .card-icon {
-          background-image: url("/src/assets/images/Cards-Block-1.png");
+          background-image: url("/src/assets/images/You-Have-1-512px.png");
         }
       }
 
@@ -184,7 +186,7 @@ $to-column-width: 620px;
         color: white;
 
         .card-icon {
-          background-image: url("/src/assets/images/Cards-Block-2.png");
+          background-image: url("/src/assets/images/You-Have-2-512px.png");
         }
       }
 
@@ -193,7 +195,7 @@ $to-column-width: 620px;
         color: black;
 
         .card-icon {
-          background-image: url("/src/assets/images/Cards-Block-3.png");
+          background-image: url("/src/assets/images/You-Have-3-512px.png");
         }
       }
     }

@@ -10,15 +10,9 @@
       </div>
       <div class="line-block">
         <div class="advantages">
-          <div class="advantages-image">
-            <img src="src\assets\images\Trusted-1.png" alt="">
-          </div>
-          <div class="advantages-image">
-            <img src="src\assets\images\Trusted-2.png" alt="">
-          </div>
-          <div class="advantages-image">
-            <img src="src\assets\images\Trusted-3.png" alt="">
-          </div>
+          <div class="advantages-image image-1"/>
+          <div class="advantages-image image-2"/>
+          <div class="advantages-image image-3"/>
         </div>
         <div class="advantages-description">
           <div class="advantages-text">Актуальность и точность предоставляемых данных</div>
@@ -83,11 +77,23 @@ $tag-width: 1150px;
         .advantages-image {
           display: flex;
           flex-direction: column;
-          padding-block: 50px;
+          margin-bottom: 20px;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: bottom;
+          height: 120px;
+          width: 140px;
 
-          img {
-            width: 100px;
-            height: 100px;
+          &.image-1 {
+            background-image: url("/src/assets/images/Trusted-1-512px.png");
+          }
+
+          &.image-2 {
+            background-image: url("/src/assets/images/Trusted-2-512px.png");
+          }
+
+          &.image-3 {
+            background-image: url("/src/assets/images/Trusted-3-512px.png");
           }
         }
       }

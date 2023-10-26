@@ -103,15 +103,15 @@ $tag-width: 1150px;
         width: 100px;
 
         &.image-1 {
-          background-image: url("/src/assets/images/Tariffs-1.png");
+          background-image: url("/src/assets/images/Tariffs-1-512px.png");
         }
 
         &.image-2 {
-          background-image: url("/src/assets/images/Tariffs-2.png");
+          background-image: url("/src/assets/images/Tariffs-2-512px.png");
         }
 
         &.image-3 {
-          background-image: url("/src/assets/images/Tariffs-3.png");
+          background-image: url("/src/assets/images/Tariffs-3-512px.png");
         }
       }
 

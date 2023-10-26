@@ -14,9 +14,7 @@ function openText() {
       <slot name="header">Здесь будет вопрос</slot>
     </h1>
     <div class="arrow-link">
-      <button class="button-link" @click="openText">
-        <img src="src\assets\images\Arrow.png" alt="">
-      </button>
+      <button class="button-link" @click="openText"/>
     </div>
   </div>
   <div class="description" :class="{ active: isActive }">
@@ -49,9 +47,10 @@ $tag-width: 1150px;
 
   .arrow-link {
     .button-link {
-      img {
-        height: 40px;
-      }
+      background: url("/src/assets/images/Arrow-64px.png") no-repeat top;
+      background-size: contain;
+      width: 40px;
+      height: 40px;
     }
   }
 }

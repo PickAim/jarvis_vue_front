@@ -6,6 +6,8 @@ export class WorkspaceActions {
 
     async initSection() {
         this.isPageLoading = true;
+        // Just delay for visualization
+        await (new Promise(resolve => setTimeout(resolve, 500)));
         const response = await (new AccountRequestActions()).loginToken();
         this.isPageLoading = response.code !== ResultCode.OK;
     }

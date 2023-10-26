@@ -11,7 +11,7 @@ const {closeOverlay} = useOverlayStateStore()
   <div class="overlay-window-wrapper">
     <div class="overlay-wrapper">
       <div class="top-items">
-        <img src="src\assets\images\jarvis.png" alt="Logo">
+        <div class="jarvis-label"/>
         <button class="button-close" @click="closeOverlay()">Закрыть</button>
       </div>
       <div class="link-items">
@@ -63,9 +63,11 @@ const {closeOverlay} = useOverlayStateStore()
       justify-content: space-between;
       gap: 60px;
 
-      img {
+      .jarvis-label {
+        background: url("/src/assets/images/Jarvis-Label-256px.png") no-repeat top;
+        background-size: contain;
         width: 200px;
-        height: 50px;
+        height: 70px;
       }
 
       .button-close {

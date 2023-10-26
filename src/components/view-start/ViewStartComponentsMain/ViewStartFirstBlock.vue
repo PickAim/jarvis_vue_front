@@ -71,7 +71,7 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
     .jarvis-label {
       width: 90%;
       height: 100%;
-      background: url("/src/assets/images/jarvis.png") no-repeat center;
+      background: url("/src/assets/images/Jarvis-Label-1024px.png") no-repeat center;
       background-size: contain;
     }
 

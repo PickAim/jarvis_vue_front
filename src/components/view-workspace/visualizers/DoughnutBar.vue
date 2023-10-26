@@ -69,6 +69,7 @@ const chartOptions = computed<ChartOptions>(() => ({
     legend: {
       labels: {
         font: {
+          family: "Montserrat",
           size: 15
         },
         color: 'white'
@@ -79,7 +80,7 @@ const chartOptions = computed<ChartOptions>(() => ({
     title: {
       color: 'white',
       font: {
-        size: 20
+        size: 25
       },
       display: true,
       text: props.title

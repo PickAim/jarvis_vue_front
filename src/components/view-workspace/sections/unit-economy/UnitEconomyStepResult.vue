@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type {TransitUnitEconomyResultData} from "@/types/DataTypes";
+import type {SimpleUnitEconomyResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import DoughnutBar from "@/components/view-workspace/visualizers/DoughnutBar.vue";
 import {computed, ref} from "vue";
-import ControlTextInput from "@/components/controls/ControlTextInput.vue";
-import ControlButton from "@/components/controls/ControlButton.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 
 const props = defineProps<{
@@ -12,57 +10,87 @@ const props = defineProps<{
   resultData: TransitUnitEconomyResultData | undefined
 }>();
 
-const emits = defineEmits<{
-  (e: "saveRequest", name: string): void
-}>();
+// const emits = defineEmits<{
+//   (e: "saveRequest", name: string): void
+// }>();
 
-const requestNamePlaceholder = computed(() => `${props.saveName}, ${
-    (new Date()).toLocaleDateString('ru-RU', {day: "2-digit", month: "short"})
-}`);
-const requestName = ref(requestNamePlaceholder);
+// const requestNamePlaceholder = computed(() => `${props.saveName}, ${
+//     (new Date()).toLocaleDateString('ru-RU', {day: "2-digit", month: "short"})
+// }`);
+// const requestName = ref(requestNamePlaceholder);
+const showResultIndex = ref<0 | 1>(1);
 
-const chartKeyToTitle: { [ind in keyof TransitUnitEconomyResultData]: string } = {
-  // margin: "Маржа",
-  // logistic_price: "Стоимость логистики",
-  // pack_cost: "Стоимость упаковки",
-  // product_cost: "Себестоимость",
-  // storage_price: "Хранение",
-  // marketplace_commission: "Комиссия маркетплейса",
-  // transit_margin: "Комиссия транзита",
-  // transit_profit: "Транизтная выручка",
-  // recommended_price: "",
-  // roi: ""
-}
+type FirstKey = Omit<TransitUnitEconomyResultData[0], SimpleUnitEconomyResultData[0]>;
+type SecondKey = SimpleUnitEconomyResultData[0];
+type KeyOrFunction<KT> = keyof KT | [keyof KT, (<T>(a: T) => T)];
+type KeyTitles = [string, [KeyOrFunction<FirstKey>, KeyOrFunction<SecondKey>] | [KeyOrFunction<FirstKey | SecondKey>]][]
 
-const chartResult = computed(() => {
-  const result = [];
-  if (!props.resultData) return result;
-  Object.keys(props.resultData).forEach((key) => {
-    if (["transit_margin", "transit_profit"].includes(key)) return;
-    const value = props.resultData && props.resultData[key];
-    if (value !== undefined) {
-      const title = chartKeyToTitle[key];
-      if (title === "") return;
-      result.push([value, title]);
-    }
+const chartKeyTitles: KeyTitles = [
+  ["Маржа", ["absolute_transit_margin", "absolute_margin"]],
+  ["Налоги", ["tax_expanses", ["result_cost", (val) => val * 0.06]]],
+  ["Маркетплейс", ["commercial_expanses", "marketplace_expanses"]],
+  ["Себестоимость", ["purchase_investments", "purchase_cost"]],
+]
+
+const inFixed = (val) => val.toFixed(2);
+const inRub = (val) => `${inFixed(val)} ₽`;
+const inPercents = (val) => `${inFixed(val * 100)} %`;
+
+
+const textKeyTitles: KeyTitles = [
+  ["Стоимость логистики: ", [["logistic_price", inRub]]],
+  ["Стоимость хранения: ", [["storage_price", inRub]]],
+  ["Относительная маржинальность: ", [["relative_transit_margin", inPercents], ["relative_margin", inPercents]]],
+  ["ROI: ", [["transit_roi", inFixed], ["roi", inFixed]]],
+]
+
+const keyTitlesArray = [chartKeyTitles, textKeyTitles]
+
+const computedResult = computed<[number, string][][]>(() => {
+  if (!props.resultData) return [];
+  const resultData = props.resultData[showResultIndex.value];
+  // map all keyTitles parts of result
+  return keyTitlesArray.map((keyTitles) => {
+    return keyTitles.reduce((valueAndTexts, titleAndKeys) => {
+      titleAndKeys[1].some(keyOrFunction => {
+        if (typeof keyOrFunction === "object") {
+          const value = resultData[keyOrFunction[0]];
+          if (value != undefined) {
+            valueAndTexts.push([keyOrFunction[1](value), titleAndKeys[0]]);
+            return true;
+          }
+        } else {
+          const value = resultData[keyOrFunction];
+          if (value != undefined) {
+            valueAndTexts.push([value, titleAndKeys[0]]);
+            return true;
+          }
+        }
+      })
+      return valueAndTexts;
+    }, [] as [number, string][]);
   });
-  return result;
 });
 
-const chartTitle = computed(() => `Рекомендуемая цена: ${props.resultData?.result_cost}`);
-
+const chartTitle = computed(() =>
+    `Рекомендуемая цена: ${props.resultData && props.resultData[showResultIndex.value].result_cost}`);
 </script>
 
 <template>
   <UnitEconomyStep id="unit-economy-result" :class="{active: props.shown}">
     <template v-slot:header>Результат</template>
     <template v-slot:body>
-      {{ resultData }}
-      <!--      <div class="result-wrapper">-->
-      <!--        <DoughnutBar class="result-chart"-->
-      <!--                     :data-and-labels="chartResult"-->
-      <!--                     :title="chartTitle" v-if="chartResult.length >= 0"/>-->
-      <!--      </div>-->
+      <div class="result-wrapper">
+        <DoughnutBar class="result-chart"
+                     :data-and-labels="computedResult[0]"
+                     :title="chartTitle" v-if="computedResult.length > 0"/>
+        <div class="text-result">
+          <div class="result-item" v-for="(res, ind) in computedResult[1]" :key="ind">
+            <div class="result-title">{{ res[1] }}</div>
+            <div class="result-value" :class="{negative: res[0].toString().split(' ')[0] < 0}">{{ res[0] }}</div>
+          </div>
+        </div>
+      </div>
       <!--      <div class="save-wrapper">-->
       <!--        <ControlTextInput class="save-name-input"-->
       <!--                          v-model="requestName"-->
@@ -77,6 +105,8 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .unit-economy-step {
   position: relative;
   visibility: hidden;
@@ -89,14 +119,38 @@ const chartTitle = computed(() => `Рекомендуемая цена: ${props.
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 400px;
+    height: 600px;
+    gap: 30px;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
     margin-block: 5px;
 
     .result-chart {
-      height: 100%;
+      flex: 1;
+    }
+
+    .text-result {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+      flex-direction: column;
+
+      .result-item {
+        display: grid;
+        grid-template-columns: minmax(200px, 500px) minmax(50px, 120px);
+        border-bottom: 1px solid var.$green-jarvis-color;
+        font-size: 18px;
+
+        .result-value {
+          font-weight: 700;
+
+          &.negative {
+            color: rgb(255, 68, 68);
+          }
+        }
+      }
     }
   }
 
