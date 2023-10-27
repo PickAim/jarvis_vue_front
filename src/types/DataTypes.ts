@@ -2,7 +2,7 @@ import type {ResponseType} from "axios";
 import type {ResultCode} from "@/requests/ResultCode";
 
 export interface RequestData {
-    url: string;
+    uri: string;
     method?: "POST" | "GET";
     body?: any;
     responseType?: ResponseType;

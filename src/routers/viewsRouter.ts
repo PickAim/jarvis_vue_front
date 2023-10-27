@@ -11,7 +11,7 @@ export const viewRoutes: RouteRecordRaw[] = [
     },
     {
         name: 'ViewStart',
-        path: '/ViewTariffs',
+        path: '/tariffs',
         component: ViewTariffs,
     },
     {

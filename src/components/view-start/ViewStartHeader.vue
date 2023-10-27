@@ -12,7 +12,7 @@ const router = useRouter();
     <div class="buttons-wrapper">
       <div class="logo"/>
       <button class="about-product">О продукте</button>
-      <button class="tariffs" @click="router.push('ViewTariffs')">Тарифы</button>
+      <button class="tariffs" @click="router.push('tariffs')">Тарифы</button>
       <button class="question">Вопросы</button>
       <!--      <button class="login-button" @click="router.push('workspace')">На работу</button>-->
       <button class="login-button" @click="actions.openLoginOverlay()">

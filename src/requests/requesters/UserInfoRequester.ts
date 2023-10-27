@@ -11,7 +11,7 @@ export class UserInfoRequester<Q, R> extends Requester implements IUserInfoReque
 
     async getUserInfo(request: Q): Promise<ResponseData<R>> {
         return await this.requestHandler.makeRequest<R>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL,
+            uri: Configs.AccessRequestPrefix + this.baseRequestURL + "/",
             body: request
         });
     }

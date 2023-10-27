@@ -17,9 +17,6 @@ import ViewStartFormBlock from "./ViewStartComponentsMain/ViewStartFormBlock.vue
     <ViewStartWhyTrustBlock/>
     <ViewStartQuestionsBlock/>
     <ViewStartFormBlock/>
-    <!--<ViewStartTraiffLinkBlock />-->
-    <!--<ViewStartHeaderOverlay/>-->
-    <!--use on mobile version screen -->
   </div>
 </template>
 

@@ -21,21 +21,21 @@ export class SavableCalculateRequester<Q, R> extends CalculateRequester<Q, R>
 
     async saveRequest(calcRequest: CalculateRequestData<Q, R>): Promise<ResponseData<CalculateRequestData<Q, R>["info"]>> {
         return await this.requestHandler.makeRequest<CalculateRequestData<Q, R>["info"]>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/save',
+            uri: Configs.AccessRequestPrefix + this.baseRequestURL + '/save/',
             body: calcRequest
         });
     }
 
     async deleteRequest(id: CalculateRequestInfoData['id']): Promise<ResponseData<void>> {
         return await this.requestHandler.makeRequest<void>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete',
+            uri: Configs.AccessRequestPrefix + this.baseRequestURL + '/delete/',
             body: {request_id: id}
         });
     }
 
     async loadAll(): Promise<ResponseData<CalculateRequestData<Q, R>[]>> {
         return await this.requestHandler.makeRequest<CalculateRequestData<Q, R>[]>({
-            url: Configs.AccessRequestPrefix + this.baseRequestURL + '/get-all'
+            uri: Configs.AccessRequestPrefix + this.baseRequestURL + '/get-all/'
         });
     }
 }

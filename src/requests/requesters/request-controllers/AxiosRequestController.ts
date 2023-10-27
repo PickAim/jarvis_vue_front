@@ -14,7 +14,7 @@ export default class AxiosRequestController implements IRequestController {
     constructor(private authStore: IAuthStore) {
         this.requestStore = useRequestStore();
         this.axiosInst = axios.create({
-            baseURL: 'http://localhost:8090/',
+            baseURL: Configs.ServerURL,
             headers: {
                 Accept: "*/*"
             },
@@ -24,16 +24,15 @@ export default class AxiosRequestController implements IRequestController {
 
     async makeRequest<K>(request: RequestData):
         Promise<ResponseData<K>> {
-        const {url, body = {}, method = "POST", responseType = "json"} = request;
-
+        const {uri, body = {}, method = "POST", responseType = "json"} = request;
         const config: AxiosRequestConfig = {
             responseType: responseType
         }
 
         const tokens: Partial<TokenData> = {} as TokenData;
-        if (url.startsWith(Configs.UpdateRequestPrefix)) {
+        if (uri.startsWith(Configs.UpdateRequestPrefix)) {
             Object.assign(tokens, this.authStore.getTokens());
-        } else if (url.startsWith(Configs.AccessRequestPrefix)) {
+        } else if (uri.startsWith(Configs.AccessRequestPrefix)) {
             tokens["access_token"] = this.authStore.getTokens().access_token;
             tokens["imprint_token"] = this.authStore.getTokens().imprint_token;
         }
@@ -46,9 +45,9 @@ export default class AxiosRequestController implements IRequestController {
             let result: AxiosResponse<K> | undefined = undefined;
             if (method == "GET") {
                 config.params = requestBody;
-                result = await this.axiosInst.get<K>(url, config);
+                result = await this.axiosInst.get<K>(uri, config);
             } else if (method == "POST") {
-                result = await this.axiosInst.post<K>(url, requestBody, config);
+                result = await this.axiosInst.post<K>(uri, requestBody, config);
             }
             if (!result) {
                 return {code: ResultCode.CONFIGURATION_ERROR}
@@ -84,7 +83,7 @@ export default class AxiosRequestController implements IRequestController {
     }
 
     async updateToken(): Promise<ResponseData<object>> {
-        const request: RequestData = {url: Configs.UpdateRequestPrefix + "/update-all-tokens"};
+        const request: RequestData = {uri: Configs.UpdateRequestPrefix + "/update-all-tokens"};
         const response = await this.makeRequest<TokenData>(request);
         if (response.code == ResultCode.OK && response.result !== undefined) {
             const tokens = response.result;
