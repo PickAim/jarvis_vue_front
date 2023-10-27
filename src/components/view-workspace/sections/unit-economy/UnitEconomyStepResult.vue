@@ -18,7 +18,7 @@ const props = defineProps<{
 //     (new Date()).toLocaleDateString('ru-RU', {day: "2-digit", month: "short"})
 // }`);
 // const requestName = ref(requestNamePlaceholder);
-const showResultIndex = ref<0 | 1>(1);
+const showResultIndex = ref<"0" | "1">("0");
 
 type FirstKey = Omit<TransitUnitEconomyResultData[0], SimpleUnitEconomyResultData[0]>;
 type SecondKey = SimpleUnitEconomyResultData[0];
@@ -73,7 +73,7 @@ const computedResult = computed<[number, string][][]>(() => {
 });
 
 const chartTitle = computed(() =>
-    `Рекомендуемая цена: ${props.resultData && props.resultData[showResultIndex.value].result_cost}`);
+    `Рекомендуемая цена: ${props.resultData && inRub(props.resultData[showResultIndex.value].result_cost)}`);
 </script>
 
 <template>
@@ -81,13 +81,27 @@ const chartTitle = computed(() =>
     <template v-slot:header>Результат</template>
     <template v-slot:body>
       <div class="result-wrapper">
-        <DoughnutBar class="result-chart"
-                     :data-and-labels="computedResult[0]"
-                     :title="chartTitle" v-if="computedResult.length > 0"/>
-        <div class="text-result">
-          <div class="result-item" v-for="(res, ind) in computedResult[1]" :key="ind">
-            <div class="result-title">{{ res[1] }}</div>
-            <div class="result-value" :class="{negative: res[0].toString().split(' ')[0] < 0}">{{ res[0] }}</div>
+        <div class="chart-wrapper">
+          <DoughnutBar class="result-chart"
+                       :data-and-labels="computedResult[0]"
+                       :title="chartTitle" v-if="computedResult.length > 0"/>
+        </div>
+        <div class="right-wrapper">
+          <div class="result-choose-wrapper">
+            <div class="choose-button">
+              <input type="radio" name="result-choose" id="choose-recommendation" value="1" v-model="showResultIndex">
+              <label for="choose-recommendation">Показать расчёт по рекомендованной цене</label>
+            </div>
+            <div class="choose-button">
+              <input type="radio" name="result-choose" id="choose-current" value="0" v-model="showResultIndex">
+              <label for="choose-current">Показать расчёт по текущей цене</label>
+            </div>
+          </div>
+          <div class="text-result">
+            <div class="result-item" v-for="(res, ind) in computedResult[1]" :key="ind">
+              <div class="result-title">{{ res[1] }}</div>
+              <div class="result-value" :class="{negative: res[0].toString().split(' ')[0] < 0}">{{ res[0] }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -115,41 +129,100 @@ const chartTitle = computed(() =>
   overflow: hidden;
   transition: all 0.3s;
 
+  .step-body {
+    align-items: center;
+  }
+
   .result-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
     width: 100%;
-    height: 600px;
-    gap: 30px;
+    height: 500px;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
     margin-block: 5px;
 
-    .result-chart {
-      flex: 1;
+    .chart-wrapper {
+      flex: 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .result-chart {
+        flex: 1 0;
+        width: 100%;
+        max-width: 400px;
+      }
     }
 
-    .text-result {
+    .right-wrapper {
+      flex: 1;
       display: flex;
-      align-items: center;
-      width: 100%;
-      gap: 10px;
+      gap: 30px;
       flex-direction: column;
+      align-items: flex-start;
 
-      .result-item {
-        display: grid;
-        grid-template-columns: minmax(200px, 500px) minmax(50px, 120px);
-        border-bottom: 1px solid var.$green-jarvis-color;
-        font-size: 18px;
+      .result-choose-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
 
-        .result-value {
-          font-weight: 700;
+        .choose-button {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+          font-size: 18px;
 
-          &.negative {
-            color: rgb(255, 68, 68);
+          input {
+            border: 0;
+            width: 0.7em;
+            height: 0.7em;
           }
         }
+      }
+
+      .text-result {
+        flex: 1;
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+        flex-direction: column;
+
+        .result-item {
+          display: grid;
+          grid-template-columns: 1fr 100px;
+          border-bottom: 1px solid var.$green-jarvis-color;
+          font-size: 18px;
+
+          .result-value {
+            font-weight: 700;
+
+            &.negative {
+              color: rgb(255, 68, 68);
+            }
+          }
+        }
+      }
+    }
+
+    .result-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+      height: 100%;
+
+      .data-visualizers {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 50px;
+        width: 100%;
+        height: 100%;
       }
     }
   }
