@@ -1,3 +1,5 @@
+@use "./variables" as var;
+
 @font-face {
     font-family: Montserrat;
     font-weight: 100;
@@ -30,4 +32,8 @@
 
 * {
     font-family: Montserrat, sans-serif;
+}
+
+body {
+    background: var.$dark-jarvis-color;
 }
