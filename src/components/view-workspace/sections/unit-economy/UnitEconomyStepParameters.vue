@@ -7,6 +7,7 @@ import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
+import {unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
 
 const props = defineProps<{
   shown: boolean,
@@ -43,14 +44,16 @@ type InputCheckInfoType = InputInfoType<boolean> &
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType | InputCheckInfoType)[];
 
+const baseInputParametersKeys = ["product_exist_cost", "cost_price", "length", "width", "height", "mass", "target_warehouse_id"];
+
 const baseParameters = reactive<ParametersType>([
-  {name: "product_exist_cost", type: "input", title: "Текущая цена товара (₽)", inputType: "number", value: "0"},
-  {name: "cost_price", type: "input", title: "Себестоимость (₽)", inputType: "number"},
-  {name: "length", type: "input", title: "Длина (см)", inputType: "number"},
-  {name: "width", type: "input", title: "Ширина (см)", inputType: "number"},
-  {name: "height", type: "input", title: "Высота (см)", inputType: "number"},
-  {name: "mass", type: "input", title: "Масса (кг)", inputType: "number"},
-  {name: "target_warehouse_id", type: "input", title: "Склад назначения", inputType: "number"},
+  ...(baseInputParametersKeys.map(key =>
+      ({
+        name: key as keyof TransitUnitEconomyRequestData,
+        type: "input",
+        title: unitEconomyParameters[key],
+        inputType: "number"
+      }))),
   {
     type: "check", value: computed(() => props.isCalculateTransit),
     placeholder: "Рассчитать стоимость транзита",

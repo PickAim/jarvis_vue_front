@@ -89,7 +89,7 @@ export class SimpleUnitEconomyRequestData implements NicheRequestData {
     target_warehouse_id = 2;
 }
 
-type SimpleUnitEconomyOneResultData = {
+export type SimpleUnitEconomyOneResultData = {
     result_cost: number;
     logistic_price: number;
     storage_price: number;
@@ -108,7 +108,7 @@ export class TransitUnitEconomyRequestData extends SimpleUnitEconomyRequestData 
     transit_cost_for_cubic_meter = NaN;
 }
 
-interface TransitUnitEconomyOneResultData extends SimpleUnitEconomyOneResultData {
+export interface TransitUnitEconomyOneResultData extends SimpleUnitEconomyOneResultData {
     purchase_investments: number;
     commercial_expanses: number;
     tax_expanses: number;

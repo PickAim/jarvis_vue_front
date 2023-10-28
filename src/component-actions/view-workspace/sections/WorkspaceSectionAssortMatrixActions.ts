@@ -1,4 +1,4 @@
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/WorkspaceSectionActions";
+import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
 
 export class WorkspaceSectionAssortMatrixActions extends WorkspaceSectionActions {
     constructor() {

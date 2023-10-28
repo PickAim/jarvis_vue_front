@@ -1,6 +1,6 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import type {WidgetName, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/WorkspaceSectionActions";
+import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
 import {useWidgetStore} from "@/stores/widgetStore";
 
 export class WorkspaceSectionDashboardActions extends WorkspaceSectionActions {

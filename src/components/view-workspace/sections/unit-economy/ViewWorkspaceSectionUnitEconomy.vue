@@ -3,7 +3,7 @@ import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorks
 import {sections} from "@/components/view-workspace/workspaceSections";
 import {
   WorkspaceSectionUnitEconomyActions
-} from "@/component-actions/view-workspace/WorkspaceSectionUnitEconomyActions";
+} from "@/component-actions/view-workspace/sections/WorkspaceSectionUnitEconomyActions";
 import type {ProductData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import UnitEconomyStepSet from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepSet.vue";
 import UnitEconomyStepParameters from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepParameters.vue";

@@ -7,7 +7,9 @@ import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
-import {WorkspaceSectionDashboardActions} from "@/component-actions/view-workspace/WorkspaceSectionDashboardActions";
+import {
+  WorkspaceSectionDashboardActions
+} from "@/component-actions/view-workspace/sections/WorkspaceSectionDashboardActions";
 import type {WidgetName} from "@/types/WidgetTypes";
 import {widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
