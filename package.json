@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vite build --watch",
+    "build": "vite build",
     "dev": "vite --port=8300",
     "test": "npx vitest"
   },

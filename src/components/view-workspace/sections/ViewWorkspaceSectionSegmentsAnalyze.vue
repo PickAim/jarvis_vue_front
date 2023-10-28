@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
-import ControlSelect from "@/components/controls/ControlSelect.vue";
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import type {GreenZoneResultData} from "@/types/DataTypes";
@@ -9,29 +8,30 @@ import {GreenZoneActions} from "@/requests/request-actions/calculations/GreenZon
 import {ResultCode} from "@/requests/ResultCode";
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
+import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
+import {useRequestStore} from "@/stores/requestStore";
 
-const selectedCategoryID = ref("");
-const selectedNicheID = ref("");
-const analyzeResult = ref<GreenZoneResultData | undefined>(undefined);
+const selectedCategoryID = ref(0);
+const selectedNicheID = ref(0);
+const analyzeResult = ref<GreenZoneResultData | undefined>();
 const calculateActions = new GreenZoneActions();
 
 
 const chartData = computed<[number, number][]>(() => {
-  const segments = analyzeResult.value?.freq;
-  if (!segments) return [];
-  return segments.x.map((segment, ind) => {
-    return [segment, segments.y[ind]];
-  });
+  const greenZoneResult = analyzeResult.value;
+  if (!greenZoneResult) return [];
+  return greenZoneResult.segments.map((segment, ind) => [segment[0], greenZoneResult.segment_product_count[ind]]);
 });
 
-// FIX NICHE ID!!!
 async function onCalculate() {
+  useRequestStore().setLevel(202);
   const response = await calculateActions.calculate({
-    category_id: Number(selectedCategoryID.value),
-    niche: "1",
-    marketplace_id: 2
+    marketplace_id: 2,
+    category_id: selectedCategoryID.value,
+    niche_id: selectedNicheID.value,
   })
   if (response.code === ResultCode.OK) {
+    console.log(response.result)
     analyzeResult.value = response.result;
   }
 }
@@ -45,17 +45,9 @@ async function onCalculate() {
         <div class="segments-analyze-wrapper">
           <div class="niche-input">
             <div class="niche-input-label">Выберите категорию и нишу для расчёта:</div>
-            <ControlSelect class="select-wrapper"
-                           v-model:selected-value="selectedCategoryID"
-                           @update:selected-value="selectedNicheID=''"
-                           :options="[]"
-                           placeholder="Категория"
-            />
-            <ControlSelect class="select-wrapper"
-                           v-model:selected-value="selectedNicheID"
-                           :options="[]"
-                           placeholder="Ниша"
-            />
+            <NicheSelect :request-level="201"
+                         @update:nicheID="(id) => selectedNicheID = id"
+                         @update:categoryID="(id) => selectedNicheID = id"/>
           </div>
           <ControlButton class="calculate-button" @click="onCalculate">Рассчитать</ControlButton>
           <div class="segments-result-wrapper" v-if="analyzeResult">
@@ -63,56 +55,56 @@ async function onCalculate() {
               <BarChart class="segments-chart" :data="chartData"/>
               <div class="segments-result-interpretation">
                 <div class="priority-segment-label recommendation-label">
-                  Приоритетный сегмент: {{ analyzeResult.green.best_segment_idx + 1 }}
+                  Приоритетный сегмент: {{ analyzeResult.best_segment_idx + 1 }}
                 </div>
                 <div class="segment-recommendation-label recommendation-label">
                   Рекомендуется держать цену в диапазоне от
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][0] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_idx][0] }}
                   до
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_idx][1] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_idx][1] }}
                 </div>
                 <div class="high-sells-segment-label recommendation-label">
                   Высокая выручка в сегменте от
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][0] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_profit_idx][0] }}
                   до
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_profit_idx][1] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_profit_idx][1] }}
                 </div>
                 <div class="high-gross-segment-label recommendation-label">
                   Высокий % с продажами в сегменте от
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][0] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_product_with_trades_count_idx][0] }}
                   до
-                  {{ analyzeResult.green.segments[analyzeResult.green.best_segment_product_with_trades_count_idx][1] }}
+                  {{ analyzeResult.segments[analyzeResult.best_segment_product_with_trades_count_idx][1] }}
                 </div>
               </div>
             </div>
             <div class="segments-recommendation-grid">
               <div class="grid-header segment-grid-row">
                 <div class="grid-cell">Номер</div>
-                <div class="grid-cell">Промежуток</div>
+                <div class="grid-cell">Промежуток (₽)</div>
                 <div class="grid-cell">Количество</div>
-                <div class="grid-cell">Выручка</div>
+                <div class="grid-cell">Выручка (₽)</div>
                 <div class="grid-cell">Количество проданых</div>
-                <div class="grid-cell">Средняя выручка</div>
+                <div class="grid-cell">Средняя<br>выручка (₽)</div>
               </div>
-              <div class="segment-grid-row" v-for="(_, ind) in analyzeResult.freq.x" :key="ind">
+              <div class="segment-grid-row" v-for="ind in analyzeResult.segments.keys()" :key="ind">
                 <div class="grid-cell">
-                  {{ ind + 1 }}
+                  {{ Number(ind) + 1 }}
                 </div>
-                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_idx}">
-                  {{ analyzeResult.green.segments[ind][0] }}-{{ analyzeResult.green.segments[ind][1] }}
+                <div class="grid-cell" :class="{best: ind == analyzeResult.best_segment_idx}">
+                  {{ analyzeResult.segments[ind][0] }}-{{ analyzeResult.segments[ind][1] }}
                 </div>
-                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_product_count_idx}">
-                  {{ analyzeResult.green.segment_product_count[ind] }}
+                <div class="grid-cell" :class="{best: ind == analyzeResult.best_segment_product_count_idx}">
+                  {{ analyzeResult.segment_product_count[ind] }}
                 </div>
-                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_segment_profit_idx}">
-                  {{ analyzeResult.green.segment_profits[ind] }}
+                <div class="grid-cell" :class="{best: ind == analyzeResult.best_segment_profit_idx}">
+                  {{ analyzeResult.segment_profits[ind] }}
                 </div>
                 <div class="grid-cell"
-                     :class="{best: ind === analyzeResult.green.best_segment_product_with_trades_count_idx}">
-                  {{ analyzeResult.green.segment_product_with_trades_count[ind] }}
+                     :class="{best: ind == analyzeResult.best_segment_product_with_trades_count_idx}">
+                  {{ analyzeResult.segment_product_with_trades_count[ind] }}
                 </div>
-                <div class="grid-cell" :class="{best: ind === analyzeResult.green.best_mean_segment_profit_idx}">
-                  {{ analyzeResult.green.mean_segment_profit[ind] }}
+                <div class="grid-cell" :class="{best: ind == analyzeResult.best_mean_segment_profit_idx}">
+                  {{ analyzeResult.mean_segment_profit[ind] }}
                 </div>
               </div>
             </div>
@@ -155,6 +147,7 @@ async function onCalculate() {
     .segments-result-wrapper {
       display: flex;
       flex-direction: column;
+      margin-top: 50px;
 
       .segments-chart-wrapper {
         display: flex;

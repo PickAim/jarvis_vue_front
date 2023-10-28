@@ -78,6 +78,8 @@ $header-height: 80px;
           height: 60px;
           border-radius: 999px;
           border: 2px solid var.$green-jarvis-color;
+          background: url("/src/assets/images/Profile-Icon-128px.png") no-repeat center;
+          background-size: 70%;
         }
       }
 

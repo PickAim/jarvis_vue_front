@@ -11,12 +11,12 @@ export class GreenZoneActions extends CalculateActions<GreenZoneRequestData, Gre
     }
 
     protected prepareResultData(result: GreenZoneResultData): GreenZoneResultData {
+        console.log(JSON.stringify(result));
         const delimiter = (x: number) => x / 100;
-        result.freq.x = result.freq.x.map(delimiter);
-        result.green.mean_product_profit = result.green.mean_product_profit.map(delimiter);
-        result.green.mean_segment_profit = result.green.mean_segment_profit.map(delimiter);
-        result.green.segment_profits = result.green.segment_profits.map(delimiter);
-        result.green.segments = result.green.segments.map((x) => [x[0] / 100, x[1] / 100]);
+        result.mean_product_profit = result.mean_product_profit.map(delimiter);
+        result.mean_segment_profit = result.mean_segment_profit.map(delimiter);
+        result.segment_profits = result.segment_profits.map(delimiter);
+        result.segments = result.segments.map((x) => [x[0] / 100, x[1] / 100]);
         return super.prepareResultData(result);
     }
 }

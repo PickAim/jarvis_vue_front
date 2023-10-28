@@ -2,6 +2,7 @@
 import NotificationListItem from "@/components/notifications/NotificationListItem.vue";
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import {storeToRefs} from "pinia";
+import TrashIcon from "@/components/icon/TrashIcon.vue";
 
 const notificationsStore = useNotificationsStore()
 const {activeNotificationsList} = storeToRefs(notificationsStore);
@@ -13,7 +14,9 @@ const {hideAllNotifications} = notificationsStore;
   <div class="notification-list-wrapper">
     <div :class="{active: activeNotificationsList.length !== 0}"
          class="clear-button"
-         @click="hideAllNotifications()"/>
+         @click="hideAllNotifications()">
+      <TrashIcon class="trash-icon"/>
+    </div>
     <div class="list">
       <template v-for="note in notificationsStore.notificationsList" :key="note.id">
         <Transition name="list" appear>
@@ -25,6 +28,8 @@ const {hideAllNotifications} = notificationsStore;
 </template>
 
 <style scoped lang="scss">
+@use "src/assets/styles/variables" as var;
+
 .notification-list-wrapper {
   position: absolute;
   display: inline-flex;
@@ -44,16 +49,24 @@ const {hideAllNotifications} = notificationsStore;
 }
 
 .clear-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   width: 50px;
   height: 50px;
   margin-right: 10px;
-  border: 2px solid black;
+  border: 2px solid rgb(100, 100, 100);
   opacity: 0;
   margin-top: 5px;
   border-radius: 100px;
-  background-color: #FFF;
+  background-color: var.$dark-jarvis-color;
   transition: opacity 0.3s ease;
+
+  .trash-icon {
+    width: 80%;
+  }
 
   &.active {
     pointer-events: all;
@@ -61,11 +74,11 @@ const {hideAllNotifications} = notificationsStore;
   }
 
   &:hover {
-    border-width: 3px;
+    border-color: rgb(70, 70, 70);
   }
 
   &:active {
-    border-width: 1px;
+    border-color: rgb(100, 100, 100);
   }
 
 }

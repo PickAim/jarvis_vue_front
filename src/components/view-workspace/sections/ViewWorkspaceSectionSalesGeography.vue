@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
-import TestRequestLevels from "@/components/test/TestRequestLevels.vue";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
+import ViewWorkspaceUnderConstruction from "@/components/view-workspace/sections/ViewWorkspaceUnderConstruction.vue";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
     <template v-slot:header>{{ sections.salesGeography.title }}</template>
     <div class="section-body-wrapper">
       <MiddleLineLayout>
-        <TestRequestLevels/>
+        <ViewWorkspaceUnderConstruction/>
       </MiddleLineLayout>
     </div>
   </ViewWorkspaceSection>

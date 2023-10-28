@@ -15,6 +15,6 @@ export class OverlayRegistrationActions extends OverlayActions {
 
     async registration(data: RegData) {
         // TODO: add data validation
-        await this.accountRequestActions.registration(data);
+        return await this.accountRequestActions.registration(data);
     }
 }

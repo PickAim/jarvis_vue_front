@@ -12,6 +12,7 @@ const loginInput = ref("dummy");
 const passwordInput = ref("dummy");
 const actions = new OverlayLoginActions();
 const router = useRouter();
+const overlayState = useOverlayStateStore();
 
 function onLoginClick() {
   actions.login({login: loginInput.value, password: passwordInput.value}).then((resp) => {
@@ -28,12 +29,8 @@ function onLoginClick() {
     <main>
       <header>Вход</header>
       <div class="input-wrapper">
-        <ControlTextInputTransparent title="Логин"
-                                     input-type="text"
-                                     v-model="loginInput"/>
-        <ControlTextInputTransparent title="Пароль"
-                                     input-type="password"
-                                     v-model="passwordInput"/>
+        <ControlTextInputTransparent title="Логин" input-type="text" v-model="loginInput"/>
+        <ControlTextInputTransparent title="Пароль" input-type="password" v-model="passwordInput"/>
       </div>
       <ControlButtonTransparent class="submit"
                                 @click="onLoginClick">
@@ -41,7 +38,8 @@ function onLoginClick() {
       </ControlButtonTransparent>
       <div class="other-options">
         <div class="forgot-password">Забыли пароль?</div>
-        <div class="registration-link">Ещё нет аккаунта?<br><b>РЕГИСТРАЦИЯ</b></div>
+        <div class="registration-link" @click="overlayState.openOverlay('registration')">Ещё нет аккаунта?<br><b>РЕГИСТРАЦИЯ</b>
+        </div>
       </div>
     </main>
   </OverlayTemplateDecorated>
@@ -102,6 +100,7 @@ main {
       line-height: normal;
       text-align: center;
       margin-top: 17px;
+      cursor: pointer;
 
       b {
         font-weight: 700;

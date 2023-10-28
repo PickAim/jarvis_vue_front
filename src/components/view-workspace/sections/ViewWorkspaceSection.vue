@@ -26,7 +26,7 @@ import SmallCircle from "@/components/generals/SmallCircle.vue";
   flex-direction: column;
   align-items: stretch;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: var.$dark-jarvis-color;
 
   h1 {

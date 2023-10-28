@@ -197,31 +197,21 @@ export type ProductData = ResultProductData &
 
 export type AllProductsResultData = { [marketplaceID: string]: { [productID: string]: ResultProductData } }
 
-export type GreenZoneRequestData = {
-    category_id: number,
-    niche: string,
-    marketplace_id: number
-}
+export type GreenZoneRequestData = NicheRequestData;
 
 export type GreenZoneResultData = {
-    green: {
-        segments: [number, number][],
-        best_segment_idx: number,
-        segment_profits: number[],
-        best_segment_profit_idx: number,
-        mean_segment_profit: number[],
-        best_mean_segment_profit_idx: number,
-        mean_product_profit: number[],
-        best_mean_product_profit_idx: number,
-        segment_product_count: number[],
-        best_segment_product_count_idx: number,
-        segment_product_with_trades_count: number[],
-        best_segment_product_with_trades_count_idx: number,
-    },
-    freq: {
-        x: number[],
-        y: number[]
-    }
+    segments: [number, number][],
+    best_segment_idx: number,
+    segment_profits: number[],
+    best_segment_profit_idx: number,
+    mean_segment_profit: number[],
+    best_mean_segment_profit_idx: number,
+    mean_product_profit: number[],
+    best_mean_product_profit_idx: number,
+    segment_product_count: number[],
+    best_segment_product_count_idx: number,
+    segment_product_with_trades_count: number[],
+    best_segment_product_with_trades_count_idx: number,
 }
 
 export type SelectOptionType = { name: string, value: number };

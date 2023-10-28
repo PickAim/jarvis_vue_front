@@ -69,6 +69,7 @@ const chartOptions = reactive<ChartOptions>({
         color: "white",
         display: true,
         font: {
+          family: "Montserrat",
           size: 14
         }
       },
@@ -82,6 +83,7 @@ const chartOptions = reactive<ChartOptions>({
         color: "white",
         display: true,
         font: {
+          family: "Montserrat",
           size: 14
         }
       },
@@ -97,6 +99,7 @@ const chartOptions = reactive<ChartOptions>({
     },
     title: {
       font: {
+        family: "Montserrat",
         size: 20
       },
       display: true,

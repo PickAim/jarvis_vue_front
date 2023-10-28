@@ -2,6 +2,7 @@
 import {SectionLabelType, sections} from "@/component-actions/view-workspace/WorkspaceLabels";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
+import {SectionNameType} from "@/types/SectionTypes";
 
 const router = useRouter();
 const isOpen = ref(false);
@@ -34,6 +35,18 @@ const menus: { title: string, menuItems: SectionLabelType[] }[] = [
   }
 ]
 
+const underConstructionItems: SectionNameType[] = [
+  // "dashboard",
+  "nicheAnalyze",
+  "categoryAnalyze",
+  "auditoryGeography",
+  // "segmentsAnalyze",
+  "remainsAnalyze",
+  "assortMatrix",
+  "salesGeography",
+  // "unitEconomy",
+  "financialHealth"
+]
 const gridColumns = menus.length;
 const gridRows = Math.max(...menus.map((menu) => menu.menuItems.length));
 
@@ -80,7 +93,9 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType, id: number) {
       <div class="title menu-item"
            v-for="(menuItem, ind) in menuItems"
            :key="ind"
-           :class="{selected: ind === selectedRoute}"
+           :class="{
+             selected: ind === selectedRoute,
+           underConstruction: underConstructionItems.some(item => sections[item] === menuItem.item)}"
            :style="{gridRow: menuItem.row, gridColumn: menuItem.column}"
            @click="onMenuButtonClicked(menuItem, ind)">
         <div class="hover-effect-box"/>
@@ -166,6 +181,10 @@ $hover-effect-width: 40px;
         .hover-effect-box {
           border-left-width: $hover-effect-width;
         }
+      }
+
+      &.underConstruction {
+        color: gray;
       }
     }
 

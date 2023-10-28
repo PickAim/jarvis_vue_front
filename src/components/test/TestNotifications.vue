@@ -1,5 +1,4 @@
 <template>
-  <div>
     <ControlButton @click="addNotification({
     header: 'Ошибка',
     body: 'Какое-то уведомление об ошибкеКакое-то уведомление об ошибкеКакое-то уведомление об ошибкеКакое-то уведомление об ошибкеКакое-то уведомление об ошибкеКакое-то уведомление об ошибкеКакое-то уведомление об ошибке',
@@ -25,7 +24,6 @@
                       input-type="number"
                       title="Длительность"
                       v-model="defaultDuration"/>
-  </div>
 </template>
 
 <script setup lang="ts">

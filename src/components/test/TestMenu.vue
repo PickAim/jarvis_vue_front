@@ -37,8 +37,21 @@ if (!(window.location.href.endsWith("/test/") || window.location.href.endsWith("
 
 <style scoped lang="scss">
 .menu-wrapper {
-  height: 100vh;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .fade-enter-active,
