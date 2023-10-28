@@ -73,7 +73,8 @@ const computedResult = computed<[number, string][][]>(() => {
 });
 
 const chartTitle = computed(() =>
-    `Рекомендуемая цена: ${props.resultData && inRub(props.resultData[showResultIndex.value].result_cost)}`);
+    (showResultIndex.value === "1" ? "Рекомендуемая цена:" : "Текущая цена:") +
+    ` ${props.resultData && inRub(props.resultData[showResultIndex.value].result_cost)}`);
 </script>
 
 <template>
@@ -178,8 +179,8 @@ const chartTitle = computed(() =>
 
           input {
             border: 0;
-            width: 0.7em;
-            height: 0.7em;
+            width: 1em;
+            height: 1em;
           }
         }
       }

@@ -20,7 +20,7 @@ import ViewWorkspaceSectionSegmentsAnalyze
     from "@/components/view-workspace/sections/ViewWorkspaceSectionSegmentsAnalyze.vue";
 import ViewWorkspaceSectionUnitEconomy
     from "@/components/view-workspace/sections/unit-economy/ViewWorkspaceSectionUnitEconomy.vue";
-import {sections} from "@/components/view-workspace/workspaceSections";
+import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
 
 const sectionComponents: { [section in SectionNameType]: Component } = {
     assortMatrix: ViewWorkspaceSectionAssortMatrix,

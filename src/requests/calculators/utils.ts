@@ -10,7 +10,7 @@
 //     return replacementMethod;
 // }
 
-export function checkAndConvert<T extends Record<string, any>> (pattern: T, data: T): T | string {
+export function checkAndConvert<T extends Record<string, any>>(pattern: T, data: T): T | keyof T {
     for (const key in pattern) {
         if (!(key in data)) return key;
         if (typeof pattern[key] === "number") {

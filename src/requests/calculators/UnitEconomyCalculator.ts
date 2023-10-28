@@ -10,6 +10,7 @@ import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
 import type {SimpleUnitEconomyResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import {SimpleUnitEconomyRequestData, TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import {useNotificationsStore} from "@/stores/notificationsStore";
+import {unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
 
 type RequestType = TransitUnitEconomyRequestData | SimpleUnitEconomyRequestData;
 type ResultType = TransitUnitEconomyResultData | SimpleUnitEconomyResultData;
@@ -37,17 +38,18 @@ export class UnitEconomyCalculator extends SavableCalculator<RequestType, Result
     }
 
     beforeCalculating() {
-        let pattern;
+        let pattern: TransitUnitEconomyRequestData;
         if (this.isTransitOn) {
             pattern = new TransitUnitEconomyRequestData();
             this.setTransitCalculateActions();
         } else {
-            pattern = new SimpleUnitEconomyRequestData();
+            pattern = new SimpleUnitEconomyRequestData() as TransitUnitEconomyRequestData;
             this.setSimpleCalculateActions();
         }
         const requestOrKey = checkAndConvert(pattern, this.request);
         if (typeof requestOrKey === "string") {
-            useNotificationsStore().addErrorNotification(["Ошибка", `Ошибка в поле ${requestOrKey}`]);
+            useNotificationsStore().addErrorNotification(
+                ["Ошибка", `Ошибка в поле "${unitEconomyParameters[requestOrKey].title}"`]);
         } else {
             return requestOrKey;
         }

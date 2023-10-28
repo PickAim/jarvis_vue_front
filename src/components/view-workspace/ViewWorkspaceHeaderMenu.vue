@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SectionInfoType, sections} from "@/components/view-workspace/workspaceSections";
+import {SectionLabelType, sections} from "@/component-actions/view-workspace/WorkspaceLabels";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 
@@ -7,7 +7,7 @@ const router = useRouter();
 const isOpen = ref(false);
 const selectedRoute = ref(-1);
 
-const menus: { title: string, menuItems: SectionInfoType[] }[] = [
+const menus: { title: string, menuItems: SectionLabelType[] }[] = [
   {
     title: "Внешняя аналитика",
     menuItems: [
@@ -37,7 +37,7 @@ const menus: { title: string, menuItems: SectionInfoType[] }[] = [
 const gridColumns = menus.length;
 const gridRows = Math.max(...menus.map((menu) => menu.menuItems.length));
 
-type SectionButtonInfoType = { item: SectionInfoType, row: number, column: number };
+type SectionButtonInfoType = { item: SectionLabelType, row: number, column: number };
 const menuItems = menus.reduce(
     (accum: SectionButtonInfoType[], menu, menuInd) => {
       menu.menuItems.forEach((menuItem, menuItemInd) => {

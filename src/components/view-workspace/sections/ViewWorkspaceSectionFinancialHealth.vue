@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
-import {sections} from "@/components/view-workspace/workspaceSections";
+import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
 </script>
 
 <template>

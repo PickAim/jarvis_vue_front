@@ -1,14 +1,16 @@
-import type {SectionInfoType, SectionNameType} from "@/types/SectionTypes";
-import type {TransitUnitEconomyOneResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
+import type {SectionNameType} from "@/types/SectionTypes";
 import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 
-type Title = { title: string };
-type Unit = { unit: string };
-type Link = { link: string };
+export type Title = { title: string };
+export type Unit = { unit: string };
+export type Link = { link: string };
 
-type LabelData<TKeys extends string, TData> = Record<TKeys, TData>
+export type SectionLabelType = Title & Link;
+export type UnitEconomyParameterLabelType = Title & Unit;
 
-export const sections: LabelData<SectionNameType, Title & Link> = {
+export type LabelData<TKeys extends string, TData> = Record<TKeys, TData>
+
+export const sections: LabelData<SectionNameType, SectionLabelType> = {
     dashboard: {title: "Главная страница", link: "/workspace/"},
 
     nicheAnalyze: {title: "Анализ ниш", link: "/workspace/niche-analyze"},
@@ -24,7 +26,7 @@ export const sections: LabelData<SectionNameType, Title & Link> = {
     financialHealth: {title: "Финансовое здоровье магазина", link: "/workspace/financial-health"},
 }
 
-export const unitEconomyParameters: LabelData<keyof TransitUnitEconomyRequestData, Title & Unit> = {
+export const unitEconomyParameters: LabelData<keyof TransitUnitEconomyRequestData, UnitEconomyParameterLabelType> = {
     marketplace_id: {title: "", unit: ""},
     category_id: {title: "", unit: ""},
     niche_id: {title: "", unit: ""},

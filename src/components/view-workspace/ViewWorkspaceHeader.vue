@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {sections} from "@/components/view-workspace/workspaceSections";
+import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
 import ViewWorkspaceHeaderMenu from "@/components/view-workspace/ViewWorkspaceHeaderMenu.vue";
 import ViewWorkspaceHeaderMenuPopup from "@/components/view-workspace/ViewWorkspaceHeaderMenuPopup.vue";
 

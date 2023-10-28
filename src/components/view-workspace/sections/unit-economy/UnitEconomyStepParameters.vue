@@ -7,7 +7,7 @@ import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
-import {unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {UnitEconomyParameterLabelType, unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
 
 const props = defineProps<{
   shown: boolean,
@@ -44,16 +44,15 @@ type InputCheckInfoType = InputInfoType<boolean> &
 type ParametersType =
     (InputTextInfoType | InputSelectInfoType | InputCheckInfoType)[];
 
+function makeTitle(titleData: UnitEconomyParameterLabelType) {
+  return titleData.title + (titleData.unit ? ` (${titleData.unit})` : "");
+}
+
 const baseInputParametersKeys = ["product_exist_cost", "cost_price", "length", "width", "height", "mass", "target_warehouse_id"];
 
 const baseParameters = reactive<ParametersType>([
-  ...(baseInputParametersKeys.map(key =>
-      ({
-        name: key as keyof TransitUnitEconomyRequestData,
-        type: "input",
-        title: unitEconomyParameters[key],
-        inputType: "number"
-      }))),
+  ...(baseInputParametersKeys.map((key: keyof TransitUnitEconomyRequestData) =>
+      ({name: key, type: "input", title: makeTitle(unitEconomyParameters[key]), inputType: "number"}))),
   {
     type: "check", value: computed(() => props.isCalculateTransit),
     placeholder: "Рассчитать стоимость транзита",
@@ -61,11 +60,11 @@ const baseParameters = reactive<ParametersType>([
   }
 ])
 
-const transitParameters: ParametersType = reactive([
-  {name: "logistic_count", type: "input", title: "Количество штук в партии", inputType: "number"},
-  {name: "logistic_price", type: "input", title: "Стоимость логистики партии", inputType: "number"},
-  {name: "transit_cost_for_cubic_meter", type: "input", title: "Стоимость перевоза за м^3", inputType: "number"}
-])
+const transitInputParametersKeys = ["logistic_count", "logistic_price", "transit_cost_for_cubic_meter"];
+
+const transitParameters = reactive<ParametersType>(
+    transitInputParametersKeys.map((key: keyof TransitUnitEconomyRequestData) =>
+        ({name: key, type: "input", title: makeTitle(unitEconomyParameters[key]), inputType: "number"})));
 
 const parameters = computed(() => [
   ...baseParameters,
