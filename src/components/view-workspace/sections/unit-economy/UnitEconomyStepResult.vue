@@ -82,11 +82,6 @@ const chartTitle = computed(() =>
     <template v-slot:header>Результат</template>
     <template v-slot:body>
       <div class="result-wrapper">
-        <div class="chart-wrapper">
-          <DoughnutBar class="result-chart"
-                       :data-and-labels="computedResult[0]"
-                       :title="chartTitle" v-if="computedResult.length > 0"/>
-        </div>
         <div class="right-wrapper">
           <div class="result-choose-wrapper">
             <div class="choose-button">
@@ -104,6 +99,11 @@ const chartTitle = computed(() =>
               <div class="result-value" :class="{negative: res[0].toString().split(' ')[0] < 0}">{{ res[0] }}</div>
             </div>
           </div>
+        </div>
+        <div class="chart-wrapper">
+          <DoughnutBar class="result-chart"
+                       :data-and-labels="computedResult[0]"
+                       :title="chartTitle" v-if="computedResult.length > 0"/>
         </div>
       </div>
       <!--      <div class="save-wrapper">-->
@@ -136,30 +136,17 @@ const chartTitle = computed(() =>
 
   .result-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
     width: 100%;
-    height: 500px;
+    height: 750px;
+    gap: 60px;
     opacity: 0;
     transform: translateY(100px);
     transition: all 0.3s;
     margin-block: 5px;
 
-    .chart-wrapper {
-      flex: 1 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .result-chart {
-        flex: 1 0;
-        width: 100%;
-        max-width: 400px;
-      }
-    }
-
     .right-wrapper {
-      flex: 1;
       display: flex;
       gap: 30px;
       flex-direction: column;
@@ -207,6 +194,19 @@ const chartTitle = computed(() =>
             }
           }
         }
+      }
+    }
+
+    .chart-wrapper {
+      flex: 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .result-chart {
+        flex: 1 0;
+        width: 100%;
+        max-width: 400px;
       }
     }
 

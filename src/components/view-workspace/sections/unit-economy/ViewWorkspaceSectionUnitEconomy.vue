@@ -125,16 +125,18 @@ function onSaveRequest(name: string) {
                               @select-product="(ID) => onProductSelect(ID, $refs.parametersStep)"
                               @select-request="onRequestSelect"
                               @just-continue="onSet"/>
-          <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
-                                     :parameters="calculator.request as TransitUnitEconomyRequestData"
-                                     @parameter-changed="onParameterChanged"
-                                     @calculate="onCalculate"
-                                     ref="parametersStep"
-                                     v-model:is-calculate-transit="calculator.isTransitOn"/>
-          <UnitEconomyStepResult :shown="calculated && !!calculator.result"
-                                 :result-data="calculator.result as TransitUnitEconomyResultData"
-                                 :save-name="saveName"
-                                 @save-request="onSaveRequest"/>
+          <div class="parameters-and-result">
+            <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
+                                       :parameters="calculator.request as TransitUnitEconomyRequestData"
+                                       @parameter-changed="onParameterChanged"
+                                       @calculate="onCalculate"
+                                       ref="parametersStep"
+                                       v-model:is-calculate-transit="calculator.isTransitOn"/>
+            <UnitEconomyStepResult :shown="calculated && !!calculator.result"
+                                   :result-data="calculator.result as TransitUnitEconomyResultData"
+                                   :save-name="saveName"
+                                   @save-request="onSaveRequest"/>
+          </div>
         </div>
       </MiddleLineLayout>
     </div>
@@ -145,5 +147,10 @@ function onSaveRequest(name: string) {
 .section-body-wrapper {
   width: 100%;
   height: 100%;
+
+  .parameters-and-result {
+    display: flex;
+    flex-direction: row;
+  }
 }
 </style>
