@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {defineEmits, defineProps, withDefaults} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 
 const emits = defineEmits(['click']);

@@ -7,6 +7,7 @@ import {storeToRefs} from "pinia";
 import "@/assets/styles/main.scss";
 
 const {isLoading, isHidden} = storeToRefs(useRequestStore());
+console.log(import.meta.env.VITE_URL);
 </script>
 
 <template>
