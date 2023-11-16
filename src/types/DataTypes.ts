@@ -131,8 +131,13 @@ export interface DownturnRequestData {
     product_ids?: number[];
 }
 
-export type DownturnResultData =
-    { [productGlobalID: number]: { [warehouseID: number]: { [productType: string]: number } } };
+export type DownturnResultData = {
+    result_dict: {
+        [productGlobalID: number]: {
+            downturn_info: { [warehouseID: number]: { [productType: string]: { leftover: number, days: number } } }
+        }
+    }
+}
 
 export interface TurnoverRequestData {
     // TODO: Rename after server realization
@@ -140,7 +145,7 @@ export interface TurnoverRequestData {
 }
 
 export type TurnoverResultData =
-    { [productGlobalID: number]: { [warehouseID: number]: { [productType: string]: number } } };
+    { [productGlobalID: number]: { [warehouseID: number]: { [productType: string]: string } } };
 
 export type NicheCharacteristicsRequestData = NicheRequestData;
 
