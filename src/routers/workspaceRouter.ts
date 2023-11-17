@@ -13,7 +13,7 @@ import ViewWorkspaceSectionFinancialHealth
 import ViewWorkspaceSectionNicheAnalyze
     from "@/components/view-workspace/sections/ViewWorkspaceSectionNicheAnalyze.vue";
 import ViewWorkspaceSectionRemainsAnalyze
-    from "@/components/view-workspace/sections/ViewWorkspaceSectionRemainsAnalyze.vue";
+    from "@/components/view-workspace/sections/remains-analyze/ViewWorkspaceSectionRemainsAnalyze.vue";
 import ViewWorkspaceSectionSalesGeography
     from "@/components/view-workspace/sections/ViewWorkspaceSectionSalesGeography.vue";
 import ViewWorkspaceSectionSegmentsAnalyze

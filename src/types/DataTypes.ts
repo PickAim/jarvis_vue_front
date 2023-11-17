@@ -126,15 +126,14 @@ export interface NicheDistResultData {
     y: number[];
 }
 
-export interface DownturnRequestData {
-    // TODO: Rename after server realization
-    product_ids?: number[];
-}
+export type DownturnRequestData = void;
 
 export type DownturnResultData = {
-    result_dict: {
-        [productGlobalID: number]: {
-            downturn_info: { [warehouseID: number]: { [productType: string]: { leftover: number, days: number } } }
+    [marketplaceID: number]: {
+        result_dict: {
+            [productGlobalID: number]: {
+                downturn_info: { [warehouseID: number]: { [productType: string]: { leftover: number, days: number } } }
+            }
         }
     }
 }
