@@ -1,5 +1,5 @@
 import type {RouteRecordRaw} from "vue-router";
-import type {SectionNameType} from "@/components/view-workspace/workspaceSections";
+import type {SectionNameType} from "@/types/SectionTypes";
 import type {Component} from "vue";
 import ViewWorkspaceSectionAssortMatrix
     from "@/components/view-workspace/sections/ViewWorkspaceSectionAssortMatrix.vue";
