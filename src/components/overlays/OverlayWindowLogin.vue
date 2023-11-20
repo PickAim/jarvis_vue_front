@@ -8,8 +8,8 @@ import {useOverlayStateStore} from "@/stores/overlayStore";
 import ControlTextInputTransparent from "@/components/controls/ControlTextInputTransparent.vue";
 import ControlButtonTransparent from "@/components/controls/ControlButtonTransparent.vue";
 
-const loginInput = ref("dummy");
-const passwordInput = ref("dummy");
+const loginInput = ref("");
+const passwordInput = ref("");
 const actions = new OverlayLoginActions();
 const router = useRouter();
 const overlayState = useOverlayStateStore();

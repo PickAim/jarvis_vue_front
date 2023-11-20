@@ -80,12 +80,12 @@ export class SimpleUnitEconomyRequestData implements NicheRequestData {
     marketplace_id = 2;
     category_id = 2; // Need
     niche_id = 2; // Need
-    product_exist_cost = 600;
-    cost_price = 100;
-    length = 10;
-    width = 10;
-    height = 10;
-    mass = 1;
+    product_exist_cost = NaN;
+    cost_price = NaN;
+    length = NaN;
+    width = NaN;
+    height = NaN;
+    mass = NaN;
     target_warehouse_id = 2;
 }
 
