@@ -1,6 +1,6 @@
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
+import {PageActions} from "@/component-actions/view-workspace/PageActions";
 
-export class WorkspaceSectionAuditoryGeographyActions extends WorkspaceSectionActions {
+export class WorkspaceSectionAuditoryGeographyActions extends PageActions {
     constructor() {
         super();
     }

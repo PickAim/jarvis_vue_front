@@ -30,7 +30,7 @@ const saveName = ref("");
 - 203: save
  */
 
-actions.initSection().then(() => {
+actions.initPage().then(() => {
   if ((actions.products
           && Object.keys(actions.products).some(market => Object.keys(actions.products[market]).length > 0)) ||
       (actions.simpleRequests && actions.simpleRequests.length > 0) ||

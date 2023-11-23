@@ -1,8 +1,8 @@
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
+import {PageActions} from "@/component-actions/view-workspace/PageActions";
 import type {DownturnResultData} from "@/types/DataTypes";
 import {DownturnActions} from "@/requests/request-actions/calculations/DownturnActions";
 
-export class WorkspaceSectionRemainsAnalyze extends WorkspaceSectionActions {
+export class WorkspaceSectionRemainsAnalyze extends PageActions {
     remainsInfo: DownturnResultData | undefined = undefined;
 
     constructor() {

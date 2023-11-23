@@ -10,7 +10,7 @@ import {reactive} from "vue";
 import RemainsAnalyzeTable from "@/components/view-workspace/sections/remains-analyze/RemainsAnalyzeTable.vue";
 
 const actions = reactive(new WorkspaceSectionRemainsAnalyze());
-actions.initSection();
+actions.initPage();
 
 </script>
 

@@ -29,7 +29,7 @@ const widgetWidth = computed(() => widgetBodyWidth(widgetSizeMode.value) + 'px')
 
 const scrollTimerHandlersArray = [-1, -1, -1, -1];
 
-actions.initSection();
+actions.initPage();
 
 window.addEventListener('keydown', (e) => {
   if (e.ctrlKey)

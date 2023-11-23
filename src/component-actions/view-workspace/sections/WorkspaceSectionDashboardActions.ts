@@ -1,9 +1,9 @@
 import {useOverlayStateStore} from "@/stores/overlayStore";
-import type {WidgetName, WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
+import type {WidgetOptionsOverlayProperties} from "@/types/WidgetTypes";
+import {PageActions} from "@/component-actions/view-workspace/PageActions";
 import {useWidgetStore} from "@/stores/widgetStore";
 
-export class WorkspaceSectionDashboardActions extends WorkspaceSectionActions {
+export class WorkspaceSectionDashboardActions extends PageActions {
     overlayState;
 
     constructor() {
@@ -24,7 +24,7 @@ export class WorkspaceSectionDashboardActions extends WorkspaceSectionActions {
         this.overlayState.openOverlay('widgetSettings');
     }
 
-    openWidgetSettingsOverlay<N extends WidgetName>(options: WidgetOptionsOverlayProperties) {
+    openWidgetSettingsOverlay(options: WidgetOptionsOverlayProperties) {
         this.overlayState.openOverlay("widgetOptions", options);
     }
 }

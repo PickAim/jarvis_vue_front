@@ -1,4 +1,4 @@
-import {WorkspaceSectionActions} from "@/component-actions/view-workspace/sections/WorkspaceSectionActions";
+import {PageActions} from "@/component-actions/view-workspace/PageActions";
 import type {
     AllProductsResultData, SimpleUnitEconomyResultData,
     TransitUnitEconomyRequestData,
@@ -13,7 +13,7 @@ import {
 } from "@/requests/request-actions/calculations/UnitEconomyActions";
 import {useRequestStore} from "@/stores/requestStore";
 
-export class WorkspaceSectionUnitEconomyActions extends WorkspaceSectionActions {
+export class WorkspaceSectionUnitEconomyActions extends PageActions {
     products: AllProductsResultData | undefined = undefined;
     simpleRequests: CalculateRequestData<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData>[] | undefined = undefined;
     transitRequests: CalculateRequestData<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>[] | undefined = undefined;

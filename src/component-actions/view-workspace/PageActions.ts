@@ -1,7 +1,7 @@
-export abstract class WorkspaceSectionActions {
+export abstract class PageActions {
     isPageLoading = false;
 
-    async initSection() {
+    async initPage() {
         this.isPageLoading = true;
         await this.prepareSectionData();
         this.isPageLoading = false;
