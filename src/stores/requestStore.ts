@@ -14,8 +14,8 @@ export const useRequestStore = defineStore('requestStore', () => {
         requestAbortControllers.value[requestLevel] = new AbortController();
     }
 
-    function setLevel(setRequestLevel: number) {
-        requestLevel.value = setRequestLevel;
+    function setLevel(level: number) {
+        requestLevel.value = level;
     }
 
     function loadingStart(): AbortController {
