@@ -27,7 +27,7 @@ export class WorkspaceSectionUnitEconomyActions extends PageActions {
         const promise = Promise.all([
             (new SimpleUnitEconomyActions()).loadAll(),
             (new TransitUnitEconomyActions()).loadAll(),
-            (new AllProductsActions()).getUserInfo()
+            (new AllProductsActions()).userInfoRequest()
         ]);
         useRequestStore().stopSequence();
 

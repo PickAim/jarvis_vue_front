@@ -24,8 +24,8 @@ export class UserInfoRequestActions<Q, R>
         super();
     }
 
-    async getUserInfo(request: Q): Promise<ResponseData<R>> {
-        const response = await this.requester.getUserInfo(this.prepareRequestData(request));
+    async userInfoRequest(request: Q): Promise<ResponseData<R>> {
+        const response = await this.requester.userInfoRequest(this.prepareRequestData(request));
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         }

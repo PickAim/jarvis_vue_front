@@ -23,8 +23,8 @@ export class InfoRequestActions<Q, R>
         super();
     }
 
-    async getInfo(request: Q): Promise<ResponseData<R>> {
-        const response = await this.requester.getInfo(this.prepareRequestData(request));
+    async infoRequest(request: Q): Promise<ResponseData<R>> {
+        const response = await this.requester.infoRequest(this.prepareRequestData(request));
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         }

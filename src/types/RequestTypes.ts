@@ -56,13 +56,13 @@ export interface ISavableCalculatorStoreActions<Q, R> {
 export type ISavableCalculatorStore<Q, R> = ISavableCalculatorStoreActions<Q, R> & ISavableCalculatorStoreState<Q, R>
 
 export interface IInfoRequester<Q, R> {
-    getInfo(request: Q): Promise<ResponseData<R>>
+    infoRequest(request: Q): Promise<ResponseData<R>>
 }
 
 export type IInfoActions<Q, R> = IInfoRequester<Q, R>;
 
 export interface IUserInfoRequester<Q, R> {
-    getUserInfo(request: Q): Promise<ResponseData<R>>
+    userInfoRequest(request: Q): Promise<ResponseData<R>>
 }
 
 export type IUserInfoActions<Q, R> = IUserInfoRequester<Q, R>;
