@@ -1,9 +1,15 @@
 import type {IUserInfoActions, IUserInfoRequester} from "@/types/RequestTypes";
 import {RequestActions} from "@/requests/request-actions/RequestActions";
-import type {ResponseData, AllProductsResultData, AllMarketplaceApiKeysResultData} from "@/types/DataTypes";
+import type {
+    ResponseData,
+    AllProductsResultData,
+    AllMarketplaceApiKeysResultData,
+    AddMarketplaceApiKeyRequestData
+} from "@/types/DataTypes";
 import {ResultCode} from "@/requests/ResultCode";
 import {ErrorHandler} from "@/requests/ErrorHandler";
 import {
+    AddMarketplaceApiKeyRequester,
     AllMarketplaceApiKeysRequester,
     AllMarketplaceProductsRequester,
     AllProductsRequester
@@ -52,5 +58,11 @@ export class AllMarketplaceProductsActions extends UserInfoRequestActions<void, 
 export class AllMarketplaceApiKeysActions extends UserInfoRequestActions<void, AllMarketplaceApiKeysResultData> {
     constructor() {
         super(new AllMarketplaceApiKeysRequester());
+    }
+}
+
+export class AddMarketplaceApiKeyActions extends UserInfoRequestActions<AddMarketplaceApiKeyRequestData, undefined> {
+    constructor() {
+        super(new AddMarketplaceApiKeyRequester());
     }
 }
