@@ -1,6 +1,6 @@
 import Requester from "@/requests/requesters/Requester";
 import type {IUserInfoRequester} from "@/types/RequestTypes";
-import type {ResponseData} from "@/types/DataTypes";
+import type {AllMarketplaceApiKeysResultData, ResponseData} from "@/types/DataTypes";
 import {Configs} from "@/Configs";
 import type {AllProductsResultData} from "@/types/DataTypes";
 
@@ -26,5 +26,11 @@ export class AllProductsRequester extends UserInfoRequester<undefined, AllProduc
 export class AllMarketplaceProductsRequester extends UserInfoRequester<undefined, AllProductsResultData> {
     constructor() {
         super("/get-all-in-marketplace-user-products");
+    }
+}
+
+export class AllMarketplaceApiKeysRequester extends UserInfoRequester<void, AllMarketplaceApiKeysResultData> {
+    constructor() {
+        super("/get-all-marketplace-api-keys");
     }
 }

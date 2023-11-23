@@ -1,10 +1,13 @@
 import type {IUserInfoActions, IUserInfoRequester} from "@/types/RequestTypes";
 import {RequestActions} from "@/requests/request-actions/RequestActions";
-import type {ResponseData} from "@/types/DataTypes";
-import type {AllProductsResultData} from "@/types/DataTypes";
+import type {ResponseData, AllProductsResultData, AllMarketplaceApiKeysResultData} from "@/types/DataTypes";
 import {ResultCode} from "@/requests/ResultCode";
 import {ErrorHandler} from "@/requests/ErrorHandler";
-import {AllMarketplaceProductsRequester, AllProductsRequester} from "@/requests/requesters/UserInfoRequester";
+import {
+    AllMarketplaceApiKeysRequester,
+    AllMarketplaceProductsRequester,
+    AllProductsRequester
+} from "@/requests/requesters/UserInfoRequester";
 import {convertMoneyToRoubles} from "@/requests/request-actions/utils";
 
 export class UserInfoRequestActions<Q, R>
@@ -28,8 +31,8 @@ export class UserInfoRequestActions<Q, R>
 export class AllProductsActions extends UserInfoRequestActions<void, AllProductsResultData> {
     protected prepareResultData(result: AllProductsResultData): AllProductsResultData {
         Object.keys(result).forEach(marketplace => {
-            Object.keys(result[marketplace]).forEach(product => {
-                convertMoneyToRoubles(result[marketplace][product], ["cost"]);
+            Object.keys(result[Number(marketplace)]).forEach(product => {
+                convertMoneyToRoubles(result[Number(marketplace)][product], ["cost"]);
             })
         })
         return super.prepareResultData(result);
@@ -43,5 +46,11 @@ export class AllProductsActions extends UserInfoRequestActions<void, AllProducts
 export class AllMarketplaceProductsActions extends UserInfoRequestActions<void, AllProductsResultData> {
     constructor() {
         super(new AllMarketplaceProductsRequester());
+    }
+}
+
+export class AllMarketplaceApiKeysActions extends UserInfoRequestActions<void, AllMarketplaceApiKeysResultData> {
+    constructor() {
+        super(new AllMarketplaceApiKeysRequester());
     }
 }

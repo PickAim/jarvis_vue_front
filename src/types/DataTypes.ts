@@ -199,7 +199,9 @@ export type ProductData = ResultProductData &
         marketplaceID: number
     }
 
-export type AllProductsResultData = { [marketplaceID: string]: { [productID: string]: ResultProductData } }
+export type AllProductsResultData = { [marketplaceID: number]: { [productID: string]: ResultProductData } }
+
+export type AllMarketplaceApiKeysResultData = { [marketplaceID: number]: string }
 
 export type GreenZoneRequestData = NicheRequestData;
 
