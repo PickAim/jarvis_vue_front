@@ -1,6 +1,5 @@
 import AccountRequester from "@/requests/requesters/AccountRequester";
 import type {LoginData, RegData, ResponseData} from "@/types/DataTypes";
-import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export class AccountRequestActions {
     accountRequester;
@@ -10,38 +9,26 @@ export class AccountRequestActions {
     }
 
     async loginPassword(loginData: LoginData): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.loginPassword(loginData);
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.loginPassword(loginData);
     }
 
     async loginToken(): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.loginToken();
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.loginToken();
     }
 
     async registration(regData: RegData): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.registration(regData);
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.registration(regData);
     }
 
     async passwordChange(passwords: { oldPassword: string, newPassword: string }): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.passwordChange(passwords);
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.passwordChange(passwords);
     }
 
     async deleteAccount(): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.deleteAccount();
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.deleteAccount();
     }
 
     async logout(): Promise<ResponseData<object>> {
-        const response = await this.accountRequester.logout();
-        ErrorHandler.handle(response.code);
-        return response;
+        return await this.accountRequester.logout();
     }
 }

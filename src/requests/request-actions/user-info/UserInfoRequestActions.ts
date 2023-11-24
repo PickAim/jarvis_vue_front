@@ -7,7 +7,6 @@ import type {
     AddMarketplaceApiKeyRequestData
 } from "@/types/DataTypes";
 import {ResultCode} from "@/requests/ResultCode";
-import {ErrorHandler} from "@/requests/ErrorHandler";
 import {
     AddMarketplaceApiKeyRequester,
     AllMarketplaceApiKeysRequester,
@@ -29,7 +28,6 @@ export class UserInfoRequestActions<Q, R>
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         }
-        ErrorHandler.handle(response.code);
         return response;
     }
 }

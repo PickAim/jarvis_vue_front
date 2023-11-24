@@ -7,7 +7,6 @@ import type {
     ISavableCalculatorStore
 } from "@/types/RequestTypes";
 import {CalculateActions} from "@/requests/request-actions/calculations/CalculateActions";
-import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export abstract class SavableCalculateActions<Q, R>
     extends CalculateActions<Q, R, ISavableCalculateRequestActions<Q, R>>
@@ -22,7 +21,6 @@ export abstract class SavableCalculateActions<Q, R>
         if (response.code === ResultCode.OK) {
             this.calculateStore.deleteRequest(id);
         }
-        ErrorHandler.handle(response.code);
         return response;
     }
 
@@ -37,7 +35,6 @@ export abstract class SavableCalculateActions<Q, R>
             this.calculateStore.saveRequest(savedCalcRequestData);
             return {code: response.code, result: savedCalcRequestData.info};
         }
-        ErrorHandler.handle(response.code);
         return {code: response.code};
     }
 
@@ -48,7 +45,6 @@ export abstract class SavableCalculateActions<Q, R>
                 this.calculateStore.saveRequest(r);
             });
         }
-        ErrorHandler.handle(response.code);
         return response;
     }
 

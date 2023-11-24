@@ -31,5 +31,7 @@ export enum ResultCode {
 
     INCORRECT_NICHE = 4010,
 
-    TIMEOUT = 5040
+    TIMEOUT = 5040,
+
+    USER_FUCKS = 9090
 }

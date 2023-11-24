@@ -4,6 +4,7 @@ import {ResultDescription} from "@/requests/ResultDescription";
 
 export class ErrorHandler {
     static handle(code: ResultCode) {
+        console.log(code);
         const notificator = useNotificationsStore();
         switch (code) {
             case ResultCode.OK:
