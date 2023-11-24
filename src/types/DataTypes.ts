@@ -60,11 +60,12 @@ export interface SubscribeData {
     pay_api_key?: string;
 }
 
-export type NicheRequestData = {
-    marketplace_id: number;
+export type MarketplaceRequestData = { marketplace_id: number }
+
+export interface NicheRequestData extends MarketplaceRequestData {
     niche_id: number;
     category_id: number;
-};
+}
 
 export class SimpleUnitEconomyRequestData implements NicheRequestData {
     // marketplace_id = NaN;
@@ -175,8 +176,7 @@ export interface AllNichesRequestData {
 
 export type AllNichesResultData = { [nicheID: number]: string }
 
-export interface AllCategoriesRequestData {
-    marketplace_id: number,
+export interface AllCategoriesRequestData extends MarketplaceRequestData {
     is_allow_defaults?: boolean
 }
 
@@ -193,19 +193,30 @@ export type ResultProductData = {
     brand: string;
 }
 
-export type ProductData = ResultProductData &
-    {
-        productID: number,
-        marketplaceID: number
-    }
+export interface ProductData extends ResultProductData {
+    productID: number,
+    marketplaceID: number
+}
 
 export type AllProductsResultData = { [marketplaceID: number]: { [productID: string]: ResultProductData } }
 
 export type AllMarketplaceApiKeysResultData = { [marketplaceID: number]: string }
 
-export type AddMarketplaceApiKeyRequestData = { marketplace_id: number, api_key: string }
+export interface AddMarketplaceApiKeyRequestData extends MarketplaceRequestData {
+    api_key: string
+}
 
 export type GreenZoneRequestData = NicheRequestData;
+
+export interface NearestKeywordsRequestData extends MarketplaceRequestData {
+    sentence: string
+}
+
+export interface NearestKeywordsForProductRequestData extends MarketplaceRequestData {
+    product_id: number
+}
+
+export type NearestKeywordsResultData = string[];
 
 export type GreenZoneResultData = {
     segments: [number, number][],

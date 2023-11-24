@@ -1,36 +1,43 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {sections} from "@/component-actions/view-workspace/workspaceLabels";
-import {
-  WorkspaceSectionUnitEconomyActions
-} from "@/component-actions/view-workspace/sections/WorkspaceSectionUnitEconomyActions";
-import type {ProductData} from "@/types/DataTypes";
-import {computed, reactive, ref} from "vue";
+import {reactive, ref} from "vue";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import DefaultPagePreloader from "@/components/generals/DefaultPagePreloader.vue";
 import NearestKeywordsSet from "@/components/view-workspace/sections/nearest-keywords/NearestKeywordsSet.vue";
+import {useRequestStore} from "@/stores/requestStore";
+import {
+  NearestKeywordsActions,
+  NearestKeywordsForProductActions
+} from "@/requests/request-actions/calculations/NearestKeywordsActions";
+import NearestKeywordsResult from "@/components/view-workspace/sections/nearest-keywords/NearestKeywordsResult.vue";
+import {
+  WorkspaceSectionNearestKeywordsActions
+} from "@/component-actions/view-workspace/sections/WorkspaceSectionNearestKeywordsActions";
 
-const actions = reactive(new WorkspaceSectionUnitEconomyActions());
-// const parametersStep = ref(null);
+const actions = reactive(new WorkspaceSectionNearestKeywordsActions());
+const keywords = ref<string[] | undefined>(undefined);
+const requestText = ref<string | undefined>(undefined);
 
 actions.initPage();
 
-const products = computed<ProductData[] | undefined>(() => {
-  if (!actions.products) return;
-  const requestedProducts = actions.products;
-  const products: ProductData[] = [];
-  Object.keys(requestedProducts).forEach((marketplaceID) => {
-    Object.keys(requestedProducts[marketplaceID]).forEach((productID) => {
-      products.push(
-          {
-            ...requestedProducts[marketplaceID][productID],
-            productID: Number(productID),
-            marketplaceID: Number(marketplaceID)
-          });
-    })
-  });
-  return products;
-});
+async function onCalculateProduct(productID: number) {
+  requestText.value = undefined;
+  useRequestStore().setLevel(201);
+  keywords.value = (await (new NearestKeywordsForProductActions()).calculate({
+    marketplace_id: 2,
+    product_id: productID
+  })).result;
+}
+
+async function onCalculateText(text: string) {
+  requestText.value = text;
+  useRequestStore().setLevel(201);
+  keywords.value = (await (new NearestKeywordsActions()).calculate({
+    marketplace_id: 2,
+    sentence: text
+  })).result;
+}
 </script>
 
 <template>
@@ -39,7 +46,14 @@ const products = computed<ProductData[] | undefined>(() => {
     <div class="section-body-wrapper">
       <MiddleLineLayout>
         <DefaultPagePreloader v-if="actions.isPageLoading"/>
-        <NearestKeywordsSet :products="products"/>
+        <div class="steps-wrapper" v-else>
+          <NearestKeywordsSet :products="actions.products"
+                              @calculate-product="onCalculateProduct"
+                              @calculate-text="onCalculateText"/>
+          <NearestKeywordsResult class="nearest-keywords-result" v-if="keywords"
+                                 :keywords="keywords"
+                                 :text="requestText"/>
+        </div>
       </MiddleLineLayout>
     </div>
   </ViewWorkspaceSection>
@@ -53,6 +67,10 @@ const products = computed<ProductData[] | undefined>(() => {
   .parameters-and-result {
     display: flex;
     flex-direction: row;
+  }
+
+  .nearest-keywords-result {
+    margin-top: 30px;
   }
 }
 </style>

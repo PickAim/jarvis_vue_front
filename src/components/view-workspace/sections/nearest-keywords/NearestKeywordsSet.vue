@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
 import {
-  ProductData
+  AllProductsResultData
 } from "@/types/DataTypes";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
 
 const props = defineProps<{
-  products?: ProductData[]
+  products?: AllProductsResultData
 }>();
 
 const emit = defineEmits<{
@@ -19,11 +19,17 @@ const emit = defineEmits<{
 enum InputType {NONE, PRODUCT, TEXT}
 
 const requestText = ref("");
-const productID = ref(0);
+const requestProductID = ref(0);
 const lastChanged = ref<InputType>(InputType.NONE);
 
+const hasProducts = computed(() => {
+  const products = props.products;
+  return products &&
+      Object.keys(products).some((key) => products && Object.keys(products[key]).length > 0)
+})
+
 function onProductSelect(ID: number) {
-  productID.value = ID;
+  requestProductID.value = ID;
   lastChanged.value = InputType.PRODUCT;
 }
 
@@ -32,7 +38,14 @@ function onTextInput() {
 }
 
 function onCalculate() {
-
+  switch (lastChanged.value) {
+    case InputType.TEXT:
+      emit("calculate-text", requestText.value);
+      break;
+    case InputType.PRODUCT:
+      emit("calculate-product", requestProductID.value);
+      break;
+  }
 }
 </script>
 
@@ -40,7 +53,7 @@ function onCalculate() {
   <div class="nearest-keywords-set">
     <div class="input-type request-product-wrapper"
          :class="{last: lastChanged == InputType.PRODUCT}"
-         v-if="products && products.length > 0">
+         v-if="hasProducts">
       <span class="select-product-label">Выберите один из своих продуктов для рассчёта:</span>
       <ProductsList v-if="props.products"
                     class="select-product"
@@ -49,7 +62,7 @@ function onCalculate() {
     </div>
     <div class="input-type request-text-wrapper" :class="{last: lastChanged == InputType.TEXT}">
       <span class="text-request-label">
-          <span v-if="products && products.length > 0">или введите </span>
+          <span v-if="hasProducts">или введите </span>
           <span v-else>Введите </span>
            текст для рассчёта:
         </span>
@@ -57,7 +70,7 @@ function onCalculate() {
                         v-model="requestText"/>
     </div>
     <div>
-      <ControlButton class="calculate-button" @click="emit('just-continue')">Расчитать</ControlButton>
+      <ControlButton class="calculate-button" @click="onCalculate">Расчитать</ControlButton>
     </div>
   </div>
 </template>

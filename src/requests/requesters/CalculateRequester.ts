@@ -1,7 +1,11 @@
 import Requester from "@/requests/requesters/Requester";
 import type {
     DownturnRequestData,
-    DownturnResultData, NicheCharacteristicsRequestData, NicheCharacteristicsResultData,
+    DownturnResultData,
+    NearestKeywordsForProductRequestData, NearestKeywordsRequestData,
+    NearestKeywordsResultData,
+    NicheCharacteristicsRequestData,
+    NicheCharacteristicsResultData,
     ResponseData,
     TurnoverRequestData,
     TurnoverResultData
@@ -50,5 +54,19 @@ export class GreenZoneRequester
     extends CalculateRequester<GreenZoneRequestData, GreenZoneResultData> {
     constructor() {
         super("/green-trade-zone");
+    }
+}
+
+export class NearestKeywordsRequester
+    extends CalculateRequester<NearestKeywordsRequestData, NearestKeywordsResultData> {
+    constructor() {
+        super("/nearest-keywords");
+    }
+}
+
+export class NearestKeywordsForProductRequester
+    extends CalculateRequester<NearestKeywordsForProductRequestData, NearestKeywordsResultData> {
+    constructor() {
+        super("/nearest-keywords-for-product");
     }
 }
