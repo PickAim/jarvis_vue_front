@@ -131,5 +131,9 @@ function onSaveRequest(name: string) {
     display: flex;
     flex-direction: row;
   }
+
+  .steps-wrapper {
+    width: 100%;
+  }
 }
 </style>

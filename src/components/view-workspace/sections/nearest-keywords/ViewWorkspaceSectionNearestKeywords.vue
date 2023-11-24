@@ -72,5 +72,9 @@ async function onCalculateText(text: string) {
   .nearest-keywords-result {
     margin-top: 30px;
   }
+
+  .steps-wrapper {
+    width: 100%;
+  }
 }
 </style>
