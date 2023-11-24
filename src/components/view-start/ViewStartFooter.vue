@@ -44,9 +44,8 @@ footer {
   }
 
   .fasie-logo {
-    background: url("/src/assets/images/head_logo_fasie.png") no-repeat top;
+    background: url("/src/assets/images/head_logo_fasie.png") no-repeat left;
     background-size: contain;
-    background-position: left;
     height: 100px;
   }
 }
