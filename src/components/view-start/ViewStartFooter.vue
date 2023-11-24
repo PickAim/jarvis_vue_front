@@ -8,6 +8,7 @@
       <div class="jarvis-label"/>
       <a href="">Контакты</a>
       <a href="">Мы в социальных сетях:</a>
+      <div class="fasie-logo"/>
     </div>
   </footer>
 </template>
@@ -40,6 +41,13 @@ footer {
       font-size: 36px;
       line-height: 44px;
     }
+  }
+
+  .fasie-logo {
+    background: url("/src/assets/images/head_logo_fasie.png") no-repeat top;
+    background-size: contain;
+    background-position: left;
+    height: 100px;
   }
 }
 
