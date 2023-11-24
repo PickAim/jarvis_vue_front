@@ -20,12 +20,15 @@ import ViewWorkspaceSectionSegmentsAnalyze
     from "@/components/view-workspace/sections/ViewWorkspaceSectionSegmentsAnalyze.vue";
 import ViewWorkspaceSectionUnitEconomy
     from "@/components/view-workspace/sections/unit-economy/ViewWorkspaceSectionUnitEconomy.vue";
-import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {sections} from "@/component-actions/view-workspace/workspaceLabels";
+import ViewWorkspaceSectionNearestKeywords
+    from "@/components/view-workspace/sections/nearest-keywords/ViewWorkspaceSectionNearestKeywords.vue";
 
 const sectionComponents: { [section in SectionNameType]: Component } = {
     assortMatrix: ViewWorkspaceSectionAssortMatrix,
     auditoryGeography: ViewWorkspaceSectionAuditoryGeography,
     categoryAnalyze: ViewWorkspaceSectionCategoryAnalyze,
+    nearestKeywords: ViewWorkspaceSectionNearestKeywords,
     dashboard: ViewWorkspaceSectionDashboard,
     financialHealth: ViewWorkspaceSectionFinancialHealth,
     nicheAnalyze: ViewWorkspaceSectionNicheAnalyze,

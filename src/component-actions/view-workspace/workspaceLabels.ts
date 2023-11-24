@@ -17,6 +17,7 @@ export const sections: LabelData<SectionNameType, SectionLabelType> = {
     categoryAnalyze: {title: "Анализ категорий", link: "/workspace/category-analyze"},
     auditoryGeography: {title: "География целевой аудитории", link: "/workspace/auditory-geography"},
     segmentsAnalyze: {title: "Сегментарный анализ", link: "/workspace/segments-analyze"},
+    nearestKeywords: {title: "Подбор ключевых слов", link: "/workspace/nearest-keywords"},
 
     remainsAnalyze: {title: "Анализ остатков", link: "/workspace/remains-analyze"},
     assortMatrix: {title: "Ассортиментная матрица", link: "/workspace/assort-matrix"},

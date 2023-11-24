@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
-import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {sections} from "@/component-actions/view-workspace/workspaceLabels";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import ViewWorkspaceUnderConstruction from "@/components/view-workspace/sections/ViewWorkspaceUnderConstruction.vue";
 </script>

@@ -10,7 +10,7 @@ import {checkAndConvert, removeKeys} from "@/requests/calculators/utils";
 import type {SimpleUnitEconomyResultData, TransitUnitEconomyResultData} from "@/types/DataTypes";
 import {SimpleUnitEconomyRequestData, TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import {useNotificationsStore} from "@/stores/notificationsStore";
-import {unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {unitEconomyParameters} from "@/component-actions/view-workspace/workspaceLabels";
 
 type RequestType = TransitUnitEconomyRequestData | SimpleUnitEconomyRequestData;
 type ResultType = TransitUnitEconomyResultData | SimpleUnitEconomyResultData;

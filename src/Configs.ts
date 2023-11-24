@@ -1,3 +1,4 @@
+// @ts-ignore
 const host = import.meta.env.JARVIS_URL;
 // const host = window.location.protocol + "//" + window.location.host + "/";
 

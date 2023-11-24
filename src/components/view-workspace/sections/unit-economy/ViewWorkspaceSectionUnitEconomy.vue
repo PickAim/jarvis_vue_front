@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
-import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {sections} from "@/component-actions/view-workspace/workspaceLabels";
 import {
   WorkspaceSectionUnitEconomyActions
 } from "@/component-actions/view-workspace/sections/WorkspaceSectionUnitEconomyActions";
@@ -8,7 +8,7 @@ import type {ProductData, TransitUnitEconomyResultData} from "@/types/DataTypes"
 import UnitEconomyStepSet from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepSet.vue";
 import UnitEconomyStepParameters from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepParameters.vue";
 import UnitEconomyStepResult from "@/components/view-workspace/sections/unit-economy/UnitEconomyStepResult.vue";
-import {computed, reactive, ref} from "vue";
+import {reactive, ref} from "vue";
 import {UnitEconomyCalculator} from "@/requests/calculators/UnitEconomyCalculator";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import UnitEconomyPreloader from "@/components/view-workspace/sections/unit-economy/UnitEconomyPreloader.vue";
@@ -39,32 +39,11 @@ actions.initPage().then(() => {
   }
 });
 
-const products = computed<ProductData[] | undefined>(() => {
-  if (!actions.products) return;
-  const requestedProducts = actions.products;
-  const products: ProductData[] = [];
-  Object.keys(requestedProducts).forEach((marketplaceID) => {
-    Object.keys(requestedProducts[marketplaceID]).forEach((productID) => {
-      products.push(
-          {
-            ...requestedProducts[marketplaceID][productID],
-            productID: Number(productID),
-            marketplaceID: Number(marketplaceID)
-          });
-    })
-  });
-  return products;
-});
-
 function onParameterChanged(key, value) {
   calculator.request[key] = value;
 }
 
-function onProductSelect(ID, parametersStep) {
-  const productsArray = products.value;
-  if (!productsArray) return;
-  const product = productsArray.find((product) => product.productID === ID);
-  if (!product) return;
+function onProductSelect(product: ProductData, parametersStep) {
   parametersStep.setNicheByNames(product.marketplaceID, product.category, product.niche);
   calculator.request.product_exist_cost = product.cost;
   saveName.value = product.name;
@@ -119,10 +98,10 @@ function onSaveRequest(name: string) {
         <UnitEconomyPreloader v-if="actions.isPageLoading"/>
         <div class="steps-wrapper" v-else>
           <UnitEconomyStepSet v-if="!emptySettings"
-                              :products="products"
+                              :products="actions.products"
                               :simple-requests="actions.simpleRequests"
                               :transit-requests="actions.transitRequests"
-                              @select-product="(ID) => onProductSelect(ID, $refs.parametersStep)"
+                              @select-product="(ID, product) => onProductSelect(product, $refs.parametersStep)"
                               @select-request="onRequestSelect"
                               @just-continue="onSet"/>
           <div class="parameters-and-result">

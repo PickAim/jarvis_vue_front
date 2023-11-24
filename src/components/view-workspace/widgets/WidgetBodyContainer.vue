@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
+import {widgetBodyHeight, widgetBodyWidth} from "@/component-actions/view-workspace/widgetSizeCalculator";
 
 const props = defineProps<{
   widgetSize: number
