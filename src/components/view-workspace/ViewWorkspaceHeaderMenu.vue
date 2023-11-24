@@ -43,7 +43,7 @@ const underConstructionItems: SectionNameType[] = [
   "auditoryGeography",
   // "nearestKeywords",
   // "segmentsAnalyze",
-  "remainsAnalyze",
+  // "remainsAnalyze",
   "assortMatrix",
   "salesGeography",
   // "unitEconomy",

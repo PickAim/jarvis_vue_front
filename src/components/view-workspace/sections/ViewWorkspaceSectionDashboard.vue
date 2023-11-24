@@ -13,6 +13,9 @@ import {
 import type {WidgetName} from "@/types/WidgetTypes";
 import {widgetBodyWidth} from "@/component-actions/view-workspace/widgetSizeCalculator";
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
+import ViewWorkspaceUnderConstruction from "@/components/view-workspace/sections/ViewWorkspaceUnderConstruction.vue";
+import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
+import {sections} from "../../../component-actions/view-workspace/WorkspaceLabels";
 
 const actions = new WorkspaceSectionDashboardActions();
 const container = ref<HTMLElement>(null as HTMLElement);
@@ -149,39 +152,42 @@ function clearScrollInterval(id: number) {
 
 <template>
   <ViewWorkspaceSection :style="{'--widgetSizeMode': widgetSizeMode}">
-    <template v-slot:header>Главная страница</template>
+    <template v-slot:header>{{ sections.dashboard.title }}</template>
     <div class="section-body-wrapper">
-      <!--      <div class="size-select">-->
-      <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
-      <!--      </div>-->
-      <div class="widget-buttons-panel">
-        <ControlButtonRound class="widget-panel-settings-button"
-                            @click="actions.openWidgetPanelSettingsOverlay()">SET
-        </ControlButtonRound>
-        <ControlButtonRound class="widget-add-button"
-                            @click="actions.openWidgetAddOverlay()">ADD
-        </ControlButtonRound>
-      </div>
-      <div class="widget-panel"
-           :class="{scrollable: isCtrl}"
-           @mousedown="onPanelMouseDown"
-           @mousemove="(e) => {onPanelMouseMove(e)}"
-           @mouseup="onPanelMouseUp"
-           @mouseleave="onPanelMouseLeave"
-           ref="container">
-        <WidgetContainer v-for="(w, ind) in widgetClassList"
-                         :key="ind"
-                         :options="w"
-                         :grid-width="gridWidth"
-                         :widget-size="widgetSizeMode"
-                         :is-other-moving="isWidgetMoving"
-                         @mouse-enter="onWidgetMouseEnter(ind)"
-                         @mouse-leave="onWidgetMouseLeave(ind)"
-                         @move-start="onWidgetMoveStart(ind)"
-                         @move-stop="onWidgetMoveStop(ind)"
-                         @close="widgetStore.deleteWidget(ind)"
-                         @edit="onEditClick(w)"/>
-      </div>
+      <MiddleLineLayout>
+        <ViewWorkspaceUnderConstruction/>
+        <!--      <div class="size-select">-->
+        <!--        <ControlButton v-for="i in [1,2,3,4]" :key="i" @click="widgetSizeMode=i">{{ i }}</ControlButton>-->
+        <!--      </div>-->
+        <!--      <div class="widget-buttons-panel">-->
+        <!--        <ControlButtonRound class="widget-panel-settings-button"-->
+        <!--                            @click="actions.openWidgetPanelSettingsOverlay()">SET-->
+        <!--        </ControlButtonRound>-->
+        <!--        <ControlButtonRound class="widget-add-button"-->
+        <!--                            @click="actions.openWidgetAddOverlay()">ADD-->
+        <!--        </ControlButtonRound>-->
+        <!--      </div>-->
+        <!--      <div class="widget-panel"-->
+        <!--           :class="{scrollable: isCtrl}"-->
+        <!--           @mousedown="onPanelMouseDown"-->
+        <!--           @mousemove="(e) => {onPanelMouseMove(e)}"-->
+        <!--           @mouseup="onPanelMouseUp"-->
+        <!--           @mouseleave="onPanelMouseLeave"-->
+        <!--           ref="container">-->
+        <!--        <WidgetContainer v-for="(w, ind) in widgetClassList"-->
+        <!--                         :key="ind"-->
+        <!--                         :options="w"-->
+        <!--                         :grid-width="gridWidth"-->
+        <!--                         :widget-size="widgetSizeMode"-->
+        <!--                         :is-other-moving="isWidgetMoving"-->
+        <!--                         @mouse-enter="onWidgetMouseEnter(ind)"-->
+        <!--                         @mouse-leave="onWidgetMouseLeave(ind)"-->
+        <!--                         @move-start="onWidgetMoveStart(ind)"-->
+        <!--                         @move-stop="onWidgetMoveStop(ind)"-->
+        <!--                         @close="widgetStore.deleteWidget(ind)"-->
+        <!--                         @edit="onEditClick(w)"/>-->
+        <!--      </div>-->
+      </MiddleLineLayout>
     </div>
   </ViewWorkspaceSection>
 </template>
