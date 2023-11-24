@@ -6,6 +6,7 @@ import {
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ControlTextInput from "@/components/controls/ControlTextInput.vue";
+import FormComponent from "@/components/generals/FormComponent.vue";
 
 const props = defineProps<{
   products?: AllProductsResultData
@@ -50,7 +51,7 @@ function onCalculate() {
 </script>
 
 <template>
-  <div class="nearest-keywords-set">
+  <FormComponent class="nearest-keywords-set" @submit="onCalculate">
     <div class="input-type request-product-wrapper"
          :class="{last: lastChanged == InputType.PRODUCT}"
          v-if="hasProducts">
@@ -72,7 +73,7 @@ function onCalculate() {
     <div>
       <ControlButton class="calculate-button" @click="onCalculate">Расчитать</ControlButton>
     </div>
-  </div>
+  </FormComponent>
 </template>
 
 <style scoped lang="scss">
