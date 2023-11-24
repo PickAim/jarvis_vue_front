@@ -7,7 +7,7 @@ import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
-import {UnitEconomyParameterLabelType, unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {UnitEconomyParameterLabelType, unitEconomyParameters} from "@/component-actions/view-workspace/workspaceLabels";
 
 const props = defineProps<{
   shown: boolean,

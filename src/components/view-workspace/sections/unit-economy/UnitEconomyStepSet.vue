@@ -39,7 +39,7 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
     <template v-slot:header>Надстройка</template>
     <template v-slot:body>
       <div v-if="products && products.length > 0">
-        <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
+        <span class="select-product-label">Выберите один из своих продуктов для рассчёта:</span>
         <ProductsList v-if="props.products"
                       class="select-product"
                       :products="props.products"

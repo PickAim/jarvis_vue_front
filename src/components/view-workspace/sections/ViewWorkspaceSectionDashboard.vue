@@ -11,7 +11,7 @@ import {
   WorkspaceSectionDashboardActions
 } from "@/component-actions/view-workspace/sections/WorkspaceSectionDashboardActions";
 import type {WidgetName} from "@/types/WidgetTypes";
-import {widgetBodyWidth} from "@/component-actions/view-workspace/WidgetSizeCalculator";
+import {widgetBodyWidth} from "@/component-actions/view-workspace/widgetSizeCalculator";
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 
 const actions = new WorkspaceSectionDashboardActions();

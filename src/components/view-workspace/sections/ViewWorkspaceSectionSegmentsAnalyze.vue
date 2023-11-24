@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
-import {sections} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {sections} from "@/component-actions/view-workspace/workspaceLabels";
 import {computed, ref} from "vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import type {GreenZoneResultData} from "@/types/DataTypes";

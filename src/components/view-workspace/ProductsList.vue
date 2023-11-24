@@ -13,8 +13,8 @@ const emit = defineEmits<{
 
 const selectedProductID = ref("0");
 
-function onProductSelect(id: string) {
-  selectedProductID.value = id;
+function onProductSelect(id: number) {
+  selectedProductID.value = id.toString();
   emit("select-product", id);
 }
 
@@ -25,7 +25,7 @@ function onProductSelect(id: string) {
     <div class="shadow left"/>
     <div class="products-wrapper">
       <ProductItem v-for="product in props.products"
-                   :class="{selected: selectedProductID === product.productID}"
+                   :class="{selected: selectedProductID === product.productID.toString()}"
                    :key="product.productID"
                    :product-item="product"
                    @select="onProductSelect(product.productID)"/>

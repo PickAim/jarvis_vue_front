@@ -4,6 +4,7 @@ export type SectionNameType =
     "categoryAnalyze" |
     "auditoryGeography" |
     "segmentsAnalyze" |
+    "nearestKeywords" |
     "remainsAnalyze" |
     "assortMatrix" |
     "salesGeography" |
