@@ -13,7 +13,7 @@ export class InfoRequester<Q, R> extends Requester implements IInfoRequester<Q, 
         super();
     }
 
-    async getInfo(request: Q): Promise<ResponseData<R>> {
+    async infoRequest(request: Q): Promise<ResponseData<R>> {
         return await this.requestHandler.makeRequest<R>({
             uri: this.baseRequestURL + "/",
             body: request

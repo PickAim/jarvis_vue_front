@@ -83,7 +83,7 @@ defineEmits(['update:modelValue'])
     input {
       font-size: 18px;
       margin-left: $left-padding;
-      padding: 15px 0 0 0;
+      padding: 15px 5px 3px 0;
       background-color: transparent;
       outline: none;
       box-sizing: border-box;

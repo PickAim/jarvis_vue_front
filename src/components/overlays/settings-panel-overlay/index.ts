@@ -1,14 +1,14 @@
-import SettingsPanelSectionPersonalInfo
-    from "@/components/overlays/settings-panel-overlay/SettingsPanelSectionPersonalInfo.vue";
-import SettingsPanelSectionAccount from "@/components/overlays/settings-panel-overlay/SettingsPanelSectionAccount.vue";
-import SettingsPanelSectionSubscribe
-    from "@/components/overlays/settings-panel-overlay/SettingsPanelSectionSubscribe.vue";
-import SettingsPanelSectionSellerInfo
-    from "@/components/overlays/settings-panel-overlay/SettingsPanelSectionSellerInfo.vue";
+import SettingsPanelPersonalInfo
+    from "@/components/overlays/settings-panel-overlay/SettingsPanelPersonalInfo.vue";
+import SettingsPanelAccount from "@/components/overlays/settings-panel-overlay/SettingsPanelAccount.vue";
+import SettingsPanelSubscribe
+    from "@/components/overlays/settings-panel-overlay/SettingsPanelSubscribe.vue";
+import SettingsPanelSellerInfo
+    from "@/components/overlays/settings-panel-overlay/SettingsPanelSellerInfo.vue";
 
 export const settingsPanelSections = {
-    personalInfo: SettingsPanelSectionPersonalInfo,
-    account: SettingsPanelSectionAccount,
-    subscribe: SettingsPanelSectionSubscribe,
-    sellerInfo: SettingsPanelSectionSellerInfo
+    personalInfo: SettingsPanelPersonalInfo,
+    account: SettingsPanelAccount,
+    subscribe: SettingsPanelSubscribe,
+    sellerInfo: SettingsPanelSellerInfo
 }

@@ -31,5 +31,7 @@ export const ResultDescription: { [code in ResultCode]: [string, string] } = {
 
     // token exceptions
     [ResultCode.INCORRECT_TOKEN]: ["Ошибка запроса", "Некорретный токен"],
-    [ResultCode.EXPIRED_TOKEN]: ["Ошибка запроса", "Срок действия токена истёк"]
+    [ResultCode.EXPIRED_TOKEN]: ["Ошибка запроса", "Срок действия токена истёк"],
+
+    [ResultCode.USER_FUCKS]: ["Ошибка запроса", "API ключ уже сохранён"]
 }
