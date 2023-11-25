@@ -63,7 +63,6 @@ export interface SubscribeData {
 export type NicheRequestData = {
     marketplace_id: number;
     niche_id: number;
-    category_id: number;
 };
 
 export class SimpleUnitEconomyRequestData implements NicheRequestData {

@@ -6,7 +6,7 @@ import ViewWorkspaceSectionAssortMatrix
 import ViewWorkspaceSectionAuditoryGeography
     from "@/components/view-workspace/sections/ViewWorkspaceSectionAuditoryGeography.vue";
 import ViewWorkspaceSectionCategoryAnalyze
-    from "@/components/view-workspace/sections/ViewWorkspaceSectionCategoryAnalyze.vue";
+    from "@/components/view-workspace/sections/category-analyze/ViewWorkspaceSectionCategoryAnalyze.vue";
 import ViewWorkspaceSectionDashboard from "@/components/view-workspace/sections/ViewWorkspaceSectionDashboard.vue";
 import ViewWorkspaceSectionFinancialHealth
     from "@/components/view-workspace/sections/ViewWorkspaceSectionFinancialHealth.vue";
