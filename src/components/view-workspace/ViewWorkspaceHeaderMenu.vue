@@ -12,7 +12,6 @@ const menus: { title: string, menuItems: SectionLabelType[] }[] = [
   {
     title: "Внешняя аналитика",
     menuItems: [
-      sections.nicheAnalyze,
       sections.categoryAnalyze,
       sections.auditoryGeography,
       sections.segmentsAnalyze,
