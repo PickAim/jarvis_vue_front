@@ -2,19 +2,15 @@
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {sections} from "@/component-actions/view-workspace/workspaceLabels";
 import {computed, ref} from "vue";
-import ControlButton from "@/components/controls/ControlButton.vue";
-import type {GreenZoneResultData} from "@/types/DataTypes";
+import type {GreenZoneResultData, NicheRequestData} from "@/types/DataTypes";
 import {GreenZoneActions} from "@/requests/request-actions/calculations/GreenZoneActions";
 import {ResultCode} from "@/requests/ResultCode";
 import BarChart from "@/components/view-workspace/visualizers/BarChart.vue";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
-import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
 import {useRequestStore} from "@/stores/requestStore";
+import CalculateWithCategoryComponent from "@/components/view-workspace/sections/CalculateWithCategoryComponent.vue";
 
-const selectedCategoryID = ref(0);
-const selectedNicheID = ref(0);
 const analyzeResult = ref<GreenZoneResultData | undefined>();
-const calculateActions = new GreenZoneActions();
 
 
 const chartData = computed<[number, number][]>(() => {
@@ -23,13 +19,9 @@ const chartData = computed<[number, number][]>(() => {
   return greenZoneResult.segments.map((segment, ind) => [segment[0], greenZoneResult.segment_product_count[ind]]);
 });
 
-async function onCalculate() {
+async function onCalculate(value: NicheRequestData) {
   useRequestStore().setLevel(202);
-  const response = await calculateActions.calculate({
-    marketplace_id: 2,
-    category_id: selectedCategoryID.value,
-    niche_id: selectedNicheID.value,
-  })
+  const response = await (new GreenZoneActions()).calculate(value);
   if (response.code === ResultCode.OK) {
     console.log(response.result)
     analyzeResult.value = response.result;
@@ -43,13 +35,7 @@ async function onCalculate() {
     <div class="section-body-wrapper">
       <MiddleLineLayout>
         <div class="segments-analyze-wrapper">
-          <div class="niche-input">
-            <div class="niche-input-label">Выберите категорию и нишу для расчёта:</div>
-            <NicheSelect :request-level="201"
-                         @update:nicheID="(id) => selectedNicheID = id"
-                         @update:categoryID="(id) => selectedNicheID = id"/>
-          </div>
-          <ControlButton class="calculate-button" @click="onCalculate">Рассчитать</ControlButton>
+          <CalculateWithCategoryComponent @calculate="onCalculate" :request-level="201"/>
           <div class="segments-result-wrapper" v-if="analyzeResult">
             <div class="segments-chart-wrapper">
               <BarChart class="segments-chart" :data="chartData"/>
@@ -138,10 +124,6 @@ async function onCalculate() {
 
     .select-wrapper {
       margin-bottom: 10px;
-    }
-
-    .calculate-button {
-      width: 300px;
     }
 
     .segments-result-wrapper {

@@ -77,7 +77,7 @@ function onCalculate() {
     if (!calculator.result || calculated.value) return;
     calculated.value = true;
     setTimeout(() => {
-      document.querySelector('#unit-economy-result').scrollIntoView({
+      document.querySelector('#unit-economy-resultData').scrollIntoView({
         behavior: "smooth"
       })
     }, 0);

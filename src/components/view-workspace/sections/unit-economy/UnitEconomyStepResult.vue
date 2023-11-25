@@ -49,7 +49,7 @@ const keyTitlesArray = [chartKeyTitles, textKeyTitles]
 const computedResult = computed<[number, string][][]>(() => {
   if (!props.resultData) return [];
   const resultData = props.resultData[showResultIndex.value];
-  // map all keyTitles parts of result
+  // map all keyTitles parts of resultData
   return keyTitlesArray.map((keyTitles) => {
     return keyTitles.reduce((valueAndTexts, titleAndKeys) => {
       titleAndKeys[1].some(keyOrFunction => {

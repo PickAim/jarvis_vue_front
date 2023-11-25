@@ -105,5 +105,6 @@ defineExpose({setByNames, setByIDs});
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 400px;
 }
 </style>

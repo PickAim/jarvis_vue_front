@@ -17,7 +17,7 @@ withDefaults(defineProps<{
 @use "src/assets/styles/variables" as var;
 
 .button-wrapper {
-  min-width: 200px;
+  min-width: 300px;
   min-height: 63px;
   color: #000;
   border-radius: 12px;
