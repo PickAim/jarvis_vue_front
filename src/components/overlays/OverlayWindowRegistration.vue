@@ -9,6 +9,7 @@ import {useOverlayStateStore} from "@/stores/overlayStore";
 import {ResultCode} from "@/requests/ResultCode";
 import {OverlayLoginActions} from "@/component-actions/overlays-actions/OverlayLoginActions";
 import {useRouter} from "vue-router";
+import FormComponent from "@/components/generals/FormComponent.vue";
 
 const emailInput = ref("")
 const phoneInput = ref("")
@@ -40,12 +41,12 @@ async function onRegistration() {
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Регистрация</header>
-      <div class="input-wrapper">
+      <FormComponent class="input-wrapper" @submit="onRegistration">
         <ControlTextInputTransparent title="Почта" input-type="email" v-model="emailInput"/>
         <ControlTextInputTransparent title="Телефон" input-type="text" v-model="phoneInput"/>
         <ControlTextInputTransparent title="Пароль" input-type="password" v-model="passwordInput"/>
         <ControlTextInputTransparent title="Пароль ещё раз" input-type="password" v-model="passwordRepeatInput"/>
-      </div>
+      </FormComponent>
       <ControlButtonTransparent class="submit" :disabled="passwordInput !== passwordRepeatInput"
                                 @click="onRegistration">
         Подтвердить

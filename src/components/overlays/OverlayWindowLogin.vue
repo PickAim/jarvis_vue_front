@@ -7,6 +7,7 @@ import {useRouter} from "vue-router";
 import {useOverlayStateStore} from "@/stores/overlayStore";
 import ControlTextInputTransparent from "@/components/controls/ControlTextInputTransparent.vue";
 import ControlButtonTransparent from "@/components/controls/ControlButtonTransparent.vue";
+import FormComponent from "@/components/generals/FormComponent.vue";
 
 const loginInput = ref("");
 const passwordInput = ref("");
@@ -28,10 +29,10 @@ function onLoginClick() {
   <OverlayTemplateDecorated class="overlay-window-wrapper" header-text="">
     <main>
       <header>Вход</header>
-      <div class="input-wrapper">
+      <FormComponent class="input-wrapper" @submit="onLoginClick">
         <ControlTextInputTransparent title="Логин" input-type="text" v-model="loginInput"/>
         <ControlTextInputTransparent title="Пароль" input-type="password" v-model="passwordInput"/>
-      </div>
+      </FormComponent>
       <ControlButtonTransparent class="submit"
                                 @click="onLoginClick">
         ОТПРАВИТЬ

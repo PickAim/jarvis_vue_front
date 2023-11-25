@@ -7,7 +7,8 @@ import type {TransitUnitEconomyRequestData} from "@/types/DataTypes";
 import ControlSelect from "@/components/controls/ControlSelect.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 import NicheSelect from "@/components/view-workspace/NicheSelect.vue";
-import {UnitEconomyParameterLabelType, unitEconomyParameters} from "@/component-actions/view-workspace/workspaceLabels";
+import {UnitEconomyParameterLabelType, unitEconomyParameters} from "@/component-actions/view-workspace/WorkspaceLabels";
+import FormComponent from "@/components/generals/FormComponent.vue";
 
 const props = defineProps<{
   shown: boolean,
@@ -105,36 +106,38 @@ defineExpose({setNicheByNames});
   <UnitEconomyStep id="unit-economy-parameters" :class="{active: props.shown}">
     <template v-slot:header>Параметры</template>
     <template v-slot:body>
-      <div class="inputs-wrapper">
-        <NicheSelect ref="nicheSelectComp"
-                     @update:marketplaceID="onMarketplaceChange"
-                     @update:categoryID="onCategoryChange"
-                     @update:nicheID="onNicheChange"
-                     :request-level="201"/>
-        <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
-          <ControlTextInput v-if="input.type === 'input'"
-                            :model-value="props.parameters[input.name] || input.value"
-                            @update:model-value="(value) => {
+      <FormComponent @submit="emits('calculate')">
+        <div class="inputs-wrapper">
+          <NicheSelect ref="nicheSelectComp"
+                       @update:marketplaceID="onMarketplaceChange"
+                       @update:categoryID="onCategoryChange"
+                       @update:nicheID="onNicheChange"
+                       :request-level="201"/>
+          <div class="input-item-wrapper" v-for="input in parameters" :key="input.name">
+            <ControlTextInput v-if="input.type === 'input'"
+                              :model-value="props.parameters[input.name] || input.value"
+                              @update:model-value="(value) => {
                               input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                             }"
-                            :title="input.title"
-                            :input-type="input.inputType"/>
-          <ControlSelect v-if="input.type === 'select'"
-                         :selected-value="input.value || props.parameters[input.name]"
-                         @update:selected-value="(value) => {
+                              :title="input.title"
+                              :input-type="input.inputType"/>
+            <ControlSelect v-if="input.type === 'select'"
+                           :selected-value="input.value || props.parameters[input.name]"
+                           @update:selected-value="(value) => {
                            input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                          }"
-                         :placeholder="input.placeholder"
-                         :options="input.options"/>
-          <ControlCheckBox v-if="input.type === 'check'"
-                           :model-value="input.value || props.parameters[input.name]"
-                           @update:model-value="(value) => {
+                           :placeholder="input.placeholder"
+                           :options="input.options"/>
+            <ControlCheckBox v-if="input.type === 'check'"
+                             :model-value="input.value || props.parameters[input.name]"
+                             @update:model-value="(value) => {
                              input.onChange ? input.onChange(value) : defaultOnChange(input.name, value);
                            }">
-            {{ input.placeholder }}
-          </ControlCheckBox>
+              {{ input.placeholder }}
+            </ControlCheckBox>
+          </div>
         </div>
-      </div>
+      </FormComponent>
       <ControlButton class="calculate-button" @click="emits('calculate')">Рассчитать</ControlButton>
     </template>
   </UnitEconomyStep>
