@@ -44,7 +44,7 @@ function onParameterChanged(key, value) {
 }
 
 function onProductSelect(product: ProductData, parametersStep) {
-  parametersStep.setNicheByNames(product.marketplaceID, product.category, product.niche);
+  parametersStep.setNicheByNames(product.marketplaceID, ...product.category_niche_list[0]);
   calculator.request.product_exist_cost = product.cost;
   saveName.value = product.name;
   onSet();

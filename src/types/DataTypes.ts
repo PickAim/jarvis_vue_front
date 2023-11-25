@@ -185,8 +185,7 @@ export type AllCategoriesResultData = { [categoryID: number]: string }
 export type ResultProductData = {
     global_id: number;
     name: string;
-    category: string;
-    niche: string;
+    category_niche_list: [string, string][];
     cost: number;
     rating: number;
     seller: string;
