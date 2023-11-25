@@ -12,7 +12,7 @@
 .padding-layout {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   padding: 20px 10px;
   width: 100%;
 }

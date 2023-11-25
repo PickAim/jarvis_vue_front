@@ -19,7 +19,7 @@ import PaddingLayout from "@/components/layouts/PaddingLayout.vue";
 .middle-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
   max-width: 1280px;
 }
