@@ -38,7 +38,7 @@ const menus: { title: string, menuItems: SectionLabelType[] }[] = [
 const underConstructionItems: SectionNameType[] = [
   // "dashboard",
   "nicheAnalyze",
-  "categoryAnalyze",
+  // "categoryAnalyze",
   "auditoryGeography",
   // "nearestKeywords",
   // "segmentsAnalyze",
