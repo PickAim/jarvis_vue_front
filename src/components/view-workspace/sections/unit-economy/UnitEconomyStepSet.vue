@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProductsList from "@/components/view-workspace/ProductsList.vue";
 import {
-  ProductData,
+  AllProductsResultData, ProductData,
   SelectOptionType, SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData,
   TransitUnitEconomyRequestData,
   TransitUnitEconomyResultData
@@ -13,24 +13,25 @@ import ControlButton from "@/components/controls/ControlButton.vue";
 import UnitEconomyStep from "@/components/view-workspace/sections/unit-economy/UnitEconomyStep.vue";
 
 const props = defineProps<{
-  products?: ProductData[],
+  products?: AllProductsResultData,
   simpleRequests?: CalculateRequestData<SimpleUnitEconomyRequestData, SimpleUnitEconomyResultData>[]
   transitRequests?: CalculateRequestData<TransitUnitEconomyRequestData, TransitUnitEconomyResultData>[]
 }>();
 
 const emit = defineEmits<{
-  (e: "select-product", ID): void,
+  (e: "select-product", ID: number, product: ProductData): void,
   (e: "select-request", ID, isTransit: boolean): void,
   (e: "just-continue"): void
 }>()
 
+const hasProducts = computed(() => {
+  const products = props.products;
+  return products &&
+      Object.keys(products).some((key) => products && Object.keys(products[key]).length > 0)
+})
+
 const requests = computed<SelectOptionType[] | undefined>(() => {
-  return props.requests?.map<SelectOptionType>((v, ind) => {
-    return {
-      name: v.info.name,
-      value: ind.toString()
-    }
-  })
+  return [];
 })
 </script>
 
@@ -38,16 +39,16 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
   <UnitEconomyStep class="unit-economy-set">
     <template v-slot:header>Надстройка</template>
     <template v-slot:body>
-      <div v-if="products && products.length > 0">
-        <span class="select-product-label">Выберите свой один из продуктов для рассчёта:</span>
+      <div v-if="hasProducts">
+        <span class="select-product-label">Выберите один из своих продуктов для рассчёта:</span>
         <ProductsList v-if="props.products"
                       class="select-product"
                       :products="props.products"
-                      @select-product="(ID) => emit('select-product', ID)"/>
+                      @select-product="(ID, product) => emit('select-product', ID, product)"/>
       </div>
       <div v-if="requests && requests.length > 0">
         <span class="select-request-label">
-          <span v-if="products && products.length > 0">или </span>
+          <span v-if="hasProducts">или </span>
           <span v-else>Выберите </span>
            один из своих сохранённых запросов:
         </span>

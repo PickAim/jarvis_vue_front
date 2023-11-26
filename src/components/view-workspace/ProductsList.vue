@@ -1,21 +1,38 @@
 <script setup lang="ts">
 import ProductItem from "@/components/view-workspace/ProductItem.vue";
-import {ref} from "vue";
-import {ProductData} from "@/types/DataTypes";
+import {computed, ref} from "vue";
+import {AllProductsResultData, ProductData} from "@/types/DataTypes";
 
 const props = defineProps<{
-  products: ProductData[]
+  products: AllProductsResultData
 }>();
 
 const emit = defineEmits<{
-  (e: "select-product", ID): void
+  (e: "select-product", ID: number, product: ProductData): void
 }>()
+
+const products = computed<ProductData[] | undefined>(() => {
+  if (!props.products) return;
+  const requestedProducts = props.products;
+  const products: ProductData[] = [];
+  Object.keys(requestedProducts).forEach((marketplaceID) => {
+    Object.keys(requestedProducts[marketplaceID]).forEach((productID) => {
+      products.push(
+          {
+            ...requestedProducts[marketplaceID][productID],
+            productID: Number(productID),
+            marketplaceID: Number(marketplaceID)
+          });
+    })
+  });
+  return products;
+});
 
 const selectedProductID = ref("0");
 
-function onProductSelect(id: string) {
-  selectedProductID.value = id;
-  emit("select-product", id);
+function onProductSelect(id: number, product: ProductData) {
+  selectedProductID.value = id.toString();
+  emit("select-product", id, product);
 }
 
 </script>
@@ -24,11 +41,11 @@ function onProductSelect(id: string) {
   <div class="product-list">
     <div class="shadow left"/>
     <div class="products-wrapper">
-      <ProductItem v-for="product in props.products"
-                   :class="{selected: selectedProductID === product.productID}"
+      <ProductItem v-for="product in products"
+                   :class="{selected: selectedProductID === product.productID.toString()}"
                    :key="product.productID"
                    :product-item="product"
-                   @select="onProductSelect(product.productID)"/>
+                   @select="onProductSelect(product.productID, product)"/>
     </div>
     <div class="shadow right"/>
   </div>

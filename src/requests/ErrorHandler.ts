@@ -10,6 +10,7 @@ export class ErrorHandler {
             case ResultCode.OK:
                 break;
             case ResultCode.CANCEL_ERROR:
+                console.error("Cancelled");
                 break;
             case ResultCode.INCORRECT_TOKEN:
                 window.location.replace(window.location.protocol + "//" + window.location.host);

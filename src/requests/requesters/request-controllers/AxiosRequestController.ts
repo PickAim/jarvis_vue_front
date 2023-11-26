@@ -39,10 +39,12 @@ export default class AxiosRequestController implements IRequestController {
         }
 
         const requestBody = {"request_data": body, ...tokens};
+        const requestOptions = this.requestStore.loadingStart();
+        console.log("LOAD START", requestOptions);
 
         let response: ResponseData<K>;
         try {
-            config.signal = this.requestStore.loadingStart().signal;
+            config.signal = requestOptions.abortController.signal;
             let result: AxiosResponse<K> | undefined = undefined;
             if (method == "GET") {
                 config.params = requestBody;
@@ -80,7 +82,7 @@ export default class AxiosRequestController implements IRequestController {
                 response = {code: err.response.data.jarvis_exception, error: err.response.data};
             }
         }
-        this.requestStore.loadingStop();
+        this.requestStore.loadingStop(requestOptions, response);
         ErrorHandler.handle(response.code);
         return response;
     }

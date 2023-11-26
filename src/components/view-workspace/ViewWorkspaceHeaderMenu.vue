@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SectionLabelType, sections} from "@/component-actions/view-workspace/WorkspaceLabels";
+import {SectionLabelType, sections} from "@/component-actions/view-workspace/workspaceLabels";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {SectionNameType} from "@/types/SectionTypes";
@@ -12,10 +12,10 @@ const menus: { title: string, menuItems: SectionLabelType[] }[] = [
   {
     title: "Внешняя аналитика",
     menuItems: [
-      sections.nicheAnalyze,
       sections.categoryAnalyze,
       sections.auditoryGeography,
       sections.segmentsAnalyze,
+      sections.nearestKeywords,
     ]
   },
   {
@@ -38,8 +38,9 @@ const menus: { title: string, menuItems: SectionLabelType[] }[] = [
 const underConstructionItems: SectionNameType[] = [
   // "dashboard",
   "nicheAnalyze",
-  "categoryAnalyze",
+  // "categoryAnalyze",
   "auditoryGeography",
+  // "nearestKeywords",
   // "segmentsAnalyze",
   // "remainsAnalyze",
   "assortMatrix",
@@ -110,6 +111,7 @@ function onMenuButtonClicked(menuItem: SectionButtonInfoType, id: number) {
 
 $header-height: 80px;
 
+$menu-item-height: 70px;
 $menu-item-width: 300px;
 $menu-gap: 0;
 $hover-effect-width: 40px;
@@ -176,6 +178,7 @@ $hover-effect-width: 40px;
     .menu-item {
       cursor: pointer;
       border-left: 1px solid $menu-items-border-color;
+      height: $menu-item-height;
 
       &:hover, &.selected {
         .hover-effect-box {
@@ -192,7 +195,7 @@ $hover-effect-width: 40px;
       transition-property: opacity, height;
       transition-duration: 0.2s, 0.3s;
       opacity: 1;
-      height: calc(v-bind(gridRows) * $header-height);
+      height: calc(v-bind(gridRows) * $menu-item-height);
     }
   }
 }

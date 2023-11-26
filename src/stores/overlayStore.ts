@@ -38,10 +38,10 @@ export const useOverlayStateStore = defineStore('overlayState', () => {
     // function waitForResult<R>(): Promise<R | undefined>{
     //     return new Promise((resolve) => {
     //         let watchHandler: WatchStopHandle;
-    //         watchHandler = watch(result, ()=>{
+    //         watchHandler = watch(resultData, ()=>{
     //             watchHandler()
     //             isOpen.value;
-    //             resolve(result.value)
+    //             resolve(resultData.value)
     //         })
     //     })
     // }

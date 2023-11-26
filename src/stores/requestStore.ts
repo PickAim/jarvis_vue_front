@@ -1,44 +1,78 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
+import type {ResponseData} from "@/types/DataTypes";
+import {ResultCode} from "@/requests/ResultCode";
+
+export interface RequestOptionsInfo {
+    requestLevel: number,
+    isSequence: boolean,
+    isAllOK: boolean
+}
+
+export interface RequestOptions extends RequestOptionsInfo {
+    abortController: AbortController
+}
 
 export const useRequestStore = defineStore('requestStore', () => {
     const isLoading = ref(false);
     const isHidden = ref(false);
-    const isSequence = ref(false);
     const requestsCount = ref(0);
     const requestLevel = ref(0);
-    const requestAbortControllers = ref<AbortController[]>([]);
+    const requestsOptions = ref<RequestOptions[]>([]);
 
-    function updateAbortController(requestLevel: number) {
-        loadingAbort(requestLevel);
-        requestAbortControllers.value[requestLevel] = new AbortController();
+    function createRequestOptions(requestOptionsInfo: RequestOptionsInfo) {
+        const abortController = new AbortController();
+        requestsOptions.value[requestOptionsInfo.requestLevel] = {
+            abortController,
+            ...requestOptionsInfo
+        };
+    }
+
+    function updateRequestOptions(requestOptionsInfo: Partial<RequestOptionsInfo>) {
+        const infoWithDefaults: RequestOptionsInfo = {
+            requestLevel: requestOptionsInfo.requestLevel ?? requestLevel.value,
+            isSequence: requestOptionsInfo.isSequence ?? false,
+            isAllOK: requestOptionsInfo.isAllOK ?? true,
+        }
+        console.log("UPDATE", infoWithDefaults);
+        loadingAbort(infoWithDefaults.requestLevel);
+        createRequestOptions(infoWithDefaults);
     }
 
     function setLevel(level: number) {
         requestLevel.value = level;
     }
 
-    function loadingStart(): AbortController {
-        requestsCount.value++;
-        if (!isSequence.value) {
-            updateAbortController(requestLevel.value);
-        }
-        isLoading.value = true;
-        return requestAbortControllers.value[requestLevel.value];
+    function getOptions(requestLevel: number): RequestOptions {
+        return requestsOptions.value[requestLevel];
     }
 
-    function loadingStop() {
+    function loadingStart(): RequestOptions {
+        requestsCount.value++;
+        if (!getOptions(requestLevel.value) ||
+            (getOptions(requestLevel.value) && !(getOptions(requestLevel.value).isSequence))) {
+            console.log("UPDATE OPTIONS");
+            updateRequestOptions({requestLevel: requestLevel.value});
+        }
+        isLoading.value = true;
+        return getOptions(requestLevel.value);
+    }
+
+    function loadingStop<RT>(requestOptions: RequestOptions, response: ResponseData<RT>) {
         requestsCount.value--;
+        if (requestOptions.isAllOK && (response.code != ResultCode.OK && response.code != ResultCode.CANCEL_ERROR)) {
+            loadingAbort(requestOptions.requestLevel);
+        }
         if (requestsCount.value <= 0) {
             isLoading.value = false;
         }
     }
 
     function loadingAbort(requestLevel: number) {
-        requestAbortControllers.value.forEach((item, ind) => {
+        requestsOptions.value.forEach((options, ind) => {
             if (ind >= requestLevel) {
-                item.abort();
-                delete requestAbortControllers.value[ind];
+                options.abortController.abort();
+                delete requestsOptions.value[ind];
             }
         })
     }
@@ -60,16 +94,19 @@ export const useRequestStore = defineStore('requestStore', () => {
         showPreloader();
     }
 
-    function startSequence(onLevel?: number) {
+    function startSequence(onLevel?: number, allOK = true) {
+        console.log("START SEQ " + onLevel);
         if (onLevel !== undefined) {
             setLevel(onLevel);
         }
-        updateAbortController(requestLevel.value);
-        isSequence.value = true;
+        updateRequestOptions({
+            isSequence: true,
+            isAllOK: allOK
+        });
     }
 
     function stopSequence() {
-        isSequence.value = false;
+        getOptions(requestLevel.value).isSequence = false;
     }
 
     return {

@@ -29,7 +29,7 @@ async function onMarketplaceSelect(selectID: number) {
   if (selectMarketplaceID.value === selectID) return;
   selectMarketplaceID.value = selectID;
   requestState.setLevel(props.requestLevel);
-  const res = await (new AllCategoriesActions).getInfo({
+  const res = await (new AllCategoriesActions).infoRequest({
     marketplace_id: selectID
   });
   if (res.code === ResultCode.OK) {
@@ -44,7 +44,7 @@ async function onCategorySelect(selectID: number) {
   if (selectCategoryID.value === selectID) return;
   selectCategoryID.value = selectID;
   requestState.setLevel(props.requestLevel);
-  const res = await (new AllNichesActions()).getInfo({
+  const res = await (new AllNichesActions()).infoRequest({
     category_id: selectID
   });
   if (res.code === ResultCode.OK) {
@@ -105,5 +105,6 @@ defineExpose({setByNames, setByIDs});
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 400px;
 }
 </style>

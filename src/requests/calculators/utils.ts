@@ -3,9 +3,9 @@
 //     async function replacementMethod(this: { isBusy: boolean }, ...args: any[]) {
 //         if (this.isBusy) return;
 //         this.isBusy = true;
-//         const result = await originalMethod.call(this, ...args);
+//         const resultData = await originalMethod.call(this, ...args);
 //         this.isBusy = false;
-//         return result;
+//         return resultData;
 //     }
 //     return replacementMethod;
 // }
