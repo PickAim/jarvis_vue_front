@@ -6,7 +6,6 @@ import {ResultCode} from "@/requests/ResultCode";
 import type IAuthStore from "@/requests/requesters/interfaces/IAuthStore";
 import {useRequestStore} from "@/stores/requestStore";
 import {Configs} from "@/Configs";
-import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export default class AxiosRequestController implements IRequestController {
     axiosInst: AxiosInstance;
@@ -83,7 +82,6 @@ export default class AxiosRequestController implements IRequestController {
             }
         }
         this.requestStore.loadingStop(requestOptions, response);
-        ErrorHandler.handle(response.code);
         return response;
     }
 

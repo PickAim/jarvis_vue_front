@@ -21,7 +21,7 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
           </div>
         </div>
         <div class="under-label-block">
-          <h2>Нейросеть, которая не только даст всю интересующую<br> аналитику, но и подскажет что делать дальше,<br>чтобы
+          <h2>Сервис, который не только даст всю интересующую аналитику, но и подскажет что делать дальше, чтобы
             быстрее расти и больше зарабатывать
           </h2>
           <ControlButton>Попробовать сейчас</ControlButton>

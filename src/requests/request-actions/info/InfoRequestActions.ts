@@ -13,6 +13,7 @@ import {
     AllMarketplacesRequester,
     AllNichesRequester
 } from "@/requests/requesters/InfoRequester";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export class InfoRequestActions<Q, R>
     extends RequestActions<Q, R>
@@ -24,6 +25,7 @@ export class InfoRequestActions<Q, R>
 
     async infoRequest(request: Q): Promise<ResponseData<R>> {
         const response = await this.requester.infoRequest(this.prepareRequestData(request));
+        ErrorHandler.handle(response.code);
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         }

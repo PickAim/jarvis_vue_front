@@ -14,6 +14,7 @@ import {
     AllProductsRequester
 } from "@/requests/requesters/UserInfoRequester";
 import {convertMoneyToRoubles} from "@/requests/request-actions/utils";
+import {ErrorHandler} from "@/requests/ErrorHandler";
 
 export class UserInfoRequestActions<Q, R>
     extends RequestActions<Q, R>
@@ -25,6 +26,7 @@ export class UserInfoRequestActions<Q, R>
 
     async userInfoRequest(request: Q): Promise<ResponseData<R>> {
         const response = await this.requester.userInfoRequest(this.prepareRequestData(request));
+        ErrorHandler.handle(response.code);
         if (response.code === ResultCode.OK && response.result) {
             return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
         }
