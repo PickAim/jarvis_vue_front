@@ -2,7 +2,7 @@ import {ResultCode} from "@/requests/ResultCode";
 
 export const ResultDescription: { [code in ResultCode]: [string, string] } = {
     [ResultCode.OK]: ["Успех", ""],
-    [ResultCode.CONNECTION_ERROR]: ["Ошибка сети", "Не получилось получить ответ от сервера. Возможно, есть проблема с подключением к сети"],
+    [ResultCode.CONNECTION_ERROR]: ["Ошибка сети", "Не удалось получить ответ от сервера. Возможно, есть проблема с подключением к сети"],
     [ResultCode.CONFIGURATION_ERROR]: ["", ""],
     [ResultCode.FAIL]: ["Ошибка", "Ошибка запроса к серверу"],
     [ResultCode.CANCEL_ERROR]: ["", ""],
@@ -25,13 +25,15 @@ export const ResultDescription: { [code in ResultCode]: [string, string] } = {
 
     [ResultCode.INCORRECT_GRANT_TYPE]: ["Ошибка запроса", "Недоступный запрос"],
 
-    [ResultCode.INCORRECT_NICHE]: ["Ошибка запроса", "Некорретная ниша"],
+    [ResultCode.INCORRECT_NICHE]: ["Ошибка запроса по нише", "Некорретная ниша"],
 
     [ResultCode.TIMEOUT]: ["Ошибка запроса", "Вышел лимит времени"],
 
     // token exceptions
     [ResultCode.INCORRECT_TOKEN]: ["Ошибка запроса", "Некорретный токен"],
     [ResultCode.EXPIRED_TOKEN]: ["Ошибка запроса", "Срок действия токена истёк"],
+
+    [ResultCode.INCORRECT_MARKETPLACE_API_KEY]: ["Ошибка ввода API ключа", "Ключ некорректен"],
 
     [ResultCode.USER_FUCKS]: ["Ошибка запроса", "API ключ уже сохранён"]
 }

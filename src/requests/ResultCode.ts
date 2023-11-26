@@ -31,6 +31,8 @@ export enum ResultCode {
 
     INCORRECT_NICHE = 4010,
 
+    INCORRECT_MARKETPLACE_API_KEY = 6010,
+
     TIMEOUT = 5040,
 
     USER_FUCKS = 9090
