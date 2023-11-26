@@ -104,6 +104,7 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
     h2 {
       font-size: 24px;
       font-weight: 300;
+      max-width: 700px;
     }
   }
 }
