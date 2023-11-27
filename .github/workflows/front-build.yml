@@ -13,15 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Node.js
-        with:
-          node-version: '20.x'
-      - name: Install requirements
-        run: |
-          npm i
-      - name: Build
-        run: |
-          npm run build
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    - name: Install requirements
+      run: |
+        npm i
+    - name: Build
+      run: |
+        npm run build
