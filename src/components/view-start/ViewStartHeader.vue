@@ -4,17 +4,24 @@ import {useRouter} from "vue-router";
 
 const actions = new ViewStartActions();
 const router = useRouter();
+
+function scrollTo(id: string) {
+  router.push('/').then(() => {
+    document.querySelector(`#${id}`)?.scrollIntoView({
+      behavior: "smooth"
+    })
+  });
+}
 </script>
 
 <template>
   <header>
 
     <div class="buttons-wrapper">
-      <div class="logo"/>
-      <button class="about-product">О продукте</button>
+      <div class="view-start-logo" @click="router.push('/')"/>
+      <button class="about-product" @click="() => scrollTo('about-jarvis')">О продукте</button>
       <button class="tariffs" @click="router.push('tariffs')">Тарифы</button>
-      <button class="question">Вопросы</button>
-      <!--      <button class="login-button" @click="router.push('workspace')">На работу</button>-->
+      <button class="question" @click="() => scrollTo('questions')">Вопросы</button>
       <button class="login-button" @click="actions.openLoginOverlay()">
         <span class="login-label">Войти</span>
         <span class="arrow"/>
@@ -36,12 +43,13 @@ header {
   height: 60px;
   background-color: #191919;
 
-  .logo {
+  .view-start-logo {
     //flex: 1;
     width: 80px;
     background: url("/src/assets/images/Jarvis-Logo-White-128px.png") center no-repeat;
     background-size: contain;
     height: 100%;
+    cursor: pointer;
   }
 
   .buttons-wrapper {

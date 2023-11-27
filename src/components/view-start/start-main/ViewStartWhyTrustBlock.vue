@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
+
+const actions = new ViewStartActions();
 const imagesWithText =
     [
       ["/src/assets/images/Trusted-1-512px.png", "Актуальность и точность предоставляемых данных"],
@@ -32,7 +35,7 @@ const imagesWithText =
         </template>
       </div>
     </div>
-    <button class="button-try">Попробовать сейчас</button>
+    <button class="button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</button>
   </div>
 </template>
 

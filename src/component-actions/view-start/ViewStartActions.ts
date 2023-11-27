@@ -15,7 +15,11 @@ export class ViewStartActions {
         this.overlayState.openOverlay('registration');
     }
 
-    openMobMenu(){
+    onTryButtonClick() {
+        this.openRegistrationOverlay();
+    }
+
+    openMobMenu() {
         this.overlayState.openOverlay('mobileMenu');
     }
 }

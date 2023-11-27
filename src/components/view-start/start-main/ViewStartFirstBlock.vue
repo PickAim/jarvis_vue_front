@@ -1,8 +1,10 @@
 <script setup lang="ts">
-
 import PaddingLayout from "@/components/layouts/PaddingLayout.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
 import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
+
+const actions = new ViewStartActions();
 </script>
 
 <template>
@@ -24,7 +26,7 @@ import ViewStartHeader from "@/components/view-start/ViewStartHeader.vue";
           <h2>Сервис, который не только даст всю интересующую аналитику, но и подскажет что делать дальше, чтобы
             быстрее расти и больше зарабатывать
           </h2>
-          <ControlButton>Попробовать сейчас</ControlButton>
+          <ControlButton class="button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</ControlButton>
         </div>
       </div>
     </PaddingLayout>

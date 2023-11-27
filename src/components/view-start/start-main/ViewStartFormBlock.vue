@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
 
+const actions = new ViewStartActions();
 </script>
 
 <template>
@@ -14,7 +16,7 @@
         <input type="tel" name="tel" placeholder="Введите ваш телефона">
         <input type="email" name="email" placeholder="Введите ваш email">
       </form>
-      <button class="button-try">Получить консультацию</button>
+      <button class="button-try" @click="actions.onTryButtonClick()">Получить консультацию</button>
     </div>
   </div>
 </template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
 
+const actions = new ViewStartActions();
 </script>
 
 <template>
@@ -16,7 +18,7 @@
             <span>Внутренняя аналитика</span>
             <span>Рекомендации по ценообразованию</span>
           </div>
-          <button class="simple-button-try">Попробовать сейчас</button>
+          <button class="simple-button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</button>
         </div>
       </div>
       <div class="tariff second-tariff">
@@ -27,7 +29,7 @@
           <span>Внешняя аналитика</span>
           <span>Рекомендации по ценообразованию</span>
         </div>
-        <button class="simple-button-try">Попробовать сейчас</button>
+        <button class="simple-button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</button>
       </div>
       <div class="tariff-side-wrapper">
         <div class="tariff third-tariff">
@@ -37,7 +39,7 @@
             <span>Внутренняя аналитика</span>
             <span>Рекомендации по ценообразованию</span>
           </div>
-          <button class="simple-button-try">Попробовать сейчас</button>
+          <button class="simple-button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</button>
         </div>
       </div>
     </div>

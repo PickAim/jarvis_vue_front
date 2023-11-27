@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
 import ControlButton from "@/components/controls/ControlButton.vue";
+import {ViewStartActions} from "@/component-actions/view-start/ViewStartActions";
+
+const actions = new ViewStartActions();
 </script>
 
 <template>
   <MiddleLineLayout>
-    <div class="about-jarvis-block-wrapper">
+    <div class="about-jarvis-block-wrapper" id="about-jarvis">
       <h1>ЧТО УМЕЕТ JARVIS?</h1>
       <div class="feature-grid-wrapper">
         <div class="feature-grid">
@@ -68,7 +71,7 @@ import ControlButton from "@/components/controls/ControlButton.vue";
           <div class="circle circle-6"/>
         </div>
       </div>
-      <ControlButton class="button-try">Попробовать сейчас</ControlButton>
+      <ControlButton class="button-try" @click="actions.onTryButtonClick()">Попробовать сейчас</ControlButton>
     </div>
   </MiddleLineLayout>
 </template>
