@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import WidgetContainer
-  from "@/components/view-workspace/widgets/WidgetContainer.vue";
 import ViewWorkspaceSection from "@/components/view-workspace/sections/ViewWorkspaceSection.vue";
 import {computed, ref} from "vue";
-import ControlButtonRound from "@/components/controls/ControlButtonRound.vue";
 import * as _ from "lodash";
 import {storeToRefs} from "pinia";
 import {useWidgetStore} from "@/stores/widgetStore";
@@ -15,7 +12,7 @@ import {widgetBodyWidth} from "@/component-actions/view-workspace/widgetSizeCalc
 import {WidgetClass} from "@/component-actions/view-workspace/widgets/WidgetClass";
 import ViewWorkspaceUnderConstruction from "@/components/view-workspace/sections/ViewWorkspaceUnderConstruction.vue";
 import MiddleLineLayout from "@/components/layouts/MiddleLineLayout.vue";
-import {sections} from "../../../component-actions/view-workspace/WorkspaceLabels";
+import {sections} from "@/component-actions/view-workspace/workspaceLabels";
 
 const actions = new WorkspaceSectionDashboardActions();
 const container = ref<HTMLElement>(null as HTMLElement);
