@@ -1,38 +1,46 @@
 <script setup lang="ts">
-
+const imagesWithText =
+    [
+      ["/src/assets/images/Trusted-1-512px.png", "Актуальность и точность предоставляемых данных"],
+      ["/src/assets/images/Trusted-2-512px.png", "3 года работы с маркетплейсами"],
+      ["/src/assets/images/Trusted-3-512px.png", "100+ клиентов выведено на маркетплейсы"],
+    ]
 </script>
 
 <template>
-  <div class="trusted-block-wrapper">
+  <div class="trust-block-wrapper">
     <div class="trust-wrapper">
       <div class="paragraph-about-trust">
         <h1>ПОЧЕМУ НАМ ДОВЕРЯЮТ?</h1>
       </div>
-      <div class="line-block">
-        <div class="advantages">
-          <div class="advantages-image image-1"/>
-          <div class="advantages-image image-2"/>
-          <div class="advantages-image image-3"/>
-        </div>
-        <div class="advantages-description">
-          <div class="advantages-text">Актуальность и точность предоставляемых данных</div>
-          <div class="advantages-text">3 года работы
-            с маркетплейсами
+      <div class="trust-grid">
+        <template v-for="(imageWithText, ind) in imagesWithText" :key="ind">
+          <div class="advantages-image-cell">
+            <div class="advantages-image"
+                 :class="['image-'+(ind+1)]"
+                 :style="{backgroundImage: `url(${imagesWithText[0]})`}"/>
           </div>
-          <div class="advantages-text">100+ клиентов выведено
-            на маркетплейсы
+          <div class="delimiter-cell">
+            <div class="delimiter"/>
+            <div class="spot"/>
           </div>
-        </div>
+          <div class="advantages-text-cell">
+            <div class="advantages-text">
+              {{ imageWithText[1] }}
+            </div>
+          </div>
+        </template>
       </div>
-      <button class="button-try">Попробовать сейчас</button>
     </div>
+    <button class="button-try">Попробовать сейчас</button>
   </div>
 </template>
 
 <style scoped lang="scss">
 $tag-width: 1150px;
+$grid-template: 1fr 250px 1fr;
 
-.trusted-block-wrapper {
+.trust-block-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +56,7 @@ $tag-width: 1150px;
     margin: 10px;
     width: 100%;
     max-width: 1200px;
-    padding: 0 40px;
+    padding: 0 20px;
 
     .paragraph-about-trust {
       display: flex;
@@ -61,28 +69,32 @@ $tag-width: 1150px;
       }
     }
 
-    .line-block {
+    .trust-grid {
       display: grid;
       margin: 100px 0;
-      padding: 0 50px;
+      //padding: 0 50px;
+      grid-template-rows: $grid-template;
+      grid-auto-flow: column;
+      align-items: stretch;
+      justify-items: stretch;
+      width: 100%;
+      //row-gap: 0px;
 
-      .advantages {
+      .advantages-image-cell {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        flex-direction: column;
         align-items: center;
-        text-align: center;
-        border-bottom: 1px solid #B7FF44;
+        justify-content: center;
 
         .advantages-image {
           display: flex;
           flex-direction: column;
-          margin-bottom: 20px;
           background-size: contain;
           background-repeat: no-repeat;
-          background-position: bottom;
+          background-position: center;
+          justify-self: center;
           height: 120px;
-          width: 140px;
+          width: 160px;
 
           &.image-1 {
             background-image: url("/src/assets/images/Trusted-1-512px.png");
@@ -98,18 +110,43 @@ $tag-width: 1150px;
         }
       }
 
-      .advantages-description {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+      .delimiter-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+
+        .delimiter {
+          background: #B7FF44;
+          //width: 2px;
+          height: 2px;
+        }
+
+        .spot {
+          position: absolute;
+          border-radius: 999px;
+          background: #B7FF44;
+          filter: blur(10px);
+          align-self: center;
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      .advantages-text-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
 
         .advantages-text {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-top: 40px;
-          font-weight: 500;
           font-size: 20px;
-          line-height: 29px;
+          line-height: normal;
+          max-width: 300px;
+          font-weight: 700;
         }
       }
     }
@@ -126,7 +163,7 @@ $tag-width: 1150px;
 }
 
 @media (max-width: $tag-width) {
-  .trusted-block-wrapper {
+  .trust-block-wrapper {
     margin: 0;
 
     .trust-wrapper {
@@ -143,42 +180,41 @@ $tag-width: 1150px;
         }
       }
 
-      .line-block {
-        display: grid;
-        grid-template-columns: 157px 1fr;
-        margin: 50px 0 0 0;
+      .trust-grid {
+        grid-template-rows: repeat(3, minmax(300px, 1fr));
+        grid-template-columns: 1fr 50px 1fr;
+        grid-auto-flow: row;
 
-        .advantages {
-          display: flex;
-          flex-direction: column;
-          border: none;
 
-          .advantages-image {
-            flex-shrink: 0;
+        .delimiter-cell {
+          align-items: center;
+          justify-content: center;
 
-            img {
-              width: 70px;
-              height: 70px;
-            }
+          .spot {
+            width: 40px;
+            height: 40px;
+          }
+
+          .delimiter {
+            width: 2px;
+            height: 100%;
           }
         }
 
-        .advantages-description {
-          display: grid;
-          grid-template-columns: 1fr;
-          padding-left: 20px;
-          border-left: 1px solid #B7FF44;
+        .advantages-text-cell {
+          justify-content: center;
 
           .advantages-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 50px;
-            font-weight: 700;
-            font-size: 13px;
-            line-height: 16px;
-            text-align: center;
+            font-size: 15px;
+          }
+        }
+
+        .advantages-image-cell {
+          align-items: center;
+
+          .advantages-image {
+            height: 84px;
+            width: 112px;
           }
         }
       }
@@ -188,4 +224,5 @@ $tag-width: 1150px;
       display: none;
     }
   }
-}</style>
+}
+</style>
