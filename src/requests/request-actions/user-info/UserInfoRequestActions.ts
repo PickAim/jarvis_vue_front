@@ -27,8 +27,8 @@ export class UserInfoRequestActions<Q, R>
     async userInfoRequest(request: Q): Promise<ResponseData<R>> {
         const response = await this.requester.userInfoRequest(this.prepareRequestData(request));
         ErrorHandler.handle(response.code);
-        if (response.code === ResultCode.OK && response.result) {
-            return {code: ResultCode.OK, result: this.prepareResultData(response.result)}
+        if (response.code === ResultCode.OK) {
+            return {code: ResultCode.OK, result: this.prepareResultData(response.result as R)}
         }
         return response;
     }
@@ -61,8 +61,12 @@ export class AllMarketplaceApiKeysActions extends UserInfoRequestActions<void, A
     }
 }
 
-export class AddMarketplaceApiKeyActions extends UserInfoRequestActions<AddMarketplaceApiKeyRequestData, undefined> {
+export class AddMarketplaceApiKeyActions extends UserInfoRequestActions<AddMarketplaceApiKeyRequestData, void> {
     constructor() {
         super(new AddMarketplaceApiKeyRequester());
+    }
+
+    protected prepareResultData(): void {
+        this.notificator.addSuccessNotification(["Успех", "API ключ успешно добавлен"]);
     }
 }
