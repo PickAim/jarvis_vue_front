@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {DownturnResultData} from "@/types/DataTypes";
+import type {AllProductsResultData, DownturnResultData, ResultProductData} from "@/types/DataTypes";
 import {computed} from "vue";
 
 interface ProductTypeInfo {
@@ -21,7 +21,8 @@ interface RemainsRowType extends ProductTypeInfo {
 type ColumnInfoType<K> = { title: string, key: K | undefined, preparator?: <T>(value: T) => T | string };
 
 const props = defineProps<{
-  remainsInfo: DownturnResultData
+  remainsInfo: DownturnResultData,
+  products: AllProductsResultData
 }>()
 
 function daysName(count: number) {
@@ -29,6 +30,15 @@ function daysName(count: number) {
   if (last == 0 || last > 4) return "дней";
   else if (last == 1) return "день";
   else return "дня";
+}
+
+function findProductInfo(article: string): ResultProductData | undefined {
+  let result: ResultProductData | undefined;
+  props.products && Object.keys(props.products).some<ResultProductData>((marketID) => {
+    const products = props.products[Number(marketID)];
+    return products && (result = products[article]);
+  })
+  return result;
 }
 
 const remainsRows = computed<RemainsRowType[]>(() => {
@@ -57,11 +67,12 @@ const remainsRows = computed<RemainsRowType[]>(() => {
         productTypes: preparedProductTypesInfo
       })
     })
+    const productInfo = findProductInfo(productID);
     resultArray.push({
-      name: productID,
+      name: productInfo ? productInfo.name : "",
       leftover: sumLeftover,
       days: sumDays,
-      productID: Number(productID),
+      productID: productInfo ? productInfo.global_id : -1,
       storages: preparedWarehousesInfo,
     })
   })
@@ -135,16 +146,16 @@ function getColumnValue<T>(row, column: ColumnInfoType<T>) {
   }
 
   .remains-cell, .warehouses-cell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding-inline: 20px;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .remains-header, .remains-row-header {
     display: grid;
+    align-items: center;
     grid-template-columns: minmax(50px, 250px) minmax(50px, 200px) minmax(50px, 100px) minmax(50px, 150px);
     height: 50px;
   }
@@ -168,6 +179,7 @@ function getColumnValue<T>(row, column: ColumnInfoType<T>) {
 
       .product-type-row, .warehouses-header {
         display: grid;
+        align-items: center;
         width: 100%;
         justify-content: center;
         grid-template-columns: minmax(50px, 250px) minmax(50px, 200px) minmax(50px, 100px) minmax(50px, 150px);
@@ -183,6 +195,9 @@ function getColumnValue<T>(row, column: ColumnInfoType<T>) {
         width: 100%;
 
         .warehouse-name {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-weight: 700;
         }
       }

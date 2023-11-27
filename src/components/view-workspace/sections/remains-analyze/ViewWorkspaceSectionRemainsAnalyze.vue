@@ -20,8 +20,8 @@ actions.initPage();
     <div class="section-body-wrapper">
       <MiddleLineLayout>
         <RemainsAnalyzePreloader v-if="actions.isPageLoading"/>
-        <div class="remains-table-wrapper" v-else-if="actions.remainsInfo">
-          <RemainsAnalyzeTable :remains-info="actions.remainsInfo"/>
+        <div class="remains-table-wrapper" v-else-if="actions.remainsInfo && actions.products">
+          <RemainsAnalyzeTable :remains-info="actions.remainsInfo" :products="actions.products"/>
         </div>
       </MiddleLineLayout>
     </div>
