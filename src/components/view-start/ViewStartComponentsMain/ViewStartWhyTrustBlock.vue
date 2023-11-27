@@ -205,7 +205,7 @@ $grid-template: 1fr 250px 1fr;
           justify-content: center;
 
           .advantages-text {
-            font-size: 15px;
+            font-size: 17px;
           }
         }
 
