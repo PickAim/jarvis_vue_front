@@ -7,18 +7,11 @@ defineProps<{
 </script>
 
 <template>
-  <div class="overlay-decorate-wrapper">
-    <OverlayTemplate :header-text="headerText">
-      <slot/>
-    </OverlayTemplate>
-  </div>
+  <OverlayTemplate :header-text="headerText">
+    <slot/>
+  </OverlayTemplate>
   <!--  TODO: make decoration-->
 </template>
 
 <style scoped lang="scss">
-.overlay-decorate-wrapper {
-  background-color: white;
-  border-radius: 15px;
-  overflow: hidden;
-}
 </style>

@@ -50,11 +50,13 @@ function onLoginClick() {
 @use "src/assets/styles/variables" as var;
 
 .overlay-window-wrapper {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   background: linear-gradient(180deg, rgba(84, 84, 84, 0.50) 0%, rgba(94, 94, 94, 0.09) 100%);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 21px;
+  padding-block: 25px;
 }
 
 main {

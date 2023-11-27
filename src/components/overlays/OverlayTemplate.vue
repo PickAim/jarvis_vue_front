@@ -20,11 +20,13 @@ const {closeOverlay} = useOverlayStateStore()
 <style scoped lang="scss">
 .template-wrapper {
   position: relative;
-  max-height: 90vh;
-  min-height: 65vh;
+  //max-height: 900vh;
+  //min-height: 65vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  margin: auto;
+  overflow: visible;
 
   .close-button {
     position: absolute;
@@ -37,7 +39,7 @@ const {closeOverlay} = useOverlayStateStore()
   .main-wrapper {
     flex: 1 0 auto;
     display: flex;
-    overflow-y: auto;
+    overflow-y: hidden;
     opacity: 1;
   }
 }

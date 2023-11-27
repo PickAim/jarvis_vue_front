@@ -24,23 +24,26 @@ function backgroundPointerDown() {
 
 <style scoped lang="scss">
 .overlay-container-wrapper {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   clip-path: inset(0 0 100% 0);
   pointer-events: none;
   z-index: 100;
   transition: clip-path 0.2s;
-  position: fixed;
+  overflow: auto;
 
   .background-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    overflow: auto;
   }
 }
 
