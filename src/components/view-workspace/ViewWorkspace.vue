@@ -31,10 +31,12 @@ useRequestStore().executeInBackground(() => actions.initSection(), 100);
   width: 100vw;
   background: var.$dark-jarvis-color;
   color: white;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .section-wrapper {
     flex: 1 0;
+    width: 100%;
   }
 }
 </style>

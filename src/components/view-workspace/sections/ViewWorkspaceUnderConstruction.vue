@@ -14,18 +14,41 @@
 <style scoped lang="scss">
 @use "src/assets/styles/variables" as var;
 
+$breakpoints: (
+    980px: 0.8,
+    768px: 0.6,
+    580px: 0.4,
+    390px: 0.3,
+);
+
+$height: 400px;
+$h1-fz: 60px;
+$h2-fz: 20px;
+$brace-fz: 200px;
+$gap: 100px;
+$shift: -80px;
+
+//@each $width, $margin in $breakpoints {
+//  @media screen and (max-width: $width) {
+//    .element {
+//      margin-top: $margin;
+//    }
+//  }
+//}
+
 .under-construction-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 400px;
+  height: calc($height * var(--scale));
+  --scale: 1;
 
   .under-construction-labels {
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: calc($gap * var(--scale));
     align-items: center;
     transform: rotate(-10deg);
 
@@ -35,30 +58,36 @@
 
     h1 {
       text-align: center;
-      font-size: 60px;
+      font-size: calc($h1-fz * var(--scale));
       font-weight: 700;
     }
 
     h2 {
-      font-size: 20px;
+      font-size: calc($h2-fz * var(--scale));
+    }
+
+    &::before, &::after {
+      position: absolute;
+      top: calc($shift * var(--scale));
+      font-size: calc($brace-fz * var(--scale));
     }
 
     &::before {
-      position: absolute;
       content: "[";
-      left: -80px;
-      top: -80px;
-      font-size: 200px;
+      left: calc($shift * var(--scale));
       color: var.$blue-jarvis-color;
     }
 
     &::after {
-      position: absolute;
       content: "]";
-      right: -80px;
-      top: -80px;
-      font-size: 200px;
+      right: calc($shift * var(--scale));
       color: var.$green-jarvis-color;
+    }
+  }
+
+  @each $width, $scale in $breakpoints {
+    @media screen and (max-width: $width) {
+      --scale: #{$scale};
     }
   }
 }
