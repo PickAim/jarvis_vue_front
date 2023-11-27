@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ViewStartFooter from "@/components/view-start/ViewStartFooter.vue";
-import ViewStartMain from "@/components/view-start/ViewStartMain.vue";
+import ViewStartMain from "@/components/view-start/start-main/ViewStartMain.vue";
 import {useRouter} from "vue-router";
 
 const router = useRouter();
