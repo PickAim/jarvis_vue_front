@@ -23,7 +23,6 @@ async function onCalculate(value: NicheRequestData) {
   useRequestStore().setLevel(202);
   const response = await (new GreenZoneActions()).calculate(value);
   if (response.code === ResultCode.OK) {
-    console.log(response.result)
     analyzeResult.value = response.result;
   }
 }

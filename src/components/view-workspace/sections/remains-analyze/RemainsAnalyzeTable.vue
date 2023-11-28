@@ -49,8 +49,6 @@ const remainsRows = computed<RemainsRowType[]>(() => {
     const preparedWarehousesInfo: WarehouseInfo[] = [];
     let sumLeftover = 0;
     let sumDays = 0;
-    console.log(remainsInfo);
-    console.log(warehousesInfo);
     Object.keys(warehousesInfo).forEach(warehouseID => {
       const productTypeInfo = warehousesInfo[Number(warehouseID)];
       const preparedProductTypesInfo: ProductTypeInfo[] = Object.keys(productTypeInfo).map(productType => {

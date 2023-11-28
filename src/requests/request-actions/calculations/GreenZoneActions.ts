@@ -11,7 +11,6 @@ export class GreenZoneActions extends CalculateActions<GreenZoneRequestData, Gre
     }
 
     protected prepareResultData(result: GreenZoneResultData): GreenZoneResultData {
-        console.log(JSON.stringify(result));
         const delimiter = (x: number) => x / 100;
         result.mean_product_profit = result.mean_product_profit.map(delimiter);
         result.mean_segment_profit = result.mean_segment_profit.map(delimiter);

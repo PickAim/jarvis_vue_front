@@ -39,7 +39,6 @@ export default class AxiosRequestController implements IRequestController {
 
         const requestBody = {"request_data": body, ...tokens};
         const requestOptions = this.requestStore.loadingStart();
-        console.log("LOAD START", requestOptions);
 
         let response: ResponseData<K>;
         try {

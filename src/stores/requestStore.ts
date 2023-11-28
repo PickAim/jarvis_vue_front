@@ -34,7 +34,6 @@ export const useRequestStore = defineStore('requestStore', () => {
             isSequence: requestOptionsInfo.isSequence ?? false,
             isAllOK: requestOptionsInfo.isAllOK ?? true,
         }
-        console.log("UPDATE", infoWithDefaults);
         loadingAbort(infoWithDefaults.requestLevel);
         createRequestOptions(infoWithDefaults);
     }
@@ -51,7 +50,6 @@ export const useRequestStore = defineStore('requestStore', () => {
         requestsCount.value++;
         if (!getOptions(requestLevel.value) ||
             (getOptions(requestLevel.value) && !(getOptions(requestLevel.value).isSequence))) {
-            console.log("UPDATE OPTIONS");
             updateRequestOptions({requestLevel: requestLevel.value});
         }
         isLoading.value = true;
@@ -95,7 +93,6 @@ export const useRequestStore = defineStore('requestStore', () => {
     }
 
     function startSequence(onLevel?: number, allOK = true) {
-        console.log("START SEQ " + onLevel);
         if (onLevel !== undefined) {
             setLevel(onLevel);
         }
