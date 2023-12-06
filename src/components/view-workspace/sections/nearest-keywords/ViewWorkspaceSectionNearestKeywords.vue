@@ -49,7 +49,8 @@ async function onCalculateText(text: string) {
         <div class="steps-wrapper" v-else>
           <NearestKeywordsSet :products="actions.products"
                               @calculate-product="onCalculateProduct"
-                              @calculate-text="onCalculateText"/>
+                              @calculate-text="onCalculateText"
+                              @update-products="actions.updateProducts()"/>
           <NearestKeywordsResult class="nearest-keywords-result" v-if="keywords"
                                  :keywords="keywords"
                                  :text="requestText"/>

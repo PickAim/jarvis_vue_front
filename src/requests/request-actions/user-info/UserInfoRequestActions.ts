@@ -11,7 +11,7 @@ import {
     AddMarketplaceApiKeyRequester,
     AllMarketplaceApiKeysRequester,
     AllMarketplaceProductsRequester,
-    AllProductsRequester
+    AllProductsRequester, UpdateUsersProductsRequester
 } from "@/requests/requesters/UserInfoRequester";
 import {convertMoneyToRoubles} from "@/requests/request-actions/utils";
 import {ErrorHandler} from "@/requests/ErrorHandler";
@@ -68,5 +68,11 @@ export class AddMarketplaceApiKeyActions extends UserInfoRequestActions<AddMarke
 
     protected prepareResultData(): void {
         this.notificator.addSuccessNotification(["Успех", "API ключ успешно добавлен"]);
+    }
+}
+
+export class UpdateUsersProductsActions extends UserInfoRequestActions<void, void> {
+    constructor() {
+        super(new UpdateUsersProductsRequester());
     }
 }

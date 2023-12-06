@@ -14,7 +14,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "calculate-product", ID): void,
-  (e: "calculate-text", text): void
+  (e: "calculate-text", text): void,
+  (e: "update-products"): void
 }>()
 
 enum InputType {NONE, PRODUCT, TEXT}
@@ -59,7 +60,8 @@ function onCalculate() {
       <ProductsList v-if="props.products"
                     class="select-product"
                     :products="props.products"
-                    @select-product="onProductSelect"/>
+                    @select-product="onProductSelect"
+                    @update-products="emit('update-products')"/>
     </div>
     <div class="input-type request-text-wrapper" :class="{last: lastChanged == InputType.TEXT}">
       <span class="text-request-label">

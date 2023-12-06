@@ -88,6 +88,10 @@ function onSaveRequest(name: string) {
   useRequestStore().setLevel(203);
   calculator.saveRequest(name);
 }
+
+function onUpdateProducts() {
+  actions.updateProducts();
+}
 </script>
 
 <template>
@@ -103,7 +107,8 @@ function onSaveRequest(name: string) {
                               :transit-requests="actions.transitRequests"
                               @select-product="(ID, product) => onProductSelect(product, $refs.parametersStep)"
                               @select-request="onRequestSelect"
-                              @just-continue="onSet"/>
+                              @just-continue="onSet"
+                              @update-products="onUpdateProducts"/>
           <div class="parameters-and-result">
             <UnitEconomyStepParameters :shown="settingSelected || emptySettings"
                                        :parameters="calculator.request as TransitUnitEconomyRequestData"

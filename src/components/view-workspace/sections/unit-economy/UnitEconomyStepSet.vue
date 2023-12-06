@@ -21,6 +21,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "select-product", ID: number, product: ProductData): void,
   (e: "select-request", ID, isTransit: boolean): void,
+  (e: "update-products"): void,
   (e: "just-continue"): void
 }>()
 
@@ -44,6 +45,7 @@ const requests = computed<SelectOptionType[] | undefined>(() => {
         <ProductsList v-if="props.products"
                       class="select-product"
                       :products="props.products"
+                      @update-products="emit('update-products')"
                       @select-product="(ID, product) => emit('select-product', ID, product)"/>
       </div>
       <div v-if="requests && requests.length > 0">

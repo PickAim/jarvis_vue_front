@@ -8,7 +8,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "select-product", ID: number, product: ProductData): void
+  (e: "select-product", ID: number, product: ProductData): void,
+  (e: "update-products"): void
 }>()
 
 const products = computed<ProductData[] | undefined>(() => {
@@ -35,10 +36,17 @@ function onProductSelect(id: number, product: ProductData) {
   emit("select-product", id, product);
 }
 
+function onProductUpdate() {
+  emit("update-products");
+}
+
 </script>
 
 <template>
   <div class="product-list">
+    <div class="update-products-button" @click="onProductUpdate">
+      <div class="update-icon"/>
+    </div>
     <div class="shadow left"/>
     <div class="products-wrapper">
       <ProductItem v-for="product in products"
@@ -86,6 +94,41 @@ function onProductSelect(id: number, product: ProductData) {
 
     &.right {
       right: 0;
+    }
+  }
+
+  .update-products-button {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(100, 100, 100, 1) 0%, rgb(50, 50, 50, 1) 100%);
+    border: 1px solid var.$gray-color;
+    cursor: pointer;
+    z-index: 2;
+
+    .update-icon {
+      width: 70%;
+      height: 70%;
+      background: url("/src/assets/images/Update-Icon-512px.png") center no-repeat;
+      background-size: contain;
+      transition: 0.1s transform, 0.2s margin-top;
+    }
+
+    &:hover .update-icon {
+      transform: rotate(150deg);
+    }
+
+    &:active .update-icon {
+      transition: 0.08s transform;
+      margin-top: 2px;
+      transform: rotate(150deg) scale(2);
     }
   }
 }

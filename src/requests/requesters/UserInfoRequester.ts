@@ -40,3 +40,9 @@ export class AddMarketplaceApiKeyRequester extends UserInfoRequester<AddMarketpl
         super("/add-marketplace-api-key");
     }
 }
+
+export class UpdateUsersProductsRequester extends UserInfoRequester<void, void> {
+    constructor() {
+        super("/update-user-products");
+    }
+}
